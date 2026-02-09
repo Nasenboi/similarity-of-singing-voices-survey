@@ -1,0 +1,25 @@
+import React, {createContext, useContext, useState} from "react";
+
+const AudioContext = createContext(undefined);
+
+export const AudioProvider = ({children}) => {
+  const [currentSong, setCurrentSong] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const contextValue = {
+    currentSong,
+    setCurrentSong,
+    isPlaying,
+    setIsPlaying,
+  };
+
+  return <AudioContext.Provider value={contextValue}>{children}</AudioContext.Provider>;
+};
+
+export const useAudioContext = () => {
+  const context = useContext(AudioContext);
+  if (context === undefined) {
+    throw new Error("useAudioContext must be used within an AudioProvider");
+  }
+  return context;
+};
