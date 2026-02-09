@@ -1,0 +1,9 @@
+{
+  "bracketSpacing": false,
+  "jsonRecursiveSort": true,
+  "organizeImportsSkipDestructiveCodeActions": true,
+  "plugins": ["prettier-plugin-organize-imports", "prettier-plugin-sort-json"],
+  "printWidth": 125,
+  "semi": true,
+  "tabWidth": 2
+}
