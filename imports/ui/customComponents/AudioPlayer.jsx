@@ -49,6 +49,17 @@ export function AudioPlayer() {
     }
   }, [currentSong?.url]);
 
+  useEffect(() => {
+    if (isPlaying && audioRef.current) {
+      audioRef.current.play();
+    } else {
+      audioRef.current.pause();
+      if (audioRef.current.currentTime > 0) {
+        audioRef.current.currentTime = 0;
+      }
+    }
+  }, [isPlaying]);
+
   return (
     <>
       {currentSong?.url && (

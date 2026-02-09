@@ -10,7 +10,7 @@ import {RoutedContentArea} from "./RoutedContentArea";
 export const App = () => {
   return (
     <div className="min-w-screen min-h-screen max-h-screen mx-auto flex-col justify-center bg-background">
-      <SidebarProvider>
+      <SidebarProvider defaultOpen={false}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <AudioProvider>
             <BrowserRouter>
