@@ -39,15 +39,15 @@ export function SurveyCard({voiceTriplet, setSubmissionAnswer, isSubmitted = fal
   };
 
   return (
-    <div className={`rounded-md border-2 flex justifiy-center ${isSubmitted && "bg-accent border-accent-foreground"}`}>
-      <div className={`p-4 h-full border-r-2 flex flex-col ${isSubmitted && "border-accent-foreground"}`}>
+    <div className={`h-min rounded-md border-2 flex justifiy-center ${isSubmitted && "bg-accent border-accent-foreground"}`}>
+      <div className="p-4 h-full flex flex-col">
         <h1 className="mb-8 w-full text-4xl font-bold underline text-center">Target Audio</h1>
         <Button onClick={() => onVoiceClick(voiceTriplet.URLS["X"], "X")}>
           <p className="text-bold text-4xl text-center">Voice X</p>
         </Button>
       </div>
 
-      <div className="p-4 flex flex-col space-y-4">
+      <div className={`p-4 flex flex-col space-y-4 border-l-2 ${isSubmitted && "border-accent-foreground"}`}>
         <h1 className="mb-8 w-full text-4xl font-bold underline text-center">Reference Audios</h1>
         <ButtonGroup>
           <AudioButton url={voiceTriplet.URLS[similarToX[0]]} voice={similarToX[0]} onVoiceClick={onVoiceClick} />
