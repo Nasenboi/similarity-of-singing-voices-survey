@@ -2,21 +2,59 @@ import {Button} from "@/components/ui/button";
 import {ButtonGroup, ButtonGroupSeparator} from "@/components/ui/button-group";
 import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
 import {Slider} from "@/components/ui/slider";
-import React from "react";
+import {ArrowLeft, ArrowRight} from "lucide-react";
+import React, {useState} from "react";
 import {AUDIO_FILE_SERVER_URL} from "../../../common/globals";
 import {useAudioContext} from "../../contextProvider/AudioContext";
 import {AudioPlayer} from "../../customComponents/AudioPlayer";
 
+function AudioButtonGroup({url, voice, otherVoice, similarToX, setSimilarToX, onVoiceClick}) {
+  const isSimilarToX = similarToX === voice;
+
+  return (
+    <div className="m-2 rounded-md bg-accent flex items-center justify-center">
+      {!isSimilarToX && <div className="mx-20" />}
+      <ButtonGroup className="-ml-1">
+        {!isSimilarToX && (
+          <>
+            <Button onClick={() => setSimilarToX(voice)}>
+              <ArrowLeft />
+              More Similar
+            </Button>
+            <ButtonGroupSeparator />
+          </>
+        )}
+        <Button onClick={() => onVoiceClick(url, voice)}>
+          <p className="m-4 text-bold text-4xl text-center">{`Voice ${voice}`}</p>
+        </Button>
+        {isSimilarToX && (
+          <>
+            <ButtonGroupSeparator />
+            <Button onClick={() => setSimilarToX(otherVoice)}>
+              Less Similar
+              <ArrowRight />
+            </Button>
+          </>
+        )}
+      </ButtonGroup>
+      {isSimilarToX && <div className="mx-20" />}
+    </div>
+  );
+}
+
 export function SurveyPage() {
-  const {currentSong, setCurrentSong, setIsPlaying, isPlaying} = useAudioContext();
+  const {currentAudio, setCurrentAudio, isPlaying, setIsPlaying} = useAudioContext();
+  const [similarToX, setSimilarToX] = useState("A");
+
   const surveyProgress = 50;
 
-  const onVoiceClick = (song) => {
-    const url = `${AUDIO_FILE_SERVER_URL}${song}`;
-    if (currentSong != url) {
-      setCurrentSong({url: url});
+  const onVoiceClick = (audio, voice) => {
+    const oldUrl = currentAudio?.url;
+    const url = `${AUDIO_FILE_SERVER_URL}${audio}`;
+    setCurrentAudio({url: url, voice: voice});
+    if (url === oldUrl) {
+      setIsPlaying(!isPlaying);
     }
-    setIsPlaying(!isPlaying);
   };
 
   return (
@@ -36,30 +74,32 @@ export function SurveyPage() {
         </CardFooter>
       </Card>
 
-      <div className="flex justifiy-center items-center m-2" onClick={() => onVoiceClick("000/000002.mp3")}>
-        <Button className="m-2">
-          <p className="m-4 text-bold text-4xl text-center">Voice X</p>
-        </Button>
+      <h1 className="w-full text-center text-4xl font-bold ">{similarToX} is more similar to X</h1>
+
+      <div className="flex justifiy-center items-center m-2">
+        <div className="p-2 h-full">
+          <Button className="h-full" onClick={() => onVoiceClick("000/000002.mp3", "X")}>
+            <p className="text-bold text-4xl text-center">Voice X</p>
+          </Button>
+        </div>
 
         <div className="flex flex-col">
-          <ButtonGroup className="m-2">
-            <Button>
-              <p className="m-4 text-bold text-4xl text-center">Voice A</p>
-            </Button>
-            <ButtonGroupSeparator />
-            <Button>
-              <p className="m-4 text-l text-center">More Similar to X</p>
-            </Button>
-          </ButtonGroup>
-          <ButtonGroup className="m-2">
-            <Button>
-              <p className="m-4 text-bold text-4xl text-center">Voice B</p>
-            </Button>
-            <ButtonGroupSeparator />
-            <Button>
-              <p className="m-4 text-l text-center">More Similar to X</p>
-            </Button>
-          </ButtonGroup>
+          <AudioButtonGroup
+            url="000/000003.mp3"
+            voice="A"
+            otherVoice="B"
+            similarToX={similarToX}
+            setSimilarToX={setSimilarToX}
+            onVoiceClick={onVoiceClick}
+          />
+          <AudioButtonGroup
+            url="000/000010.mp3"
+            voice="B"
+            otherVoice="A"
+            similarToX={similarToX}
+            setSimilarToX={setSimilarToX}
+            onVoiceClick={onVoiceClick}
+          />
         </div>
       </div>
 

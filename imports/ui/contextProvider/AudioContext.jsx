@@ -3,12 +3,12 @@ import React, {createContext, useContext, useState} from "react";
 const AudioContext = createContext(undefined);
 
 export const AudioProvider = ({children}) => {
-  const [currentSong, setCurrentSong] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [currentAudio, setCurrentAudio] = useState(null);
 
   const contextValue = {
-    currentSong,
-    setCurrentSong,
+    currentAudio,
+    setCurrentAudio,
     isPlaying,
     setIsPlaying,
   };
