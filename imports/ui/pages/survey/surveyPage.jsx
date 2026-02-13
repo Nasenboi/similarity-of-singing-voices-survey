@@ -11,10 +11,10 @@ import {Progress} from "@/components/ui/progress";
 import React, {useState} from "react";
 import {useAudioContext} from "../../contextProvider/AudioContext";
 import {AudioPlayer} from "../../customComponents/AudioPlayer";
+import {cookies, getCookieSave} from "../../customComponents/Cookies";
 import {SurveyCard} from "./surveyCard";
 
 export function SurveyPage() {
-  const [submissionAnswers, setSubmissionAnswers] = useState({});
   const [currentPage, setCurrentPage] = useState(0);
   const [surveyProgress, setSurveyProgress] = useState(0);
   const {isPlaying, setIsPlaying} = useAudioContext();
@@ -43,10 +43,8 @@ export function SurveyPage() {
       setIsPlaying(false);
     }
 
-    setSubmissionAnswers((prev) => ({
-      ...prev,
-      [ID]: response,
-    }));
+    const submissionAnswers = {...getCookieSave("submissionAnswers"), [ID]: response};
+    cookies.set("submissionAnswers", submissionAnswers);
 
     const sp = Math.round((100 * (Object.keys(submissionAnswers).length + 1)) / voiceTriplets.length);
     setSurveyProgress(sp);
@@ -82,7 +80,8 @@ export function SurveyPage() {
                   <PaginationItem key={index}>
                     <PaginationLink
                       className={
-                        submissionAnswers.hasOwnProperty(voiceTriplets[index].ID) && "bg-accent border-accent-foreground"
+                        getCookieSave("submissionAnswers").hasOwnProperty(voiceTriplets[index].ID) &&
+                        "bg-accent border-accent-foreground"
                       }
                       href="#"
                       isActive={index === currentPage}
@@ -117,7 +116,7 @@ export function SurveyPage() {
       <SurveyCard
         voiceTriplet={voiceTriplets[currentPage]}
         setSubmissionAnswer={setSubmissionAnswer}
-        isSubmitted={submissionAnswers.hasOwnProperty(voiceTriplets[currentPage].ID)}
+        isSubmitted={getCookieSave("submissionAnswers").hasOwnProperty(voiceTriplets[currentPage].ID)}
       />
 
       <div className="fixed bottom-0 max-w-500 w-full">

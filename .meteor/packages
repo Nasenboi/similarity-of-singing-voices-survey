@@ -31,3 +31,5 @@ percolate:migrations
 logging
 aldeed:schema-deny
 ostrio:files
+session
+ostrio:cookies
