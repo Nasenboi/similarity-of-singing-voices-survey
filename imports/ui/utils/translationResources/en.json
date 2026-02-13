@@ -1,5 +1,10 @@
 {
   "translation": {
+    "Sidebar": {
+      "language": "Lanugage",
+      "settings": "Settings",
+      "theme": "Theme"
+    },
     "SurveyPage": {
       "and": "and",
       "areMoreSimilar": "are more similar",
@@ -12,11 +17,6 @@
       "targetVoice": "Target Voice",
       "title": "Survey: Similarity of Singing Voices",
       "voice": "Voice"
-    },
-    "sidebar": {
-      "language": "Lanugage",
-      "settings": "Settings",
-      "theme": "Theme"
     }
   }
 }

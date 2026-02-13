@@ -1,5 +1,10 @@
 {
   "translation": {
+    "Sidebar": {
+      "language": "Sprache",
+      "settings": "Einstellungen",
+      "theme": "Thema"
+    },
     "SurveyPage": {
       "and": "und",
       "areMoreSimilar": "sind sich ähnlicher",
@@ -12,11 +17,6 @@
       "targetVoice": "Zielstimme",
       "title": "Umfrage: Ähnlichkeit von Gesangsstimmen",
       "voice": "Stimme"
-    },
-    "sidebar": {
-      "language": "Sprache",
-      "settings": "Einstellungen",
-      "theme": "Thema"
     }
   }
 }

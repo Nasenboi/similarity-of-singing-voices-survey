@@ -3,15 +3,17 @@ import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger
 import {Moon, Sun} from "lucide-react";
 import {useTheme} from "next-themes";
 import React from "react";
+import {useTranslation} from "react-i18next";
 
 export function ThemeToggle() {
   const {setTheme} = useTheme();
+  const {t} = useTranslation();
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <div className="w-full flex justify-between items-center">
-          <h1 className="text-l m-2 font-bold">Theme</h1>
+          <h1 className="text-l m-2 font-bold">{t("Sidebar.theme")}</h1>
           <Button size="icon">
             <Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
             <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
