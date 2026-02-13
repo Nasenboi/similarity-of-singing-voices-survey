@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/pagination";
 import {Progress} from "@/components/ui/progress";
 import React, {useState} from "react";
+import {useTranslation} from "react-i18next";
 import {useAudioContext} from "../../contextProvider/AudioContext";
 import {AudioPlayer} from "../../customComponents/AudioPlayer";
 import {cookies, getCookieSave} from "../../customComponents/Cookies";
@@ -18,6 +19,7 @@ export function SurveyPage() {
   const [currentPage, setCurrentPage] = useState(0);
   const [surveyProgress, setSurveyProgress] = useState(0);
   const {isPlaying, setIsPlaying} = useAudioContext();
+  const {t} = useTranslation();
 
   const handlePageChange = (newPage) => {
     if (isPlaying) {
@@ -55,13 +57,13 @@ export function SurveyPage() {
   };
 
   return (
-    <div className="w-full flex flex-col justify-center items-center">
+    <div className="w-screen h-screen flex flex-col justify-center items-center">
       <Card className="fixed top-0 ms-50 max-w-500 w-full m-4 bg-background z-10">
         <CardHeader>
-          <CardTitle className="text-center">Survey: Similarity of Singing Voices</CardTitle>
+          <CardTitle className="text-center">{t("SurveyPage.title")}</CardTitle>
         </CardHeader>
         <CardContent className="border-b-2">
-          <p className="text-center">Select the voice option which sounds the most similar to the target voice</p>
+          <p className="text-center">{t("SurveyPage.description")}</p>
         </CardContent>
         <CardFooter>
           <div className="mt-2 space-y-4 w-full flex flex-col">
@@ -69,6 +71,7 @@ export function SurveyPage() {
               <PaginationContent>
                 <PaginationPrevious
                   className={currentPage === 0 && "text-background hover:text-background hover:bg-background"}
+                  displayName={t("SurveyPage.previous")}
                   href="#"
                   onClick={(e) => {
                     e.preventDefault();
@@ -98,6 +101,7 @@ export function SurveyPage() {
                   className={
                     currentPage + 1 === voiceTriplets.length && "text-background hover:text-background hover:bg-background"
                   }
+                  displayName={t("SurveyPage.next")}
                   href="#"
                   onClick={(e) => {
                     e.preventDefault();
@@ -113,11 +117,17 @@ export function SurveyPage() {
         </CardFooter>
       </Card>
 
-      <SurveyCard
-        voiceTriplet={voiceTriplets[currentPage]}
-        setSubmissionAnswer={setSubmissionAnswer}
-        isSubmitted={getCookieSave("submissionAnswers").hasOwnProperty(voiceTriplets[currentPage].ID)}
-      />
+      <div className="w-full flex flex-col justify-between items-center overflow-hidden">
+        <div className="w-full h-60" />
+
+        <SurveyCard
+          voiceTriplet={voiceTriplets[currentPage]}
+          setSubmissionAnswer={setSubmissionAnswer}
+          isSubmitted={getCookieSave("submissionAnswers").hasOwnProperty(voiceTriplets[currentPage].ID)}
+        />
+
+        <div className="w-full h-24" />
+      </div>
 
       <div className="fixed bottom-0 max-w-500 w-full">
         <AudioPlayer />

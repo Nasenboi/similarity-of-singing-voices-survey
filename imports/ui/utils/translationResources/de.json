@@ -1,0 +1,22 @@
+{
+  "translation": {
+    "SurveyPage": {
+      "and": "und",
+      "areMoreSimilar": "sind sich ähnlicher",
+      "cardTitle": "Frage",
+      "description": "Wählen Sie die Stimmoption, die der Zielstimme am ähnlichsten klingt",
+      "next": "weiter",
+      "previous": "zurück",
+      "referenceVoices": "Referenzstimmen",
+      "submit": "Bestätigen",
+      "targetVoice": "Zielstimme",
+      "title": "Umfrage: Ähnlichkeit von Singstimmen",
+      "voice": "Stimme"
+    },
+    "sidebar": {
+      "language": "Sprache",
+      "settings": "Einstellungen",
+      "theme": "Thema"
+    }
+  }
+}

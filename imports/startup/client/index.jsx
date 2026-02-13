@@ -1,3 +1,4 @@
+import "@/imports/ui/utils/LanguageSettings";
 import {Meteor} from "meteor/meteor";
 import React from "react";
 import {createRoot} from "react-dom/client";

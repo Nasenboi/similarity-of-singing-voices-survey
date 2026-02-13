@@ -1,5 +1,5 @@
-import {SidebarProvider, useSidebar} from "@/components/ui/sidebar";
-import React, {useEffect, useState} from "react";
+import {SidebarProvider} from "@/components/ui/sidebar";
+import React from "react";
 import {BrowserRouter} from "react-router-dom";
 import {AudioProvider} from "./contextProvider/AudioContext";
 import {ThemeProvider} from "./contextProvider/ThemeProvider";

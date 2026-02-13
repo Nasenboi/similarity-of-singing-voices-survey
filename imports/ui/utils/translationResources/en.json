@@ -1,0 +1,22 @@
+{
+  "translation": {
+    "SurveyPage": {
+      "and": "and",
+      "areMoreSimilar": "are more similar",
+      "cardTitle": "Question",
+      "description": "Select the voice option which sounds the most similar to the target voice",
+      "next": "next",
+      "previous": "previous",
+      "referenceVoices": "Reference Voices",
+      "submit": "Submit",
+      "targetVoice": "Target Voice",
+      "title": "Survey: Similarity of Singing Voices",
+      "voice": "Voice"
+    },
+    "sidebar": {
+      "language": "Lanugage",
+      "settings": "Settings",
+      "theme": "Theme"
+    }
+  }
+}
