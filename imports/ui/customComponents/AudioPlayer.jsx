@@ -64,7 +64,7 @@ export function AudioPlayer() {
             </div>
           )}
           <div className="w-full h-20 flex justify-center items-center">
-            <audio ref={audioRef} onTimeUpdate={handleTimeUpdate} onEnded={() => stopAudio()} />
+            <audio ref={audioRef} onTimeUpdate={handleTimeUpdate} onEnded={() => setIsPlaying(false)} />
             <Button
               className="rounded-full mr-2 w-10 h-10"
               onClick={() => {
