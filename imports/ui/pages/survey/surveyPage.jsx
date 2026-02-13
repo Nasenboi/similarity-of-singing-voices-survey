@@ -70,12 +70,14 @@ export function SurveyPage() {
             <Pagination>
               <PaginationContent>
                 <PaginationPrevious
+                  className={currentPage === 0 && "text-background hover:text-background hover:bg-background"}
                   href="#"
                   onClick={(e) => {
                     e.preventDefault();
                     handlePageChange(currentPage - 1);
                   }}
                 />
+
                 {voiceTriplets.map((_, index) => (
                   <PaginationItem key={index}>
                     <PaginationLink
@@ -94,6 +96,9 @@ export function SurveyPage() {
                   </PaginationItem>
                 ))}
                 <PaginationNext
+                  className={
+                    currentPage + 1 === voiceTriplets.length && "text-background hover:text-background hover:bg-background"
+                  }
                   href="#"
                   onClick={(e) => {
                     e.preventDefault();
