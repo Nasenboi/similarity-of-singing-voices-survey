@@ -71,7 +71,7 @@ export function SurveyPage() {
               <PaginationContent>
                 <PaginationPrevious
                   className={currentPage === 0 && "text-background hover:text-background hover:bg-background"}
-                  displayName={t("SurveyPage.previous")}
+                  text={t("SurveyPage.previous")}
                   href="#"
                   onClick={(e) => {
                     e.preventDefault();
@@ -101,7 +101,7 @@ export function SurveyPage() {
                   className={
                     currentPage + 1 === voiceTriplets.length && "text-background hover:text-background hover:bg-background"
                   }
-                  displayName={t("SurveyPage.next")}
+                  text={t("SurveyPage.next")}
                   href="#"
                   onClick={(e) => {
                     e.preventDefault();
