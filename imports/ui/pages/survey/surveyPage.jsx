@@ -8,18 +8,33 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import {Progress} from "@/components/ui/progress";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useAudioContext} from "../../contextProvider/AudioContext";
 import {AudioPlayer} from "../../customComponents/AudioPlayer";
 import {cookies, getCookieSave} from "../../customComponents/Cookies";
 import {SurveyCard} from "./surveyCard";
 
+const voiceTriplets = [
+  {ID: "001", URLS: {X: "000/000002.mp3", A: "000/000003.mp3", B: "000/000010.mp3"}},
+  {ID: "002", URLS: {X: "000/000002.mp3", A: "000/000003.mp3", B: "000/000010.mp3"}},
+  {ID: "003", URLS: {X: "000/000002.mp3", A: "000/000003.mp3", B: "000/000010.mp3"}},
+  {ID: "004", URLS: {X: "000/000002.mp3", A: "000/000003.mp3", B: "000/000010.mp3"}},
+  {ID: "005", URLS: {X: "000/000002.mp3", A: "000/000003.mp3", B: "000/000010.mp3"}},
+  {ID: "006", URLS: {X: "000/000002.mp3", A: "000/000003.mp3", B: "000/000010.mp3"}},
+];
+
 export function SurveyPage() {
   const [currentPage, setCurrentPage] = useState(0);
   const [surveyProgress, setSurveyProgress] = useState(0);
   const {isPlaying, setIsPlaying} = useAudioContext();
   const {t} = useTranslation();
+
+  useEffect(() => {
+    const submissionAnswers = getCookieSave("submissionAnswers");
+    const sp = Math.round((100 * (Object.keys(submissionAnswers).length + 1)) / voiceTriplets.length);
+    setSurveyProgress(sp);
+  }, []);
 
   const handlePageChange = (newPage) => {
     if (isPlaying) {
@@ -30,15 +45,6 @@ export function SurveyPage() {
       setCurrentPage(newPage);
     }
   };
-
-  const voiceTriplets = [
-    {ID: "001", URLS: {X: "000/000002.mp3", A: "000/000003.mp3", B: "000/000010.mp3"}},
-    {ID: "002", URLS: {X: "000/000002.mp3", A: "000/000003.mp3", B: "000/000010.mp3"}},
-    {ID: "003", URLS: {X: "000/000002.mp3", A: "000/000003.mp3", B: "000/000010.mp3"}},
-    {ID: "004", URLS: {X: "000/000002.mp3", A: "000/000003.mp3", B: "000/000010.mp3"}},
-    {ID: "005", URLS: {X: "000/000002.mp3", A: "000/000003.mp3", B: "000/000010.mp3"}},
-    {ID: "006", URLS: {X: "000/000002.mp3", A: "000/000003.mp3", B: "000/000010.mp3"}},
-  ];
 
   const setSubmissionAnswer = ({ID, response}) => {
     if (isPlaying) {
