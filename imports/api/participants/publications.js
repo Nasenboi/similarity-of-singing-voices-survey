@@ -1,8 +1,9 @@
+import {check} from "meteor/check";
 import {Meteor} from "meteor/meteor";
 import {Particitpants} from "./collection";
 
-Meteor.publish("participants.single", async function (participantID) {
-  check(participantID, string);
+Meteor.publish("participants.single", function (participantID) {
+  check(participantID, String);
 
-  return await Particitpants.findOneAsync(participantID);
+  return Particitpants.find(participantID);
 });
