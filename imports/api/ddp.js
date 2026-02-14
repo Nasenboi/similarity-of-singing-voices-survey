@@ -7,5 +7,6 @@ DDPRateLimiter.addRule(
     clientAddress: (connection) => connection.clientAddress,
   },
   1,
-  3600000,
+  5000,
 );
+// 1h 3600000,

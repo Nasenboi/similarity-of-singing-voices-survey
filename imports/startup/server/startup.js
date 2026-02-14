@@ -8,7 +8,7 @@ import {initQuestionnaire} from "./initQuestionnaire";
  */
 Meteor.startup(async () => {
   await initServer();
-  Log.debug("async initServer finished");
+  Log.info("async initServer finished");
 });
 
 /**
@@ -19,17 +19,17 @@ async function initServer() {
   printInfoLog();
 
   initSimpleSchema();
-  Log.debug("init simpleSchema finished");
+  Log.info("init simpleSchema finished");
 
   await initQuestionnaire();
-  Log.debug("init questionnaire finished");
+  Log.info("init questionnaire finished");
 }
 
 /**
  * Print server info
  */
 function printInfoLog() {
-  Log.debug(`Starting ${APP_NAME} server ${APP_VERSION}`);
+  Log.info(`Starting ${APP_NAME} server ${APP_VERSION}`);
   const meteorSettings = {
     isProduction: Meteor.isProduction,
     isDevelopment: Meteor.isDevelopment,
@@ -38,7 +38,7 @@ function printInfoLog() {
     time: new Date(),
     absoluteUrl: Meteor.absoluteUrl(),
   };
-  Log.debug("Meteor server settings:", meteorSettings);
+  Log.info("Meteor server settings:", meteorSettings);
 }
 
 /**

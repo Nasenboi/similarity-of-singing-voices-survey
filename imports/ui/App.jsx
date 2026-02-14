@@ -2,6 +2,7 @@ import {SidebarProvider} from "@/components/ui/sidebar";
 import React from "react";
 import {BrowserRouter} from "react-router-dom";
 import {AudioProvider} from "./contextProvider/AudioContext";
+import {ParticipantProvider} from "./contextProvider/ParticipantContext";
 import {ThemeProvider} from "./contextProvider/ThemeProvider";
 import {AppSideBar} from "./customComponents/AppSideBar";
 import {SideBarToggle} from "./customComponents/SideBarToggle";
@@ -13,11 +14,13 @@ export const App = () => {
       <SidebarProvider defaultOpen={false}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <AudioProvider>
-            <BrowserRouter>
-              <SideBarToggle />
-              <AppSideBar />
-              <RoutedContentArea />
-            </BrowserRouter>
+            <ParticipantProvider>
+              <BrowserRouter>
+                <SideBarToggle />
+                <AppSideBar />
+                <RoutedContentArea />
+              </BrowserRouter>
+            </ParticipantProvider>
           </AudioProvider>
         </ThemeProvider>
       </SidebarProvider>

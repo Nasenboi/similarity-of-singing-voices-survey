@@ -1,5 +1,6 @@
 import {Meteor} from "meteor/meteor";
-import React, {useTracker} from "react";
+import {useTracker} from "meteor/react-meteor-data";
+import React from "react";
 import {Particitpants} from "./collection";
 
 export const useSingleParticipant = (participantID) =>

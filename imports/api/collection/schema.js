@@ -1,4 +1,3 @@
-import {Mongo} from "meteor/mongo";
 import SimpleSchema from "simpl-schema";
 
 /**
@@ -7,7 +6,6 @@ import SimpleSchema from "simpl-schema";
 export const dbMetadataSchema = new SimpleSchema({
   _id: {
     type: String,
-    denyUpdate: true,
     optional: true,
   },
   createDate: {
@@ -17,7 +15,6 @@ export const dbMetadataSchema = new SimpleSchema({
         return new Date();
       }
     },
-    denyUpdate: true,
     optional: true,
   },
   editDate: {
@@ -28,4 +25,21 @@ export const dbMetadataSchema = new SimpleSchema({
     optional: true,
   },
   number: {type: Number, optional: true},
+});
+
+dbMetadataSchema.addValidator(function () {
+  if (this.isUpdate) {
+    if (this.field("_id").isSet) {
+      return {_id: "Cannot update _id field"};
+    }
+    if (this.field("editDate").isSet) {
+      return {editDate: "Cannot update editDate field"};
+    }
+    if (this.field("number").isSet) {
+      return {number: "Cannot update number field"};
+    }
+    if (this.field("number").isSet) {
+      return {number: "Cannot update number field"};
+    }
+  }
 });
