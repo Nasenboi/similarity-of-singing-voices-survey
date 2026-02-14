@@ -1,3 +1,4 @@
+import {APP_NAME, APP_VERSION} from "@/imports/common/globals";
 import {Log} from "meteor/logging";
 import {Meteor} from "meteor/meteor";
 import SimpleSchema from "simpl-schema";
