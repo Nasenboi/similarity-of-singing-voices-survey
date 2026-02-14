@@ -1,7 +1,8 @@
-import { Log } from "meteor/logging";
+import {Log} from "meteor/logging";
 
 Log.debug("Loading server startup files...");
 
+import "../../api/ddp";
 import "../../api/methods";
 import "../../api/publications";
 import "./startup";
