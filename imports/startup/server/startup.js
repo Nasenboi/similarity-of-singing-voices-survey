@@ -1,6 +1,7 @@
 import {Log} from "meteor/logging";
 import {Meteor} from "meteor/meteor";
 import SimpleSchema from "simpl-schema";
+import {initQuestionnaire} from "./initQuestionnaire";
 
 /**
  * Call the initServer function on startup
@@ -19,6 +20,9 @@ async function initServer() {
 
   initSimpleSchema();
   Log.debug("init simpleSchema finished");
+
+  await initQuestionnaire();
+  Log.debug("init questionnaire finished");
 }
 
 /**
