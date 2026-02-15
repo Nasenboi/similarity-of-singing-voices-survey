@@ -40,14 +40,25 @@ export function SurveyPage() {
 
     const sp = Math.round((100 * numAnswers) / numQuestions);
     setSurveyProgress(sp);
-  }, [participant, surveyQuestions, surveyAnswers]);
-
-  const numQuestions = surveyQuestions?.length;
+  }, [
+    participant?._id,
+    surveyQuestions,
+    surveyAnswers,
+    isParticipantLoading,
+    isSurveyAnswersLoading,
+    isSurveyQuestionsLoading,
+  ]);
 
   const handlePageChange = (newPage) => {
+    if (!surveyQuestions) {
+      return;
+    }
+
     if (isPlaying) {
       setIsPlaying(false);
     }
+
+    const numQuestions = surveyQuestions.length;
 
     if (newPage >= 0 && newPage < numQuestions) {
       setDirection(newPage > currentPage ? 1 : -1);
@@ -55,10 +66,11 @@ export function SurveyPage() {
     }
   };
 
-  const setSurveyAnswer = async ({questionID, answer}) => {
-    if (!participant) {
+  const setSurveyAnswer = async (questionID, answer) => {
+    if (!participant || !surveyQuestions) {
       return;
     }
+    const numQuestions = surveyQuestions.length;
 
     if (isPlaying) {
       setIsPlaying(false);
@@ -70,19 +82,14 @@ export function SurveyPage() {
         answer,
         participantID: participant._id,
       });
+
+      if (currentPage + 1 < numQuestions) {
+        setCurrentPage(currentPage + 1);
+      }
     } catch (err) {
       console.error(err);
     }
-
-    if (currentPage + 1 < numQuestions) {
-      setCurrentPage(currentPage + 1);
-    }
   };
-
-  const currentQuestion = surveyQuestions?.find((q) => q.questionNumber === currentPage);
-  const currentAnswer = surveyAnswers?.find(
-    (a) => a.participantID === participant._id && a.questionID === currentQuestion._id,
-  );
 
   if (isParticipantLoading || isSurveyAnswersLoading || isSurveyQuestionsLoading) {
     return (
@@ -135,7 +142,10 @@ export function SurveyPage() {
                   </PaginationItem>
                 ))}
                 <PaginationNext
-                  className={currentPage + 1 === numQuestions && "text-background hover:text-background hover:bg-background"}
+                  className={
+                    currentPage + 1 === (surveyQuestions?.length || 1) &&
+                    "text-background hover:text-background hover:bg-background"
+                  }
                   text={t("SurveyPage.next")}
                   href="#"
                   onClick={(e) => {
@@ -159,7 +169,7 @@ export function SurveyPage() {
           <div className="w-full h-60" />
 
           <AnimatePresence mode="wait">
-            {currentQuestion ? (
+            {surveyQuestions?.find((q) => q.questionNumber === currentPage) ? (
               <motion.div
                 key={currentPage}
                 initial={{x: direction * 300, opacity: 0}}
@@ -168,7 +178,15 @@ export function SurveyPage() {
                 className="w-full"
               >
                 <div className="w-full h-full flex justify-center items-center">
-                  <SurveyCard question={currentQuestion} setSurveyAnswer={setSurveyAnswer} isSubmitted={!!currentAnswer} />
+                  <SurveyCard
+                    question={surveyQuestions?.find((q) => q.questionNumber === currentPage)}
+                    setSurveyAnswer={setSurveyAnswer}
+                    isSubmitted={
+                      !!surveyAnswers.find(
+                        (a) => a.questionID === surveyQuestions?.find((q) => q.questionNumber === currentPage)?._id,
+                      )
+                    }
+                  />
                 </div>
               </motion.div>
             ) : (

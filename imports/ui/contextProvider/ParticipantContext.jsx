@@ -1,19 +1,21 @@
 import {useSingleParticipant} from "@/imports/api/participants/hooks";
 import {PARTICIPANTS} from "@/imports/api/participants/methods";
-import React, {createContext, useContext, useEffect} from "react";
+import React, {createContext, useContext, useEffect, useState} from "react";
 import {cookies} from "../customComponents/Cookies";
 
 const ParticipantContext = createContext(undefined);
 
 export const ParticipantProvider = ({children}) => {
-  const {participant, isLoading} = useSingleParticipant(cookies.get("participantID"));
+  const [participantID, setParticipantID] = useState(cookies.get("participantID"));
+  const {participant, isLoading} = useSingleParticipant(participantID);
 
   useEffect(() => {
     async function checkParticipantID() {
       if (!cookies.get("participantID")) {
         try {
-          const newId = await PARTICIPANTS.newParticipant.callAsync();
-          cookies.set("participantID", newId);
+          const newID = await PARTICIPANTS.newParticipant.callAsync();
+          cookies.set("participantID", newID);
+          setParticipantID(newID);
         } catch (err) {
           console.error(err);
         }
@@ -26,8 +28,9 @@ export const ParticipantProvider = ({children}) => {
     async function checkParticipantExisting() {
       if (cookies.get("participantID") && !isLoading && !participant) {
         try {
-          const newId = await PARTICIPANTS.newParticipant.callAsync();
-          cookies.set("participantID", newId);
+          const newID = await PARTICIPANTS.newParticipant.callAsync();
+          cookies.set("participantID", newID);
+          setParticipantID(newID);
         } catch (err) {
           console.error(err);
         }

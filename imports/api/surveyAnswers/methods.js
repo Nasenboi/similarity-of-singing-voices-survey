@@ -8,37 +8,35 @@ import {surveyAnswersSchema} from "./schema";
 export const SURVEY_ANSWERS = {
   setAnswer: new ValidatedMethod({
     name: "surveyAnswers.setAnswer",
-    validate: new SimpleSchema({
-      answer: {type: surveyAnswersSchema, blackbox: true},
-    }).validator(),
-    async run({answer}) {
+    validate: surveyAnswersSchema.validator(),
+    async run(surveyAnswer) {
       if (this.isSimulation) return;
 
       // additional validation
-      const participant = await Participants.findOneAsync(answer.participantID);
+      const participant = await Participants.findOneAsync(surveyAnswer.participantID);
       if (!participant) throw new Meteor.Error("participant-not-found");
-      const question = await SurveyQuestions.findOneAsync(answer.questionID);
+      const question = await SurveyQuestions.findOneAsync(surveyAnswer.questionID);
       if (!question) throw new Meteor.Error("question-not-found");
       const existing = await SurveyAnswers.findOneAsync({
-        participantID: answer.participantID,
-        questionID: answer.questionID,
+        participantID: surveyAnswer.participantID,
+        questionID: surveyAnswer.questionID,
       });
 
       // upsert answer
       let result;
       if (existing) {
         result = await SurveyAnswers.updateAsync(existing._id, {
-          $set: {answer: answer.answer, editDate: new Date()},
+          $set: {surveyAnswer: surveyAnswer.answer, editDate: new Date()},
         });
       } else {
-        result = await SurveyAnswers.insertAsync(answer);
+        result = await SurveyAnswers.insertAsync(surveyAnswer);
       }
 
       // set surveyCompleted
-      const countSurveyAnswers = await SurveyAnswers.find({participantID: answer.participantID}).countAsync();
+      const countSurveyAnswers = await SurveyAnswers.find({participantID: surveyAnswer.participantID}).countAsync();
       const countQuestions = await SurveyQuestions.find({questionnaireID: participant.questionnaireID}).countAsync();
       if (countQuestions === countSurveyAnswers && !participant.surveyCompleted) {
-        await Participants.updateAsync(answer.participantID, {
+        await Participants.updateAsync(surveyAnswer.participantID, {
           $set: {
             surveyCompleted: true,
           },

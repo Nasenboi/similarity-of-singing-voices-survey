@@ -60,7 +60,7 @@ export function SurveyCard({question, setSurveyAnswer, isSubmitted = false}) {
       <div className="flex justify-center">
         <div className="p-4 w-full h-full flex flex-col items-center">
           <h1 className="mb-8 w-full text-4xl font-bold underline text-center">{t("SurveyPage.targetVoice")}</h1>
-          <Button onClick={() => onVoiceClick(getURL(X), "X")}>
+          <Button onClick={() => onVoiceClick(getURL("X"), "X")}>
             <p className="text-bold text-4xl text-center">{t("SurveyPage.voice")} X</p>
           </Button>
         </div>
@@ -92,10 +92,7 @@ export function SurveyCard({question, setSurveyAnswer, isSubmitted = false}) {
               </div>
             </RadioGroup>
             <div className="-mb-4 w-full flex justify-center">
-              <Button
-                className="px-8 text-lg font-bold"
-                onClick={() => setSurveyAnswer({ID: voiceTriplet.ID, response: similarToX})}
-              >
+              <Button className="px-8 text-lg font-bold" onClick={() => setSurveyAnswer(question._id, similarToX)}>
                 {t("SurveyPage.submit")}
               </Button>
             </div>
