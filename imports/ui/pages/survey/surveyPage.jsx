@@ -12,6 +12,7 @@ import {Spinner} from "@/components/ui/spinner";
 import {useSurveyAnswersParticipant} from "@/imports/api/surveyAnswers/hooks";
 import {SURVEY_ANSWERS} from "@/imports/api/surveyAnswers/methods";
 import {useSurveyQuestionsParticipant} from "@/imports/api/surveyQuestions/hooks";
+import {AnimatePresence, motion} from "motion/react";
 import React, {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useAudioContext} from "../../contextProvider/AudioContext";
@@ -24,6 +25,7 @@ export function SurveyPage() {
   const {surveyQuestions, isLoading: isSurveyQuestionsLoading} = useSurveyQuestionsParticipant(participant?._id);
   const {surveyAnswers, isLoading: isSurveyAnswersLoading} = useSurveyAnswersParticipant(participant?._id);
   const [currentPage, setCurrentPage] = useState(0);
+  const [direction, setDirection] = useState(1);
   const [surveyProgress, setSurveyProgress] = useState(0);
   const {isPlaying, setIsPlaying} = useAudioContext();
   const {t} = useTranslation();
@@ -48,6 +50,7 @@ export function SurveyPage() {
     }
 
     if (newPage >= 0 && newPage < numQuestions) {
+      setDirection(newPage > currentPage ? 1 : -1);
       setCurrentPage(newPage);
     }
   };
@@ -152,13 +155,31 @@ export function SurveyPage() {
       <div className="w-full flex flex-col justify-between items-center overflow-hidden">
         <div className="w-full h-60" />
 
-        {currentQuestion ? (
-          <SurveyCard question={currentQuestion} setSurveyAnswer={setSurveyAnswer} isSubmitted={!!currentAnswer} />
-        ) : (
-          <div className="w-screen h-screen flex justify-center items-center">
-            <Spinner className="w-40 h-40" />
-          </div>
-        )}
+        <div className="w-full flex flex-col justify-between items-center overflow-hidden relative">
+          <div className="w-full h-60" />
+
+          <AnimatePresence mode="wait">
+            {currentQuestion ? (
+              <motion.div
+                key={currentPage}
+                initial={{x: direction * 300, opacity: 0}}
+                animate={{x: 0, opacity: 1}}
+                transition={{duration: 0.3}}
+                className="w-full"
+              >
+                <div className="w-full h-full flex justify-center items-center">
+                  <SurveyCard question={currentQuestion} setSurveyAnswer={setSurveyAnswer} isSubmitted={!!currentAnswer} />
+                </div>
+              </motion.div>
+            ) : (
+              <div className="w-full h-full flex justify-center items-center">
+                <Spinner className="w-40 h-40" />
+              </div>
+            )}
+          </AnimatePresence>
+
+          <div className="w-full h-24" />
+        </div>
 
         <div className="w-full h-24" />
       </div>
