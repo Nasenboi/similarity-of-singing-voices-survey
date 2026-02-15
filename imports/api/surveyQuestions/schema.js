@@ -16,7 +16,7 @@ export const audioSchema = new SimpleSchema({
 
 export const surveyQuestionSchema = new SimpleSchema({
   questionnaireID: {type: String},
-  number: {type: Number},
+  questionNumber: {type: Number},
   X: audioSchema,
   A: audioSchema,
   B: audioSchema,

@@ -54,7 +54,7 @@ export function SurveyCard({question, setSurveyAnswer, isSubmitted = false}) {
     >
       <div className={`border-b-2 rounded-t-md ${isSubmitted && "bg-accent border-accent-foreground"}`}>
         <h1 className="m-4 w-full text-4xl font-bold text-center">
-          {t("SurveyPage.cardTitle")} {question.number}
+          {t("SurveyPage.cardTitle")} {question.questionNumber}
         </h1>
       </div>
       <div className="flex justify-center">

@@ -20,7 +20,7 @@ import {AudioPlayer} from "../../customComponents/AudioPlayer";
 import {SurveyCard} from "./surveyCard";
 
 export function SurveyPage() {
-  const participant = useParticipantContext();
+  const {participant, isLoading: isParticipantLoading} = useParticipantContext();
   const {surveyQuestions, isLoading: isSurveyQuestionsLoading} = useSurveyQuestionsParticipant(participant?._id);
   const {surveyAnswers, isLoading: isSurveyAnswersLoading} = useSurveyAnswersParticipant(participant?._id);
   const [currentPage, setCurrentPage] = useState(0);
@@ -76,12 +76,12 @@ export function SurveyPage() {
     }
   };
 
-  const currentQuestion = surveyQuestions?.find((q) => q.number === currentPage);
+  const currentQuestion = surveyQuestions?.find((q) => q.questionNumber === currentPage);
   const currentAnswer = surveyAnswers?.find(
     (a) => a.participantID === participant._id && a.questionID === currentQuestion._id,
   );
 
-  if (!participant || isSurveyAnswersLoading || isSurveyQuestionsLoading || !currentQuestion) {
+  if (isParticipantLoading || isSurveyAnswersLoading || isSurveyQuestionsLoading) {
     return (
       <div className="w-screen h-screen flex justify-center items-center">
         <Spinner className="w-40 h-40" />
@@ -152,7 +152,13 @@ export function SurveyPage() {
       <div className="w-full flex flex-col justify-between items-center overflow-hidden">
         <div className="w-full h-60" />
 
-        <SurveyCard question={currentQuestion} setSurveyAnswer={setSurveyAnswer} isSubmitted={!!currentAnswer} />
+        {currentQuestion ? (
+          <SurveyCard question={currentQuestion} setSurveyAnswer={setSurveyAnswer} isSubmitted={!!currentAnswer} />
+        ) : (
+          <div className="w-screen h-screen flex justify-center items-center">
+            <Spinner className="w-40 h-40" />
+          </div>
+        )}
 
         <div className="w-full h-24" />
       </div>

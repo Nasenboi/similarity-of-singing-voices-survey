@@ -9,9 +9,8 @@ export const ParticipantProvider = ({children}) => {
   const {participant, isLoading} = useSingleParticipant(cookies.get("participantID"));
 
   useEffect(() => {
-    const participantIDCookie = cookies.get("participantID");
     async function checkParticipantID() {
-      if (!participantIDCookie || (participantIDCookie && !participant)) {
+      if (!cookies.get("participantID")) {
         try {
           const newId = await PARTICIPANTS.newParticipant.callAsync();
           cookies.set("participantID", newId);
@@ -23,7 +22,21 @@ export const ParticipantProvider = ({children}) => {
     checkParticipantID();
   }, []);
 
-  const contextValue = isLoading ? {} : participant;
+  useEffect(() => {
+    async function checkParticipantExisting() {
+      if (cookies.get("participantID") && !isLoading && !participant) {
+        try {
+          const newId = await PARTICIPANTS.newParticipant.callAsync();
+          cookies.set("participantID", newId);
+        } catch (err) {
+          console.error(err);
+        }
+      }
+    }
+    checkParticipantExisting();
+  }, [isLoading]);
+
+  const contextValue = isLoading || !participant ? {isLoading, participant: null} : {isLoading, participant};
 
   return <ParticipantContext.Provider value={contextValue}>{children}</ParticipantContext.Provider>;
 };

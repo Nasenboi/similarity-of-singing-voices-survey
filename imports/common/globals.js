@@ -8,7 +8,7 @@ export const TEST_QUESTIONNAIRE_LENGTH = 15;
 export const TEST_QUESTIONNAIRE = [...Array(TEST_QUESTIONNAIRE_LENGTH).keys()].map((i) => {
   return {
     questionnaireID: TEST_QUESTIONNAIRE_ID,
-    number: i,
+    questionNumber: i,
     X: {folder: "000", filename: "000002.mp3"},
     A: {folder: "000", filename: "000003.mp3"},
     B: {folder: "000", filename: "000010.mp3"},
