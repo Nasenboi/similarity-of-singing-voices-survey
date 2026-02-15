@@ -77,7 +77,6 @@ export function SurveyPage() {
   };
 
   const currentQuestion = surveyQuestions?.find((q) => q.number === currentPage);
-  console.log(surveyQuestions);
   const currentAnswer = surveyAnswers?.find(
     (a) => a.participantID === participant._id && a.questionID === currentQuestion._id,
   );

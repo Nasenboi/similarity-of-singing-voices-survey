@@ -1,5 +1,6 @@
 import {Mongo} from "meteor/mongo";
 import {getDocumentDiffArray} from "../utils";
+import {incrementCounter} from "./counters";
 
 /**
  * Extending Mongo.Collection to add custom functionality
@@ -31,10 +32,8 @@ export class Collection extends Mongo.Collection {
    * @returns {Promise<String>} _id of the new document
    */
   async insertAsync(doc, callback) {
-    const lastItem = await this.findOneAsync({}, {sort: {itemNumber: -1}});
-    console.log(doc.number, lastItem?.itemNumber, lastItem);
-    const itemNumber = doc.itemNumber || lastItem?.itemNumber + 1 || 1;
-    doc = {...doc, itemNumber: itemNumber};
+    const newCount = await incrementCounter(this.name);
+    doc = {...doc, itemNumber: newCount};
     return await super.insertAsync(doc, callback);
   }
 

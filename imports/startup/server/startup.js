@@ -3,6 +3,7 @@ import {Log} from "meteor/logging";
 import {Meteor} from "meteor/meteor";
 import SimpleSchema from "simpl-schema";
 import {initQuestionnaire} from "./initQuestionnaire";
+import {resetDB} from "./resetDB";
 
 /**
  * Call the initServer function on startup
@@ -21,6 +22,9 @@ async function initServer() {
 
   initSimpleSchema();
   Log.info("init simpleSchema finished");
+
+  await resetDB();
+  Log.info("DB reset finished");
 
   await initQuestionnaire();
   Log.info("init questionnaire finished");
