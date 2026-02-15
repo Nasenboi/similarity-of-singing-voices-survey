@@ -1,5 +1,13 @@
 import * as _ from "lodash";
 
+function isFlatArray(obj) {
+  if (!Array.isArray(obj)) return false;
+  for (const e of obj) {
+    if (_.isObject(e)) return false;
+  }
+  return true;
+}
+
 /**
  * Get the differences of two objects
  * @returns {object[]} [] if newDoc and oldDoc are equal. If not, returns array of {new: ..., old: ..., key: ...}

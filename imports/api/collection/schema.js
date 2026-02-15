@@ -32,9 +32,6 @@ dbMetadataSchema.addValidator(function () {
     if (this.field("_id").isSet) {
       return {_id: "Cannot update _id field"};
     }
-    if (this.field("editDate").isSet) {
-      return {editDate: "Cannot update editDate field"};
-    }
     if (this.field("createDate").isSet) {
       return {createDate: "Cannot update createDate field"};
     }

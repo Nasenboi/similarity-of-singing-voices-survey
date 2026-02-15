@@ -21,17 +21,26 @@ import {AudioPlayer} from "../../customComponents/AudioPlayer";
 import {SurveyCard} from "./surveyCard";
 
 export function SurveyPage() {
+  const {t} = useTranslation();
+  const {isPlaying, setIsPlaying} = useAudioContext();
   const {participant, isLoading: isParticipantLoading} = useParticipantContext();
-  const {surveyQuestions, isLoading: isSurveyQuestionsLoading} = useSurveyQuestionsParticipant(participant?._id);
-  const {surveyAnswers, isLoading: isSurveyAnswersLoading} = useSurveyAnswersParticipant(participant?._id);
+  const [participantID, setParticipantID] = useState(participant?._id);
   const [currentPage, setCurrentPage] = useState(0);
   const [direction, setDirection] = useState(1);
   const [surveyProgress, setSurveyProgress] = useState(0);
-  const {isPlaying, setIsPlaying} = useAudioContext();
-  const {t} = useTranslation();
+  const [questionsAnswered, setQuestionsAnswered] = useState([]);
 
   useEffect(() => {
-    if (!participant || !surveyQuestions || !surveyAnswers) {
+    if (participant?._id && participant._id !== participantID) {
+      setParticipantID(participant._id);
+    }
+  }, [participant]);
+
+  const {surveyQuestions, isLoading: isSurveyQuestionsLoading} = useSurveyQuestionsParticipant(participantID);
+  const {surveyAnswers, isLoading: isSurveyAnswersLoading} = useSurveyAnswersParticipant(participantID);
+
+  useEffect(() => {
+    if (!surveyQuestions || !surveyAnswers) {
       return;
     }
 
@@ -40,14 +49,10 @@ export function SurveyPage() {
 
     const sp = Math.round((100 * numAnswers) / numQuestions);
     setSurveyProgress(sp);
-  }, [
-    participant?._id,
-    surveyQuestions,
-    surveyAnswers,
-    isParticipantLoading,
-    isSurveyAnswersLoading,
-    isSurveyQuestionsLoading,
-  ]);
+
+    const questionsAnswered = surveyAnswers.map((a) => surveyQuestions.find((q) => q._id === a.questionID)?.questionNumber);
+    setQuestionsAnswered(questionsAnswered);
+  }, [surveyQuestions, surveyAnswers, isSurveyAnswersLoading, isSurveyQuestionsLoading]);
 
   const handlePageChange = (newPage) => {
     if (!surveyQuestions) {
@@ -67,11 +72,6 @@ export function SurveyPage() {
   };
 
   const setSurveyAnswer = async (questionID, answer) => {
-    if (!participant || !surveyQuestions) {
-      return;
-    }
-    const numQuestions = surveyQuestions.length;
-
     if (isPlaying) {
       setIsPlaying(false);
     }
@@ -82,7 +82,7 @@ export function SurveyPage() {
         answer,
         participantID: participant._id,
       });
-
+      const numQuestions = surveyQuestions.length;
       if (currentPage + 1 < numQuestions) {
         setCurrentPage(currentPage + 1);
       }
@@ -125,11 +125,7 @@ export function SurveyPage() {
                 {surveyQuestions?.map((_, index) => (
                   <PaginationItem key={index}>
                     <PaginationLink
-                      className={
-                        !!surveyAnswers.find(
-                          (a) => a.participantID === participant._id && a.questionID === surveyQuestions._id,
-                        ) && "bg-accent border-accent-foreground"
-                      }
+                      className={questionsAnswered.includes(index) && "bg-accent border-accent-foreground"}
                       href="#"
                       isActive={index === currentPage}
                       onClick={(e) => {
@@ -181,11 +177,7 @@ export function SurveyPage() {
                   <SurveyCard
                     question={surveyQuestions?.find((q) => q.questionNumber === currentPage)}
                     setSurveyAnswer={setSurveyAnswer}
-                    isSubmitted={
-                      !!surveyAnswers.find(
-                        (a) => a.questionID === surveyQuestions?.find((q) => q.questionNumber === currentPage)?._id,
-                      )
-                    }
+                    isSubmitted={questionsAnswered.includes(currentPage)}
                   />
                 </div>
               </motion.div>
