@@ -36,7 +36,7 @@ export function SurveyPage() {
     const numQuestions = surveyQuestions.length;
     const numAnswers = surveyAnswers.length;
 
-    const sp = Math.round((100 * (numAnswers + 1)) / numQuestions);
+    const sp = Math.round((100 * numAnswers) / numQuestions);
     setSurveyProgress(sp);
   }, [participant, surveyQuestions, surveyAnswers]);
 

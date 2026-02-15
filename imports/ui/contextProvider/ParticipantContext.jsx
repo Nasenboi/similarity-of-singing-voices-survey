@@ -9,8 +9,9 @@ export const ParticipantProvider = ({children}) => {
   const {participant, isLoading} = useSingleParticipant(cookies.get("participantID"));
 
   useEffect(() => {
+    const participantIDCookie = cookies.get("participantID");
     async function checkParticipantID() {
-      if (!cookies.get("participantID") || !participant) {
+      if (!participantIDCookie || (participantIDCookie && !participant)) {
         try {
           const newId = await PARTICIPANTS.newParticipant.callAsync();
           cookies.set("participantID", newId);
