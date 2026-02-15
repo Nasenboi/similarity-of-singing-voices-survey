@@ -31,9 +31,10 @@ export class Collection extends Mongo.Collection {
    * @returns {Promise<String>} _id of the new document
    */
   async insertAsync(doc, callback) {
-    const maxCounter = (await this.findOneAsync({}, {sort: {number: -1}}))?.number;
-    const number = doc.number || maxCounter + 1 || 1;
-    doc = {...doc, number: number};
+    const lastItem = await this.findOneAsync({}, {sort: {itemNumber: -1}});
+    console.log(doc.number, lastItem?.itemNumber, lastItem);
+    const itemNumber = doc.itemNumber || lastItem?.itemNumber + 1 || 1;
+    doc = {...doc, itemNumber: itemNumber};
     return await super.insertAsync(doc, callback);
   }
 

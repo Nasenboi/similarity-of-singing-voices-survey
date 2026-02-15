@@ -3,5 +3,16 @@ import {TEST_QUESTIONNAIRE} from "@/imports/common/globals";
 
 export async function initQuestionnaire() {
   await SurveyQuestions.removeAsync({});
-  await Promise.all(TEST_QUESTIONNAIRE.map((q) => SurveyQuestions.insertAsync(q)));
+
+  await Promise.all(
+    TEST_QUESTIONNAIRE.map(async (q) => {
+      await SurveyQuestions.insertAsync(q);
+      return;
+    }),
+  );
+
+  console.log(
+    "fetched data",
+    (await SurveyQuestions.find({}).fetch()).map((q) => [q.number, q.itemNumber, q._id]),
+  );
 }

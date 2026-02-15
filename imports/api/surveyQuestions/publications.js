@@ -8,5 +8,5 @@ Meteor.publish("surveyQuestions.participant", async function (participantID) {
   const participant = await Particitpants.findOneAsync(participantID);
   if (!participant) return;
 
-  return SurveyQuestions.find({questionnaireID: participant.questionnaireID});
+  return SurveyQuestions.find({questionnaireID: participant.questionnaireID}, {sort: {number: 1}});
 });

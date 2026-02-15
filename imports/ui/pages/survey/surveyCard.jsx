@@ -20,7 +20,7 @@ function AudioButton({url, voice, onVoiceClick}) {
   );
 }
 
-export function SurveyCard({voiceTriplet, setSubmissionAnswer, isSubmitted = false}) {
+export function SurveyCard({question, setSurveyAnswer, isSubmitted = false}) {
   const {currentAudio, setCurrentAudio, isPlaying, setIsPlaying} = useAudioContext();
   const [similarToX, setSimilarToX] = useState(["A", "B"]);
   const {t} = useTranslation();
@@ -44,19 +44,23 @@ export function SurveyCard({voiceTriplet, setSubmissionAnswer, isSubmitted = fal
     }
   };
 
+  const getURL = (key) => {
+    return `${question[key].folder}/${question[key].filename}`;
+  };
+
   return (
     <div
       className={`w-220 h-min rounded-md border-2 flex flex-col justifiy-center ${isSubmitted && "bg-accent border-accent-foreground"}`}
     >
       <div className={`border-b-2 rounded-t-md ${isSubmitted && "bg-accent border-accent-foreground"}`}>
         <h1 className="m-4 w-full text-4xl font-bold text-center">
-          {t("SurveyPage.cardTitle")} {voiceTriplet.ID}
+          {t("SurveyPage.cardTitle")} {question.number}
         </h1>
       </div>
       <div className="flex justify-center">
         <div className="p-4 w-full h-full flex flex-col items-center">
           <h1 className="mb-8 w-full text-4xl font-bold underline text-center">{t("SurveyPage.targetVoice")}</h1>
-          <Button onClick={() => onVoiceClick(voiceTriplet.URLS["X"], "X")}>
+          <Button onClick={() => onVoiceClick(getURL(X), "X")}>
             <p className="text-bold text-4xl text-center">{t("SurveyPage.voice")} X</p>
           </Button>
         </div>
@@ -64,13 +68,13 @@ export function SurveyCard({voiceTriplet, setSubmissionAnswer, isSubmitted = fal
         <div className={`w-full p-4 flex flex-col space-y-4 border-l-2 ${isSubmitted && "border-accent-foreground"}`}>
           <h1 className="mb-8 w-full text-4xl font-bold underline text-center">{t("SurveyPage.referenceVoices")}</h1>
           <ButtonGroup>
-            <AudioButton url={voiceTriplet.URLS[similarToX[0]]} voice={similarToX[0]} onVoiceClick={onVoiceClick} />
+            <AudioButton url={getURL([similarToX[0]])} voice={similarToX[0]} onVoiceClick={onVoiceClick} />
             <ButtonGroupSeparator />
             <Button size="icon" onClick={() => toggleVoices(similarToX[1])}>
               <ArrowRightLeft className="size-6!" />
             </Button>
             <ButtonGroupSeparator />
-            <AudioButton url={voiceTriplet.URLS[similarToX[1]]} voice={similarToX[1]} onVoiceClick={onVoiceClick} />
+            <AudioButton url={getURL([similarToX[1]])} voice={similarToX[1]} onVoiceClick={onVoiceClick} />
           </ButtonGroup>
           <div className="p-4 space-y-4 w-full">
             <RadioGroup value={similarToX[0]} onValueChange={(value) => toggleVoices(value)}>
@@ -90,7 +94,7 @@ export function SurveyCard({voiceTriplet, setSubmissionAnswer, isSubmitted = fal
             <div className="-mb-4 w-full flex justify-center">
               <Button
                 className="px-8 text-lg font-bold"
-                onClick={() => setSubmissionAnswer({ID: voiceTriplet.ID, response: similarToX})}
+                onClick={() => setSurveyAnswer({ID: voiceTriplet.ID, response: similarToX})}
               >
                 {t("SurveyPage.submit")}
               </Button>

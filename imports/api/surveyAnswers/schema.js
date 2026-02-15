@@ -3,7 +3,7 @@ import {dbMetadataSchema} from "../collection/schema";
 
 export const surveyAnswersSchema = new SimpleSchema({
   participantID: {type: String},
-  tripletID: {type: String},
+  questionID: {type: String},
   answer: {
     type: Array,
     custom() {

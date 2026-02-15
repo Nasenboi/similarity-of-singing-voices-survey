@@ -30,7 +30,7 @@ export const ParticipantProvider = ({children}) => {
 export const useParticipantContext = () => {
   const context = useContext(ParticipantContext);
   if (context === undefined) {
-    throw new Error("useParticipantContext must be used within an AudioProvider");
+    throw new Error("useParticipantContext must be used within an ParticipantProvider");
   }
   return context;
 };

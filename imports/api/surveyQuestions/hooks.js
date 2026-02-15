@@ -7,8 +7,8 @@ export const useSurveyQuestionsParticipant = (participantID) =>
   useTracker(() => {
     if (!participantID) return {surveyQuestions: null, isLoading: false};
 
-    const subscriptionHandle = Meteor.subscribe("surveyAnswers.participant", participantID);
-    const surveyQuestions = SurveyQuestions.find(participantID);
+    const subscriptionHandle = Meteor.subscribe("surveyQuestions.participant", participantID);
+    const surveyQuestions = SurveyQuestions.find().fetch();
 
     return {
       surveyQuestions,

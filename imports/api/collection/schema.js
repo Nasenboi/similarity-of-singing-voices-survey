@@ -24,7 +24,7 @@ export const dbMetadataSchema = new SimpleSchema({
     },
     optional: true,
   },
-  number: {type: Number, optional: true},
+  itemNumber: {type: Number, optional: true},
 });
 
 dbMetadataSchema.addValidator(function () {
@@ -35,11 +35,11 @@ dbMetadataSchema.addValidator(function () {
     if (this.field("editDate").isSet) {
       return {editDate: "Cannot update editDate field"};
     }
-    if (this.field("number").isSet) {
-      return {number: "Cannot update number field"};
+    if (this.field("createDate").isSet) {
+      return {createDate: "Cannot update createDate field"};
     }
-    if (this.field("number").isSet) {
-      return {number: "Cannot update number field"};
+    if (this.field("itemNumber").isSet) {
+      return {itemNumber: "Cannot update itemNumber field"};
     }
   }
 });

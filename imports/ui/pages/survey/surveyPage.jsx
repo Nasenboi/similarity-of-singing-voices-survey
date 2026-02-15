@@ -8,59 +8,87 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import {Progress} from "@/components/ui/progress";
+import {Spinner} from "@/components/ui/spinner";
+import {useSurveyAnswersParticipant} from "@/imports/api/surveyAnswers/hooks";
+import {SURVEY_ANSWERS} from "@/imports/api/surveyAnswers/methods";
+import {useSurveyQuestionsParticipant} from "@/imports/api/surveyQuestions/hooks";
 import React, {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useAudioContext} from "../../contextProvider/AudioContext";
+import {useParticipantContext} from "../../contextProvider/ParticipantContext";
 import {AudioPlayer} from "../../customComponents/AudioPlayer";
-import {cookies, getCookieSave} from "../../customComponents/Cookies";
 import {SurveyCard} from "./surveyCard";
 
-const voiceTriplets = [
-  {ID: "001", URLS: {X: "000/000002.mp3", A: "000/000003.mp3", B: "000/000010.mp3"}},
-  {ID: "002", URLS: {X: "000/000002.mp3", A: "000/000003.mp3", B: "000/000010.mp3"}},
-  {ID: "003", URLS: {X: "000/000002.mp3", A: "000/000003.mp3", B: "000/000010.mp3"}},
-  {ID: "004", URLS: {X: "000/000002.mp3", A: "000/000003.mp3", B: "000/000010.mp3"}},
-  {ID: "005", URLS: {X: "000/000002.mp3", A: "000/000003.mp3", B: "000/000010.mp3"}},
-  {ID: "006", URLS: {X: "000/000002.mp3", A: "000/000003.mp3", B: "000/000010.mp3"}},
-];
-
 export function SurveyPage() {
+  const participant = useParticipantContext();
+  const {surveyQuestions, isLoading: isSurveyQuestionsLoading} = useSurveyQuestionsParticipant(participant?._id);
+  const {surveyAnswers, isLoading: isSurveyAnswersLoading} = useSurveyAnswersParticipant(participant?._id);
   const [currentPage, setCurrentPage] = useState(0);
   const [surveyProgress, setSurveyProgress] = useState(0);
   const {isPlaying, setIsPlaying} = useAudioContext();
   const {t} = useTranslation();
 
   useEffect(() => {
-    const submissionAnswers = getCookieSave("submissionAnswers");
-    const sp = Math.round((100 * (Object.keys(submissionAnswers).length + 1)) / voiceTriplets.length);
+    if (!participant || !surveyQuestions || !surveyAnswers) {
+      return;
+    }
+
+    const numQuestions = surveyQuestions.length;
+    const numAnswers = surveyAnswers.length;
+
+    const sp = Math.round((100 * (numAnswers + 1)) / numQuestions);
     setSurveyProgress(sp);
-  }, []);
+  }, [participant, surveyQuestions, surveyAnswers]);
+
+  const numQuestions = surveyQuestions?.length;
 
   const handlePageChange = (newPage) => {
     if (isPlaying) {
       setIsPlaying(false);
     }
 
-    if (newPage >= 0 && newPage < voiceTriplets.length) {
+    if (newPage >= 0 && newPage < numQuestions) {
       setCurrentPage(newPage);
     }
   };
 
-  const setSubmissionAnswer = ({ID, response}) => {
+  const setSurveyAnswer = async ({questionID, answer}) => {
+    if (!participant) {
+      return;
+    }
+
     if (isPlaying) {
       setIsPlaying(false);
     }
 
-    const submissionAnswers = {...getCookieSave("submissionAnswers"), [ID]: response};
-    cookies.set("submissionAnswers", submissionAnswers);
+    try {
+      await SURVEY_ANSWERS.setAnswer.callAsync({
+        questionID,
+        answer,
+        participantID: participant._id,
+      });
+    } catch (err) {
+      console.error(err);
+    }
 
-    const sp = Math.round((100 * (Object.keys(submissionAnswers).length + 1)) / voiceTriplets.length);
-    setSurveyProgress(sp);
-
-    if (currentPage + 1 < voiceTriplets.length) {
+    if (currentPage + 1 < numQuestions) {
       setCurrentPage(currentPage + 1);
     }
   };
+
+  const currentQuestion = surveyQuestions?.find((q) => q.number === currentPage);
+  console.log(surveyQuestions);
+  const currentAnswer = surveyAnswers?.find(
+    (a) => a.participantID === participant._id && a.questionID === currentQuestion._id,
+  );
+
+  if (!participant || isSurveyAnswersLoading || isSurveyQuestionsLoading || !currentQuestion) {
+    return (
+      <div className="w-screen h-screen flex justify-center items-center">
+        <Spinner className="w-40 h-40" />
+      </div>
+    );
+  }
 
   return (
     <div className="w-screen h-screen flex flex-col justify-center items-center">
@@ -85,12 +113,13 @@ export function SurveyPage() {
                   }}
                 />
 
-                {voiceTriplets.map((_, index) => (
+                {surveyQuestions?.map((_, index) => (
                   <PaginationItem key={index}>
                     <PaginationLink
                       className={
-                        getCookieSave("submissionAnswers").hasOwnProperty(voiceTriplets[index].ID) &&
-                        "bg-accent border-accent-foreground"
+                        !!surveyAnswers.find(
+                          (a) => a.participantID === participant._id && a.questionID === surveyQuestions._id,
+                        ) && "bg-accent border-accent-foreground"
                       }
                       href="#"
                       isActive={index === currentPage}
@@ -104,9 +133,7 @@ export function SurveyPage() {
                   </PaginationItem>
                 ))}
                 <PaginationNext
-                  className={
-                    currentPage + 1 === voiceTriplets.length && "text-background hover:text-background hover:bg-background"
-                  }
+                  className={currentPage + 1 === numQuestions && "text-background hover:text-background hover:bg-background"}
                   text={t("SurveyPage.next")}
                   href="#"
                   onClick={(e) => {
@@ -126,11 +153,7 @@ export function SurveyPage() {
       <div className="w-full flex flex-col justify-between items-center overflow-hidden">
         <div className="w-full h-60" />
 
-        <SurveyCard
-          voiceTriplet={voiceTriplets[currentPage]}
-          setSubmissionAnswer={setSubmissionAnswer}
-          isSubmitted={getCookieSave("submissionAnswers").hasOwnProperty(voiceTriplets[currentPage].ID)}
-        />
+        <SurveyCard question={currentQuestion} setSurveyAnswer={setSurveyAnswer} isSubmitted={!!currentAnswer} />
 
         <div className="w-full h-24" />
       </div>

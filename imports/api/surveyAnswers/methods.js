@@ -17,11 +17,11 @@ export const SURVEY_ANSWERS = {
       // additional validation
       const participant = await Particitpants.findOneAsync(answer.participantID);
       if (!participant) throw new Meteor.Error("participant-not-found");
-      const question = await SurveyQuestions.findOneAsync(answer.tripletID);
+      const question = await SurveyQuestions.findOneAsync(answer.questionID);
       if (!question) throw new Meteor.Error("question-not-found");
       const existing = await SurveyAnswers.findOneAsync({
         participantID: answer.participantID,
-        tripletID: answer.tripletID,
+        questionID: answer.questionID,
       });
 
       // upsert answer
