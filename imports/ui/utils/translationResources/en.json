@@ -1,5 +1,11 @@
 {
   "translation": {
+    "MainPage": {
+      "content": "This Survey is about the similarity of singing voices. You will hear triplets of short music clips (A, B and X). X contains the target voice, A and B are to be compared to it. After listening, choose the reference voice in which the voice is the most similar with the one from the target audio clip X. Do not mind the instruments playing in the background while answering the questions.",
+      "description": "This survey will take about 15 minutes of your time.",
+      "startSurvey": "Start Survey",
+      "title": "Welcome to the survey!"
+    },
     "Sidebar": {
       "language": "Lanugage",
       "settings": "Settings",
