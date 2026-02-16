@@ -58,6 +58,23 @@ export function AudioPlayer() {
 
   const setAudioVolume = (value) => {
     setVolume(value);
+
+    if (audioRef.current) {
+      audioRef.current.volume = value;
+    }
+  };
+
+  const getVolumeIcon = (v) => {
+    switch (true) {
+      case v <= 0.01:
+        return <VolumeOff />;
+      case v <= 0.3:
+        return <Volume />;
+      case v <= 0.6:
+        return <Volume1 />;
+      default:
+        return <Volume2 />;
+    }
   };
 
   return (
@@ -72,7 +89,7 @@ export function AudioPlayer() {
           <div className="w-full h-20 space-x-2 flex justify-center items-center">
             <audio ref={audioRef} onTimeUpdate={handleTimeUpdate} onEnded={() => setIsPlaying(false)} />
             <Button
-              className="rounded-full w-10 h-10"
+              className="rounded-full size-10"
               onClick={() => {
                 setIsPlaying(!isPlaying);
               }}
@@ -86,8 +103,8 @@ export function AudioPlayer() {
 
             <Popover>
               <PopoverTrigger asChild>
-                <Button variant="secondary" className="rounded-full w-10 h-10">
-                  <Volume />
+                <Button variant="secondary" className="rounded-full size-10">
+                  {getVolumeIcon(volume)}
                 </Button>
               </PopoverTrigger>
               <PopoverContent align="center" className="w-10 h-30 p-2 flex justify-center items-center">
