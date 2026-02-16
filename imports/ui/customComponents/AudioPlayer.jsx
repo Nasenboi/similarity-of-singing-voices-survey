@@ -80,10 +80,10 @@ export function AudioPlayer() {
   return (
     <>
       {currentAudio?.url && (
-        <div className="w-full sticky bottom-0 left-0 right-0 border-t-2 bg-background border-sidebar-border flex items-center p-2">
+        <div className="w-full max-h-22 h-22 sticky bottom-0 left-0 right-0 border-t-2 bg-background border-sidebar-border flex items-center p-2">
           {currentAudio?.voice && (
-            <div className="mr-4  w-16 h-16 bg-accent rounded-md border-2 flex items-center justify-center">
-              <h1 className="text-center text-2xl font-bold">{currentAudio.voice}</h1>
+            <div className="md:mr-4 mr-2 md:size-16 size-10 bg-accent rounded-md border-2 flex items-center justify-center">
+              <h1 className="text-center md:text-2xl text-sm font-bold">{currentAudio.voice}</h1>
             </div>
           )}
           <div className="w-full h-20 space-x-2 flex justify-center items-center">

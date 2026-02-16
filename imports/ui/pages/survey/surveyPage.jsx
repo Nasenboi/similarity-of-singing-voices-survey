@@ -1,3 +1,4 @@
+import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "@/components/ui/accordion";
 import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
 import {
   Pagination,
@@ -29,6 +30,14 @@ export function SurveyPage() {
   const [direction, setDirection] = useState(1);
   const [surveyProgress, setSurveyProgress] = useState(0);
   const [questionsAnswered, setQuestionsAnswered] = useState([]);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   useEffect(() => {
     if (participant?._id && participant._id !== participantID) {
@@ -100,16 +109,25 @@ export function SurveyPage() {
   }
 
   return (
-    <div className="w-screen h-screen flex flex-col justify-center items-center">
-      <Card className="fixed top-0 ms-50 max-w-500 w-full m-4 bg-background z-10">
-        <CardHeader>
-          <CardTitle className="text-center">{t("SurveyPage.title")}</CardTitle>
-        </CardHeader>
-        <CardContent className="border-b-2">
-          <p className="text-center">{t("SurveyPage.description")}</p>
-        </CardContent>
+    <div className="w-screen h-screen max-w-screen max-h-screen flex flex-col justify-center items-center">
+      <Card className="fixed top-0 ms-50 max-w-500 w-full m-2 mt-4 md:m-4 bg-background z-10">
+        <Accordion className="p-0 m-0" type="single" collapsible defaultValue="content">
+          <AccordionItem className="p-0 m-0" value="content">
+            <AccordionTrigger className="max-md:w-full p-0">
+              <CardHeader className="w-full">
+                <CardTitle className="text-center max-md:text-lg max-md:w-full">{t("SurveyPage.title")}</CardTitle>
+              </CardHeader>
+            </AccordionTrigger>
+            <AccordionContent className="m-0 p-0">
+              <CardContent className="border-b-2 max-md:w-full max-md:px-0">
+                <p className="text-center max-md:text-xs">{t("SurveyPage.description")}</p>
+              </CardContent>
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+
         <CardFooter>
-          <div className="mt-2 space-y-4 w-full flex flex-col">
+          <div className="mt-2 md:space-y-4 space-y-2 w-full flex flex-col">
             <Pagination>
               <PaginationContent>
                 <PaginationPrevious
@@ -121,22 +139,27 @@ export function SurveyPage() {
                     handlePageChange(currentPage - 1);
                   }}
                 />
-
-                {surveyQuestions?.map((_, index) => (
-                  <PaginationItem key={index}>
-                    <PaginationLink
-                      className={questionsAnswered.includes(index) && "bg-accent border-accent-foreground"}
-                      href="#"
-                      isActive={index === currentPage}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handlePageChange(index);
-                      }}
-                    >
-                      {index + 1}
-                    </PaginationLink>
-                  </PaginationItem>
-                ))}
+                {surveyQuestions?.map((_, index) => {
+                  if (isMobile && (index > currentPage + 2 || index < currentPage - 2)) {
+                    return null;
+                  }
+                  console.log(currentPage, index);
+                  return (
+                    <PaginationItem key={index}>
+                      <PaginationLink
+                        className={questionsAnswered.includes(index) && "bg-accent border-accent-foreground"}
+                        href="#"
+                        isActive={index === currentPage}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handlePageChange(index);
+                        }}
+                      >
+                        {index + 1}
+                      </PaginationLink>
+                    </PaginationItem>
+                  );
+                })}
                 <PaginationNext
                   className={
                     currentPage + 1 === (surveyQuestions?.length || 1) &&
@@ -158,7 +181,7 @@ export function SurveyPage() {
         </CardFooter>
       </Card>
 
-      <div className="w-full flex flex-col justify-between items-center overflow-hidden">
+      <div className="w-full flex flex-col justify-between items-center overflow-scroll md:overflow-hidden">
         <div className="w-full h-60" />
 
         <div className="w-full flex flex-col justify-between items-center overflow-hidden relative">
@@ -194,7 +217,7 @@ export function SurveyPage() {
         <div className="w-full h-24" />
       </div>
 
-      <div className="fixed bottom-0 max-w-500 w-full">
+      <div className="fixed bottom-0 max-w-500 w-full flex items-center">
         <AudioPlayer />
       </div>
     </div>

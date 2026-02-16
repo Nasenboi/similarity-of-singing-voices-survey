@@ -7,7 +7,7 @@ export function SideBarToggle() {
   const {open, toggleSidebar} = useSidebar();
 
   return (
-    <div className="fixed top-4 left-4 z-50">
+    <div className="fixed md:top-4 md:left-4 top-1 left-1 z-50">
       <Button size="icon" onClick={toggleSidebar}>
         {open ? <ArrowLeft /> : <Settings />}
       </Button>
