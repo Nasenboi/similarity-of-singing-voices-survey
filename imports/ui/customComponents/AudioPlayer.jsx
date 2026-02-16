@@ -1,12 +1,14 @@
 import {Button} from "@/components/ui/button";
-import {Slider} from "@/components/ui/slider";
-import {Pause, Play} from "lucide-react";
+import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
+import {Slider} from "@/imports/ui/customComponents/slider";
+import {Pause, Play, Volume, Volume1, Volume2, VolumeOff} from "lucide-react";
 import React, {useEffect, useRef, useState} from "react";
 import {useAudioContext} from "../contextProvider/AudioContext";
 
 export function AudioPlayer() {
   const {currentAudio, isPlaying, setIsPlaying} = useAudioContext();
   const [progress, setProgress] = useState(0);
+  const [volume, setVolume] = useState(1);
   const audioRef = useRef(null);
 
   useEffect(() => {
@@ -54,6 +56,10 @@ export function AudioPlayer() {
     setProgress(value[0]);
   };
 
+  const setAudioVolume = (value) => {
+    setVolume(value);
+  };
+
   return (
     <>
       {currentAudio?.url && (
@@ -63,10 +69,10 @@ export function AudioPlayer() {
               <h1 className="text-center text-2xl font-bold">{currentAudio.voice}</h1>
             </div>
           )}
-          <div className="w-full h-20 flex justify-center items-center">
+          <div className="w-full h-20 space-x-2 flex justify-center items-center">
             <audio ref={audioRef} onTimeUpdate={handleTimeUpdate} onEnded={() => setIsPlaying(false)} />
             <Button
-              className="rounded-full mr-2 w-10 h-10"
+              className="rounded-full w-10 h-10"
               onClick={() => {
                 setIsPlaying(!isPlaying);
               }}
@@ -77,6 +83,25 @@ export function AudioPlayer() {
                 <Play className="text-white dark:text-zinc-600" />
               )}
             </Button>
+
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button variant="secondary" className="rounded-full w-10 h-10">
+                  <Volume />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent align="center" className="w-10 h-30 p-2 flex justify-center items-center">
+                <Slider
+                  className="h-full w-full"
+                  orientation="vertical"
+                  value={[volume]}
+                  min={0}
+                  max={1}
+                  step={0.01}
+                  onValueChange={setAudioVolume}
+                />
+              </PopoverContent>
+            </Popover>
 
             <div className="w-full h-full flex justify-center items-center">
               <Slider value={[progress]} min={0} max={100} step={0.1} onValueChange={handleSeek} className="w-full" />

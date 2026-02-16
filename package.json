@@ -82,7 +82,7 @@
     "recharts": "^2.15.4",
     "remove-markdown": "^0.6.2",
     "rrule": "^2.8.1",
-    "shadcn": "^3.6.3",
+    "shadcn": "^3.8.4",
     "simpl-schema": "^1.12.3",
     "sonner": "^2.0.7",
     "speakeasy": "^2.0.0",
@@ -111,7 +111,7 @@
     "postcss-load-config": "^3.1.4",
     "prettier-plugin-organize-imports": "^4.3.0",
     "puppeteer": "^24.30.0",
-    "tailwindcss": "^0.0.0-insiders.8ed67bf",
+    "tailwindcss": "^4.1.18",
     "vite": "^7.3.1"
   }
 }
