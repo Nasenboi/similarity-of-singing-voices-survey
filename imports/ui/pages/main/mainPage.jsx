@@ -16,7 +16,7 @@ export function MainPage() {
           <CardDescription>{t("MainPage.description")}</CardDescription>
         </CardHeader>
         <CardContent>
-          <p>{t("MainPage.content")}</p>
+          <p className="max-md:text-sm">{t("MainPage.content")}</p>
         </CardContent>
         <CardFooter>
           <Button onClick={() => navigate("/survey")}>{t("MainPage.startSurvey")}</Button>

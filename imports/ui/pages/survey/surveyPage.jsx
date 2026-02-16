@@ -1,5 +1,10 @@
 import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "@/components/ui/accordion";
 import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
+import {Progress} from "@/components/ui/progress";
+import {Spinner} from "@/components/ui/spinner";
+import {useSurveyAnswersParticipant} from "@/imports/api/surveyAnswers/hooks";
+import {SURVEY_ANSWERS} from "@/imports/api/surveyAnswers/methods";
+import {useSurveyQuestionsParticipant} from "@/imports/api/surveyQuestions/hooks";
 import {
   Pagination,
   PaginationContent,
@@ -7,12 +12,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/components/ui/pagination";
-import {Progress} from "@/components/ui/progress";
-import {Spinner} from "@/components/ui/spinner";
-import {useSurveyAnswersParticipant} from "@/imports/api/surveyAnswers/hooks";
-import {SURVEY_ANSWERS} from "@/imports/api/surveyAnswers/methods";
-import {useSurveyQuestionsParticipant} from "@/imports/api/surveyQuestions/hooks";
+} from "@/imports/ui/customComponents/pagination";
 import {AnimatePresence, motion} from "motion/react";
 import React, {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
@@ -110,10 +110,10 @@ export function SurveyPage() {
 
   return (
     <div className="w-screen h-screen max-w-screen max-h-screen flex flex-col justify-center items-center">
-      <Card className="fixed top-0 ms-50 max-w-500 w-full m-2 mt-4 md:m-4 bg-background z-10">
+      <Card className="fixed top-0 ms-50 max-w-500 w-full m-2 md:m-4 bg-background z-10">
         <Accordion className="p-0 m-0" type="single" collapsible defaultValue="content">
           <AccordionItem className="p-0 m-0" value="content">
-            <AccordionTrigger className="max-md:w-full p-0">
+            <AccordionTrigger className="max-md:w-full p-0 px-2 md:px-4">
               <CardHeader className="w-full">
                 <CardTitle className="text-center max-md:text-lg max-md:w-full">{t("SurveyPage.title")}</CardTitle>
               </CardHeader>
@@ -132,7 +132,7 @@ export function SurveyPage() {
               <PaginationContent>
                 <PaginationPrevious
                   className={currentPage === 0 && "text-background hover:text-background hover:bg-background"}
-                  text={t("SurveyPage.previous")}
+                  text={isMobile ? "" : t("SurveyPage.previous")}
                   href="#"
                   onClick={(e) => {
                     e.preventDefault();
@@ -165,7 +165,7 @@ export function SurveyPage() {
                     currentPage + 1 === (surveyQuestions?.length || 1) &&
                     "text-background hover:text-background hover:bg-background"
                   }
-                  text={t("SurveyPage.next")}
+                  text={isMobile ? "" : t("SurveyPage.next")}
                   href="#"
                   onClick={(e) => {
                     e.preventDefault();

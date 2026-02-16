@@ -10,7 +10,7 @@ export function AppSideBar() {
   return (
     <Sidebar className="z-40">
       <SidebarHeader className="border-b-2">
-        <div className="m-2 mt-16">
+        <div className="m-2 md:ml-16">
           <h1 className="text-2xl font-semibold leading-none tracking-tight text-center justify-center m-2">
             {t("Sidebar.settings")}
           </h1>
