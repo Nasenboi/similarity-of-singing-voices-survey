@@ -143,7 +143,6 @@ export function SurveyPage() {
                   if (isMobile && (index > currentPage + 2 || index < currentPage - 2)) {
                     return null;
                   }
-                  console.log(currentPage, index);
                   return (
                     <PaginationItem key={index}>
                       <PaginationLink
