@@ -5,7 +5,7 @@ import {RadioGroup, RadioGroupItem} from "@/components/ui/radio-group";
 import {ArrowRightLeft} from "lucide-react";
 import React, {useState} from "react";
 import {useTranslation} from "react-i18next";
-import {FILE_SERVER_URL, SONG_FILE_PATH} from "../../../common/globals";
+import {FILE_SERVER_URL, SONG_FILE_PATH, VOCAL_FILE_PATH} from "../../../common/globals";
 import {useAudioContext} from "../../contextProvider/AudioContext";
 
 function AudioButton({url, voice, onVoiceClick}) {
@@ -21,7 +21,7 @@ function AudioButton({url, voice, onVoiceClick}) {
 }
 
 export function SurveyCard({question, setSurveyAnswer, isSubmitted = false}) {
-  const {currentAudio, setCurrentAudio, isPlaying, setIsPlaying} = useAudioContext();
+  const {currentAudio, setCurrentAudio, isPlaying, setIsPlaying, useBackgroundMusic} = useAudioContext();
   const [similarToX, setSimilarToX] = useState(["A", "B"]);
   const {t} = useTranslation();
 
@@ -45,7 +45,11 @@ export function SurveyCard({question, setSurveyAnswer, isSubmitted = false}) {
   };
 
   const getURL = (key) => {
-    return `${SONG_FILE_PATH}${question[key].songSubPath}`;
+    if (useBackgroundMusic) {
+      return `${SONG_FILE_PATH}${question[key].songSubPath}`;
+    } else {
+      return `${VOCAL_FILE_PATH}${question[key].vocalSubPath}`;
+    }
   };
 
   return (

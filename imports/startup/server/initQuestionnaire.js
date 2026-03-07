@@ -6,7 +6,7 @@ import {
   NUM_Questionnaires,
   SONG_FILE_PATH,
   TRIPLETS_FILE_PATH,
-  VOCALS_FILE_PATH,
+  VOCAL_FILE_PATH,
 } from "@/imports/common/globals";
 import ndarray from "ndarray";
 import {fromArrayBuffer} from "numpy-parser";

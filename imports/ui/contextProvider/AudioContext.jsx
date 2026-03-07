@@ -5,12 +5,15 @@ const AudioContext = createContext(undefined);
 export const AudioProvider = ({children}) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentAudio, setCurrentAudio] = useState(null);
+  const [useBackgroundMusic, setUseBackgroundMusic] = useState(true);
 
   const contextValue = {
     currentAudio,
     setCurrentAudio,
     isPlaying,
     setIsPlaying,
+    useBackgroundMusic,
+    setUseBackgroundMusic,
   };
 
   return <AudioContext.Provider value={contextValue}>{children}</AudioContext.Provider>;

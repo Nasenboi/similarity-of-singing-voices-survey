@@ -1,9 +1,11 @@
 import {Sidebar, SidebarContent, SidebarGroup, SidebarHeader} from "@/components/ui/sidebar";
 import React from "react";
 import {useTranslation} from "react-i18next";
+import {BackgroundMusicToggle} from "./BackgroundMusicToggle";
 import {LanguageToggle} from "./LanguageToggle";
 import {ThemeToggle} from "./ThemeToggle";
 
+// ToDo: add translations for toggle buttons
 export function AppSideBar() {
   const {t} = useTranslation();
 
@@ -20,6 +22,7 @@ export function AppSideBar() {
         <SidebarGroup className="w-full flex items-center space-y-4">
           <ThemeToggle />
           <LanguageToggle />
+          <BackgroundMusicToggle />
         </SidebarGroup>
       </SidebarContent>
     </Sidebar>

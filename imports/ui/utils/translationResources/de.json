@@ -7,9 +7,10 @@
       "title": "Willkommen zur Umfrage!"
     },
     "Sidebar": {
+      "backgroundMusic": "Instrumente",
       "language": "Sprache",
       "settings": "Einstellungen",
-      "theme": "Thema"
+      "theme": "Farben"
     },
     "SurveyPage": {
       "and": "und",
