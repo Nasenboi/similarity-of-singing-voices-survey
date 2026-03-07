@@ -8,6 +8,12 @@ const callCounter = function (method, ...args) {
   return Meteor.wrapAsync(countersCollection[method].bind(countersCollection))(...Array.from(args || []));
 };
 
+export const getCounterValue = async function (counterName) {
+  const doc = await callCounter("findOne", {_id: counterName});
+
+  return doc?.next_val ? doc?.next_val : null;
+};
+
 export const incrementCounter = async function (counterName, amount = 1) {
   const newDoc = await callCounter(
     "findOneAndUpdate",

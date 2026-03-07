@@ -4,14 +4,37 @@ services:
     ports:
       - "3003:80"
     volumes:
-      - ${AUDIO_FILE_DIR}:/usr/share/nginx/html/files
+      - ${SONG_FILE_DIR}:/usr/share/nginx/html/songs
+      - ${VOCAL_FILE_DIR}:/usr/share/nginx/html/vocals
+      - ${DATASET_PATH}:/usr/share/nginx/html/dataset.csv
+      - ${TRIPLET_PATH}:/usr/share/nginx/html/triplets.npy
     command: >
       sh -c "
       echo 'server {
         listen 80;
-        location /files/ {
-          root /usr/share/nginx/html;
+        
+        # Serve song files
+        location /songs/ {
+          alias /usr/share/nginx/html/songs/;
           autoindex off;
+        }
+        
+        # Serve vocal files  
+        location /vocals/ {
+          alias /usr/share/nginx/html/vocals/;
+          autoindex off;
+        }
+        
+        # Serve dataset.csv as a single file
+        location /dataset.csv {
+          alias /usr/share/nginx/html/dataset.csv;
+          add_header Content-Type text/csv;
+        }
+        
+        # Serve triplets.npy as a single file
+        location /triplets.npy {
+          alias /usr/share/nginx/html/triplets.npy;
+          add_header Content-Type application/octet-stream;
         }
       }' > /etc/nginx/conf.d/default.conf &&
       nginx -g 'daemon off;'

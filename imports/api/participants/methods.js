@@ -1,5 +1,6 @@
-import {TEST_QUESTIONNAIRE_ID} from "@/imports/common/globals";
 import {ValidatedMethod} from "meteor/mdg:validated-method";
+import {getCounterValue} from "../collection/counters";
+import {SurveyQuestions} from "../surveyQuestions/collection";
 import {Participants} from "./collection";
 
 export const PARTICIPANTS = {
@@ -9,8 +10,11 @@ export const PARTICIPANTS = {
     async run() {
       if (this.isSimulation) return;
 
+      const questionnaireCount = await SurveyQuestions.countAsync();
+      const estimatedParticipantCounter = (await getCounterValue("participants")) + 1;
+
       const itemID = await Participants.insertAsync({
-        questionnaireID: TEST_QUESTIONNAIRE_ID,
+        questionnaireID: (estimatedParticipantCounter % questionnaireCount) - 1,
       });
 
       return itemID;

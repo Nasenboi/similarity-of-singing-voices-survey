@@ -1,8 +1,16 @@
 export const APP_NAME = "Similarity of Singing Voices Survey";
 export const APP_VERSION = "0.0.0";
 
-export const AUDIO_FILE_SERVER_URL = "http://localhost:3003/files/";
+export const FILE_SERVER_URL = "http://localhost:3003/";
+export const SONG_FILE_PATH = "songs";
+export const VOCALS_FILE_PATH = "vocals";
+export const DATASET_FILE_PATH = "dataset.csv";
+export const TRIPLETS_FILE_PATH = "triplets.npy";
 
+export const NUM_QUESTIONS_PER_BATCH = 2;
+export const NUM_Questionnaires = 1;
+
+/*
 export const TEST_QUESTIONNAIRE_ID = "test_questionnaire";
 export const TEST_QUESTIONNAIRE_LENGTH = 15;
 export const TEST_QUESTIONNAIRE = [...Array(TEST_QUESTIONNAIRE_LENGTH).keys()].map((i) => {
@@ -14,3 +22,4 @@ export const TEST_QUESTIONNAIRE = [...Array(TEST_QUESTIONNAIRE_LENGTH).keys()].m
     B: {folder: "000", filename: "000010.mp3"},
   };
 });
+*/

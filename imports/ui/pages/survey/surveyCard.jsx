@@ -5,7 +5,7 @@ import {RadioGroup, RadioGroupItem} from "@/components/ui/radio-group";
 import {ArrowRightLeft} from "lucide-react";
 import React, {useState} from "react";
 import {useTranslation} from "react-i18next";
-import {AUDIO_FILE_SERVER_URL} from "../../../common/globals";
+import {FILE_SERVER_URL, SONG_FILE_PATH} from "../../../common/globals";
 import {useAudioContext} from "../../contextProvider/AudioContext";
 
 function AudioButton({url, voice, onVoiceClick}) {
@@ -27,7 +27,7 @@ export function SurveyCard({question, setSurveyAnswer, isSubmitted = false}) {
 
   const onVoiceClick = (audio, voice) => {
     const oldUrl = currentAudio?.url;
-    const url = `${AUDIO_FILE_SERVER_URL}${audio}`;
+    const url = `${FILE_SERVER_URL}${audio}`;
     setCurrentAudio({url: url, voice: voice});
     if (url === oldUrl) {
       setIsPlaying(!isPlaying);
@@ -45,7 +45,7 @@ export function SurveyCard({question, setSurveyAnswer, isSubmitted = false}) {
   };
 
   const getURL = (key) => {
-    return `${question[key].folder}/${question[key].filename}`;
+    return `${SONG_FILE_PATH}${question[key].songSubPath}`;
   };
 
   return (

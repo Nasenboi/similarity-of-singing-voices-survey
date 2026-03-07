@@ -2,20 +2,22 @@ import SimpleSchema from "simpl-schema";
 import {dbMetadataSchema} from "../collection/schema";
 
 export const audioSchema = new SimpleSchema({
-  folder: {type: String},
+  trackID: {type: SimpleSchema.oneOf(String, SimpleSchema.Integer)},
   filename: {type: String},
   genre: {type: String, optional: true},
 
   artist: {type: String, optional: true},
-  artistLocation: {type: String, optional: true},
 
   album: {type: String, optional: true},
   albumDateCreated: {type: Date, optional: true},
   albumDateReleased: {type: Date, optional: true},
+
+  songSubPath: {type: String, optional: true},
+  vocalSubPath: {type: String, optional: true},
 }).extend(dbMetadataSchema);
 
 export const surveyQuestionSchema = new SimpleSchema({
-  questionnaireID: {type: String},
+  questionnaireID: {type: SimpleSchema.oneOf(String, SimpleSchema.Integer)},
   questionNumber: {type: Number},
   X: audioSchema,
   A: audioSchema,

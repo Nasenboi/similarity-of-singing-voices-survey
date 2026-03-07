@@ -2,6 +2,7 @@ import React from "react";
 import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import {MainPage} from "./pages/main/mainPage";
 import {NotFoundPage} from "./pages/notFound/notFoundPage";
+import {SimilarityPlotPage} from "./pages/similarityPlot/similarityPlotPage";
 import {SurveyPage} from "./pages/survey/surveyPage";
 
 export function RoutedContentArea() {
@@ -9,6 +10,7 @@ export function RoutedContentArea() {
     <Routes>
       <Route path={"/"} element={<MainPage />} />
       <Route path={"/survey"} element={<SurveyPage />} />
+      <Route path={"/plot"} element={<SimilarityPlotPage />} />
       <Route path={"*"} element={<NotFoundPage />} />
     </Routes>
   );
