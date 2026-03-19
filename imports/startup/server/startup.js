@@ -3,6 +3,7 @@ import {Log} from "meteor/logging";
 import {Meteor} from "meteor/meteor";
 import SimpleSchema from "simpl-schema";
 import {initQuestionnaire} from "./initQuestionnaire";
+import {initSongs} from "./initSongs";
 import {resetDB} from "./resetDB";
 
 /**
@@ -25,6 +26,9 @@ async function initServer() {
 
   await resetDB();
   Log.info("DB reset finished");
+
+  await initSongs();
+  Log.info("init songs finished");
 
   await initQuestionnaire();
   Log.info("init questionnaire finished");

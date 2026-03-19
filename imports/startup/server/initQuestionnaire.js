@@ -10,7 +10,6 @@ import {
 } from "@/imports/common/globals";
 import ndarray from "ndarray";
 import {fromArrayBuffer} from "numpy-parser";
-import Papa from "papaparse";
 
 /*
 await Promise.all(
@@ -19,32 +18,23 @@ await Promise.all(
     return;
   }),
 );
-*/
 
-function convertToAudioSchema(audio) {
-  return {
-    trackID: audio.track_id,
-    filename: audio.filename,
-    genre: audio.genre_top,
-    artist: audio.artist,
-    album: audio.album,
-    albumDateCreated: audio.creation_date,
-    albumDateReleased: audio.release_date,
-    songSubPath: audio.song_path,
-    vocalSubPath: audio.vocal_path,
-  };
-}
 
 function getObjectFromID(args) {
   const oID = args.tripletArray.get(args.cluster, args.batchNo, args.pos);
   const obj = args.dataset.find((a) => a.track_id === oID);
   return convertToAudioSchema(obj);
 }
+*/
+
+function getTrackID(args) {
+  return args.tripletArray.get(args.cluster, args.batchNo, args.pos);
+}
 
 function generateQuestion(args) {
-  const X = getObjectFromID({...args, pos: 0});
-  const A = getObjectFromID({...args, pos: 1});
-  const B = getObjectFromID({...args, pos: 2});
+  const X = getTrackID({...args, pos: 0});
+  const A = getTrackID({...args, pos: 1});
+  const B = getTrackID({...args, pos: 2});
 
   return {
     questionnaireID: args.questionnaireID,
@@ -84,25 +74,16 @@ function generateQuestionnaires(args) {
 }
 
 export async function initQuestionnaire() {
-  const datasetURL = `${FILE_SERVER_URL}/${DATASET_FILE_PATH}`;
   const tripletURL = `${FILE_SERVER_URL}/${TRIPLETS_FILE_PATH}`;
 
   try {
-    const datasetResponse = await fetch(datasetURL);
-    const datasetText = await datasetResponse.text();
-    const dataset = Papa.parse(datasetText, {
-      header: true,
-      skipEmptyLines: true,
-      dynamicTyping: true,
-    }).data;
-
     // Fetch triplets.npy
     const tripletResponse = await fetch(tripletURL);
     const tripletBuffer = await tripletResponse.arrayBuffer();
     const {data, shape} = fromArrayBuffer(tripletBuffer);
     const tripletArray = ndarray(data, shape);
 
-    let questionnaires = generateQuestionnaires({dataset, tripletArray});
+    const questionnaires = generateQuestionnaires({tripletArray});
 
     questionnaires.map(async (q) => {
       await SurveyQuestions.insertAsync(q);

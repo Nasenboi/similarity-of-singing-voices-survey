@@ -1,0 +1,36 @@
+import SimpleSchema from "simpl-schema";
+
+export const UMAP2DSchema = new SimpleSchema({
+  UMAP_1: {type: Number},
+  UMAP_2: {type: Number},
+});
+
+export const UMAP3DSchema = new SimpleSchema({
+  UMAP_1: {type: Number},
+  UMAP_2: {type: Number},
+  UMAP_3: {type: Number},
+});
+
+export const songSchema = new SimpleSchema({
+  _id: {type: String},
+  trackID: {type: SimpleSchema.oneOf(String, SimpleSchema.Integer)},
+  filename: {type: String},
+  genre: {type: String, optional: true},
+
+  artist: {type: String, optional: true},
+
+  album: {type: String, optional: true},
+  albumDateCreated: {type: Date, optional: true},
+  albumDateReleased: {type: Date, optional: true},
+
+  songSubPath: {type: String, optional: true},
+  vocalSubPath: {type: String, optional: true},
+
+  vocalContentLenghtS: {type: String, optional: true},
+  onsets: {type: Array, optional: true},
+  "onsets.$": {type: Number},
+
+  UMAP2D: {type: UMAP2DSchema},
+  UMAP3D: {type: UMAP3DSchema},
+  cluster: {type: Number, optional: true},
+}).extend(dbMetadataSchema);
