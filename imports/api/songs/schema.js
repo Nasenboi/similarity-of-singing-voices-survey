@@ -1,4 +1,5 @@
 import SimpleSchema from "simpl-schema";
+import {dbMetadataSchema} from "../collection/schema";
 
 export const UMAP2DSchema = new SimpleSchema({
   UMAP_1: {type: Number},

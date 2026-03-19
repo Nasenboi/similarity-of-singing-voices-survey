@@ -2,7 +2,7 @@
   "name": "agency-tool",
   "private": true,
   "scripts": {
-    "start": "meteor run",
+    "start": "meteor run --settings settings.json",
     "start:e2e": "cross-env METEOR_LOCAL_DIR=.meteor/test cross-env DISABLE_REACT_FAST_REFRESH=1 meteor run --port 4000",
     "test-e2e": "start-server-and-test start:e2e http://localhost:4000 cypress:open",
     "test-unit": "TEST_BROWSER_DRIVER=puppeteer meteor test --full-app --driver-package meteortesting:mocha --port 4000 --once",
