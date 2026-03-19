@@ -3,7 +3,7 @@ import {DATASET_FILE_PATH, FILE_SERVER_URL} from "@/imports/common/globals";
 import Papa from "papaparse";
 
 function convertToSongSchema(audio) {
-  const track_id_zp = String(audio.trackID).padStart(6, "0");
+  const track_id_zp = String(audio.track_id).padStart(6, "0");
   const main_folder = track_id_zp.slice(0, 3);
 
   return {
@@ -14,8 +14,8 @@ function convertToSongSchema(audio) {
     album: audio.album,
     albumDateCreated: audio.creation_date,
     albumDateReleased: audio.release_date,
-    songSubPath: `${main_folder}/${audio.filename}`,
-    vocalSubPath: `${main_folder}/${track_id_zp}/vocals.mp3`,
+    songSubPath: `/${main_folder}/${audio.filename}`,
+    vocalSubPath: `/${main_folder}/${track_id_zp}/vocals.mp3`,
     vocalContentLenghts: audio.vocal_content_length_s,
     onsets: audio.onset ? JSON.parse(onsets.replace(/\s+/g, ",")) : [],
     cluster: audio.cluster,

@@ -7,8 +7,8 @@ export const VOCAL_FILE_PATH = "vocals";
 export const DATASET_FILE_PATH = "dataset.csv";
 export const TRIPLETS_FILE_PATH = "triplets.npy";
 
-export const NUM_QUESTIONS_PER_BATCH = 2;
-export const NUM_Questionnaires = 1;
+export const NUM_QUESTIONS_PER_SURVEY = 30;
+export const NUM_QUESTIONNAIRES = 1;
 
 /*
 export const TEST_QUESTIONNAIRE_ID = "test_questionnaire";

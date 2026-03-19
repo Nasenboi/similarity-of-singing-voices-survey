@@ -14,3 +14,15 @@ export const useSongsParticipant = (participantID) =>
       isLoading: !subscriptionHandle.ready(),
     };
   }, [participantID]);
+
+export const useSongsSurveyQuestion = (questionnaireID, questionNumber) =>
+  useTracker(() => {
+    if (questionnaireID == null || questionNumber == null) return {songs: null, isLoading: false};
+    const subscriptionHandle = Meteor.subscribe("songs.surveyQuestion", questionnaireID, questionNumber);
+    const songs = Songs.find().fetch();
+
+    return {
+      songs,
+      isLoading: !subscriptionHandle.ready(),
+    };
+  }, [questionnaireID, questionNumber]);

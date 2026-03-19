@@ -18,3 +18,11 @@ Meteor.publish("songs.participant", async function (participantID) {
   const uniqueTrackIDs = [...new Set(trackIDs)];
   return Songs.find({trackID: {$in: uniqueTrackIDs}});
 });
+
+Meteor.publish("songs.surveyQuestion", async function (questionnaireID, questionNumber) {
+  const surveyQuestion = await SurveyQuestions.findOneAsync({questionnaireID, questionNumber});
+  if (!surveyQuestion) return;
+
+  const trackIDs = [surveyQuestion.X, surveyQuestion.A, surveyQuestion.B].map(Number);
+  return Songs.find({trackID: {$in: trackIDs}});
+});

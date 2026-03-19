@@ -2,6 +2,9 @@ import {Button} from "@/components/ui/button";
 import {ButtonGroup, ButtonGroupSeparator} from "@/components/ui/button-group";
 import {Label} from "@/components/ui/label";
 import {RadioGroup, RadioGroupItem} from "@/components/ui/radio-group";
+import {Spinner} from "@/components/ui/spinner";
+import {useSongsSurveyQuestion} from "@/imports/api/songs/hooks";
+import {useSurveyQuestionsParticipant} from "@/imports/api/surveyQuestions/hooks";
 import {ArrowRightLeft} from "lucide-react";
 import React, {useState} from "react";
 import {useTranslation} from "react-i18next";
@@ -21,6 +24,7 @@ function AudioButton({url, voice, onVoiceClick}) {
 }
 
 export function SurveyCard({question, setSurveyAnswer, isSubmitted = false}) {
+  const {songs, isLoading: isSongsLoading} = useSongsSurveyQuestion(question.questionnaireID, question.questionNumber);
   const {currentAudio, setCurrentAudio, isPlaying, setIsPlaying, useBackgroundMusic} = useAudioContext();
   const [similarToX, setSimilarToX] = useState(["A", "B"]);
   const {t} = useTranslation();
@@ -45,12 +49,24 @@ export function SurveyCard({question, setSurveyAnswer, isSubmitted = false}) {
   };
 
   const getURL = (key) => {
+    const song = songs?.find((s) => s.trackID == question[key]);
+    if (!song) {
+      return;
+    }
     if (useBackgroundMusic) {
-      return `${SONG_FILE_PATH}${question[key].songSubPath}`;
+      return `${SONG_FILE_PATH}${song.songSubPath}`;
     } else {
-      return `${VOCAL_FILE_PATH}${question[key].vocalSubPath}`;
+      return `${VOCAL_FILE_PATH}${song.vocalSubPath}`;
     }
   };
+
+  if (isSongsLoading) {
+    return (
+      <div className="w-full h-full flex justify-center items-center">
+        <Spinner />
+      </div>
+    );
+  }
 
   return (
     <div

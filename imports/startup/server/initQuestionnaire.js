@@ -2,8 +2,8 @@ import {SurveyQuestions} from "@/imports/api/surveyQuestions/collection";
 import {
   DATASET_FILE_PATH,
   FILE_SERVER_URL,
-  NUM_QUESTIONS_PER_BATCH,
-  NUM_Questionnaires,
+  NUM_QUESTIONNAIRES,
+  NUM_QUESTIONS_PER_SURVEY,
   SONG_FILE_PATH,
   TRIPLETS_FILE_PATH,
   VOCAL_FILE_PATH,
@@ -27,8 +27,14 @@ function getObjectFromID(args) {
 }
 */
 
+const shuffle = (arr) =>
+  arr
+    .map((v) => ({v, r: Math.random()}))
+    .sort((a, b) => a.r - b.r)
+    .map(({v}) => v);
+
 function getTrackID(args) {
-  return args.tripletArray.get(args.cluster, args.batchNo, args.pos);
+  return args.tripletArray.get(args.batchNo, args.pos);
 }
 
 function generateQuestion(args) {
@@ -46,29 +52,47 @@ function generateQuestion(args) {
 }
 
 function generateSingleQuestionnaire(args) {
-  let useRandom = false;
   let questions = [];
 
-  // just move on in the array, not every question is present at least once
-  // else use randomly picked batchNos (not happening yet buddy!)
-  if (args.questionnaireID * NUM_QUESTIONS_PER_BATCH > args.tripletArray.shape[2]) {
-    useRandom = true;
-  }
+  args.batchIndicies.map((batchNo) =>
+    questions.push(generateQuestion({...args, questionNumber: questions.length, batchNo})),
+  );
 
-  for (let cluster = 0; cluster < args.tripletArray.shape[0]; cluster++) {
-    // default to useRandom == False:
-    for (let i = 0; i < NUM_QUESTIONS_PER_BATCH; i++) {
-      let batchNo = args.questionnaireID * NUM_QUESTIONS_PER_BATCH + i;
-      questions.push(generateQuestion({...args, questionNumber: questions.length, cluster, batchNo}));
-    }
-  }
   return questions;
 }
 
 function generateQuestionnaires(args) {
   let all_questions = [];
-  for (let i = 0; i < NUM_Questionnaires; i++) {
-    all_questions = all_questions.concat(generateSingleQuestionnaire({...args, questionnaireID: i}));
+  const numQuestions = args.tripletArray.shape[0];
+  const minNumQuestionnairs = Math.floor(numQuestions / NUM_QUESTIONS_PER_SURVEY);
+  const allBatchIndicies = Array.from({length: numQuestions}, (_, i) => i);
+
+  let batchIndicies = [];
+
+  // evenly spaced indices
+  for (let i = 0; i < minNumQuestionnairs; ++i) {
+    batchIndicies = allBatchIndicies.filter((_, idx) => idx % minNumQuestionnairs === i).slice(0, NUM_QUESTIONS_PER_SURVEY);
+
+    all_questions = all_questions.concat(
+      generateSingleQuestionnaire({
+        ...args,
+        questionnaireID: i,
+        batchIndicies,
+      }),
+    );
+  }
+
+  // random unique indices
+  for (let i = minNumQuestionnairs; i < args.num_questionnaires; ++i) {
+    batchIndicies = shuffle(allBatchIndicies).slice(0, NUM_QUESTIONS_PER_SURVEY);
+
+    all_questions = all_questions.concat(
+      generateSingleQuestionnaire({
+        ...args,
+        questionnaireID: i,
+        batchIndicies,
+      }),
+    );
   }
   return all_questions;
 }
@@ -83,7 +107,11 @@ export async function initQuestionnaire() {
     const {data, shape} = fromArrayBuffer(tripletBuffer);
     const tripletArray = ndarray(data, shape);
 
-    const questionnaires = generateQuestionnaires({tripletArray});
+    const num_questionnaires = Math.max(tripletArray.shape[0] / NUM_QUESTIONS_PER_SURVEY, NUM_QUESTIONNAIRES);
+
+    const questionnaires = generateQuestionnaires({num_questionnaires, tripletArray});
+
+    console.log(tripletArray.shape);
 
     questionnaires.map(async (q) => {
       await SurveyQuestions.insertAsync(q);
