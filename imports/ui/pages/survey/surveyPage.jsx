@@ -21,6 +21,7 @@ import {useParticipantContext} from "../../contextProvider/ParticipantContext";
 import {AudioPlayer} from "../../customComponents/AudioPlayer";
 import {SurveyCard} from "./surveyCard";
 
+// ToDo: limit the size / number of question buttons, similar to mobile view.
 export function SurveyPage() {
   const {t} = useTranslation();
   const {isPlaying, setIsPlaying} = useAudioContext();
