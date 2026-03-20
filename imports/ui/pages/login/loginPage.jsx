@@ -2,6 +2,7 @@ import {Button} from "@/components/ui/button";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
 import {Input} from "@/components/ui/input";
 import {PasswordInput} from "@/components/ui/password-input";
+import {useIsLoggedIn} from "@/imports/api/users/hooks";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Meteor} from "meteor/meteor";
 import React from "react";
@@ -13,6 +14,7 @@ import {loginFormSchema} from "./loginSchema";
 
 export function LoginPage() {
   const navigate = useNavigate();
+  const isLoggedIn = useIsLoggedIn();
 
   const form = useForm({
     resolver: zodResolver(loginFormSchema),
@@ -24,7 +26,9 @@ export function LoginPage() {
 
   function onSubmit(values) {
     Meteor.loginWithPassword(values.username, values.password);
-    navigate("/");
+    if (isLoggedIn) {
+      navigate("/");
+    }
   }
 
   return (

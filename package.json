@@ -47,6 +47,7 @@
     "@tailwindcss/cli": "^4.1.18",
     "@tailwindcss/postcss": "^4.1.18",
     "@tailwindcss/vite": "^0.0.0-insiders.8ed67bf",
+    "@tanstack/react-table": "^8.21.3",
     "@types/meteor": "^2.9.9",
     "chai": "^6.2.1",
     "class-variance-authority": "^0.7.1",

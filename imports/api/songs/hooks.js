@@ -1,8 +1,31 @@
+import {ITEMS_PER_PAGE} from "@/imports/common/globals";
 import {Meteor} from "meteor/meteor";
 import {useTracker} from "meteor/react-meteor-data";
-import React from "react";
+import React, {useMemo} from "react";
 import {Songs} from "./collection";
 
+export const useSongsSingle = (trackID) =>
+  useTracker(() => {
+    const tID = Number(trackID);
+    const subscriptionHandle = Meteor.subscribe("songs.single", tID);
+    const song = Songs.findOne({trackID: tID});
+    return {
+      song,
+      isLoading: !subscriptionHandle.ready(),
+    };
+  }, [trackID]);
+
+export const useSongsAll = () =>
+  useTracker(() => {
+    const subscriptionHandle = Meteor.subscribe("songs.all");
+    const songs = Songs.find().fetch();
+    return {
+      songs,
+      isLoading: !subscriptionHandle.ready(),
+    };
+  }, [Meteor.userId()]);
+
+/*
 export const useSongsParticipant = (participantID) =>
   useTracker(() => {
     if (!participantID) return {songs: null, isLoading: false};
@@ -26,14 +49,4 @@ export const useSongsSurveyQuestion = (questionnaireID, questionNumber) =>
       isLoading: !subscriptionHandle.ready(),
     };
   }, [questionnaireID, questionNumber]);
-
-export const useSongsSingle = (trackID) =>
-  useTracker(() => {
-    const tID = Number(trackID);
-    const subscriptionHandle = Meteor.subscribe("songs.single", tID);
-    const song = Songs.findOne({trackID: tID});
-    return {
-      song,
-      isLoading: !subscriptionHandle.ready(),
-    };
-  }, [trackID]);
+*/

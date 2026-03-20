@@ -1,7 +1,9 @@
 {
   "translation": {
     "Common": {
+      "next": "weiter",
       "no": "Nein",
+      "previous": "zurück",
       "yes": "Ja"
     },
     "MainPage": {
@@ -23,13 +25,14 @@
       "skipSilence": "Stille Überspringen",
       "theme": "Farben"
     },
+    "SongsPage": {
+      "title": "Lieder"
+    },
     "SurveyPage": {
       "and": "und",
       "areMoreSimilar": "sind sich ähnlicher",
       "cardTitle": "Frage",
       "description": "Wählen Sie die Stimmoption, die der Zielstimme am ähnlichsten klingt",
-      "next": "weiter",
-      "previous": "zurück",
       "referenceVoices": "Referenzstimmen",
       "submit": "Bestätigen",
       "targetVoice": "Zielstimme",

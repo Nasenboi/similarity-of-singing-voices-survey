@@ -1,8 +1,27 @@
-import {check} from "meteor/check";
 import {Meteor} from "meteor/meteor";
+import {isAdminUser} from "../users/helpers";
+import {Songs} from "./collection";
+
+Meteor.publish("songs.single", function (trackID) {
+  return Songs.find({trackID});
+});
+
+Meteor.publish("songs.all", async function () {
+  if (!(await isAdminUser(this.userId))) return;
+  return Songs.find();
+});
+
+/*
+unused other ideas:
+import {check} from "meteor/check";
 import {Participants} from "../participants/collection";
 import {SurveyQuestions} from "../surveyQuestions/collection";
-import {Songs} from "./collection";
+
+Meteor.publish("songs.all", async function () {
+  if (!(await isAdminUser(this.userId))) return;
+  return Songs.find();
+});
+
 
 Meteor.publish("songs.participant", async function (participantID) {
   check(participantID, String);
@@ -26,7 +45,4 @@ Meteor.publish("songs.surveyQuestion", async function (questionnaireID, question
   const trackIDs = [surveyQuestion.X, surveyQuestion.A, surveyQuestion.B].map(Number);
   return Songs.find({trackID: {$in: trackIDs}});
 });
-
-Meteor.publish("songs.single", function (trackID) {
-  return Songs.find({trackID});
-});
+*/

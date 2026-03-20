@@ -132,7 +132,7 @@ export function SurveyPage() {
               <PaginationContent>
                 <PaginationPrevious
                   className={currentPage === 0 && "text-background hover:text-background hover:bg-background"}
-                  text={isMobile ? "" : t("SurveyPage.previous")}
+                  text={isMobile ? "" : t("Common.previous")}
                   href="#"
                   onClick={(e) => {
                     e.preventDefault();
@@ -174,7 +174,7 @@ export function SurveyPage() {
                     currentPage + 1 === (surveyQuestions?.length || 1) &&
                     "text-background hover:text-background hover:bg-background"
                   }
-                  text={isMobile ? "" : t("SurveyPage.next")}
+                  text={isMobile ? "" : t("Common.next")}
                   href="#"
                   onClick={(e) => {
                     e.preventDefault();
@@ -217,8 +217,6 @@ export function SurveyPage() {
               </div>
             )}
           </AnimatePresence>
-
-          <div className="w-full h-24" />
         </div>
 
         <div className="w-full h-24" />

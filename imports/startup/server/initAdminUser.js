@@ -7,5 +7,7 @@ export async function initAdminUser() {
   if (!(await Meteor.users.findOneAsync({username: ADMIN_USER.username}))) {
     Log.info(ADMIN_USER.username, "is not in db. Will insert it and add it to all roles:");
     const userID = await Accounts.createUserAsync(ADMIN_USER);
+
+    await Meteor.users.updateAsync(userID, {$set: {isAdmin: true}});
   }
 }

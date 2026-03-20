@@ -10,6 +10,8 @@ export const TRIPLETS_FILE_PATH = "triplets.npy";
 export const NUM_QUESTIONS_PER_SURVEY = 30;
 export const NUM_QUESTIONNAIRES = 1;
 
+export const ITEMS_PER_PAGE = 10;
+
 /*
 export const TEST_QUESTIONNAIRE_ID = "test_questionnaire";
 export const TEST_QUESTIONNAIRE_LENGTH = 15;
