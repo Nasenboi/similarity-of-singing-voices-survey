@@ -194,8 +194,6 @@ export function SurveyPage() {
         <div className="w-full h-60" />
 
         <div className="w-full flex flex-col justify-between items-center overflow-hidden relative">
-          <div className="w-full h-60" />
-
           <AnimatePresence mode="wait">
             {surveyQuestions?.find((q) => q.questionNumber === currentPage) ? (
               <motion.div
