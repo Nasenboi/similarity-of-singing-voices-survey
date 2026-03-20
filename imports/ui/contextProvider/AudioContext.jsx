@@ -7,6 +7,7 @@ export const AudioProvider = ({children}) => {
   const [trackID, setTrackID] = useState(null);
   const [icon, setIcon] = useState(null);
   const [useBackgroundMusic, setUseBackgroundMusic] = useState(true);
+  const [jumpToFirstOnset, setJumpToFirstOnset] = useState(true);
 
   const contextValue = {
     trackID,
@@ -17,6 +18,8 @@ export const AudioProvider = ({children}) => {
     setIsPlaying,
     useBackgroundMusic,
     setUseBackgroundMusic,
+    jumpToFirstOnset,
+    setJumpToFirstOnset,
   };
 
   return <AudioContext.Provider value={contextValue}>{children}</AudioContext.Provider>;

@@ -2,6 +2,7 @@ import {Sidebar, SidebarContent, SidebarGroup, SidebarHeader} from "@/components
 import React from "react";
 import {useTranslation} from "react-i18next";
 import {BackgroundMusicToggle} from "./BackgroundMusicToggle";
+import {JumpToFirstOnsetToggle} from "./JumpToFirstOnsetToggle";
 import {LanguageToggle} from "./LanguageToggle";
 import {LoginButton} from "./LoginButton";
 import {ThemeToggle} from "./ThemeToggle";
@@ -19,11 +20,12 @@ export function AppSideBar() {
           </h1>
         </div>
       </SidebarHeader>
-      <SidebarContent className="w-full px-8 h-full flex justify-between">
+      <SidebarContent className="w-full px-4 h-full flex justify-between">
         <SidebarGroup className="w-full flex items-center space-y-4">
           <ThemeToggle />
           <LanguageToggle />
           <BackgroundMusicToggle />
+          <JumpToFirstOnsetToggle />
         </SidebarGroup>
         <SidebarGroup className="w-full flex items-center space-y-4">
           <LoginButton />

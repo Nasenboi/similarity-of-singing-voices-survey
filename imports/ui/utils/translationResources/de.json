@@ -1,5 +1,9 @@
 {
   "translation": {
+    "Common": {
+      "no": "Nein",
+      "yes": "Ja"
+    },
     "MainPage": {
       "content": "Das Thema dieser Umfrage ist die Ähnlichkeit von Gesangsstimmen. Sie werden Drillinge an kurzen Musikausschnitten hören (A, B und X). X beinhaltet die Zielstimme, A und B sollen mit ihr verglichen werden. Wählen die nach dem Hören die Stimme, die X am ähnlichsten klingt. Ignorieren Sie für Ihre Entscheidungen die Instrumente im Hintergrund.",
       "description": "Diese Umfrage wird ungefähr 15 Minuten dauern.",
@@ -10,6 +14,7 @@
       "backgroundMusic": "Instrumente",
       "language": "Sprache",
       "settings": "Einstellungen",
+      "skipSilence": "Stille Überspringen",
       "theme": "Farben"
     },
     "SurveyPage": {

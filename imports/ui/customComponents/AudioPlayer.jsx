@@ -9,7 +9,7 @@ import {useAudioContext} from "../contextProvider/AudioContext";
 import {MarkerSlider} from "./MarkerSlider";
 
 export function AudioPlayer() {
-  const {trackID, icon, isPlaying, setIsPlaying, useBackgroundMusic} = useAudioContext();
+  const {trackID, icon, isPlaying, setIsPlaying, useBackgroundMusic, jumpToFirstOnset} = useAudioContext();
   const [progress, setProgress] = useState(0);
   const [volume, setVolume] = useState(1);
   const audioRef = useRef(null);
@@ -52,10 +52,11 @@ export function AudioPlayer() {
 
   const stopAudio = () => {
     if (!audioRef.current) return;
+    const seek = jumpToFirstOnset && song.onsets?.length > 0 ? song.onsets[0] : 0;
 
     audioRef.current.pause();
-    audioRef.current.currentTime = 0;
-    setProgress(0);
+    audioRef.current.currentTime = seek;
+    setProgress(seek);
   };
 
   const handleTimeUpdate = () => {
