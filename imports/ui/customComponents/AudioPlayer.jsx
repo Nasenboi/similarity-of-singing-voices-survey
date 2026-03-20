@@ -6,6 +6,7 @@ import {Slider} from "@/imports/ui/customComponents/slider";
 import {Pause, Play, Volume, Volume1, Volume2, VolumeOff} from "lucide-react";
 import React, {useEffect, useRef, useState} from "react";
 import {useAudioContext} from "../contextProvider/AudioContext";
+import {MarkerSlider} from "./MarkerSlider";
 
 export function AudioPlayer() {
   const {trackID, icon, isPlaying, setIsPlaying, useBackgroundMusic} = useAudioContext();
@@ -136,7 +137,16 @@ export function AudioPlayer() {
             </Popover>
 
             <div className="w-full h-full flex justify-center items-center">
-              <Slider value={[progress]} min={0} max={100} step={0.1} onValueChange={handleSeek} className="w-full" />
+              <MarkerSlider
+                value={[progress]}
+                duration={audioRef.current?.duration}
+                markerPoints={song.onsets}
+                min={0}
+                max={100}
+                step={0.1}
+                onValueChange={handleSeek}
+                className="w-full"
+              />
             </div>
           </div>
         </div>
