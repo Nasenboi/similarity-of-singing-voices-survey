@@ -2,20 +2,16 @@ import {Button} from "@/components/ui/button";
 import {ButtonGroup, ButtonGroupSeparator} from "@/components/ui/button-group";
 import {Label} from "@/components/ui/label";
 import {RadioGroup, RadioGroupItem} from "@/components/ui/radio-group";
-import {Spinner} from "@/components/ui/spinner";
-import {useSongsSurveyQuestion} from "@/imports/api/songs/hooks";
-import {useSurveyQuestionsParticipant} from "@/imports/api/surveyQuestions/hooks";
 import {ArrowRightLeft} from "lucide-react";
 import React, {useState} from "react";
 import {useTranslation} from "react-i18next";
-import {FILE_SERVER_URL, SONG_FILE_PATH, VOCAL_FILE_PATH} from "../../../common/globals";
 import {useAudioContext} from "../../contextProvider/AudioContext";
 
-function AudioButton({url, voice, onVoiceClick}) {
+function AudioButton({trackID, voice, onVoiceClick}) {
   const {t} = useTranslation();
 
   return (
-    <Button className="md:w-60 p-2" onClick={() => onVoiceClick(url, voice)}>
+    <Button className="md:w-60 p-2" onClick={() => onVoiceClick(trackID, voice)}>
       <p className="text-bold md:text-4xl text-center">
         {t("SurveyPage.voice")} {voice}
       </p>
@@ -24,17 +20,16 @@ function AudioButton({url, voice, onVoiceClick}) {
 }
 
 export function SurveyCard({question, setSurveyAnswer, isSubmitted = false}) {
-  const {songs, isLoading: isSongsLoading} = useSongsSurveyQuestion(question.questionnaireID, question.questionNumber);
-  const {currentAudio, setCurrentAudio, isPlaying, setIsPlaying, useBackgroundMusic} = useAudioContext();
+  const {trackID, setTrackID, setIcon, isPlaying, setIsPlaying} = useAudioContext();
   const [similarToX, setSimilarToX] = useState(["A", "B"]);
   const {t} = useTranslation();
 
-  const onVoiceClick = (audio, voice) => {
-    const oldUrl = currentAudio?.url;
-    const url = `${FILE_SERVER_URL}${audio}`;
-    setCurrentAudio({url: url, voice: voice});
-    if (url === oldUrl) {
+  const onVoiceClick = (newTrackID, voice) => {
+    if (newTrackID === trackID) {
       setIsPlaying(!isPlaying);
+    } else {
+      setIcon(voice);
+      setTrackID(newTrackID);
     }
   };
 
@@ -47,26 +42,6 @@ export function SurveyCard({question, setSurveyAnswer, isSubmitted = false}) {
       setSimilarToX([similarToX[1], similarToX[0]]);
     }
   };
-
-  const getURL = (key) => {
-    const song = songs?.find((s) => s.trackID == question[key]);
-    if (!song) {
-      return;
-    }
-    if (useBackgroundMusic) {
-      return `${SONG_FILE_PATH}${song.songSubPath}`;
-    } else {
-      return `${VOCAL_FILE_PATH}${song.vocalSubPath}`;
-    }
-  };
-
-  if (isSongsLoading) {
-    return (
-      <div className="w-full h-full flex justify-center items-center">
-        <Spinner />
-      </div>
-    );
-  }
 
   return (
     <div
@@ -85,7 +60,7 @@ export function SurveyCard({question, setSurveyAnswer, isSubmitted = false}) {
             {t("SurveyPage.targetVoice")}
           </h1>
           <div className="w-full h-full flex justify-center">
-            <Button onClick={() => onVoiceClick(getURL("X"), "X")}>
+            <Button onClick={() => onVoiceClick(question["X"], "X")}>
               <p className="text-bold md:text-4xl text-center">{t("SurveyPage.voice")} X</p>
             </Button>
           </div>
@@ -98,13 +73,13 @@ export function SurveyCard({question, setSurveyAnswer, isSubmitted = false}) {
             {t("SurveyPage.referenceVoices")}
           </h1>
           <ButtonGroup className="max-w-sreen">
-            <AudioButton url={getURL([similarToX[0]])} voice={similarToX[0]} onVoiceClick={onVoiceClick} />
+            <AudioButton trackID={question[[similarToX[0]]]} voice={similarToX[0]} onVoiceClick={onVoiceClick} />
             <ButtonGroupSeparator />
             <Button size="icon" onClick={() => toggleVoices(similarToX[1])}>
               <ArrowRightLeft className="md:size-6!" />
             </Button>
             <ButtonGroupSeparator />
-            <AudioButton url={getURL([similarToX[1]])} voice={similarToX[1]} onVoiceClick={onVoiceClick} />
+            <AudioButton trackID={question[[similarToX[1]]]} voice={similarToX[1]} onVoiceClick={onVoiceClick} />
           </ButtonGroup>
           <div className="p-4 space-y-4 w-full">
             <RadioGroup

@@ -26,3 +26,7 @@ Meteor.publish("songs.surveyQuestion", async function (questionnaireID, question
   const trackIDs = [surveyQuestion.X, surveyQuestion.A, surveyQuestion.B].map(Number);
   return Songs.find({trackID: {$in: trackIDs}});
 });
+
+Meteor.publish("songs.single", function (trackID) {
+  return Songs.find({trackID});
+});

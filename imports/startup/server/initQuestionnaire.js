@@ -34,7 +34,7 @@ const shuffle = (arr) =>
     .map(({v}) => v);
 
 function getTrackID(args) {
-  return args.tripletArray.get(args.batchNo, args.pos);
+  return Number(args.tripletArray.get(args.batchNo, args.pos));
 }
 
 function generateQuestion(args) {
@@ -110,8 +110,6 @@ export async function initQuestionnaire() {
     const num_questionnaires = Math.max(tripletArray.shape[0] / NUM_QUESTIONS_PER_SURVEY, NUM_QUESTIONNAIRES);
 
     const questionnaires = generateQuestionnaires({num_questionnaires, tripletArray});
-
-    console.log(tripletArray.shape);
 
     questionnaires.map(async (q) => {
       await SurveyQuestions.insertAsync(q);

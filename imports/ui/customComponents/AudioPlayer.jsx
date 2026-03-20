@@ -1,24 +1,39 @@
 import {Button} from "@/components/ui/button";
 import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
+import {useSongsSingle} from "@/imports/api/songs/hooks";
+import {FILE_SERVER_URL, SONG_FILE_PATH, VOCAL_FILE_PATH} from "@/imports/common/globals";
 import {Slider} from "@/imports/ui/customComponents/slider";
 import {Pause, Play, Volume, Volume1, Volume2, VolumeOff} from "lucide-react";
 import React, {useEffect, useRef, useState} from "react";
 import {useAudioContext} from "../contextProvider/AudioContext";
 
 export function AudioPlayer() {
-  const {currentAudio, isPlaying, setIsPlaying} = useAudioContext();
+  const {trackID, icon, isPlaying, setIsPlaying, useBackgroundMusic} = useAudioContext();
   const [progress, setProgress] = useState(0);
   const [volume, setVolume] = useState(1);
   const audioRef = useRef(null);
+  const {song, isLoading: isSongLoading} = useSongsSingle(trackID);
 
   useEffect(() => {
-    if (audioRef.current?.src !== currentAudio?.url) {
+    const getURL = () => {
+      if (!song || isSongLoading) {
+        return;
+      }
+      if (useBackgroundMusic) {
+        return `${FILE_SERVER_URL}${SONG_FILE_PATH}${song.songSubPath}`;
+      } else {
+        return `${FILE_SERVER_URL}${VOCAL_FILE_PATH}${song.vocalSubPath}`;
+      }
+    };
+    const url = getURL();
+
+    if (audioRef.current?.src !== url) {
       stopAudio();
-      audioRef.current.src = currentAudio?.url;
+      audioRef.current.src = url;
       setIsPlaying(true);
       audioRef.current?.play();
     }
-  }, [currentAudio]);
+  }, [song]);
 
   useEffect(() => {
     togglePlay();
@@ -79,12 +94,12 @@ export function AudioPlayer() {
 
   return (
     <>
-      {currentAudio?.url && (
+      {!isSongLoading && song && (
         <div className="w-full md:max-h-22 md:h-22 sticky bottom-0 left-0 right-0 border-t-2 bg-background border-sidebar-border flex items-center md:p-2 px-2">
           <div className="w-full md:h-20 h-18 space-x-2 flex justify-center items-center">
-            {currentAudio?.voice && (
+            {icon && (
               <div className="size-16 bg-accent rounded-md border-2 flex items-center justify-center">
-                <h1 className="text-center text-2xl font-bold">{currentAudio.voice}</h1>
+                <h1 className="text-center text-2xl font-bold">{icon}</h1>
               </div>
             )}
             <audio ref={audioRef} onTimeUpdate={handleTimeUpdate} onEnded={() => setIsPlaying(false)} />

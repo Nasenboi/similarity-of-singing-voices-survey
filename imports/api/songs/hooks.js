@@ -26,3 +26,14 @@ export const useSongsSurveyQuestion = (questionnaireID, questionNumber) =>
       isLoading: !subscriptionHandle.ready(),
     };
   }, [questionnaireID, questionNumber]);
+
+export const useSongsSingle = (trackID) =>
+  useTracker(() => {
+    const tID = Number(trackID);
+    const subscriptionHandle = Meteor.subscribe("songs.single", tID);
+    const song = Songs.findOne({trackID: tID});
+    return {
+      song,
+      isLoading: !subscriptionHandle.ready(),
+    };
+  }, [trackID]);
