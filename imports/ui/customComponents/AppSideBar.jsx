@@ -1,4 +1,12 @@
-import {Sidebar, SidebarContent, SidebarGroup, SidebarHeader, SidebarMenu} from "@/components/ui/sidebar";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarHeader,
+  SidebarMenu,
+} from "@/components/ui/sidebar";
 import React from "react";
 import {useTranslation} from "react-i18next";
 import {BackgroundMusicToggle} from "./BackgroundMusicToggle";
@@ -23,14 +31,18 @@ export function AppSideBar() {
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarMenu>
-            <ThemeToggle />
-            <LanguageToggle />
-            <BackgroundMusicToggle />
-            <JumpToFirstOnsetToggle />
-          </SidebarMenu>
+          <SidebarGroupLabel>{t("Sidebar.settings")}</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <ThemeToggle />
+              <LanguageToggle />
+              <BackgroundMusicToggle />
+              <JumpToFirstOnsetToggle />
+            </SidebarMenu>
+          </SidebarGroupContent>
         </SidebarGroup>
-        <SidebarGroup className="w-full flex items-center space-y-4">
+        <NavigationArea />
+        <SidebarGroup>
           <LoginButton />
         </SidebarGroup>
       </SidebarContent>

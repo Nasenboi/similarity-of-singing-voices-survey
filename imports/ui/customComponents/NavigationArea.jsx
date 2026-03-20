@@ -1,0 +1,36 @@
+import {Button} from "@/components/ui/button";
+import {
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from "@/components/ui/sidebar";
+import {useIsLoggedIn} from "@/imports/api/users/hooks";
+import React from "react";
+import {useTranslation} from "react-i18next";
+import {useNavigate} from "react-router-dom";
+
+export function NavigationArea() {
+  const isLoggedIn = useIsLoggedIn();
+  const navigate = useNavigate();
+  const {t} = useTranslation();
+
+  if (!isLoggedIn) return;
+
+  return (
+    <SidebarGroup>
+      <SidebarGroupLabel>{t("Sidebar.Navigation.navigation")}</SidebarGroupLabel>
+      <SidebarGroupContent>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton onClick={() => navigate("/")}>{t("Sidebar.Navigation.home")}</SidebarMenuButton>
+            <SidebarMenuButton onClick={() => navigate("/survey")}>{t("Sidebar.Navigation.survey")}</SidebarMenuButton>
+            <SidebarMenuButton onClick={() => navigate("/songs")}>{t("Sidebar.Navigation.songs")}</SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarGroupContent>
+    </SidebarGroup>
+  );
+}

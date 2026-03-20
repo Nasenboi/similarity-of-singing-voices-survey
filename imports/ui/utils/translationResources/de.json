@@ -11,6 +11,12 @@
       "title": "Willkommen zur Umfrage!"
     },
     "Sidebar": {
+      "Navigation": {
+        "home": "Startseite",
+        "navigation": "Navigation",
+        "songs": "Lieder",
+        "survey": "Umfrage"
+      },
       "backgroundMusic": "Instrumente",
       "language": "Sprache",
       "settings": "Einstellungen",

@@ -11,6 +11,12 @@
       "title": "Welcome to the survey!"
     },
     "Sidebar": {
+      "Navigation": {
+        "home": "Home",
+        "navigation": "Navigation",
+        "songs": "Songs",
+        "survey": "Survey"
+      },
       "backgroundMusic": "Instruments",
       "language": "Lanugage",
       "settings": "Settings",
