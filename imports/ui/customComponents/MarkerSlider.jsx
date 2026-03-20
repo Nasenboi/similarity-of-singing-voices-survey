@@ -15,7 +15,7 @@ function Marker({index, value, position, onValueChange}) {
 
 export function MarkerSlider({className, duration, markerPoints, onValueChange, ...sliderProps}) {
   const calcMarkerPointPosition = (value) => {
-    if (!duration) {
+    if (!value || !duration) {
       return;
     }
     return (100 * value) / duration;
@@ -26,18 +26,10 @@ export function MarkerSlider({className, duration, markerPoints, onValueChange, 
       <Slider onValueChange={onValueChange} {...sliderProps} />
 
       {markerPoints?.map((m, i) => {
-        if (!m) {
+        const pos = calcMarkerPointPosition(m);
+        if (!m || pos >= 95) {
           return;
-        } else
-          return (
-            <Marker
-              key={`marker-${m}`}
-              index={i}
-              value={m}
-              position={calcMarkerPointPosition(m)}
-              onValueChange={onValueChange}
-            />
-          );
+        } else return <Marker key={`marker-${m}`} index={i} value={m} position={pos} onValueChange={onValueChange} />;
       })}
     </div>
   );
