@@ -1,5 +1,5 @@
-import {Button} from "@/components/ui/button";
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/ui/dropdown-menu";
+import {SidebarMenuAction, SidebarMenuButton, SidebarMenuItem} from "@/components/ui/sidebar";
 import {Languages} from "lucide-react";
 import React from "react";
 import {useTranslation} from "react-i18next";
@@ -17,12 +17,14 @@ export function LanguageToggle() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <div className="w-full flex justify-between items-center">
-          <h1 className="text-l m-2 font-bold">{t("Sidebar.language")}</h1>
-          <Button size="icon">
+        <SidebarMenuItem>
+          <SidebarMenuButton asChild>
+            <span>{t("Sidebar.language")}</span>
+          </SidebarMenuButton>
+          <SidebarMenuAction>
             <Languages />
-          </Button>
-        </div>
+          </SidebarMenuAction>
+        </SidebarMenuItem>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem onClick={() => changeLanguage("en")}>English</DropdownMenuItem>

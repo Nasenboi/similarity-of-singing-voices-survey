@@ -1,5 +1,5 @@
-import {Button} from "@/components/ui/button";
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/ui/dropdown-menu";
+import {SidebarMenuAction, SidebarMenuButton, SidebarMenuItem} from "@/components/ui/sidebar";
 import {Moon, Sun} from "lucide-react";
 import {useTheme} from "next-themes";
 import React from "react";
@@ -12,14 +12,16 @@ export function ThemeToggle() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <div className="w-full flex justify-between items-center">
-          <h1 className="text-l m-2 font-bold">{t("Sidebar.theme")}</h1>
-          <Button size="icon">
+        <SidebarMenuItem>
+          <SidebarMenuButton asChild>
+            <span>{t("Sidebar.theme")}</span>
+          </SidebarMenuButton>
+          <SidebarMenuAction>
             <Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
             <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
             <span className="sr-only">Toggle theme</span>
-          </Button>
-        </div>
+          </SidebarMenuAction>
+        </SidebarMenuItem>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem onClick={() => setTheme("light")}>Light</DropdownMenuItem>

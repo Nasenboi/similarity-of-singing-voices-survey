@@ -1,5 +1,5 @@
-import {Button} from "@/components/ui/button";
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/ui/dropdown-menu";
+import {SidebarMenuAction, SidebarMenuButton, SidebarMenuItem} from "@/components/ui/sidebar";
 import {Guitar, Speech} from "lucide-react";
 import React from "react";
 import {useTranslation} from "react-i18next";
@@ -13,10 +13,12 @@ export function BackgroundMusicToggle() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <div className="w-full flex justify-between items-center">
-          <h1 className="text-l m-2 font-bold">{t("Sidebar.backgroundMusic")}</h1>
-          <Button size="icon">{useBackgroundMusic ? <Guitar /> : <Speech />}</Button>
-        </div>
+        <SidebarMenuItem>
+          <SidebarMenuButton asChild>
+            <span>{t("Sidebar.backgroundMusic")}</span>
+          </SidebarMenuButton>
+          <SidebarMenuAction>{useBackgroundMusic ? <Guitar /> : <Speech />}</SidebarMenuAction>
+        </SidebarMenuItem>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem onClick={() => setUseBackgroundMusic(true)}>
