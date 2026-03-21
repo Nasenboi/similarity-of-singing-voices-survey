@@ -6,14 +6,21 @@ import {Slider} from "@/imports/ui/customComponents/slider";
 import {Pause, Play, Volume, Volume1, Volume2, VolumeOff} from "lucide-react";
 import React, {useEffect, useRef, useState} from "react";
 import {useAudioContext} from "../contextProvider/AudioContext";
+import {cookies, getCookieSave} from "./Cookies";
 import {MarkerSlider} from "./MarkerSlider";
 
 export function AudioPlayer() {
   const {trackID, icon, isPlaying, setIsPlaying, useBackgroundMusic, jumpToFirstOnset} = useAudioContext();
   const [progress, setProgress] = useState(0);
-  const [volume, setVolume] = useState(1);
+  const [volume, setVolume] = useState(getCookieSave("audioPlayerVolume", 1));
   const audioRef = useRef(null);
   const {song, isLoading: isSongLoading} = useSongsSingle(trackID);
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = volume;
+    }
+  }, [audioRef.current]);
 
   useEffect(() => {
     const getURL = () => {
@@ -133,6 +140,7 @@ export function AudioPlayer() {
                   max={1}
                   step={0.01}
                   onValueChange={setAudioVolume}
+                  onValueCommit={([v]) => cookies.set("audioPlayerVolume", v)}
                 />
               </PopoverContent>
             </Popover>
