@@ -1,5 +1,45 @@
 {
   "translation": {
+    "Collections": {
+      "DBMetaData": {
+        "_id": "ID",
+        "createDate": "Creation Date",
+        "editDate": "Edit Date",
+        "itemNumber": "Item Number"
+      },
+      "Participants": {
+        "surveyCompleted": "Survey Completed"
+      },
+      "Songs": {
+        "album": "Album",
+        "albumDateCreated": "Creation Date",
+        "albumDateReleased": "Release Date",
+        "artist": "Artist",
+        "cluster": "Cluster",
+        "filename": "File Name",
+        "genre": "Genre",
+        "onsets": "Onsets",
+        "trackID": "Track ID",
+        "vocalContentLengthS": "Vocal Content Length (s)"
+      },
+      "SurveyAnswers": {
+        "answer": "Answer",
+        "answers": "Answers",
+        "participantID": "Participant ID"
+      },
+      "SurveyQuestions": {
+        "A": "A",
+        "B": "B",
+        "X": "X",
+        "questionNumber": "Question Number",
+        "questionnaireID": "Questionnaire ID"
+      },
+      "metadata": "Metadata",
+      "particpants": "Participants",
+      "songs": "Songs",
+      "surveyAnswers": "Survey Answers",
+      "surveyQuestions": "Survey Questions"
+    },
     "Common": {
       "no": "No",
       "yes": "Yes"
@@ -14,7 +54,6 @@
       "Navigation": {
         "home": "Home",
         "navigation": "Navigation",
-        "songs": "Songs",
         "survey": "Survey"
       },
       "backgroundMusic": "Instruments",
@@ -22,9 +61,6 @@
       "settings": "Settings",
       "skipSilence": "Skip Silence",
       "theme": "Theme"
-    },
-    "SongsPage": {
-      "title": "Songs"
     },
     "SurveyPage": {
       "and": "and",

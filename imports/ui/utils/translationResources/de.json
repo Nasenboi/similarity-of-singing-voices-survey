@@ -1,5 +1,45 @@
 {
   "translation": {
+    "Collections": {
+      "DBMetaData": {
+        "_id": "ID",
+        "createDate": "Erstellt",
+        "editDate": "Editiert",
+        "itemNumber": "Nummer"
+      },
+      "Participants": {
+        "surveyCompleted": "Umfrage beendet"
+      },
+      "Songs": {
+        "album": "Album",
+        "albumDateCreated": "Erstellt",
+        "albumDateReleased": "Veröffentlicht",
+        "artist": "Künstler",
+        "cluster": "Cluster",
+        "filename": "Dateiname",
+        "genre": "Genre",
+        "onsets": "Onsets",
+        "trackID": "Track ID",
+        "vocalContentLengthS": "Länge der Stimmaufnahme (s)"
+      },
+      "SurveyAnswers": {
+        "answer": "Antwort",
+        "answers": "Antworten",
+        "participantID": "Teilnehmer ID"
+      },
+      "SurveyQuestions": {
+        "A": "A",
+        "B": "B",
+        "X": "X",
+        "questionNumber": "Frage",
+        "questionnaireID": "Umfrage ID"
+      },
+      "metadata": "Metadaten",
+      "particpants": "Teilnehmer",
+      "songs": "Lieder",
+      "surveyAnswers": "Antworten",
+      "surveyQuestions": "Fragen"
+    },
     "Common": {
       "next": "weiter",
       "no": "Nein",
@@ -16,7 +56,6 @@
       "Navigation": {
         "home": "Startseite",
         "navigation": "Navigation",
-        "songs": "Lieder",
         "survey": "Umfrage"
       },
       "backgroundMusic": "Instrumente",
@@ -24,9 +63,6 @@
       "settings": "Einstellungen",
       "skipSilence": "Stille Überspringen",
       "theme": "Farben"
-    },
-    "SongsPage": {
-      "title": "Lieder"
     },
     "SurveyPage": {
       "and": "und",

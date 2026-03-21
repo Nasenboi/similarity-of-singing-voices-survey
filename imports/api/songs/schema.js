@@ -13,7 +13,6 @@ export const UMAP3DSchema = new SimpleSchema({
 });
 
 export const songSchema = new SimpleSchema({
-  _id: {type: String},
   trackID: {type: SimpleSchema.Integer},
   filename: {type: String},
   genre: {type: String, optional: true},

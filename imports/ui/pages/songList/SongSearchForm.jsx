@@ -5,6 +5,7 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {ChevronDown} from "lucide-react";
 import React, {useEffect} from "react";
 import {useForm} from "react-hook-form";
+import {useTranslation} from "react-i18next";
 import {z} from "zod";
 import {AutoField} from "../../customComponents/AutoField";
 
@@ -15,6 +16,7 @@ const searchFormSchema = z.object({
 });
 
 export function SongSearchForm({onFilterChange, query}) {
+  const {t} = useTranslation();
   const form = useForm({
     resolver: zodResolver(searchFormSchema),
     defaultValues: {
@@ -41,7 +43,7 @@ export function SongSearchForm({onFilterChange, query}) {
         <CollapsibleTrigger asChild>
           <CardHeader className="group">
             <CardTitle className="w-full flex items-center justify-between">
-              Filter for Songs
+              {t("Collection.songs")}
               <ChevronDown className="ml-auto group-data-[state=open]:rotate-180" />
             </CardTitle>
           </CardHeader>
