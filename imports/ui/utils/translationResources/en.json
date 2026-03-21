@@ -8,6 +8,7 @@
         "itemNumber": "Item Number"
       },
       "Participants": {
+        "participant": "Teilnehmer",
         "surveyCompleted": "Survey Completed"
       },
       "Songs": {
@@ -19,6 +20,7 @@
         "filename": "File Name",
         "genre": "Genre",
         "onsets": "Onsets",
+        "song": "song",
         "trackID": "Track ID",
         "vocalContentLengthS": "Vocal Content Length (s)"
       },
@@ -31,6 +33,7 @@
         "A": "A",
         "B": "B",
         "X": "X",
+        "question": "Question",
         "questionNumber": "Question Number",
         "questionnaireID": "Questionnaire ID"
       },
@@ -41,8 +44,18 @@
       "surveyQuestions": "Survey Questions"
     },
     "Common": {
+      "close": "Close",
+      "next": "Next",
       "no": "No",
+      "previous": "Previous",
+      "submit": "Submit",
       "yes": "Yes"
+    },
+    "Components": {
+      "InfoTable": {
+        "field": "Field",
+        "value": "Value"
+      }
     },
     "MainPage": {
       "content": "This Survey is about the similarity of singing voices. You will hear triplets of short music clips (A, B and X). X contains the target voice, A and B are to be compared to it. After listening, choose the reference voice in which the voice is the most similar with the one from the target audio clip X. Do not mind the instruments playing in the background while answering the questions.",
@@ -70,7 +83,7 @@
       "next": "next",
       "previous": "previous",
       "referenceVoices": "Reference Voices",
-      "submit": "Submit",
+
       "targetVoice": "Target Voice",
       "title": "Similarity of Singing Voices",
       "voice": "Voice"

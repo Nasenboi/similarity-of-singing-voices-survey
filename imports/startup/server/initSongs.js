@@ -24,7 +24,7 @@ function convertToSongSchema(audio) {
     albumDateReleased: audio.release_date,
     songSubPath: `/${main_folder}/${audio.filename}`,
     vocalSubPath: `/${main_folder}/${track_id_zp}/vocals.mp3`,
-    vocalContentLenghts: audio.vocal_content_length_s,
+    vocalContentLengthS: audio.vocal_content_length_s,
     onsets: audio.onsets && audio.onsets.length > 0 ? parseOnsets(audio.onsets) : [],
     cluster: audio.cluster,
     UMAP2D: {

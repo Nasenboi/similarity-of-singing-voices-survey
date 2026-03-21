@@ -8,6 +8,7 @@
         "itemNumber": "Nummer"
       },
       "Participants": {
+        "participant": "Participant",
         "surveyCompleted": "Umfrage beendet"
       },
       "Songs": {
@@ -19,6 +20,7 @@
         "filename": "Dateiname",
         "genre": "Genre",
         "onsets": "Onsets",
+        "song": "Song",
         "trackID": "Track ID",
         "vocalContentLengthS": "Länge der Stimmaufnahme (s)"
       },
@@ -31,6 +33,7 @@
         "A": "A",
         "B": "B",
         "X": "X",
+        "question": "Question",
         "questionNumber": "Frage",
         "questionnaireID": "Umfrage ID"
       },
@@ -41,10 +44,18 @@
       "surveyQuestions": "Fragen"
     },
     "Common": {
+      "close": "Schließen",
       "next": "weiter",
       "no": "Nein",
       "previous": "zurück",
+      "submit": "Bestätigen",
       "yes": "Ja"
+    },
+    "Components": {
+      "InfoTable": {
+        "field": "Feld",
+        "value": "Wert"
+      }
     },
     "MainPage": {
       "content": "Das Thema dieser Umfrage ist die Ähnlichkeit von Gesangsstimmen. Sie werden Drillinge an kurzen Musikausschnitten hören (A, B und X). X beinhaltet die Zielstimme, A und B sollen mit ihr verglichen werden. Wählen die nach dem Hören die Stimme, die X am ähnlichsten klingt. Ignorieren Sie für Ihre Entscheidungen die Instrumente im Hintergrund.",
@@ -70,7 +81,6 @@
       "cardTitle": "Frage",
       "description": "Wählen Sie die Stimmoption, die der Zielstimme am ähnlichsten klingt",
       "referenceVoices": "Referenzstimmen",
-      "submit": "Bestätigen",
       "targetVoice": "Zielstimme",
       "title": "Ähnlichkeit von Gesangsstimmen",
       "voice": "Stimme"

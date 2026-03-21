@@ -26,7 +26,7 @@ export const songSchema = new SimpleSchema({
   songSubPath: {type: String, optional: true},
   vocalSubPath: {type: String, optional: true},
 
-  vocalContentLenghtS: {type: String, optional: true},
+  vocalContentLengthS: {type: String, optional: true},
   onsets: {type: Array, optional: true},
   "onsets.$": {type: Number},
 

@@ -102,7 +102,7 @@ export function SurveyCard({question, setSurveyAnswer, isSubmitted = false}) {
             </RadioGroup>
             <div className="-mb-4 w-full flex justify-center">
               <Button className="px-8 md:text-lg font-bold" onClick={() => setSurveyAnswer(question._id, similarToX)}>
-                {t("SurveyPage.submit")}
+                {t("Common.submit")}
               </Button>
             </div>
           </div>

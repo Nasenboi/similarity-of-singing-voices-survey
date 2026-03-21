@@ -43,7 +43,7 @@ export function SongSearchForm({onFilterChange, query}) {
         <CollapsibleTrigger asChild>
           <CardHeader className="group">
             <CardTitle className="w-full flex items-center justify-between">
-              {t("Collection.songs")}
+              {t("Collections.songs")}
               <ChevronDown className="ml-auto group-data-[state=open]:rotate-180" />
             </CardTitle>
           </CardHeader>
@@ -51,11 +51,23 @@ export function SongSearchForm({onFilterChange, query}) {
         <CollapsibleContent>
           <CardContent>
             <form onSubmit={form.handleSubmit(onFilterChange)} className="grid grid-cols-3 gap-4">
-              <AutoField className="col-span-1" form={form} name="trackID" label="Track ID" type="input" />
-              <AutoField className="col-span-1" form={form} name="artist" label="Artist" type="input" />
-              <AutoField className="col-span-1" form={form} name="album" label="Album" type="input" />
+              <AutoField
+                className="col-span-1"
+                form={form}
+                name="trackID"
+                label={t("Collections.Songs.trackID")}
+                type="input"
+              />
+              <AutoField
+                className="col-span-1"
+                form={form}
+                name="artist"
+                label={t("Collections.Songs.artist")}
+                type="input"
+              />
+              <AutoField className="col-span-1" form={form} name="album" label={t("Collections.Songs.album")} type="input" />
               <div className="col-span-3 flex justify-end">
-                <Button type="submit">Submit</Button>
+                <Button type="submit">{t("Common.submit")}</Button>
               </div>
             </form>
           </CardContent>
