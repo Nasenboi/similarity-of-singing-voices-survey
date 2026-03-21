@@ -17,6 +17,18 @@ export const useSurveyQuestionsParticipant = (participantID) =>
     };
   }, [participantID]);
 
+export const useSurveyQuestionsSingle = (surveyQuestionID) =>
+  useTracker(() => {
+    if (!surveyQuestionID) return {surveyQuestion: null, isLoading: false};
+    const subscriptionHandle = Meteor.subscribe("surveyQuestions.single", surveyQuestionID);
+    const surveyQuestion = SurveyQuestions.findOne(surveyQuestionID);
+
+    return {
+      surveyQuestion,
+      isLoading: !subscriptionHandle.ready(),
+    };
+  }, [surveyQuestionID]);
+
 export const useSurveyQuestionsPaginated = ({query, next, previous}) =>
   useTracker(() => {
     const subscriptionHandle = Meteor.subscribe("surveyQuestions.paginated", {query, next, previous});

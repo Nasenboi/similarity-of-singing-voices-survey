@@ -1,15 +1,15 @@
 import {DialogContent, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog";
 import {Spinner} from "@/components/ui/spinner";
-import {useParticipantSingle} from "@/imports/api/participants/hooks";
+import {useSurveyQuestionsSingle} from "@/imports/api/surveyQuestions/hooks";
 import React from "react";
 import {useTranslation} from "react-i18next";
 import {InfoTable} from "../../customComponents/InfoTable";
 
-export function ParticipantInfoModal({participantID}) {
-  const {participant, isLoading: isParticipantLoading} = useParticipantSingle(participantID);
+export function SurveyQuestionInfoModal({surveyQuestionID}) {
+  const {surveyQuestion, isLoading: isSurveyQuestionLoading} = useSurveyQuestionsSingle(surveyQuestionID);
   const {t} = useTranslation();
 
-  if (isParticipantLoading || !participantID) {
+  if (isSurveyQuestionLoading || !surveyQuestionID) {
     return (
       <DialogContent>
         <DialogHeader>
@@ -20,21 +20,20 @@ export function ParticipantInfoModal({participantID}) {
     );
   }
 
-  const participantInfoFields = [
-    {field: t("Collections.DBMetaData.itemNumber"), value: participant.itemNumber},
-    {field: t("Collections.DBMetaData.createDate"), value: participant.createDate},
-    {field: t("Collections.DBMetaData.editDate"), value: participant.editDate},
-    {field: t("Collections.Participants.surveyCompleted"), value: participant.surveyCompleted},
+  const surveyQuestionInfoFields = [
+    {field: t("Collections.DBMetaData.itemNumber"), value: surveyQuestion.itemNumber},
+    {field: t("Collections.SurveyQuestions.questionnaireID"), value: surveyQuestion.questionnaireID},
+    {field: t("Collections.SurveyQuestions.questionNumber"), value: surveyQuestion.questionNumber},
   ];
 
   return (
     <DialogContent>
       <DialogHeader>
         <DialogTitle className="w-full flex items-center justify-start">
-          {t("Collections.Participants.participant")} {participant.itemNumber}
+          {t("Collections.SurveyQuestions.question")} {surveyQuestion.itemNumber}
         </DialogTitle>
       </DialogHeader>
-      <InfoTable className="w-full" fields={participantInfoFields} />
+      <InfoTable className="w-full" fields={surveyQuestionInfoFields} />
       <DialogFooter></DialogFooter>
     </DialogContent>
   );

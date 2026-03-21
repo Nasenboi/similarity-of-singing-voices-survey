@@ -18,6 +18,18 @@ export const useSurveyAnswersParticipant = (participantID) =>
     };
   }, [participantID]);
 
+export const useSurveyAnswersSingle = (surveyAnswerID) =>
+  useTracker(() => {
+    if (!surveyAnswerID) return {surveyAnswer: null, isLoading: false};
+    const subscriptionHandle = Meteor.subscribe("surveyAnswers.single", surveyAnswerID);
+    const surveyAnswer = SurveyAnswers.findOne(surveyAnswerID);
+
+    return {
+      surveyAnswer,
+      isLoading: !subscriptionHandle.ready(),
+    };
+  }, [surveyAnswerID]);
+
 export const useSurveyAnswersPaginated = ({query, next, previous}) =>
   useTracker(() => {
     const subscriptionHandle = Meteor.subscribe("surveyAnswers.paginated", {query, next, previous});

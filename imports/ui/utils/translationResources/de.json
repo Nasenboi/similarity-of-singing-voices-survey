@@ -8,7 +8,7 @@
         "itemNumber": "Nummer"
       },
       "Participants": {
-        "participant": "Participant",
+        "participant": "Teilnehmer",
         "surveyCompleted": "Umfrage beendet"
       },
       "Songs": {
@@ -27,13 +27,14 @@
       "SurveyAnswers": {
         "answer": "Antwort",
         "answers": "Antworten",
-        "participantID": "Teilnehmer ID"
+        "participantID": "Teilnehmer ID",
+        "questionID": "Fragen ID"
       },
       "SurveyQuestions": {
         "A": "A",
         "B": "B",
         "X": "X",
-        "question": "Question",
+        "question": "Frage",
         "questionNumber": "Frage",
         "questionnaireID": "Umfrage ID"
       },
@@ -48,6 +49,7 @@
       "loading": "Läd..",
       "next": "weiter",
       "no": "Nein",
+      "noResults": "Keine Ergebnisse",
       "previous": "zurück",
       "submit": "Bestätigen",
       "yes": "Ja"

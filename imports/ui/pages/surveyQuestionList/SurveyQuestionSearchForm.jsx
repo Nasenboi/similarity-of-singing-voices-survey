@@ -10,21 +10,23 @@ import {z} from "zod";
 import {AutoField} from "../../customComponents/AutoField";
 
 const searchFormSchema = z.object({
-  surveyCompleted: z.boolean().optional().default(false),
+  questionnaireID: z.string().optional().default(""),
+  questionNumber: z.string().optional().default(""),
 });
 
-export function ParticipantSearchForm({onFilterChange, query}) {
+export function SurveyQuestionSearchForm({onFilterChange, query}) {
   const {t} = useTranslation();
   const form = useForm({
     resolver: zodResolver(searchFormSchema),
     defaultValues: {
-      surveyCompleted: query?.surveyCompleted || false,
+      questionnaireID: query?.questionnaireID || "",
+      questionNumber: query?.questionNumber || "",
     },
   });
 
   const isFormEmpty = () => {
     const values = form.getValues();
-    return !values.surveyCompleted;
+    return !values.questionnaireID && !values.questionNumber;
   };
 
   useEffect(() => {
@@ -39,7 +41,7 @@ export function ParticipantSearchForm({onFilterChange, query}) {
         <CollapsibleTrigger asChild>
           <CardHeader className="group">
             <CardTitle className="w-full flex items-center justify-between">
-              {t("Collections.participants")}
+              {t("Collections.surveyQuestions")}
               <ChevronDown className="ml-auto group-data-[state=open]:rotate-180" />
             </CardTitle>
           </CardHeader>
@@ -50,9 +52,16 @@ export function ParticipantSearchForm({onFilterChange, query}) {
               <AutoField
                 className="col-span-1"
                 form={form}
-                name="surveyCompleted"
-                label={t("Collections.Participants.surveyCompleted")}
-                type="bool"
+                name="questionnaireID"
+                label={t("Collections.SurveyQuestions.questionnaireID")}
+                type="input"
+              />
+              <AutoField
+                className="col-span-1"
+                form={form}
+                name="questionNumber"
+                label={t("Collections.SurveyQuestions.questionNumber")}
+                type="input"
               />
               <div className="col-span-3 flex justify-end">
                 <Button type="submit">{t("Common.submit")}</Button>

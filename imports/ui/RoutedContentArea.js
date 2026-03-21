@@ -7,6 +7,8 @@ import {ParticipantListPage} from "./pages/participantList/ParticipantListPage";
 import {SimilarityPlotPage} from "./pages/similarityPlot/similarityPlotPage";
 import {SongListPage} from "./pages/songList/SongListPage";
 import {SurveyPage} from "./pages/survey/surveyPage";
+import {SurveyAnswerListPage} from "./pages/surveyAnswerList/SurveyAnswerListPage";
+import {SurveyQuestionListPage} from "./pages/surveyQuestionList/SurveyQuestionListPage";
 
 export function RoutedContentArea() {
   return (
@@ -17,6 +19,8 @@ export function RoutedContentArea() {
       <Route path={"/login"} element={<LoginPage />} />
       <Route path={"/songs"} element={<SongListPage />} />
       <Route path={"/participants"} element={<ParticipantListPage />} />
+      <Route path={"/answers"} element={<SurveyAnswerListPage />} />
+      <Route path={"/questions"} element={<SurveyQuestionListPage />} />
       <Route path={"*"} element={<NotFoundPage />} />
     </Routes>
   );

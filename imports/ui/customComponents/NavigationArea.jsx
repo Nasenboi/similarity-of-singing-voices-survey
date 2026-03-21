@@ -29,6 +29,8 @@ export function NavigationArea() {
             <SidebarMenuButton onClick={() => navigate("/survey")}>{t("Sidebar.Navigation.survey")}</SidebarMenuButton>
             <SidebarMenuButton onClick={() => navigate("/songs")}>{t("Collections.songs")}</SidebarMenuButton>
             <SidebarMenuButton onClick={() => navigate("/participants")}>{t("Collections.participants")}</SidebarMenuButton>
+            <SidebarMenuButton onClick={() => navigate("/questions")}>{t("Collections.surveyQuestions")}</SidebarMenuButton>
+            <SidebarMenuButton onClick={() => navigate("/answers")}>{t("Collections.surveyAnswers")}</SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarGroupContent>

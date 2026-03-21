@@ -12,6 +12,12 @@ Meteor.publish("surveyAnswers.participant", async function (participantID) {
   return SurveyAnswers.find({participantID});
 });
 
+Meteor.publish("surveyAnswers.single", async function (surveyAnswerID) {
+  check(surveyAnswerID, String);
+
+  return SurveyAnswers.find(surveyAnswerID);
+});
+
 Meteor.publish("surveyAnswers.paginated", async function ({query, next, previous}) {
   if (!(await isAdminUser(this.userId))) return this.ready();
 

@@ -1,11 +1,4 @@
-import {
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import {DialogContent, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog";
 import {Spinner} from "@/components/ui/spinner";
 import {useSongsSingle} from "@/imports/api/songs/hooks";
 import React from "react";

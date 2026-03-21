@@ -15,10 +15,16 @@ Meteor.publish("surveyQuestions.participant", async function (participantID) {
   return SurveyQuestions.find({questionnaireID: Number(participant.questionnaireID)}, {sort: {questionNumber: 1}});
 });
 
+Meteor.publish("surveyQuestions.single", async function (surveyQuestionID) {
+  check(surveyQuestionID, String);
+
+  return SurveyQuestions.find(surveyQuestionID);
+});
+
 Meteor.publish("surveyQuestions.paginated", async function ({query, next, previous}) {
   if (!(await isAdminUser(this.userId))) return this.ready();
 
-  const numericFields = [];
+  const numericFields = ["questionnaireID", "questionNumber"];
   const booleanFields = [];
   const newQuery = buildPaginationQuery({query, numericFields, booleanFields});
 

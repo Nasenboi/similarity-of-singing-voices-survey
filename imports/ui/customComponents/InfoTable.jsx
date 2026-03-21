@@ -21,7 +21,7 @@ export function InfoTable({className, fields}) {
         {fields.map((row) => (
           <TableRow key={`info_${row.field}`}>
             <TableCell>{row.field}</TableCell>
-            <TableCell>{row.value}</TableCell>
+            <TableCell>{String(row.value)}</TableCell>
           </TableRow>
         ))}
       </TableBody>

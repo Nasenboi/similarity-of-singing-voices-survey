@@ -27,7 +27,8 @@
       "SurveyAnswers": {
         "answer": "Answer",
         "answers": "Answers",
-        "participantID": "Participant ID"
+        "participantID": "Participant ID",
+        "questionID": "Question ID"
       },
       "SurveyQuestions": {
         "A": "A",
@@ -48,6 +49,7 @@
       "loading": "Loading...",
       "next": "Next",
       "no": "No",
+      "noResults": "No Results",
       "previous": "Previous",
       "submit": "Submit",
       "yes": "Yes"

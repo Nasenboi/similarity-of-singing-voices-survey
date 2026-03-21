@@ -10,21 +10,23 @@ import {z} from "zod";
 import {AutoField} from "../../customComponents/AutoField";
 
 const searchFormSchema = z.object({
-  surveyCompleted: z.boolean().optional().default(false),
+  questionID: z.string().optional().default(""),
+  participantID: z.string().optional().default(""),
 });
 
-export function ParticipantSearchForm({onFilterChange, query}) {
+export function SurveyAnswerSearchForm({onFilterChange, query}) {
   const {t} = useTranslation();
   const form = useForm({
     resolver: zodResolver(searchFormSchema),
     defaultValues: {
-      surveyCompleted: query?.surveyCompleted || false,
+      questionID: query?.questionID || "",
+      participantID: query?.participantID || "",
     },
   });
 
   const isFormEmpty = () => {
     const values = form.getValues();
-    return !values.surveyCompleted;
+    return !values.questionID && !values.participantID;
   };
 
   useEffect(() => {
@@ -39,7 +41,7 @@ export function ParticipantSearchForm({onFilterChange, query}) {
         <CollapsibleTrigger asChild>
           <CardHeader className="group">
             <CardTitle className="w-full flex items-center justify-between">
-              {t("Collections.participants")}
+              {t("Collections.surveyAnswers")}
               <ChevronDown className="ml-auto group-data-[state=open]:rotate-180" />
             </CardTitle>
           </CardHeader>
@@ -50,9 +52,16 @@ export function ParticipantSearchForm({onFilterChange, query}) {
               <AutoField
                 className="col-span-1"
                 form={form}
-                name="surveyCompleted"
-                label={t("Collections.Participants.surveyCompleted")}
-                type="bool"
+                name="questionID"
+                label={t("Collections.SurveyAnswers.questionID")}
+                type="input"
+              />
+              <AutoField
+                className="col-span-1"
+                form={form}
+                name="participantID"
+                label={t("Collections.SurveyAnswers.participantID")}
+                type="input"
               />
               <div className="col-span-3 flex justify-end">
                 <Button type="submit">{t("Common.submit")}</Button>
