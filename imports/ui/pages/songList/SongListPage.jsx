@@ -1,5 +1,5 @@
 import {Spinner} from "@/components/ui/spinner";
-import {useSongsAll} from "@/imports/api/songs/hooks";
+import {useSongsPaginated} from "@/imports/api/songs/hooks";
 import {useIsLoggedIn} from "@/imports/api/users/hooks";
 import React from "react";
 import {useTranslation} from "react-i18next";
@@ -7,18 +7,12 @@ import {useNavigate} from "react-router-dom";
 import {useAudioContext} from "../../contextProvider/AudioContext";
 import {AudioPlayer} from "../../customComponents/AudioPlayer";
 import {DataTable} from "../../customComponents/DataTable";
+import {SongSearchForm} from "./SongSearchForm";
 
 const songColumns = [
   {
     accessorKey: "trackID",
     header: "Track ID",
-    filterFn: (row, columnId, filterValue) => {
-      if (!filterValue) return true;
-
-      const rowValue = row.getValue(columnId);
-
-      return String(rowValue).includes(String(filterValue));
-    },
   },
   {
     accessorKey: "artist",
@@ -35,7 +29,38 @@ export function SongListPage() {
   const navigate = useNavigate();
   const {trackID, setTrackID, isPlaying, setIsPlaying} = useAudioContext();
   const {t} = useTranslation();
-  const {songs, isLoading: isSongsLoading} = useSongsAll();
+  const [query, setQuery] = React.useState({});
+  const [next, setNext] = React.useState(null);
+  const [previous, setPrevious] = React.useState(null);
+  const {
+    songs,
+    pageInfo,
+    isLoading: isSongsLoading,
+  } = useSongsPaginated({
+    query,
+    next,
+    previous,
+  });
+
+  const onFilterChange = (value) => {
+    setQuery(value);
+    setNext(null);
+    setPrevious(null);
+  };
+
+  const handleNext = () => {
+    setNext(pageInfo?.nextCursor);
+    setPrevious(null);
+  };
+
+  const handlePrevious = () => {
+    setPrevious(pageInfo?.prevCursor);
+    setNext(null);
+  };
+
+  const onRowClick = (row) => {
+    console.log(row.trackID);
+  };
 
   if (!isLoggedIn) {
     navigate("/");
@@ -53,8 +78,17 @@ export function SongListPage() {
   return (
     <div className="w-screen h-screen max-w-screen max-h-screen flex flex-col justify-center items-center">
       <div className="w-full flex flex-col justify-between items-center overflow-scroll md:overflow-hidden">
-        <div className="py-24">
-          <DataTable columns={songColumns} data={songs} />
+        <div className="py-24 md:max-w-300 w-full h-full">
+          <SongSearchForm onFilterChange={onFilterChange} query={query} />
+          <DataTable
+            columns={songColumns}
+            data={songs}
+            onNext={handleNext}
+            onPrevious={handlePrevious}
+            hasNext={pageInfo?.hasNext}
+            hasPrevious={pageInfo?.hasPrevious}
+            onRowCLick={onRowClick}
+          />
         </div>
         <div className="w-full h-24" />
       </div>

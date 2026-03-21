@@ -1,68 +1,29 @@
 import {Button} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
-import {
-  ColumnFiltersState,
-  flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
 import React, {useState} from "react";
 import {useTranslation} from "react-i18next";
 
-export function DataTable({columns, data}) {
+export function DataTable({columns, data, onNext, onPrevious, hasNext, hasPrevious, onRowCLick}) {
   const {t} = useTranslation();
-  const [columnFilters, setColumnFilters] = useState([]);
-  const table = useReactTable({
-    data,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    onColumnFiltersChange: setColumnFilters,
-    getFilteredRowModel: getFilteredRowModel(),
-    state: {
-      columnFilters,
-    },
-  });
+
   return (
     <div>
-      <div className="flex items-center justify-between space-x-2 py-4">
-        <Button variant="outline" size="sm" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
-          {t("Common.previous")}
-        </Button>
-        <Input
-          placeholder="Filter trackIDs..."
-          value={table.getColumn("trackID")?.getFilterValue() ?? ""}
-          onChange={(event) => table.getColumn("trackID")?.setFilterValue(event.target.value)}
-          className="max-w-sm"
-        />
-        <Button variant="outline" size="sm" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
-          {t("Common.next")}
-        </Button>
-      </div>
-      <div className="overflow-hidden rounded-md border">
+      <div className="w-full h-full p-4 overflow-hidden rounded-md border">
         <Table>
           <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
-                    </TableHead>
-                  );
-                })}
-              </TableRow>
-            ))}
+            <TableRow>
+              {columns.map((c) => (
+                <TableHead key={`c_${c.accessorKey}`}>{c.header}</TableHead>
+              ))}
+            </TableRow>
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+            {data.length ? (
+              data.map((row) => (
+                <TableRow key={row._id} onClick={() => onRowCLick(row)}>
+                  {columns.map((c) => (
+                    <TableCell key={`c_${c.accessorKey}_${row._id}`}>{row[c.accessorKey]}</TableCell>
                   ))}
                 </TableRow>
               ))
@@ -75,6 +36,14 @@ export function DataTable({columns, data}) {
             )}
           </TableBody>
         </Table>
+      </div>
+      <div className="flex items-center justify-between space-x-2 py-4">
+        <Button variant="outline" size="sm" onClick={onPrevious} disabled={!hasPrevious}>
+          {t("Common.previous")}
+        </Button>
+        <Button variant="outline" size="sm" onClick={onNext} disabled={!hasNext}>
+          {t("Common.next")}
+        </Button>
       </div>
     </div>
   );

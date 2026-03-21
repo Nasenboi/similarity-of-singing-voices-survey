@@ -44,3 +44,40 @@ export function getDocumentDiffArray(newDoc, oldDoc, key) {
 
   return DiffArray;
 }
+
+export function buildPaginationQuery({query, numericFields, booleanFields}) {
+  const nonEmptyQuery = Object.fromEntries(Object.entries(query).filter(([_, value]) => value !== ""));
+  const regexFields = Object.entries(nonEmptyQuery).filter(
+    ([key]) => !booleanFields.includes(key) && !numericFields.includes(key),
+  );
+  const exactFields = Object.entries(nonEmptyQuery).filter(([key]) => booleanFields.includes(key));
+  const numericRegexFields = Object.entries(nonEmptyQuery).filter(([key]) => numericFields.includes(key));
+  let newQuery = {
+    ...Object.fromEntries(exactFields),
+  };
+
+  if (regexFields.length > 0) {
+    newQuery["$and"] = regexFields.map(([key, value]) => ({
+      [key]: {$regex: String(value), $options: "i"},
+    }));
+  }
+  if (numericRegexFields.length > 0) {
+    const numericConditions = numericRegexFields.map(([key, value]) => ({
+      $expr: {
+        $regexMatch: {
+          input: {$toString: `$${key}`},
+          regex: String(value),
+          options: "i",
+        },
+      },
+    }));
+
+    if (newQuery["$and"]) {
+      newQuery["$and"].push(...numericConditions);
+    } else {
+      newQuery["$and"] = numericConditions;
+    }
+  }
+
+  return newQuery;
+}

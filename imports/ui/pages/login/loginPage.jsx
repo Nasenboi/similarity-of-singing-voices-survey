@@ -1,15 +1,12 @@
 import {Button} from "@/components/ui/button";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
-import {Input} from "@/components/ui/input";
-import {PasswordInput} from "@/components/ui/password-input";
 import {useIsLoggedIn} from "@/imports/api/users/hooks";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Meteor} from "meteor/meteor";
-import React from "react";
+import React, {useEffect} from "react";
 import {useForm} from "react-hook-form";
 import {useNavigate} from "react-router-dom";
-import * as z from "zod";
-import {FieldWrapper} from "../../customComponents/FieldWrapper";
+import {AutoField} from "../../customComponents/AutoField";
 import {loginFormSchema} from "./loginSchema";
 
 export function LoginPage() {
@@ -24,11 +21,14 @@ export function LoginPage() {
     },
   });
 
-  function onSubmit(values) {
-    Meteor.loginWithPassword(values.username, values.password);
+  useEffect(() => {
     if (isLoggedIn) {
       navigate("/");
     }
+  }, [isLoggedIn]);
+
+  function onSubmit(values) {
+    Meteor.loginWithPassword(values.username, values.password);
   }
 
   return (
@@ -42,12 +42,8 @@ export function LoginPage() {
             </CardHeader>
             <CardContent>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                <FieldWrapper form={form} name="username" label="Username">
-                  {({field, fieldState}) => <Input {...field} id={field.name} aria-invalid={fieldState.invalid} />}
-                </FieldWrapper>
-                <FieldWrapper form={form} name="password" label="Password">
-                  {({field, fieldState}) => <PasswordInput {...field} id={field.name} aria-invalid={fieldState.invalid} />}
-                </FieldWrapper>
+                <AutoField form={form} name="username" label="Username" type="input" />
+                <AutoField form={form} name="password" label="Password" type="password" />
                 <div className="w-full flex justify-end">
                   <Button type="submit">Submit</Button>
                 </div>

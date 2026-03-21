@@ -12,6 +12,13 @@ export const NUM_QUESTIONNAIRES = 1;
 
 export const ITEMS_PER_PAGE = 10;
 
+export const INDEX_MAP = {
+  PARTICIPANTS: "itemNumber",
+  SONGS: "itemNumber",
+  SURVEY_QUESTIONS: "itemNumber",
+  SURVEY_ANSWERS: "itemNumber",
+};
+
 /*
 export const TEST_QUESTIONNAIRE_ID = "test_questionnaire";
 export const TEST_QUESTIONNAIRE_LENGTH = 15;

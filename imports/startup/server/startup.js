@@ -3,6 +3,7 @@ import {Log} from "meteor/logging";
 import {Meteor} from "meteor/meteor";
 import SimpleSchema from "simpl-schema";
 import {initAdminUser} from "./initAdminUser";
+import {initIndexes} from "./initIndexes";
 import {initQuestionnaire} from "./initQuestionnaire";
 import {initSongs} from "./initSongs";
 import {resetDB} from "./resetDB";
@@ -27,6 +28,9 @@ async function initServer() {
 
   await resetDB();
   Log.info("DB reset finished");
+
+  await initIndexes();
+  Log.info("init idndexes finished");
 
   await initAdminUser();
   Log.info("init admin user finished");
