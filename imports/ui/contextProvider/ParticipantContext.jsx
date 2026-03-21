@@ -1,4 +1,4 @@
-import {useSingleParticipant} from "@/imports/api/participants/hooks";
+import {useParticipantSingle} from "@/imports/api/participants/hooks";
 import {PARTICIPANTS} from "@/imports/api/participants/methods";
 import React, {createContext, useContext, useEffect, useState} from "react";
 import {cookies} from "../customComponents/Cookies";
@@ -7,7 +7,7 @@ const ParticipantContext = createContext(undefined);
 
 export const ParticipantProvider = ({children}) => {
   const [participantID, setParticipantID] = useState(cookies.get("participantID"));
-  const {participant, isLoading} = useSingleParticipant(participantID);
+  const {participant, isLoading} = useParticipantSingle(participantID);
 
   useEffect(() => {
     async function checkParticipantID() {

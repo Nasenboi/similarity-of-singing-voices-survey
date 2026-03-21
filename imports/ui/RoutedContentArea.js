@@ -3,6 +3,7 @@ import {Route, Routes} from "react-router-dom";
 import {LoginPage} from "./pages/login/loginPage";
 import {MainPage} from "./pages/main/mainPage";
 import {NotFoundPage} from "./pages/notFound/notFoundPage";
+import {ParticipantListPage} from "./pages/participantList/ParticipantListPage";
 import {SimilarityPlotPage} from "./pages/similarityPlot/similarityPlotPage";
 import {SongListPage} from "./pages/songList/SongListPage";
 import {SurveyPage} from "./pages/survey/surveyPage";
@@ -15,6 +16,7 @@ export function RoutedContentArea() {
       <Route path={"/plot"} element={<SimilarityPlotPage />} />
       <Route path={"/login"} element={<LoginPage />} />
       <Route path={"/songs"} element={<SongListPage />} />
+      <Route path={"/participants"} element={<ParticipantListPage />} />
       <Route path={"*"} element={<NotFoundPage />} />
     </Routes>
   );

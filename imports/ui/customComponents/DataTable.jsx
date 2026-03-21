@@ -1,7 +1,6 @@
 import {Button} from "@/components/ui/button";
-import {Input} from "@/components/ui/input";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
-import React, {useState} from "react";
+import React from "react";
 import {useTranslation} from "react-i18next";
 
 export function DataTable({columns, data, onNext, onPrevious, hasNext, hasPrevious, onRowCLick}) {
@@ -23,7 +22,7 @@ export function DataTable({columns, data, onNext, onPrevious, hasNext, hasPrevio
               data.map((row) => (
                 <TableRow key={row._id} onClick={() => onRowCLick(row)}>
                   {columns.map((c) => (
-                    <TableCell key={`c_${c.accessorKey}_${row._id}`}>{row[c.accessorKey]}</TableCell>
+                    <TableCell key={`c_${c.accessorKey}_${row._id}`}>{String(row[c.accessorKey])}</TableCell>
                   ))}
                 </TableRow>
               ))

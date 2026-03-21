@@ -5,7 +5,7 @@ import React from "react";
 import {Pagination} from "../collection/pagination";
 import {Participants} from "./collection";
 
-export const useSingleParticipant = (participantID) =>
+export const useParticipantSingle = (participantID) =>
   useTracker(() => {
     if (!participantID) return {participant: null, isLoading: false};
 
