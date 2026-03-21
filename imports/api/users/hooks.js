@@ -4,5 +4,8 @@ import React from "react";
 
 export const useIsLoggedIn = () =>
   useTracker(() => {
+    if (Meteor.isDevelopment) {
+      return true;
+    }
     return !!Meteor.userId() && !Meteor.loggingOut();
   }, []);
