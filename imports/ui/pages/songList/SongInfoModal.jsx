@@ -19,9 +19,10 @@ export function SongInfoModal({trackID}) {
   if (isSongLoading || !trackID) {
     return (
       <DialogContent>
-        <div className="w-10 h-10 flex items-center justify-center">
-          <Spinner />
-        </div>
+        <DialogHeader>
+          <DialogTitle className="w-full flex items-center justify-start">{t("Common.loading")}</DialogTitle>
+        </DialogHeader>
+        <Spinner />
       </DialogContent>
     );
   }

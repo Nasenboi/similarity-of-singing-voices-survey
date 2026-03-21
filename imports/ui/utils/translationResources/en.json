@@ -45,6 +45,7 @@
     },
     "Common": {
       "close": "Close",
+      "loading": "Loading...",
       "next": "Next",
       "no": "No",
       "previous": "Previous",

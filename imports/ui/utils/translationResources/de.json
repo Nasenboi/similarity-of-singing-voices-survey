@@ -45,6 +45,7 @@
     },
     "Common": {
       "close": "Schließen",
+      "loading": "Läd..",
       "next": "weiter",
       "no": "Nein",
       "previous": "zurück",
