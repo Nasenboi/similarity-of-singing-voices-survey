@@ -8,13 +8,23 @@ import {Songs} from "./collection";
 export const useSongsSingle = (trackID) =>
   useTracker(() => {
     const tID = Number(trackID);
-    const subscriptionHandle = Meteor.subscribe("songs.single", tID);
+    const subscriptionHandle = Meteor.subscribe("songs.single", {tID});
     const song = Songs.findOne({trackID: tID});
     return {
       song,
       isLoading: !subscriptionHandle.ready(),
     };
   }, [trackID]);
+
+export const useSongsAll = ({participantID, fields}) =>
+  useTracker(() => {
+    const subscriptionHandle = Meteor.subscribe("songs.all", {participantID, fields});
+    const songs = Songs.find().fetch();
+    return {
+      songs,
+      isLoading: !subscriptionHandle.ready(),
+    };
+  }, [Meteor.userId(), participantID]);
 
 export const useSongsPaginated = ({query, next, previous}) =>
   useTracker(() => {
@@ -31,16 +41,6 @@ export const useSongsPaginated = ({query, next, previous}) =>
   }, [Meteor.userId(), next, previous, JSON.stringify(query)]);
 
 /*
-export const useSongsAll = () =>
-  useTracker(() => {
-    const subscriptionHandle = Meteor.subscribe("songs.all");
-    const songs = Songs.find().fetch();
-    return {
-      songs,
-      isLoading: !subscriptionHandle.ready(),
-    };
-  }, [Meteor.userId()]);
-
 export const useSongsParticipant = (participantID) =>
   useTracker(() => {
     if (!participantID) return {songs: null, isLoading: false};

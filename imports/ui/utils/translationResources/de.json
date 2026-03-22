@@ -70,6 +70,7 @@
       "Navigation": {
         "home": "Startseite",
         "navigation": "Navigation",
+        "similarityPlot": "Ähnlichkeitsgraph",
         "survey": "Umfrage"
       },
       "backgroundMusic": "Instrumente",

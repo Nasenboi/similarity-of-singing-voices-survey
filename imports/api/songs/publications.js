@@ -1,12 +1,23 @@
 import {Meteor} from "meteor/meteor";
 import {find as findPagination} from "mongo-cursor-pagination";
 import {INDEX_MAP, ITEMS_PER_PAGE} from "../../common/globals";
+import {Participants} from "../participants/collection";
 import {isAdminUser} from "../users/helpers";
 import {buildPaginationQuery} from "../utils";
 import {Songs} from "./collection";
 
-Meteor.publish("songs.single", function (trackID) {
+Meteor.publish("songs.single", function ({trackID}) {
   return Songs.find({trackID});
+});
+
+Meteor.publish("songs.all", async function ({participantID, fields}) {
+  const isAdmin = await isAdminUser(this.userId);
+  if (!participantID && !isAdmin) return this.ready();
+  if (!isAdmin) {
+    const participant = await Participants.findOneAsync(participantID);
+    if (!participant || !participant.surveyCompleted) return this.ready();
+  }
+  return Songs.find({}, {fields});
 });
 
 Meteor.publish("songs.paginated", async function ({query, next, previous}) {
@@ -45,12 +56,6 @@ unused other ideas:
 import {check} from "meteor/check";
 import {Participants} from "../participants/collection";
 import {SurveyQuestions} from "../surveyQuestions/collection";
-
-Meteor.publish("songs.all", async function () {
-  if (!(await isAdminUser(this.userId))) return;
-  return Songs.find();
-});
-
 
 Meteor.publish("songs.participant", async function (participantID) {
   check(participantID, String);

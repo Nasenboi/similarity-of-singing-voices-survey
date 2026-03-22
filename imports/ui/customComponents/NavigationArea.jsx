@@ -7,17 +7,16 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import {useIsLoggedIn} from "@/imports/api/users/hooks";
+import {useIsAdmin, useIsAdminOrCompleted} from "@/imports/api/users/hooks";
 import React from "react";
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
 
 export function NavigationArea() {
-  const isLoggedIn = useIsLoggedIn();
+  const isAdminOrCompleted = useIsAdminOrCompleted();
+  const isAdmin = useIsAdmin();
   const navigate = useNavigate();
   const {t} = useTranslation();
-
-  if (!isLoggedIn) return;
 
   return (
     <SidebarGroup>
@@ -27,10 +26,23 @@ export function NavigationArea() {
           <SidebarMenuItem>
             <SidebarMenuButton onClick={() => navigate("/")}>{t("Sidebar.Navigation.home")}</SidebarMenuButton>
             <SidebarMenuButton onClick={() => navigate("/survey")}>{t("Sidebar.Navigation.survey")}</SidebarMenuButton>
-            <SidebarMenuButton onClick={() => navigate("/songs")}>{t("Collections.songs")}</SidebarMenuButton>
-            <SidebarMenuButton onClick={() => navigate("/participants")}>{t("Collections.participants")}</SidebarMenuButton>
-            <SidebarMenuButton onClick={() => navigate("/questions")}>{t("Collections.surveyQuestions")}</SidebarMenuButton>
-            <SidebarMenuButton onClick={() => navigate("/answers")}>{t("Collections.surveyAnswers")}</SidebarMenuButton>
+            {useIsAdminOrCompleted && (
+              <SidebarMenuButton onClick={() => navigate("/plot")}>
+                {t("Sidebar.Navigation.similarityPlot")}
+              </SidebarMenuButton>
+            )}
+            {isAdmin && (
+              <>
+                <SidebarMenuButton onClick={() => navigate("/songs")}>{t("Collections.songs")}</SidebarMenuButton>
+                <SidebarMenuButton onClick={() => navigate("/participants")}>
+                  {t("Collections.participants")}
+                </SidebarMenuButton>
+                <SidebarMenuButton onClick={() => navigate("/questions")}>
+                  {t("Collections.surveyQuestions")}
+                </SidebarMenuButton>
+                <SidebarMenuButton onClick={() => navigate("/answers")}>{t("Collections.surveyAnswers")}</SidebarMenuButton>
+              </>
+            )}
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarGroupContent>
