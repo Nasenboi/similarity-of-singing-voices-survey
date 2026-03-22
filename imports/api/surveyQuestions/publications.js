@@ -12,7 +12,10 @@ Meteor.publish("surveyQuestions.participant", async function (participantID) {
   const participant = await Participants.findOneAsync(participantID);
   if (!participant) return this.ready();
 
-  return SurveyQuestions.find({questionnaireID: Number(participant.questionnaireID)}, {sort: {questionNumber: 1}});
+  return SurveyQuestions.find(
+    {questionnaireID: Number(participant.questionnaireID), skip: false},
+    {sort: {questionNumber: 1}},
+  );
 });
 
 Meteor.publish("surveyQuestions.single", async function (surveyQuestionID) {

@@ -91,9 +91,10 @@ export class Collection extends Mongo.Collection {
 
   /**
    * Returns the total count of documents in the collection.
+   * @param {Object} query Optional query to filter by
    * @returns {Promise<Number>} The count of documents.
    */
-  async countAsync() {
-    return await this.find().countAsync();
+  async countAsync(query) {
+    return await this.find(query).countAsync();
   }
 }

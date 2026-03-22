@@ -27,6 +27,7 @@ function convertToSongSchema(audio) {
     vocalContentLengthS: audio.vocal_content_length_s,
     onsets: audio.onsets && audio.onsets.length > 0 ? parseOnsets(audio.onsets) : [],
     cluster: audio.cluster,
+    skipInSurvey: false,
     UMAP2D: {
       UMAP_1: audio.UMAP_2D_1,
       UMAP_2: audio.UMAP_2D_2,

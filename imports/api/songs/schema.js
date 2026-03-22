@@ -12,6 +12,14 @@ export const UMAP3DSchema = new SimpleSchema({
   UMAP_3: {type: Number},
 });
 
+export const compaintSchema = new SimpleSchema({
+  notVoiced: {type: Boolean, optional: true},
+  multipleVoices: {type: Boolean, optional: true},
+  badVoiceQuality: {type: Boolean, optional: true},
+  message: {type: String, optional: true},
+  participantID: {type: String},
+});
+
 export const songSchema = new SimpleSchema({
   trackID: {type: SimpleSchema.Integer},
   filename: {type: String},
@@ -33,4 +41,8 @@ export const songSchema = new SimpleSchema({
   UMAP2D: {type: UMAP2DSchema},
   UMAP3D: {type: UMAP3DSchema},
   cluster: {type: Number, optional: true},
+
+  skipInSurvey: {type: Boolean, optional: true, defaultValue: false},
+  complaints: {type: Array, optional: true},
+  "complaints.$": {type: compaintSchema},
 }).extend(dbMetadataSchema);

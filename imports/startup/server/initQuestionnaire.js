@@ -48,6 +48,7 @@ function generateQuestion(args) {
     X,
     A,
     B,
+    skip: false,
   };
 }
 
