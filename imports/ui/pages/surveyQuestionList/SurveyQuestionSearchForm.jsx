@@ -10,8 +10,8 @@ import {z} from "zod";
 import {AutoField} from "../../customComponents/AutoField";
 
 const searchFormSchema = z.object({
-  questionnaireID: z.string().optional().default(""),
-  questionNumber: z.string().optional().default(""),
+  questionnaireID: z.string().optional(),
+  questionNumber: z.string().optional(),
 });
 
 export function SurveyQuestionSearchForm({onFilterChange, query}) {

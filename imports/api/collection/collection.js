@@ -46,8 +46,13 @@ export class Collection extends Mongo.Collection {
    * @returns {Promise<{object[] | Number}>} Either the array of differences for a single object, or the number of affected records
    */
   async updateAsync(selector, modifier, options, callback) {
-    const isSingleDoc = typeof selector === "string" || selector._id || selector instanceof Mongo.ObjectID;
-    const oldDoc = await this.getAsync(selector);
+    const isSingleDoc = typeof selector === "string" || selector instanceof Mongo.ObjectID || (selector && selector._id);
+
+    let oldDoc;
+
+    if (isSingleDoc) {
+      oldDoc = await this.findOneAsync(selector);
+    }
 
     const result = await super.updateAsync(selector, modifier, options, callback);
 

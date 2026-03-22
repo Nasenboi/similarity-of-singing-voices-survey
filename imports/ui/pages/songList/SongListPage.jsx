@@ -45,6 +45,14 @@ export function SongListPage() {
     },
   ];
 
+  const setRowColor = (row) => {
+    if (row.skipInSurvey) {
+      return "#f8d7da";
+    } else if (row.complaints?.length > 0) {
+      return "#fff3cd";
+    }
+  };
+
   const onFilterChange = (value) => {
     setQuery(value);
     setNext(null);
@@ -101,6 +109,7 @@ export function SongListPage() {
               hasNext={pageInfo?.hasNext}
               hasPrevious={pageInfo?.hasPrevious}
               onRowCLick={onRowClick}
+              setRowColor={setRowColor}
             />
           </div>
           <div className="w-full h-24" />

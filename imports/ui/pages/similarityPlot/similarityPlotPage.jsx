@@ -28,8 +28,8 @@ function DimToggle({dims, setDims}) {
 }
 
 export function SimilarityPlotPage() {
-  const {participantID, isLoading: isParticipantLoading} = useParticipantContext();
-  const {hasRights, isLoading: isRightsLoading} = useIsAdminOrCompleted(participantID);
+  const {participant, isLoading: isParticipantLoading} = useParticipantContext();
+  const {hasRights, isLoading: isRightsLoading} = useIsAdminOrCompleted(participant._id);
   const [dims, setDims] = useState("2D");
   const {songs, isLoading: isSongsLoading} = useSongsAll({participantID});
   const navigate = useNavigate();

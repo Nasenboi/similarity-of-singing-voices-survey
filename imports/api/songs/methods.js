@@ -11,18 +11,17 @@ export const SONGS = {
     name: "songs.addComplaint",
     validate: new SimpleSchema({
       trackID: {type: Number},
-      participantID: {type: String},
       complaint: {type: compaintSchema},
     }).validator(),
-    async run({trackID, participantID, complaint}) {
+    async run({trackID, complaint}) {
       if (this.isSimulation) return;
-      if (!(await Participants.findOneAsync({participantID}))) return;
+      if (!(await Participants.findOneAsync(complaint.participantID))) return;
 
       const result = await Songs.updateAsync(
         {trackID},
         {
           $push: {
-            complaints: {...complaint, participantID},
+            complaints: complaint,
           },
         },
       );

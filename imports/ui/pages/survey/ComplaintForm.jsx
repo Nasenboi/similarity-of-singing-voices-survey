@@ -10,7 +10,7 @@ import {SONGS} from "../../../api/songs/methods";
 import {useParticipantContext} from "../../contextProvider/ParticipantContext";
 import {AutoField} from "../../customComponents/AutoField";
 
-const audioOptions = ["A", "B", "X"];
+const audioOptions = ["X", "A", "B"];
 
 const complaintForm = z.object({
   notVoiced: z.boolean().optional(),
@@ -20,7 +20,7 @@ const complaintForm = z.object({
   song: z.enum(audioOptions),
 });
 
-export function ComplaintForm({surveyQuestion}) {
+export function ComplaintForm({surveyQuestion, setDialogOpen}) {
   const {participant, isLoading: isParticipantLoading} = useParticipantContext();
   const {t} = useTranslation();
   const form = useForm({
@@ -35,11 +35,17 @@ export function ComplaintForm({surveyQuestion}) {
   });
 
   const onSubmit = async (values) => {
-    await SONGS.addComplaint.callAsync({
-      trackID: surveyQuestion[values.song],
-      participantID: participant.participantID,
-      complaint: {...values, song: null},
-    });
+    try {
+      const {song, ...complaint} = values;
+      await SONGS.addComplaint.callAsync({
+        complaint: {...complaint, participantID: participant._id},
+        trackID: surveyQuestion[song],
+      });
+    } catch (error) {
+      return;
+    }
+    setDialogOpen(false);
+    form.reset();
   };
 
   if (isParticipantLoading || !surveyQuestion) {

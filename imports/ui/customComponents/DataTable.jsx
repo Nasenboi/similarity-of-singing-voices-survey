@@ -3,7 +3,7 @@ import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/c
 import React from "react";
 import {useTranslation} from "react-i18next";
 
-export function DataTable({columns, data, onNext, onPrevious, hasNext, hasPrevious, onRowCLick}) {
+export function DataTable({columns, data, onNext, onPrevious, hasNext, hasPrevious, onRowCLick, setRowColor}) {
   const {t} = useTranslation();
 
   return (
@@ -20,7 +20,7 @@ export function DataTable({columns, data, onNext, onPrevious, hasNext, hasPrevio
           <TableBody>
             {data.length ? (
               data.map((row) => (
-                <TableRow key={row._id} onClick={() => onRowCLick(row)}>
+                <TableRow key={row._id} onClick={() => onRowCLick(row)} style={{backgroundColor: setRowColor?.(row)}}>
                   {columns.map((c) => (
                     <TableCell key={`c_${c.accessorKey}_${row._id}`}>{String(row[c.accessorKey])}</TableCell>
                   ))}

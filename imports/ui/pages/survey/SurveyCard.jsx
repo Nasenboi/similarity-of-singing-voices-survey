@@ -24,6 +24,7 @@ function AudioButton({trackID, voice, onVoiceClick}) {
 export function SurveyCard({question, setSurveyAnswer, isSubmitted = false}) {
   const {trackID, setTrackID, setIcon, isPlaying, setIsPlaying} = useAudioContext();
   const [similarToX, setSimilarToX] = useState(["A", "B"]);
+  const [dialogOpen, setDialogOpen] = useState(false);
   const {t} = useTranslation();
 
   const onVoiceClick = (newTrackID, voice) => {
@@ -55,13 +56,13 @@ export function SurveyCard({question, setSurveyAnswer, isSubmitted = false}) {
         <h1 className="m-4 w-full max-w-screen md:text-4xl text-xl font-bold text-center">
           {t("SurveyPage.cardTitle")} {question.questionNumber + 1}
         </h1>
-        <Dialog>
+        <Dialog open={dialogOpen} onOpenChange={(open) => setDialogOpen(open)}>
           <DialogTrigger asChild>
             <Button variant="secondary">
               <Flag />
             </Button>
           </DialogTrigger>
-          <ComplaintForm surveyQuestion={question} />
+          <ComplaintForm surveyQuestion={question} setDialogOpen={setDialogOpen} />
         </Dialog>
       </div>
       <div className="flex justify-center flex-col md:flex-row">

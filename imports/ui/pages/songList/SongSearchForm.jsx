@@ -10,9 +10,9 @@ import {z} from "zod";
 import {AutoField} from "../../customComponents/AutoField";
 
 const searchFormSchema = z.object({
-  trackID: z.string().optional().default(""),
-  artist: z.string().optional().default(""),
-  album: z.string().optional().default(""),
+  trackID: z.string().optional(),
+  artist: z.string().optional(),
+  album: z.string().optional(),
 });
 
 export function SongSearchForm({onFilterChange, query}) {
