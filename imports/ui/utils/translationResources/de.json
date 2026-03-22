@@ -20,7 +20,7 @@
         "filename": "Dateiname",
         "genre": "Genre",
         "onsets": "Onsets",
-        "song": "Song",
+        "song": "Lied",
         "trackID": "Track ID",
         "vocalContentLengthS": "Länge der Stimmaufnahme (s)"
       },
@@ -88,6 +88,13 @@
       }
     },
     "SurveyPage": {
+      "ComplaintForm": {
+        "badVoiceQuality": "Schlechte Stimmqualität",
+        "message": "Nachricht",
+        "multipleVoices": "Mehrere Stimmen",
+        "notVoiced": "Keine Stimme",
+        "title": "Audiofehlermeldung"
+      },
       "and": "und",
       "areMoreSimilar": "sind sich ähnlicher",
       "cardTitle": "Frage",

@@ -88,6 +88,13 @@
       }
     },
     "SurveyPage": {
+      "ComplaintForm": {
+        "badVoiceQuality": "Bad Voice Quality",
+        "message": "Message",
+        "multipleVoices": "Multiple Voices",
+        "notVoiced": "Not Voiced",
+        "title": "Audio Issue Report"
+      },
       "and": "and",
       "areMoreSimilar": "are more similar",
       "cardTitle": "Question",
@@ -95,7 +102,6 @@
       "next": "next",
       "previous": "previous",
       "referenceVoices": "Reference Voices",
-
       "targetVoice": "Target Voice",
       "title": "Similarity of Singing Voices",
       "voice": "Voice"

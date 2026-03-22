@@ -1,11 +1,13 @@
 import {Button} from "@/components/ui/button";
 import {ButtonGroup, ButtonGroupSeparator} from "@/components/ui/button-group";
+import {Dialog, DialogTrigger} from "@/components/ui/dialog";
 import {Label} from "@/components/ui/label";
 import {RadioGroup, RadioGroupItem} from "@/components/ui/radio-group";
-import {ArrowRightLeft} from "lucide-react";
+import {ArrowRightLeft, Flag} from "lucide-react";
 import React, {useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useAudioContext} from "../../contextProvider/AudioContext";
+import {ComplaintForm} from "./ComplaintForm";
 
 function AudioButton({trackID, voice, onVoiceClick}) {
   const {t} = useTranslation();
@@ -48,11 +50,19 @@ export function SurveyCard({question, setSurveyAnswer, isSubmitted = false}) {
       className={`w-220 max-w-screen h-min rounded-md border-2 flex flex-col justifiy-center ${isSubmitted && "bg-accent border-accent-foreground"}`}
     >
       <div
-        className={`w-full flex justify-center border-b-2 rounded-t-md ${isSubmitted && "bg-accent border-accent-foreground"}`}
+        className={`w-full flex items-center px-4 justify-center border-b-2 rounded-t-md ${isSubmitted && "bg-accent border-accent-foreground"}`}
       >
         <h1 className="m-4 w-full max-w-screen md:text-4xl text-xl font-bold text-center">
           {t("SurveyPage.cardTitle")} {question.questionNumber + 1}
         </h1>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button variant="secondary">
+              <Flag />
+            </Button>
+          </DialogTrigger>
+          <ComplaintForm surveyQuestion={question} />
+        </Dialog>
       </div>
       <div className="flex justify-center flex-col md:flex-row">
         <div className="p-4 size-full flex flex-row md:flex-col justify-center items-center">

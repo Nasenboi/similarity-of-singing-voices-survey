@@ -6,7 +6,7 @@ import {NotFoundPage} from "./pages/notFound/notFoundPage";
 import {ParticipantListPage} from "./pages/participantList/ParticipantListPage";
 import {SimilarityPlotPage} from "./pages/similarityPlot/similarityPlotPage";
 import {SongListPage} from "./pages/songList/SongListPage";
-import {SurveyPage} from "./pages/survey/surveyPage";
+import {SurveyPage} from "./pages/survey/SurveyPage";
 import {SurveyAnswerListPage} from "./pages/surveyAnswerList/SurveyAnswerListPage";
 import {SurveyQuestionListPage} from "./pages/surveyQuestionList/SurveyQuestionListPage";
 

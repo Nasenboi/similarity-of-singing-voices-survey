@@ -19,7 +19,7 @@ import {useTranslation} from "react-i18next";
 import {useAudioContext} from "../../contextProvider/AudioContext";
 import {useParticipantContext} from "../../contextProvider/ParticipantContext";
 import {AudioPlayer} from "../../customComponents/AudioPlayer";
-import {SurveyCard} from "./surveyCard";
+import {SurveyCard} from "./SurveyCard";
 
 export function SurveyPage() {
   const {t} = useTranslation();
