@@ -8,7 +8,6 @@ export async function getNextQuestionnaireID() {
   const validQuestionnairesRaw = await Promise.all(
     questionnaireIDs.map(async (id) => {
       const count = await SurveyQuestions.countAsync({questionnaireID: id, skip: false});
-      console.log(count);
       if (count >= NUM_QUESTIONS_PER_SURVEY_h) {
         return id;
       }

@@ -29,9 +29,6 @@ async function initServer() {
   await resetDB();
   Log.info("DB reset finished");
 
-  await initIndexes();
-  Log.info("init idndexes finished");
-
   await initAdminUser();
   Log.info("init admin user finished");
 
@@ -40,6 +37,9 @@ async function initServer() {
 
   await initQuestionnaire();
   Log.info("init questionnaire finished");
+
+  await initIndexes();
+  Log.info("init idndexes finished");
 }
 
 /**
