@@ -7,6 +7,7 @@ import {buildPaginationQuery} from "../utils";
 import {Songs} from "./collection";
 
 Meteor.publish("songs.single", function ({trackID}) {
+  if (trackID === undefined || trackID === null) return this.ready();
   return Songs.find({trackID});
 });
 

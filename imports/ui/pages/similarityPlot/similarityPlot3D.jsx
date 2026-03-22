@@ -1,11 +1,14 @@
+import {useTheme} from "next-themes";
 import React from "react";
 import {useTranslation} from "react-i18next";
 import Plot from "react-plotly.js";
 import {useAudioContext} from "../../contextProvider/AudioContext";
+import {AXIS_LAYOUT, CONFIG, LAYOUT, MARKER_COLORS} from "./plotConfig";
 
 function SimilarityPlot3Dm({songs}) {
   const {setTrackID} = useAudioContext();
   const {t} = useTranslation();
+  const {theme} = useTheme();
 
   const x = songs.map((s) => s.UMAP3D.UMAP_1);
   const y = songs.map((s) => s.UMAP3D.UMAP_2);
@@ -34,6 +37,7 @@ function SimilarityPlot3Dm({songs}) {
     type: "scatter3d",
     mode: "markers",
     marker: {
+      ...MARKER_COLORS[theme || "light"],
       color: cluster,
       size: 2,
       symbol: "circle",
@@ -42,31 +46,20 @@ function SimilarityPlot3Dm({songs}) {
     },
   };
 
-  const axisLayout = {
-    showgrid: false,
-    showline: false,
-    showticklabels: false,
-    visible: false,
-  };
+  const axisLayout = AXIS_LAYOUT;
 
   const layout = {
-    autosize: true,
-    paper_bgcolor: "#00000000",
-    plot_bgcolor: "#00000000",
+    ...LAYOUT,
     scene: {
       xaxis: axisLayout,
       yaxis: axisLayout,
       zaxis: axisLayout,
     },
     dragmode: "turntable",
-    hovermode: "closest",
-    uirevision: "static",
   };
 
   const config = {
-    displayModeBar: false,
-    scrollZoom: true,
-    responsive: true,
+    ...CONFIG,
   };
 
   const onPointClick = ({points}) => {
