@@ -46,6 +46,7 @@ export function getDocumentDiffArray(newDoc, oldDoc, key) {
 }
 
 export function buildPaginationQuery({query, numericFields, booleanFields}) {
+  if (!query) return {};
   const nonEmptyQuery = Object.fromEntries(Object.entries(query).filter(([_, value]) => value !== ""));
   const regexFields = Object.entries(nonEmptyQuery).filter(
     ([key]) => !booleanFields.includes(key) && !numericFields.includes(key),

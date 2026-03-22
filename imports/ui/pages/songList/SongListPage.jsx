@@ -47,9 +47,9 @@ export function SongListPage() {
 
   const setRowColor = (row) => {
     if (row.skipInSurvey) {
-      return "#f8d7da";
+      return "red-500";
     } else if (row.complaints?.length > 0) {
-      return "#fff3cd";
+      return "yellow-500";
     }
   };
 

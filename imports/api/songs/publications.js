@@ -25,8 +25,10 @@ Meteor.publish("songs.paginated", async function ({query, next, previous}) {
   if (!(await isAdminUser(this.userId))) return this.ready();
 
   const numericFields = ["trackID"];
-  const booleanFields = [];
-  const newQuery = buildPaginationQuery({query, numericFields, booleanFields});
+  const booleanFields = ["complaints"];
+  const {hasComplaints, q} = query;
+  let newQuery = buildPaginationQuery({q, numericFields, booleanFields});
+  if (hasComplaints) newQuery["complaints.0"] = {$exists: true};
 
   const result = await findPagination(Songs.rawCollection(), {
     query: newQuery,

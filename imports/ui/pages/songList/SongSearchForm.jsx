@@ -13,6 +13,7 @@ const searchFormSchema = z.object({
   trackID: z.string().optional(),
   artist: z.string().optional(),
   album: z.string().optional(),
+  hasComplaints: z.boolean().optional(),
 });
 
 export function SongSearchForm({onFilterChange, query}) {
@@ -23,12 +24,13 @@ export function SongSearchForm({onFilterChange, query}) {
       trackID: query?.trackID || "",
       artist: query?.artist || "",
       album: query?.album || "",
+      hasComplaints: query?.hasComplaints || false,
     },
   });
 
   const isFormEmpty = () => {
     const values = form.getValues();
-    return !values.trackID && !values.artist && !values.album;
+    return !values.trackID && !values.artist && !values.album && !values.hasComplaints;
   };
 
   useEffect(() => {
@@ -66,6 +68,13 @@ export function SongSearchForm({onFilterChange, query}) {
                 type="input"
               />
               <AutoField className="col-span-1" form={form} name="album" label={t("Collections.Songs.album")} type="input" />
+              <AutoField
+                className="col-span-1"
+                form={form}
+                name="hasComplaints"
+                label={t("Collections.Songs.hasComplaints")}
+                type="bool"
+              />
               <div className="col-span-3 flex justify-end">
                 <Button type="submit">{t("Common.submit")}</Button>
               </div>

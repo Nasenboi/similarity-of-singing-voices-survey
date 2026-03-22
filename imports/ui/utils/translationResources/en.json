@@ -19,6 +19,7 @@
         "cluster": "Cluster",
         "filename": "File Name",
         "genre": "Genre",
+        "hasComplaints": "Has Audio Issues",
         "onsets": "Onsets",
         "song": "song",
         "trackID": "Track ID",

@@ -19,13 +19,18 @@ export function DataTable({columns, data, onNext, onPrevious, hasNext, hasPrevio
           </TableHeader>
           <TableBody>
             {data.length ? (
-              data.map((row) => (
-                <TableRow key={row._id} onClick={() => onRowCLick(row)} style={{backgroundColor: setRowColor?.(row)}}>
-                  {columns.map((c) => (
-                    <TableCell key={`c_${c.accessorKey}_${row._id}`}>{String(row[c.accessorKey])}</TableCell>
-                  ))}
-                </TableRow>
-              ))
+              data.map((row) => {
+                const rowColor = setRowColor?.(row);
+                return (
+                  <TableRow key={row._id} onClick={() => onRowCLick(row)}>
+                    {columns.map((c) => (
+                      <TableCell key={`c_${c.accessorKey}_${row._id}`} className={rowColor && `border-y border-${rowColor}`}>
+                        {String(row[c.accessorKey])}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                );
+              })
             ) : (
               <TableRow>
                 <TableCell colSpan={columns.length} className="h-24 text-center">
