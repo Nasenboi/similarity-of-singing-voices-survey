@@ -21,10 +21,11 @@ export function DataTable({columns, data, onNext, onPrevious, hasNext, hasPrevio
             {data.length ? (
               data.map((row) => {
                 const rowColor = setRowColor?.(row);
+                console.log(rowColor);
                 return (
                   <TableRow key={row._id} onClick={() => onRowCLick(row)}>
                     {columns.map((c) => (
-                      <TableCell key={`c_${c.accessorKey}_${row._id}`} className={rowColor && `border-y border-${rowColor}`}>
+                      <TableCell key={`c_${c.accessorKey}_${row._id}`} className={rowColor && `border-y ${rowColor}`}>
                         {String(row[c.accessorKey])}
                       </TableCell>
                     ))}

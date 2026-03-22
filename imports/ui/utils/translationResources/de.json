@@ -17,10 +17,12 @@
         "albumDateReleased": "Veröffentlicht",
         "artist": "Künstler",
         "cluster": "Cluster",
+        "complaints": "Audiofehler",
         "filename": "Dateiname",
         "genre": "Genre",
         "hasComplaints": "Hat Audiofehler",
         "onsets": "Onsets",
+        "skipInSurvey": "Aus Umfrage löschen",
         "song": "Lied",
         "trackID": "Track ID",
         "vocalContentLengthS": "Länge der Stimmaufnahme (s)"
@@ -87,6 +89,10 @@
       "3D": {
         "title": "3D Plot"
       }
+    },
+    "SongInfoModal": {
+      "skipInSurveyFalse": "In Umfrage behalten",
+      "skipInSurveyTrue": "Aus Umfrage löschen"
     },
     "SurveyPage": {
       "ComplaintForm": {

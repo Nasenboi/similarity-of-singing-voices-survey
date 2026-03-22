@@ -6,7 +6,7 @@ import {isAdminUser} from "../users/helpers";
 import {buildPaginationQuery} from "../utils";
 import {Songs} from "./collection";
 
-Meteor.publish("songs.single", function ({trackID}) {
+Meteor.publish("songs.single", async function ({trackID}) {
   if (trackID === undefined || trackID === null) return this.ready();
   return Songs.find({trackID});
 });
@@ -21,65 +21,106 @@ Meteor.publish("songs.all", async function ({participantID, fields}) {
   return Songs.find({}, {fields});
 });
 
-Meteor.publish("songs.paginated", async function ({query, next, previous}) {
-  if (!(await isAdminUser(this.userId))) return this.ready();
+Meteor.publish("songs.paginated", function ({query, next, previous}) {
+  const self = this;
+  let stopped = false;
+  let sentIds = new Set();
+  let paginationAdded = false;
+  let rerunTimer = null;
 
-  const numericFields = ["trackID"];
-  const booleanFields = ["complaints"];
-  const {hasComplaints, q} = query;
-  let newQuery = buildPaginationQuery({q, numericFields, booleanFields});
-  if (hasComplaints) newQuery["complaints.0"] = {$exists: true};
+  const scheduleRefresh = () => {
+    if (rerunTimer) return;
+    rerunTimer = Meteor.setTimeout(async () => {
+      rerunTimer = null;
+      await refreshPage();
+    }, 50);
+  };
 
-  const result = await findPagination(Songs.rawCollection(), {
-    query: newQuery,
-    limit: ITEMS_PER_PAGE,
-    paginatedField: INDEX_MAP.SONGS,
-    next,
-    previous,
+  const refreshPage = async () => {
+    if (stopped) return;
+    if (!(await isAdminUser(self.userId))) {
+      self.ready();
+      return;
+    }
+
+    const numericFields = ["trackID"];
+    const booleanFields = [];
+    const {hasComplaints, skipInSurvey, q} = query || {};
+
+    // note: buildPaginationQuery expects { query: ... }, not { q: ... }
+    let newQuery = buildPaginationQuery({query: q, numericFields, booleanFields});
+    if (hasComplaints) newQuery["complaints.0"] = {$exists: true};
+    if (skipInSurvey) newQuery.skipInSurvey = true;
+
+    const result = await findPagination(Songs.rawCollection(), {
+      query: newQuery,
+      limit: ITEMS_PER_PAGE,
+      paginatedField: INDEX_MAP.SONGS,
+      next,
+      previous,
+    });
+
+    const currentDocs = result.results || [];
+    const currentIds = new Set(currentDocs.map((d) => d._id));
+
+    for (const oldId of sentIds) {
+      if (!currentIds.has(oldId)) self.removed("songs", oldId);
+    }
+
+    for (const doc of currentDocs) {
+      if (!sentIds.has(doc._id)) self.added("songs", doc._id, doc);
+      else self.changed("songs", doc._id, doc);
+    }
+
+    const pagePayload = {
+      hasNext: result.hasNext,
+      hasPrevious: result.hasPrevious,
+      nextCursor: result.next,
+      prevCursor: result.previous,
+    };
+
+    if (!paginationAdded) {
+      self.added("pagination", "songs", pagePayload);
+      paginationAdded = true;
+    } else {
+      self.changed("pagination", "songs", pagePayload);
+    }
+
+    sentIds = currentIds;
+  };
+
+  let observerHandleOrPromise = null;
+
+  (async () => {
+    await refreshPage();
+    if (stopped) return;
+
+    const {hasComplaints, skipInSurvey, q} = query || {};
+    let reactiveQuery = buildPaginationQuery({query: q, numericFields: ["trackID"], booleanFields: []});
+    if (hasComplaints) reactiveQuery["complaints.0"] = {$exists: true};
+    if (skipInSurvey) reactiveQuery.skipInSurvey = true;
+
+    observerHandleOrPromise = Songs.find(reactiveQuery, {
+      fields: {skipInSurvey: 1, complaints: 1, [INDEX_MAP.SONGS]: 1, trackID: 1, artist: 1, album: 1},
+    }).observeChanges({
+      added: scheduleRefresh,
+      changed: scheduleRefresh,
+      removed: scheduleRefresh,
+    });
+
+    self.ready();
+  })();
+
+  self.onStop(() => {
+    stopped = true;
+    if (rerunTimer) Meteor.clearTimeout(rerunTimer);
+
+    Promise.resolve(observerHandleOrPromise)
+      .then((handle) => {
+        if (handle && typeof handle.stop === "function") handle.stop();
+      })
+      .catch(() => {
+        // optional: log once
+      });
   });
-
-  const {results, hasNext, hasPrevious} = result;
-
-  results.forEach((doc) => {
-    this.added("songs", doc._id, doc);
-  });
-
-  this.added("pagination", "songs", {
-    hasNext,
-    hasPrevious,
-    nextCursor: result.next,
-    prevCursor: result.previous,
-  });
-
-  this.ready();
 });
-
-/*
-unused other ideas:
-import {check} from "meteor/check";
-import {Participants} from "../participants/collection";
-import {SurveyQuestions} from "../surveyQuestions/collection";
-
-Meteor.publish("songs.participant", async function (participantID) {
-  check(participantID, String);
-  const participant = await Participants.findOneAsync(participantID);
-  if (!participant) return;
-
-  const surveyQuestions = await SurveyQuestions.find(
-    {questionnaireID: Number(participant.questionnaireID)},
-    {sort: {questionNumber: 1}},
-  ).fetchAsync();
-
-  const trackIDs = surveyQuestions.flatMap((q) => [q.X, q.A, q.B]);
-  const uniqueTrackIDs = [...new Set(trackIDs)];
-  return Songs.find({trackID: {$in: uniqueTrackIDs}});
-});
-
-Meteor.publish("songs.surveyQuestion", async function (questionnaireID, questionNumber) {
-  const surveyQuestion = await SurveyQuestions.findOneAsync({questionnaireID, questionNumber});
-  if (!surveyQuestion) return;
-
-  const trackIDs = [surveyQuestion.X, surveyQuestion.A, surveyQuestion.B].map(Number);
-  return Songs.find({trackID: {$in: trackIDs}});
-});
-*/

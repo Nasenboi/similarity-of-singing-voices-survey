@@ -17,10 +17,12 @@
         "albumDateReleased": "Release Date",
         "artist": "Artist",
         "cluster": "Cluster",
+        "complaints": "Audio Issues",
         "filename": "File Name",
         "genre": "Genre",
         "hasComplaints": "Has Audio Issues",
         "onsets": "Onsets",
+        "skipInSurvey": "Skip in Survey",
         "song": "song",
         "trackID": "Track ID",
         "vocalContentLengthS": "Vocal Content Length (s)"
@@ -87,6 +89,10 @@
       "3D": {
         "title": "3D Graph"
       }
+    },
+    "SongInfoModal": {
+      "skipInSurveyFalse": "Use in Survey",
+      "skipInSurveyTrue": "Skip in Survey"
     },
     "SurveyPage": {
       "ComplaintForm": {

@@ -37,7 +37,7 @@ export const SONGS = {
     }).validator(),
     async run({trackID, skipInSurvey}) {
       if (this.isSimulation) return;
-      if (!isAdminUser()) return;
+      if (!(await isAdminUser(this.userId))) return;
       const result = await Songs.updateAsync({trackID}, {$set: {skipInSurvey}});
 
       await SurveyQuestions.updateAsync(

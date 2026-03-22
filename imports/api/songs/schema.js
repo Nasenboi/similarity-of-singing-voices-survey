@@ -42,7 +42,7 @@ export const songSchema = new SimpleSchema({
   UMAP3D: {type: UMAP3DSchema},
   cluster: {type: Number, optional: true},
 
-  skipInSurvey: {type: Boolean, optional: true, defaultValue: false},
+  skipInSurvey: {type: Boolean, optional: true},
   complaints: {type: Array, optional: true},
   "complaints.$": {type: compaintSchema},
 }).extend(dbMetadataSchema);

@@ -14,6 +14,7 @@ const searchFormSchema = z.object({
   artist: z.string().optional(),
   album: z.string().optional(),
   hasComplaints: z.boolean().optional(),
+  skipInSurvey: z.boolean().optional(),
 });
 
 export function SongSearchForm({onFilterChange, query}) {
@@ -25,12 +26,13 @@ export function SongSearchForm({onFilterChange, query}) {
       artist: query?.artist || "",
       album: query?.album || "",
       hasComplaints: query?.hasComplaints || false,
+      skipInSurvey: query?.skipInSurvey || false,
     },
   });
 
   const isFormEmpty = () => {
     const values = form.getValues();
-    return !values.trackID && !values.artist && !values.album && !values.hasComplaints;
+    return !values.trackID && !values.artist && !values.album && !values.hasComplaints && !values.skipInSurvey;
   };
 
   useEffect(() => {
@@ -73,6 +75,13 @@ export function SongSearchForm({onFilterChange, query}) {
                 form={form}
                 name="hasComplaints"
                 label={t("Collections.Songs.hasComplaints")}
+                type="bool"
+              />
+              <AutoField
+                className="col-span-1"
+                form={form}
+                name="skipInSurvey"
+                label={t("Collections.Songs.skipInSurvey")}
                 type="bool"
               />
               <div className="col-span-3 flex justify-end">
