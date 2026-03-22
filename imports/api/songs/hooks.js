@@ -7,8 +7,16 @@ import {Songs} from "./collection";
 
 export const useSongsSingle = (trackID) =>
   useTracker(() => {
+    if (!trackID && trackID !== 0) {
+      return {song: null, isLoading: false};
+    }
+
     const tID = Number(trackID);
-    const subscriptionHandle = Meteor.subscribe("songs.single", {tID});
+    if (isNaN(tID)) {
+      return {song: null, isLoading: false};
+    }
+
+    const subscriptionHandle = Meteor.subscribe("songs.single", {trackID: tID});
     const song = Songs.findOne({trackID: tID});
     return {
       song,

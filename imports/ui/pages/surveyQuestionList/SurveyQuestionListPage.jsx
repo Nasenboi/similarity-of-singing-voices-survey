@@ -86,7 +86,7 @@ export function SurveyQuestionListPage() {
     <div className="w-screen h-screen max-w-screen max-h-screen flex flex-col justify-center items-center">
       <div className="w-full flex flex-col justify-between items-center overflow-scroll md:overflow-hidden">
         <Dialog open={dialogOpen} onOpenChange={(open) => onDialogOpen(open)}>
-          <div className="py-24 md:max-w-300 w-full h-full">
+          <div className="py-24 md:max-w-300 size-full">
             <SurveyQuestionSearchForm onFilterChange={onFilterChange} query={query} />
             <DataTable
               columns={surveyQuestionColumns}

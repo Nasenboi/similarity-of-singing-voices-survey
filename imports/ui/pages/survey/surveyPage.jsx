@@ -203,7 +203,7 @@ export function SurveyPage() {
                 transition={{duration: 0.3}}
                 className="w-full"
               >
-                <div className="w-full h-full flex justify-center items-center">
+                <div className="size-full flex justify-center items-center">
                   <SurveyCard
                     question={surveyQuestions?.find((q) => q.questionNumber === currentPage)}
                     setSurveyAnswer={setSurveyAnswer}
@@ -212,7 +212,7 @@ export function SurveyPage() {
                 </div>
               </motion.div>
             ) : (
-              <div className="w-full h-full flex justify-center items-center">
+              <div className="size-full flex justify-center items-center">
                 <Spinner className="w-40 h-40" />
               </div>
             )}

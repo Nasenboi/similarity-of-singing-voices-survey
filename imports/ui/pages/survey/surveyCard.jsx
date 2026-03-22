@@ -55,11 +55,11 @@ export function SurveyCard({question, setSurveyAnswer, isSubmitted = false}) {
         </h1>
       </div>
       <div className="flex justify-center flex-col md:flex-row">
-        <div className="p-4 w-full h-full flex flex-row md:flex-col justify-center items-center">
-          <h1 className="md:mb-8 w-full h-full md:text-4xl text-xl font-bold underline text-center">
+        <div className="p-4 size-full flex flex-row md:flex-col justify-center items-center">
+          <h1 className="md:mb-8 size-full md:text-4xl text-xl font-bold underline text-center">
             {t("SurveyPage.targetVoice")}
           </h1>
-          <div className="w-full h-full flex justify-center">
+          <div className="size-full flex justify-center">
             <Button onClick={() => onVoiceClick(question["X"], "X")}>
               <p className="text-bold md:text-4xl text-center">{t("SurveyPage.voice")} X</p>
             </Button>

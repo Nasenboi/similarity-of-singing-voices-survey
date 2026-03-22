@@ -79,6 +79,14 @@
       "skipSilence": "Stille Überspringen",
       "theme": "Farben"
     },
+    "SimilarityPlot": {
+      "2D": {
+        "title": "2D Plot"
+      },
+      "3D": {
+        "title": "3D Plot"
+      }
+    },
     "SurveyPage": {
       "and": "und",
       "areMoreSimilar": "sind sich ähnlicher",

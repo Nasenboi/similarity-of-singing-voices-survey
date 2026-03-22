@@ -79,6 +79,14 @@
       "skipSilence": "Skip Silence",
       "theme": "Theme"
     },
+    "SimilarityPlot": {
+      "2D": {
+        "title": "2D Graph"
+      },
+      "3D": {
+        "title": "3D Graph"
+      }
+    },
     "SurveyPage": {
       "and": "and",
       "areMoreSimilar": "are more similar",

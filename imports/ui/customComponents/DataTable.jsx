@@ -8,7 +8,7 @@ export function DataTable({columns, data, onNext, onPrevious, hasNext, hasPrevio
 
   return (
     <div>
-      <div className="w-full h-full p-4 overflow-hidden rounded-md border">
+      <div className="size-full p-4 overflow-hidden rounded-md border">
         <Table>
           <TableHeader>
             <TableRow>

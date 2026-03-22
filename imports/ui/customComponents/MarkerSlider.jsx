@@ -22,7 +22,7 @@ export function MarkerSlider({className, duration, markerPoints, onValueChange, 
   };
 
   return (
-    <div className={`relative ${className} w-full h-full flex items-center justify-center`}>
+    <div className={`relative ${className} size-full flex items-center justify-center`}>
       <Slider onValueChange={onValueChange} {...sliderProps} />
 
       {markerPoints?.map((m, i) => {

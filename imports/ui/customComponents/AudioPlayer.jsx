@@ -145,7 +145,7 @@ export function AudioPlayer() {
               </PopoverContent>
             </Popover>
 
-            <div className="w-full h-full flex justify-center items-center">
+            <div className="size-full flex justify-center items-center">
               <MarkerSlider
                 value={[progress]}
                 duration={audioRef.current?.duration}
