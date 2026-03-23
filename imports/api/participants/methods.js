@@ -1,5 +1,6 @@
 import {ValidatedMethod} from "meteor/mdg:validated-method";
 import {getNextQuestionnaireID} from "../surveyQuestions/helpers";
+import {toCSV} from "../utils";
 import {Participants} from "./collection";
 
 export const PARTICIPANTS = {
@@ -14,6 +15,17 @@ export const PARTICIPANTS = {
       });
 
       return itemID;
+    },
+  }),
+  downloadCSV: new ValidatedMethod({
+    name: "participants.downloadCSV",
+    validate: new SimpleSchema({}).validator(),
+    async run() {
+      if (this.isSimulation) return;
+      if (!(await isAdminUser(this.userId))) return;
+      const participants = await Participants.find({}).fetch();
+      const csv = toCSV(participants);
+      return csv;
     },
   }),
 };

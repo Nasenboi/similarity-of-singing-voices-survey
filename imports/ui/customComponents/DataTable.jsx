@@ -3,7 +3,7 @@ import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/c
 import React from "react";
 import {useTranslation} from "react-i18next";
 
-export function DataTable({columns, data, onNext, onPrevious, hasNext, hasPrevious, onRowCLick, setRowColor}) {
+export function DataTable({columns, data, onNext, onPrevious, hasNext, hasPrevious, onRowCLick, setRowColor, DownloadBtn}) {
   const {t} = useTranslation();
 
   return (
@@ -46,6 +46,7 @@ export function DataTable({columns, data, onNext, onPrevious, hasNext, hasPrevio
         <Button variant="outline" size="sm" onClick={onPrevious} disabled={!hasPrevious}>
           {t("Common.previous")}
         </Button>
+        <DownloadBtn />
         <Button variant="outline" size="sm" onClick={onNext} disabled={!hasNext}>
           {t("Common.next")}
         </Button>

@@ -1,12 +1,14 @@
 import {Dialog} from "@/components/ui/dialog";
 import {Spinner} from "@/components/ui/spinner";
 import {useSurveyAnswersPaginated} from "@/imports/api/surveyAnswers/hooks";
+import {SURVEY_ANSWERS} from "@/imports/api/surveyAnswers/methods";
 import {useIsLoggedIn} from "@/imports/api/users/hooks";
 import React, {useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
 import {AudioPlayer} from "../../customComponents/AudioPlayer";
 import {DataTable} from "../../customComponents/DataTable";
+import {DownloadButton} from "../../customComponents/DownLoadButton";
 import {SurveyAnswerInfoModal} from "./SurveyAnswerInfoModal";
 import {SurveyAnswerSearchForm} from "./SurveyAnswerSearchForm";
 
@@ -100,6 +102,7 @@ export function SurveyAnswerListPage() {
               hasNext={pageInfo?.hasNext}
               hasPrevious={pageInfo?.hasPrevious}
               onRowCLick={onRowClick}
+              DownloadBtn={<DownloadButton filename="surveyAnswers.csv" method={SURVEY_ANSWERS.downloadCSV.callAsync} />}
             />
           </div>
           <div className="w-full h-24" />

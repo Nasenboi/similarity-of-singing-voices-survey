@@ -1,12 +1,14 @@
 import {Dialog} from "@/components/ui/dialog";
 import {Spinner} from "@/components/ui/spinner";
 import {useParticipantsPaginated} from "@/imports/api/participants/hooks";
+import {PARTICIPANTS} from "@/imports/api/participants/methods";
 import {useIsLoggedIn} from "@/imports/api/users/hooks";
 import React, {useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
 import {AudioPlayer} from "../../customComponents/AudioPlayer";
 import {DataTable} from "../../customComponents/DataTable";
+import {DownloadButton} from "../../customComponents/DownLoadButton";
 import {ParticipantInfoModal} from "./ParticipantInfoModal";
 import {ParticipantSearchForm} from "./ParticipantSearchForm";
 
@@ -111,6 +113,7 @@ export function ParticipantListPage() {
               hasPrevious={pageInfo?.hasPrevious}
               onRowCLick={onRowClick}
               setRowColor={setRowColor}
+              DownloadBtn={<DownloadButton filename="participants.csv" method={PARTICIPANTS.downloadCSV.callAsync} />}
             />
           </div>
           <div className="w-full h-24" />

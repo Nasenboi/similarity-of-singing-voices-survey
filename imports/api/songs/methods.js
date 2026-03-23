@@ -3,8 +3,10 @@ import SimpleSchema from "simpl-schema";
 import {Participants} from "../participants/collection";
 import {SurveyQuestions} from "../surveyQuestions/collection";
 import {isAdminUser} from "../users/helpers";
+import {toCSV} from "../utils";
 import {Songs} from "./collection";
 import {compaintSchema} from "./schema";
+import {transformSongToCSVRow} from "./utils";
 
 export const SONGS = {
   addComplaint: new ValidatedMethod({
@@ -49,6 +51,19 @@ export const SONGS = {
       );
 
       return result;
+    },
+  }),
+  downloadCSV: new ValidatedMethod({
+    name: "songs.downloadCSV",
+    validate: new SimpleSchema({}).validator(),
+
+    async run() {
+      if (this.isSimulation) return;
+      if (!(await isAdminUser(this.userId))) return;
+      const songs = await Songs.find({}).fetch();
+      const transformed = songs.map(transformSongToCSVRow);
+      const csv = toCSV(transformed);
+      return csv;
     },
   }),
 };

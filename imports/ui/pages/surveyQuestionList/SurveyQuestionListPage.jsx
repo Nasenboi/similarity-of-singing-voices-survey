@@ -1,12 +1,14 @@
 import {Dialog} from "@/components/ui/dialog";
 import {Spinner} from "@/components/ui/spinner";
 import {useSurveyQuestionsPaginated} from "@/imports/api/surveyQuestions/hooks";
+import {SURVEY_QUESTIONS} from "@/imports/api/surveyQuestions/methods";
 import {useIsLoggedIn} from "@/imports/api/users/hooks";
 import React, {useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
 import {AudioPlayer} from "../../customComponents/AudioPlayer";
 import {DataTable} from "../../customComponents/DataTable";
+import {DownloadButton} from "../../customComponents/DownLoadButton";
 import {SurveyQuestionInfoModal} from "./SurveyQuestionInfoModal";
 import {SurveyQuestionSearchForm} from "./SurveyQuestionSearchForm";
 
@@ -103,6 +105,7 @@ export function SurveyQuestionListPage() {
               hasPrevious={pageInfo?.hasPrevious}
               onRowCLick={onRowClick}
               setRowColor={setRowColor}
+              DownloadBtn={<DownloadButton filename="surveyQuestions.csv" method={SURVEY_QUESTIONS.downloadCSV.callAsync} />}
             />
           </div>
           <div className="w-full h-24" />

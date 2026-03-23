@@ -2,8 +2,10 @@ import {ValidatedMethod} from "meteor/mdg:validated-method";
 import SimpleSchema from "simpl-schema";
 import {Participants} from "../participants/collection";
 import {SurveyQuestions} from "../surveyQuestions/collection";
+import {toCSV} from "../utils";
 import {SurveyAnswers} from "./collection";
 import {surveyAnswersSchema} from "./schema";
+import {transformSurveyAnswerToCSVRow} from "./utils";
 
 export const SURVEY_ANSWERS = {
   setAnswer: new ValidatedMethod({
@@ -34,7 +36,10 @@ export const SURVEY_ANSWERS = {
 
       // set surveyCompleted
       const countSurveyAnswers = await SurveyAnswers.find({participantID: surveyAnswer.participantID}).countAsync();
-      const countQuestions = await SurveyQuestions.find({questionnaireID: participant.questionnaireID}).countAsync();
+      const countQuestions = await SurveyQuestions.find({
+        questionnaireID: participant.questionnaireID,
+        skip: false,
+      }).countAsync();
       if (countQuestions === countSurveyAnswers && !participant.surveyCompleted) {
         await Participants.updateAsync(surveyAnswer.participantID, {
           $set: {
@@ -44,6 +49,18 @@ export const SURVEY_ANSWERS = {
       }
 
       return result;
+    },
+  }),
+  downloadCSV: new ValidatedMethod({
+    name: "surveyAnswers.downloadCSV",
+    validate: new SimpleSchema({}).validator(),
+    async run() {
+      if (this.isSimulation) return;
+      if (!(await isAdminUser(this.userId))) return;
+      const surveyAnswers = await SurveyAnswers.find({}).fetch();
+      const transformed = surveyAnswers.map(transformSurveyAnswerToCSVRow);
+      const csv = toCSV(transformed);
+      return csv;
     },
   }),
 };

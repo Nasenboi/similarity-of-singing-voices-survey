@@ -1,6 +1,7 @@
 import {Dialog} from "@/components/ui/dialog";
 import {Spinner} from "@/components/ui/spinner";
 import {useSongsPaginated} from "@/imports/api/songs/hooks";
+import {SONGS} from "@/imports/api/songs/methods";
 import {useIsLoggedIn} from "@/imports/api/users/hooks";
 import React, {useState} from "react";
 import {useTranslation} from "react-i18next";
@@ -8,6 +9,7 @@ import {useNavigate} from "react-router-dom";
 import {useAudioContext} from "../../contextProvider/AudioContext";
 import {AudioPlayer} from "../../customComponents/AudioPlayer";
 import {DataTable} from "../../customComponents/DataTable";
+import {DownloadButton} from "../../customComponents/DownLoadButton";
 import {SongInfoModal} from "./SongInfoModal";
 import {SongSearchForm} from "./SongSearchForm";
 
@@ -110,6 +112,7 @@ export function SongListPage() {
               hasPrevious={pageInfo?.hasPrevious}
               onRowCLick={onRowClick}
               setRowColor={setRowColor}
+              DownloadBtn={<DownloadButton filename="songs.csv" method={SONGS.downloadCSV.callAsync} />}
             />
           </div>
           <div className="w-full h-24" />

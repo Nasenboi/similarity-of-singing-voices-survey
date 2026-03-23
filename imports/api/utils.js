@@ -82,3 +82,19 @@ export function buildPaginationQuery({query, numericFields, booleanFields}) {
 
   return newQuery;
 }
+
+export function toCSV(data) {
+  if (!data.length) return "";
+
+  const headers = Object.keys(data[0]);
+
+  const escape = (value) => {
+    if (value === null || value === undefined) return "";
+    const str = String(value).replace(/"/g, '""');
+    return `"${str}"`;
+  };
+
+  const rows = data.map((row) => headers.map((field) => escape(row[field])).join(","));
+
+  return [headers.join(","), ...rows].join("\n");
+}
