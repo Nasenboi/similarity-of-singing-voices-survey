@@ -12,6 +12,7 @@ import {AutoField} from "../../customComponents/AutoField";
 const searchFormSchema = z.object({
   questionnaireID: z.string().optional(),
   questionNumber: z.string().optional(),
+  skip: z.boolean().optional(),
 });
 
 export function SurveyQuestionSearchForm({onFilterChange, query}) {
@@ -21,12 +22,13 @@ export function SurveyQuestionSearchForm({onFilterChange, query}) {
     defaultValues: {
       questionnaireID: query?.questionnaireID || "",
       questionNumber: query?.questionNumber || "",
+      skip: query?.skip || false,
     },
   });
 
   const isFormEmpty = () => {
     const values = form.getValues();
-    return !values.questionnaireID && !values.questionNumber;
+    return !values.questionnaireID && !values.questionNumber && !values.skip;
   };
 
   useEffect(() => {
@@ -62,6 +64,13 @@ export function SurveyQuestionSearchForm({onFilterChange, query}) {
                 name="questionNumber"
                 label={t("Collections.SurveyQuestions.questionNumber")}
                 type="input"
+              />
+              <AutoField
+                className="col-span-1"
+                form={form}
+                name="skip"
+                label={t("Collections.SurveyQuestions.skip")}
+                type="boolean"
               />
               <div className="col-span-3 flex justify-end">
                 <Button type="submit">{t("Common.submit")}</Button>

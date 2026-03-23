@@ -39,7 +39,8 @@
         "X": "X",
         "question": "Frage",
         "questionNumber": "Frage",
-        "questionnaireID": "Umfrage ID"
+        "questionnaireID": "Umfrage ID",
+        "skip": "Übersprungen"
       },
       "metadata": "Metadaten",
       "participants": "Teilnehmer",

@@ -39,7 +39,8 @@
         "X": "X",
         "question": "Question",
         "questionNumber": "Question Number",
-        "questionnaireID": "Questionnaire ID"
+        "questionnaireID": "Questionnaire ID",
+        "skip": "Skipped"
       },
       "metadata": "Metadata",
       "participants": "Participants",

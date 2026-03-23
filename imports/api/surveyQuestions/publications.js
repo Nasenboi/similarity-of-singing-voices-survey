@@ -29,7 +29,10 @@ Meteor.publish("surveyQuestions.paginated", async function ({query, next, previo
 
   const numericFields = ["questionnaireID", "questionNumber"];
   const booleanFields = [];
-  const newQuery = buildPaginationQuery({query, numericFields, booleanFields});
+  const {skip, q} = query || {};
+  let newQuery = buildPaginationQuery({query: q, numericFields, booleanFields});
+
+  if (skip) newQuery["skip"] = true;
 
   const result = await findPagination(SurveyQuestions.rawCollection(), {
     query: newQuery,

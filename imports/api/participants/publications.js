@@ -16,8 +16,10 @@ Meteor.publish("participants.paginated", async function ({query, next, previous}
   if (!(await isAdminUser(this.userId))) return this.ready();
 
   const numericFields = [];
-  const booleanFields = ["surveyCompleted"];
-  const newQuery = buildPaginationQuery({query, numericFields, booleanFields});
+  const booleanFields = [];
+  const {surveyCompleted, q} = query;
+  let newQuery = buildPaginationQuery({query: q, numericFields, booleanFields});
+  if (surveyCompleted) newQuery["surveyCompleted"] = true;
 
   const result = await findPagination(Participants.rawCollection(), {
     query: newQuery,

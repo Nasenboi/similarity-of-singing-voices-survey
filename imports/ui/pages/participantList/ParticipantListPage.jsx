@@ -73,6 +73,12 @@ export function ParticipantListPage() {
     setDialogOpen(true);
   };
 
+  const setRowColor = (row) => {
+    if (row.surveyCompleted) {
+      return "border-green-500";
+    }
+  };
+
   const onDialogOpen = (open) => {
     setDialogOpen(open);
   };
@@ -104,6 +110,7 @@ export function ParticipantListPage() {
               hasNext={pageInfo?.hasNext}
               hasPrevious={pageInfo?.hasPrevious}
               onRowCLick={onRowClick}
+              setRowColor={setRowColor}
             />
           </div>
           <div className="w-full h-24" />
