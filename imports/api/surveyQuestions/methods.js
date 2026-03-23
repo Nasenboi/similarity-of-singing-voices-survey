@@ -1,5 +1,5 @@
 import {ValidatedMethod} from "meteor/mdg:validated-method";
-import {default as SimpleSchema, default as SimpleSchema} from "simpl-schema";
+import SimpleSchema from "simpl-schema";
 import {toCSV} from "../utils";
 import {SurveyQuestions} from "./collection";
 
