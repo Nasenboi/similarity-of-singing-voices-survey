@@ -80,7 +80,7 @@ export function SongInfoModal({trackID}) {
         skipInSurvey: !song.skipInSurvey,
       });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

@@ -8,7 +8,6 @@ import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
 import {AudioPlayer} from "../../customComponents/AudioPlayer";
 import {DataTable} from "../../customComponents/DataTable";
-import {DownloadButton} from "../../customComponents/DownLoadButton";
 import {ParticipantInfoModal} from "./ParticipantInfoModal";
 import {ParticipantSearchForm} from "./ParticipantSearchForm";
 
@@ -113,7 +112,8 @@ export function ParticipantListPage() {
               hasPrevious={pageInfo?.hasPrevious}
               onRowCLick={onRowClick}
               setRowColor={setRowColor}
-              DownloadBtn={<DownloadButton filename="participants.csv" method={PARTICIPANTS.downloadCSV.callAsync} />}
+              downloadFilename="participants.csv"
+              downloadMethod={PARTICIPANTS.downloadCSV}
             />
           </div>
           <div className="w-full h-24" />

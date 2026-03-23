@@ -2,8 +2,20 @@ import {Button} from "@/components/ui/button";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
 import React from "react";
 import {useTranslation} from "react-i18next";
+import {DownloadButton} from "./DownLoadButton";
 
-export function DataTable({columns, data, onNext, onPrevious, hasNext, hasPrevious, onRowCLick, setRowColor, DownloadBtn}) {
+export function DataTable({
+  columns,
+  data,
+  onNext,
+  onPrevious,
+  hasNext,
+  hasPrevious,
+  onRowCLick,
+  setRowColor,
+  downloadMethod,
+  downloadFilename,
+}) {
   const {t} = useTranslation();
 
   return (
@@ -21,7 +33,6 @@ export function DataTable({columns, data, onNext, onPrevious, hasNext, hasPrevio
             {data.length ? (
               data.map((row) => {
                 const rowColor = setRowColor?.(row);
-                console.log(rowColor);
                 return (
                   <TableRow key={row._id} onClick={() => onRowCLick(row)}>
                     {columns.map((c) => (
@@ -46,7 +57,7 @@ export function DataTable({columns, data, onNext, onPrevious, hasNext, hasPrevio
         <Button variant="outline" size="sm" onClick={onPrevious} disabled={!hasPrevious}>
           {t("Common.previous")}
         </Button>
-        <DownloadBtn />
+        {downloadFilename && <DownloadButton downloadFilename={downloadFilename} downloadMethod={downloadMethod} />}
         <Button variant="outline" size="sm" onClick={onNext} disabled={!hasNext}>
           {t("Common.next")}
         </Button>

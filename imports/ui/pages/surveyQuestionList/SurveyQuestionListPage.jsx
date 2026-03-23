@@ -105,7 +105,8 @@ export function SurveyQuestionListPage() {
               hasPrevious={pageInfo?.hasPrevious}
               onRowCLick={onRowClick}
               setRowColor={setRowColor}
-              DownloadBtn={<DownloadButton filename="surveyQuestions.csv" method={SURVEY_QUESTIONS.downloadCSV.callAsync} />}
+              downloadFilename="surveyQuestions.csv"
+              downloadMethod={SURVEY_QUESTIONS.downloadCSV}
             />
           </div>
           <div className="w-full h-24" />

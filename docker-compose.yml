@@ -1,28 +1,4 @@
 services:
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "80:${PORT:-3000}"
-    depends_on:
-      - mongo
-      - fileserver
-    environment:
-      ROOT_URL: ${APP_ROOT_URL:-http://localhost}
-      MONGO_URL: mongodb://mongo:27017/meteor
-      PORT: ${PORT:-3000}
-      ADMIN_USERNAME: ${ADMIN_USERNAME:-admin}
-      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-admin}
-      METEOR_SETTINGS: '{"private":{"ADMIN_USER":{"password":"${ADMIN_PASSWORD}","username":"${ADMIN_USERNAME}"}}}'
-
-  mongo:
-    image: mongo:latest
-    command:
-      - --storageEngine=wiredTiger
-    volumes:
-      - ${MONGO_PATH}:/data/db
-
   fileserver:
     image: nginx:alpine
     ports:

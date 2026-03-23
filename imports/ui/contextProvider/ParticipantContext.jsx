@@ -16,8 +16,8 @@ export const ParticipantProvider = ({children}) => {
           const newID = await PARTICIPANTS.newParticipant.callAsync();
           cookies.set("participantID", newID);
           setParticipantID(newID);
-        } catch (err) {
-          console.error(err);
+        } catch (error) {
+          console.error(error);
         }
       }
     }
@@ -31,8 +31,8 @@ export const ParticipantProvider = ({children}) => {
           const newID = await PARTICIPANTS.newParticipant.callAsync();
           cookies.set("participantID", newID);
           setParticipantID(newID);
-        } catch (err) {
-          console.error(err);
+        } catch (error) {
+          console.error(error);
         }
       }
     }

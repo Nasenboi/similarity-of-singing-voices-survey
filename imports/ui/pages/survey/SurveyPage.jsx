@@ -95,8 +95,8 @@ export function SurveyPage() {
       if (currentPage + 1 < numQuestions) {
         setCurrentPage(currentPage + 1);
       }
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      console.error(error);
     }
   };
 

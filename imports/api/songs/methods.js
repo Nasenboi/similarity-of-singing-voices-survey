@@ -55,8 +55,7 @@ export const SONGS = {
   }),
   downloadCSV: new ValidatedMethod({
     name: "songs.downloadCSV",
-    validate: new SimpleSchema({}).validator(),
-
+    validate: null,
     async run() {
       if (this.isSimulation) return;
       if (!(await isAdminUser(this.userId))) return;

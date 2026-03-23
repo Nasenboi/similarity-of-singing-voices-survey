@@ -112,7 +112,8 @@ export function SongListPage() {
               hasPrevious={pageInfo?.hasPrevious}
               onRowCLick={onRowClick}
               setRowColor={setRowColor}
-              DownloadBtn={<DownloadButton filename="songs.csv" method={SONGS.downloadCSV.callAsync} />}
+              downloadFilename="songs.csv"
+              downloadMethod={SONGS.downloadCSV}
             />
           </div>
           <div className="w-full h-24" />

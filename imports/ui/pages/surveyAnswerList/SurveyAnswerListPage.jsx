@@ -102,7 +102,8 @@ export function SurveyAnswerListPage() {
               hasNext={pageInfo?.hasNext}
               hasPrevious={pageInfo?.hasPrevious}
               onRowCLick={onRowClick}
-              DownloadBtn={<DownloadButton filename="surveyAnswers.csv" method={SURVEY_ANSWERS.downloadCSV.callAsync} />}
+              downloadFilename="surveyAnswers.csv"
+              downloadMethod={SURVEY_ANSWERS.downloadCSV}
             />
           </div>
           <div className="w-full h-24" />
