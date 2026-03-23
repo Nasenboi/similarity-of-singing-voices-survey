@@ -1,5 +1,6 @@
 import {ValidatedMethod} from "meteor/mdg:validated-method";
 import {getNextQuestionnaireID} from "../surveyQuestions/helpers";
+import {isAdminUser} from "../users/helpers";
 import {toCSV} from "../utils";
 import {Participants} from "./collection";
 

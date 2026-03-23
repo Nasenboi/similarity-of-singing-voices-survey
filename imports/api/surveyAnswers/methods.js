@@ -1,7 +1,7 @@
 import {ValidatedMethod} from "meteor/mdg:validated-method";
-import SimpleSchema from "simpl-schema";
 import {Participants} from "../participants/collection";
 import {SurveyQuestions} from "../surveyQuestions/collection";
+import {isAdminUser} from "../users/helpers";
 import {toCSV} from "../utils";
 import {SurveyAnswers} from "./collection";
 import {surveyAnswersSchema} from "./schema";
@@ -53,7 +53,7 @@ export const SURVEY_ANSWERS = {
   }),
   downloadCSV: new ValidatedMethod({
     name: "surveyAnswers.downloadCSV",
-    validate: new SimpleSchema({}).validator(),
+    validate: null,
     async run() {
       if (this.isSimulation) return;
       if (!(await isAdminUser(this.userId))) return;
