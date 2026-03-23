@@ -1,7 +1,7 @@
 import {Button} from "@/components/ui/button";
 import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
 import {useSongsSingle} from "@/imports/api/songs/hooks";
-import {FILE_SERVER_URL, SONG_FILE_PATH, VOCAL_FILE_PATH} from "@/imports/common/globals";
+import {SONG_FILE_PATH, VOCAL_FILE_PATH} from "@/imports/common/globals";
 import {Slider} from "@/imports/ui/customComponents/slider";
 import {Pause, Play, Volume, Volume1, Volume2, VolumeOff} from "lucide-react";
 import React, {useEffect, useRef, useState} from "react";
@@ -28,9 +28,9 @@ export function AudioPlayer() {
         return;
       }
       if (useBackgroundMusic) {
-        return `${FILE_SERVER_URL}${SONG_FILE_PATH}${song.songSubPath}`;
+        return `${Meteor.settings.public.FILE_SERVER_URL}${SONG_FILE_PATH}${song.songSubPath}`;
       } else {
-        return `${FILE_SERVER_URL}${VOCAL_FILE_PATH}${song.vocalSubPath}`;
+        return `${Meteor.settings.public.FILE_SERVER_URL}${VOCAL_FILE_PATH}${song.vocalSubPath}`;
       }
     };
     const url = getURL();

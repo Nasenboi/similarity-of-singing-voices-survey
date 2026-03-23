@@ -7,6 +7,7 @@ import {initIndexes} from "./initIndexes";
 import {initQuestionnaire} from "./initQuestionnaire";
 import {initSongs} from "./initSongs";
 import {resetDB} from "./resetDB";
+import {waitForFiles} from "./waitForFiles";
 
 /**
  * Call the initServer function on startup
@@ -26,20 +27,25 @@ async function initServer() {
   initSimpleSchema();
   Log.info("init simpleSchema finished");
 
-  await resetDB();
-  Log.info("DB reset finished");
+  await waitForFiles();
+  Log.info("file server ready");
 
-  await initAdminUser();
-  Log.info("init admin user finished");
+  if (Meteor.settings.private.reset) {
+    await resetDB();
+    Log.info("DB reset finished");
 
-  await initSongs();
-  Log.info("init songs finished");
+    await initAdminUser();
+    Log.info("init admin user finished");
 
-  await initQuestionnaire();
-  Log.info("init questionnaire finished");
+    await initSongs();
+    Log.info("init songs finished");
 
-  await initIndexes();
-  Log.info("init idndexes finished");
+    await initQuestionnaire();
+    Log.info("init questionnaire finished");
+
+    await initIndexes();
+    Log.info("init idndexes finished");
+  }
 }
 
 /**

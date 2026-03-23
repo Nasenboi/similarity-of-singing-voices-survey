@@ -1,0 +1,6 @@
+.mongo
+.vscode
+.env
+settings.json
+README.md
+.meteor/local

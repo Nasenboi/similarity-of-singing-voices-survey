@@ -1,5 +1,44 @@
 services:
+  app:
+    container_name: similarity-of-singing-voices-survey-app-1
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+    environment:
+      ROOT_URL: ${APP_ROOT_URL:-http://localhost}
+      MONGO_URL: mongodb://mongo:27017/meteor
+      PORT: 3000
+      METEOR_SETTINGS: >
+        {
+          "private": {
+            "ADMIN_USER": {
+              "username": "${ADMIN_USERNAME:-admin}",
+              "password": "${ADMIN_PASSWORD:-admin}"
+            },
+            "reset": true,
+            "FILE_SERVER_URL": "http://fileserver/"
+          },
+          "public" : {
+            "FILE_SERVER_URL": "http://localhost:3003/"
+          }
+        }
+
+  mongo:
+    container_name: similarity-of-singing-voices-survey-mongo-1
+    image: mongo:7.0
+    ports:
+      - 27017:27017
+    command:
+      - --storageEngine=wiredTiger
+    volumes:
+      - ${MONGO_PATH}:/data/db
+
   fileserver:
+    container_name: similarity-of-singing-voices-survey-fileserver-1
     image: nginx:alpine
     ports:
       - "3003:80"

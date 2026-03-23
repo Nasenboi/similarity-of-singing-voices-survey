@@ -1,13 +1,6 @@
 import {SurveyQuestions} from "@/imports/api/surveyQuestions/collection";
-import {
-  DATASET_FILE_PATH,
-  FILE_SERVER_URL,
-  NUM_QUESTIONNAIRES,
-  NUM_QUESTIONS_PER_SURVEY,
-  SONG_FILE_PATH,
-  TRIPLETS_FILE_PATH,
-  VOCAL_FILE_PATH,
-} from "@/imports/common/globals";
+import {NUM_QUESTIONNAIRES, NUM_QUESTIONS_PER_SURVEY, TRIPLETS_FILE_PATH} from "@/imports/common/globals";
+import {Log} from "meteor/logging";
 import ndarray from "ndarray";
 import {fromArrayBuffer} from "numpy-parser";
 
@@ -99,7 +92,7 @@ function generateQuestionnaires(args) {
 }
 
 export async function initQuestionnaire() {
-  const tripletURL = `${FILE_SERVER_URL}/${TRIPLETS_FILE_PATH}`;
+  const tripletURL = `${Meteor.settings.private.FILE_SERVER_URL}${TRIPLETS_FILE_PATH}`;
 
   try {
     // Fetch triplets.npy
@@ -116,6 +109,7 @@ export async function initQuestionnaire() {
       await SurveyQuestions.insertAsync(q);
     });
   } catch (error) {
-    console.error(error);
+    Log.error(error);
+    Log.info(tripletURL);
   }
 }

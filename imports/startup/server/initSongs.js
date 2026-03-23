@@ -1,5 +1,6 @@
 import {Songs} from "@/imports/api/songs/collection";
-import {DATASET_FILE_PATH, FILE_SERVER_URL} from "@/imports/common/globals";
+import {DATASET_FILE_PATH} from "@/imports/common/globals";
+import {Log} from "meteor/logging";
 import Papa from "papaparse";
 
 function parseOnsets(onsets) {
@@ -41,7 +42,7 @@ function convertToSongSchema(audio) {
 }
 
 export async function initSongs() {
-  const datasetURL = `${FILE_SERVER_URL}/${DATASET_FILE_PATH}`;
+  const datasetURL = `${Meteor.settings.private.FILE_SERVER_URL}${DATASET_FILE_PATH}`;
 
   try {
     const datasetResponse = await fetch(datasetURL);
@@ -56,6 +57,7 @@ export async function initSongs() {
       await Songs.insertAsync(convertToSongSchema(s));
     });
   } catch (error) {
-    console.error(error);
+    Log.error(error);
+    Log.info(datasetURL);
   }
 }
