@@ -26,7 +26,7 @@ export function NavigationArea() {
           <SidebarMenuItem>
             <SidebarMenuButton onClick={() => navigate("/")}>{t("Sidebar.Navigation.home")}</SidebarMenuButton>
             <SidebarMenuButton onClick={() => navigate("/survey")}>{t("Sidebar.Navigation.survey")}</SidebarMenuButton>
-            {useIsAdminOrCompleted && (
+            {isAdminOrCompleted && (
               <SidebarMenuButton onClick={() => navigate("/plot")}>
                 {t("Sidebar.Navigation.similarityPlot")}
               </SidebarMenuButton>
