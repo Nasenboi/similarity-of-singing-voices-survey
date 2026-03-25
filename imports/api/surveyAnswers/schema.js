@@ -15,12 +15,3 @@ export const surveyAnswersSchema = new SimpleSchema({
   },
   "answer.$": {type: String, allowedValues: ["A", "B"]},
 }).extend(dbMetadataSchema);
-
-SimpleSchema.setDefaultMessages({
-  messages: {
-    en: {
-      mustBeExactlyTwo: "Answer array must contain exactly 2 items",
-      mustContainAB: "Answer array must contain each 'A' and 'B' once",
-    },
-  },
-});
