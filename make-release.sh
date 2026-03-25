@@ -36,6 +36,9 @@ git merge --no-ff -m "merge release branch" "$releaseBranch"
 # create tag for new version from -main
 git tag "$versionLabel"
 
+# push tag to origin
+git push origin "$versionLabel"
+
 # merge main back into develop
 git checkout $devBranch
 git merge --no-ff -m "merge main back into develop" $mainBranch
