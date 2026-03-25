@@ -1,4 +1,4 @@
-import {NUM_QUESTIONS_PER_SURVEY} from "@/imports/common/globals";
+import {NUM_QUESTIONS_PER_SURVEY} from "@/imports/common/config";
 import {Participants} from "../participants/collection";
 import {SurveyQuestions} from "./collection";
 

@@ -1,6 +1,7 @@
 import {Button} from "@/components/ui/button";
 import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
 import {useSongsSingle} from "@/imports/api/songs/hooks";
+import {INITIAL_VOLUME} from "@/imports/common/config";
 import {SONG_FILE_PATH, VOCAL_FILE_PATH} from "@/imports/common/globals";
 import {Slider} from "@/imports/ui/customComponents/slider";
 import {Pause, Play, Volume, Volume1, Volume2, VolumeOff} from "lucide-react";
@@ -12,7 +13,7 @@ import {MarkerSlider} from "./MarkerSlider";
 export function AudioPlayer() {
   const {trackID, icon, isPlaying, setIsPlaying, useBackgroundMusic, jumpToFirstOnset} = useAudioContext();
   const [progress, setProgress] = useState(0);
-  const [volume, setVolume] = useState(getCookieSave("audioPlayerVolume", 1));
+  const [volume, setVolume] = useState(getCookieSave("audioPlayerVolume", INITIAL_VOLUME));
   const audioRef = useRef(null);
   const {song, isLoading: isSongLoading} = useSongsSingle(trackID);
 

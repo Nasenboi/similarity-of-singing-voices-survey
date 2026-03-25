@@ -1,7 +1,7 @@
 import {check} from "meteor/check";
 import {Meteor} from "meteor/meteor";
 import {find as findPagination} from "mongo-cursor-pagination";
-import {INDEX_MAP, ITEMS_PER_PAGE} from "../../common/globals";
+import {INDEX_MAP, ITEMS_PER_PAGE} from "../../common/config";
 import {isAdminUser} from "../users/helpers";
 import {buildPaginationQuery} from "../utils";
 import {SurveyAnswers} from "./collection";

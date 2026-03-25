@@ -1,5 +1,6 @@
 import {SurveyQuestions} from "@/imports/api/surveyQuestions/collection";
-import {NUM_QUESTIONNAIRES, NUM_QUESTIONS_PER_SURVEY, TRIPLETS_FILE_PATH} from "@/imports/common/globals";
+import {NUM_QUESTIONNAIRES, NUM_QUESTIONS_PER_SURVEY} from "@/imports/common/config";
+import {TRIPLETS_FILE_PATH} from "@/imports/common/globals";
 import {Log} from "meteor/logging";
 import ndarray from "ndarray";
 import {fromArrayBuffer} from "numpy-parser";
