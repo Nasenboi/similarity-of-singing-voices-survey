@@ -77,6 +77,12 @@
         "similarityPlot": "Similarity Plot",
         "survey": "Survey"
       },
+      "Theme": {
+        "dark": "Dark",
+        "light": "Light",
+        "system": "System",
+        "toggle": "Toggle Theme"
+      },
       "backgroundMusic": "Instruments",
       "language": "Lanugage",
       "settings": "Settings",

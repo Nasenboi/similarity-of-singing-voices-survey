@@ -77,11 +77,17 @@
         "similarityPlot": "Ähnlichkeitsgraph",
         "survey": "Umfrage"
       },
+      "Theme": {
+        "dark": "Dunkel",
+        "light": "Hell",
+        "system": "System",
+        "toggle": "Farbschema wechseln"
+      },
       "backgroundMusic": "Instrumente",
       "language": "Sprache",
       "settings": "Einstellungen",
       "skipSilence": "Stille Überspringen",
-      "theme": "Farben"
+      "theme": "Farbschema"
     },
     "SimilarityPlot": {
       "2D": {
