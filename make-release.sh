@@ -43,6 +43,8 @@ git tag "$versionLabel"
 
 # push tag to origin
 git push origin "$versionLabel"
+git push origin $mainBranch
+git push origin $devBranch
 
 # merge main back into develop
 git checkout $devBranch
