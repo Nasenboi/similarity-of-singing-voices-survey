@@ -17,6 +17,7 @@
         "albumDateReleased": "Veröffentlicht",
         "artist": "Künstler",
         "cluster": "Cluster",
+        "complaint": "Audiofehler",
         "complaints": "Audiofehler",
         "filename": "Dateiname",
         "genre": "Genre",
@@ -98,6 +99,8 @@
       }
     },
     "SongInfoModal": {
+      "showComplaints": "Audioprobleme",
+      "showInfo": "Song Infos",
       "skipInSurveyFalse": "In Umfrage behalten",
       "skipInSurveyTrue": "Aus Umfrage löschen"
     },

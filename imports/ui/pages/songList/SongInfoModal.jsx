@@ -8,17 +8,18 @@ import {Spinner} from "@/components/ui/spinner";
 import {Textarea} from "@/components/ui/textarea";
 import {useSongsSingle} from "@/imports/api/songs/hooks";
 import {SONGS} from "@/imports/api/songs/methods";
-import React from "react";
+import {ArrowLeftRight} from "lucide-react";
+import React, {useState} from "react";
 import {useTranslation} from "react-i18next";
 import {InfoTable} from "../../customComponents/InfoTable";
 
-function SongComplaint({complaint}) {
+function SongComplaint({complaint, index}) {
   const {t} = useTranslation();
 
   return (
     <Card className="mb-4">
       <CardHeader>
-        <CardTitle>{`${t("Collections.Participants.participant")} ${complaint.participantID}`}</CardTitle>
+        <CardTitle>{`${t("Collections.Songs.complaint")} ${index}`}</CardTitle>
       </CardHeader>
       <CardContent className="w-full grid grid-cols-3 gap-4">
         <Field className="col-span-1 flex flex-row justify-center items-center">
@@ -50,6 +51,7 @@ function SongComplaint({complaint}) {
 
 export function SongInfoModal({trackID}) {
   const {song, isLoading: isSongLoading} = useSongsSingle(trackID);
+  const [showComplaints, setShowComplaints] = useState(false);
   const {t} = useTranslation();
 
   if (isSongLoading || !trackID || !song) {
@@ -92,22 +94,32 @@ export function SongInfoModal({trackID}) {
         </DialogTitle>
       </DialogHeader>
       <div className="max-h-full">
-        <InfoTable className="w-full h-full" fields={songInfoFields} />
-        {song.complaints && (
+        {!showComplaints ? (
+          <InfoTable className="w-full h-full" fields={songInfoFields} />
+        ) : (
           <>
             <h1>{t("Collections.Songs.complaints")}</h1>
-            <ScrollArea className="w-full h-full max-h-[40vh] -pb-4">
+            <ScrollArea className="w-full h-full max-h-[30vh] -pb-4">
               {song.complaints?.map((complaint, idx) => (
-                <SongComplaint key={`sc_${idx}`} complaint={complaint} />
+                <SongComplaint key={`sc_${idx}`} complaint={complaint} index={idx} />
               ))}
             </ScrollArea>
           </>
         )}
       </div>
       <DialogFooter>
-        <Button variant={song.skipInSurvey ? "secondary" : "destructive"} onClick={onSkipButtonClick} type="button">
-          {song.skipInSurvey ? t("SongInfoModal.skipInSurveyFalse") : t("SongInfoModal.skipInSurveyTrue")}
-        </Button>
+        <div className="w-full flex justify-between items-center">
+          {song.complaints ? (
+            <Button variant="secondary" onClick={() => setShowComplaints(!showComplaints)} type="button">
+              <ArrowLeftRight /> {showComplaints ? t("SongInfoModal.showInfo") : t("SongInfoModal.showComplaints")}
+            </Button>
+          ) : (
+            <div />
+          )}
+          <Button variant={song.skipInSurvey ? "secondary" : "destructive"} onClick={onSkipButtonClick} type="button">
+            {song.skipInSurvey ? t("SongInfoModal.skipInSurveyFalse") : t("SongInfoModal.skipInSurveyTrue")}
+          </Button>
+        </div>
       </DialogFooter>
     </DialogContent>
   );
