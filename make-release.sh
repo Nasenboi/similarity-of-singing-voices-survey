@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# script adopted from https://gist.github.com/bclinkinbeard/1331790
+# script inspired by https://gist.github.com/bclinkinbeard/1331790
 # example use: ./makeRelease.sh (version is in version.txt)
 
 # current Git branch
