@@ -1,7 +1,7 @@
 import {ValidatedMethod} from "meteor/mdg:validated-method";
 import SimpleSchema from "simpl-schema";
 import {Participants} from "../participants/collection";
-import {SurveyQuestions} from "../surveyQuestions/collection";
+import {toggleQuestionSkip} from "../surveyQuestions/helpers";
 import {isAdminUser} from "../users/helpers";
 import {toCSV} from "../utils";
 import {Songs} from "./collection";
@@ -42,13 +42,7 @@ export const SONGS = {
       if (!(await isAdminUser(this.userId))) return;
       const result = await Songs.updateAsync({trackID}, {$set: {skipInSurvey}});
 
-      await SurveyQuestions.updateAsync(
-        {
-          $or: [{X: trackID}, {A: trackID}, {B: trackID}],
-        },
-        {$set: {skip: skipInSurvey}},
-        {multi: true},
-      );
+      await toggleQuestionSkip({trackID, skipInSurvey});
 
       return result;
     },

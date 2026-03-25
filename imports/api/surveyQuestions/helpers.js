@@ -1,6 +1,30 @@
-import {NUM_QUESTIONS_PER_SURVEY} from "@/imports/common/globals";
+import {NUM_QUESTIONS_PER_SURVEY} from "@/imports/common/config";
 import {Participants} from "../participants/collection";
 import {SurveyQuestions} from "./collection";
+
+export async function toggleQuestionSkip({trackID, skipInSurvey}) {
+  const query = {$or: [{X: trackID}, {A: trackID}, {B: trackID}]};
+
+  await SurveyQuestions.updateAsync(query, {$set: {skip: skipInSurvey}}, {multi: true});
+
+  const affectedQuestions = await SurveyQuestions.find(query).fetchAsync();
+  const affectedQuestionnaires = [...new Set(affectedQuestions.map((q) => q.questionnaireID))];
+
+  for (const questionnaireID of affectedQuestionnaires) {
+    const questions = await SurveyQuestions.find({questionnaireID}, {sort: {questionNumber: 1}}).fetchAsync();
+
+    let counter = 0;
+
+    for (const q of questions) {
+      if (!q.skip) {
+        await SurveyQuestions.updateAsync(q._id, {
+          $set: {questionNumber: counter},
+        });
+        counter++;
+      }
+    }
+  }
+}
 
 export async function getNextQuestionnaireID() {
   const NUM_QUESTIONS_PER_SURVEY_h = NUM_QUESTIONS_PER_SURVEY / 2;

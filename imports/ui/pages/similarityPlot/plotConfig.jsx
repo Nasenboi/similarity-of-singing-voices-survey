@@ -11,6 +11,12 @@ export const LAYOUT = {
   plot_bgcolor: "#00000000",
   hovermode: "closest",
   uirevision: "static",
+  margin: {
+    b: 0,
+    t: 0,
+    l: 0,
+    r: 0,
+  },
 };
 
 // light: Cividis

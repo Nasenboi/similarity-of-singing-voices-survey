@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# script adopted from https://gist.github.com/bclinkinbeard/1331790
+# script inspired by https://gist.github.com/bclinkinbeard/1331790
 # example use: ./makeRelease.sh (version is in version.txt)
 
 # current Git branch
@@ -23,6 +23,11 @@ npmFile="package.json"
 sed -E "s/\"version\": \"[0-9.]+\S*\"/\"version\": \"$versionLabel\"/" $npmFile  >> "$npmFile.bak"
 mv "$npmFile.bak" $npmFile
 
+globalsFile="imports/common/globals.js"
+
+sed -E "s/export const APP_VERSION = \"[0-9.]+[^\"]*\";/export const APP_VERSION = \"$versionLabel\";/" "$globalsFile" > "$globalsFile.bak"
+mv "$globalsFile.bak" "$globalsFile"
+
 #Update package-lock file according to new package.json version code
 npm i --package-lock-only
 
@@ -35,6 +40,9 @@ git merge --no-ff -m "merge release branch" "$releaseBranch"
 
 # create tag for new version from -main
 git tag "$versionLabel"
+
+# push tag to origin
+git push origin "$versionLabel"
 
 # merge main back into develop
 git checkout $devBranch

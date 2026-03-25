@@ -2,7 +2,7 @@ import {Participants} from "@/imports/api/participants/collection";
 import {Songs} from "@/imports/api/songs/collection";
 import {SurveyAnswers} from "@/imports/api/surveyAnswers/collection";
 import {SurveyQuestions} from "@/imports/api/surveyQuestions/collection";
-import {INDEX_MAP} from "@/imports/common/globals";
+import {INDEX_MAP} from "@/imports/common/config";
 
 async function indexCollection({collection, indexField}) {
   try {

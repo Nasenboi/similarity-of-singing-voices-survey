@@ -50,7 +50,7 @@ export function SimilarityPlotPage() {
     <div className="w-screen h-screen max-w-screen max-h-screen flex flex-col justify-center items-center">
       <div className="size-full flex flex-col justify-between items-center overflow-scroll md:overflow-hidden">
         <Card className="size-full">
-          <CardHeader className="w-full px-24 flex flex-row justify-between items-center">
+          <CardHeader className="w-full md:px-24 px-4 flex flex-row justify-between items-center">
             <div />
             <CardTitle>{dims === "2D" ? t("SimilarityPlot.2D.title") : t("SimilarityPlot.3D.title")}</CardTitle>
             <ButtonGroup>

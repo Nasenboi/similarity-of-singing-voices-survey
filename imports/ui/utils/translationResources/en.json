@@ -17,6 +17,7 @@
         "albumDateReleased": "Release Date",
         "artist": "Artist",
         "cluster": "Cluster",
+        "complaint": "Audio Issue",
         "complaints": "Audio Issues",
         "filename": "File Name",
         "genre": "Genre",
@@ -77,6 +78,12 @@
         "similarityPlot": "Similarity Plot",
         "survey": "Survey"
       },
+      "Theme": {
+        "dark": "Dark",
+        "light": "Light",
+        "system": "System",
+        "toggle": "Toggle Theme"
+      },
       "backgroundMusic": "Instruments",
       "language": "Lanugage",
       "settings": "Settings",
@@ -92,6 +99,8 @@
       }
     },
     "SongInfoModal": {
+      "showComplaints": "Audio Issues",
+      "showInfo": "Song Info",
       "skipInSurveyFalse": "Use in Survey",
       "skipInSurveyTrue": "Skip in Survey"
     },

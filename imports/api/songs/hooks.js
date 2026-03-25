@@ -1,4 +1,4 @@
-import {INDEX_MAP, ITEMS_PER_PAGE} from "@/imports/common/globals";
+import {INDEX_MAP, ITEMS_PER_PAGE} from "@/imports/common/config";
 import {Meteor} from "meteor/meteor";
 import {useTracker} from "meteor/react-meteor-data";
 import React from "react";

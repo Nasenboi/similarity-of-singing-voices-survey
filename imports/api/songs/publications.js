@@ -1,6 +1,6 @@
 import {Meteor} from "meteor/meteor";
 import {find as findPagination} from "mongo-cursor-pagination";
-import {INDEX_MAP, ITEMS_PER_PAGE} from "../../common/globals";
+import {INDEX_MAP, ITEMS_PER_PAGE} from "../../common/config";
 import {Participants} from "../participants/collection";
 import {isAdminUser} from "../users/helpers";
 import {buildPaginationQuery} from "../utils";
