@@ -1,7 +1,7 @@
 {
   "name": "agency-tool",
   "private": true,
-  "version": "0.1.1",
+  "version": "0.1.2",
   "scripts": {
     "start": "meteor run --settings settings.json",
     "start:e2e": "cross-env METEOR_LOCAL_DIR=.meteor/test cross-env DISABLE_REACT_FAST_REFRESH=1 meteor run --port 4000",
