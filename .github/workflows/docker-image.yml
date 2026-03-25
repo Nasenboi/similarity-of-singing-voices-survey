@@ -15,9 +15,9 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: recursive
-      - name: get version code from package.json (npm)
-        id: package-version
-        uses: martinbeentjes/npm-get-version-action@master
+          fetch-depth: 0
+      - name: Get version from git tag
+        run: echo "VERSION=${GITHUB_REF_NAME}" >> $GITHUB_ENV
       - name: show version
         run: echo ${{ steps.package-version.outputs.current-version }}
       - name: Login to Docker Hub
