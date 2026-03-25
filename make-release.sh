@@ -19,13 +19,7 @@ releaseBranch=release-$versionLabel
 git checkout -b "$releaseBranch" $devBranch
 
 npmFile="package.json"
-appFile="imports/Globals.js"
 
-# find version number assignment ("1.5.5-rc1" for example)
-# and replace it with newly specified version number
-# -i command does not work cross platform, this is solved by writing to .bak file first and then moving the .bak file back to original filename
-sed -E "s/APP_VERSION = \"[0-9.]+\S*\"/APP_VERSION = \"$versionLabel\"/" $appFile >> "$appFile.bak"
-mv "$appFile.bak" $appFile
 sed -E "s/\"version\": \"[0-9.]+\S*\"/\"version\": \"$versionLabel\"/" $npmFile  >> "$npmFile.bak"
 mv "$npmFile.bak" $npmFile
 
