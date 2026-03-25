@@ -12,7 +12,7 @@ echo "Creating version with version code $versionLabel"
 
 # set branch and tag name variables
 devBranch=develop
-masterBranch=master
+mainBranch=main
 releaseBranch=release-$versionLabel
 
 # create the release branch from develop branch
@@ -29,16 +29,16 @@ npm i --package-lock-only
 # commit version number increment
 git commit -am "Incrementing version number to $versionLabel"
 
-# merge release branch with new version number into master
-git checkout $masterBranch
+# merge release branch with new version number into main
+git checkout $mainBranch
 git merge --no-ff -m "merge release branch" "$releaseBranch"
 
-# create tag for new version from -master
+# create tag for new version from -main
 git tag "$versionLabel"
 
-# merge master back into develop
+# merge main back into develop
 git checkout $devBranch
-git merge --no-ff -m "merge master back into develop" $masterBranch
+git merge --no-ff -m "merge main back into develop" $mainBranch
 
 # remove release branch
 git branch -d "$releaseBranch"
