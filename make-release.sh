@@ -23,6 +23,11 @@ npmFile="package.json"
 sed -E "s/\"version\": \"[0-9.]+\S*\"/\"version\": \"$versionLabel\"/" $npmFile  >> "$npmFile.bak"
 mv "$npmFile.bak" $npmFile
 
+globalsFile="imports/common/globals.js"
+
+sed -E "s/export const APP_VERSION = \"[0-9.]+[^\"]*\";/export const APP_VERSION = \"$versionLabel\";/" "$globalsFile" > "$globalsFile.bak"
+mv "$globalsFile.bak" "$globalsFile"
+
 #Update package-lock file according to new package.json version code
 npm i --package-lock-only
 
