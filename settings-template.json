@@ -1,0 +1,13 @@
+{
+  "private": {
+    "ADMIN_USER": {
+      "password": "password",
+      "username": "username"
+    },
+    "FILE_SERVER_URL": "http://fileserver:port/",
+    "reset": true
+  },
+  "public": {
+    "FILE_SERVER_URL": "http://fileserver:port/"
+  }
+}
