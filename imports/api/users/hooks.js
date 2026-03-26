@@ -25,5 +25,5 @@ export const useIsAdminOrCompleted = (participantID) => {
     if (!!user?.isAdmin) return {hasRights: true, isLoading: false};
 
     return {hasRights: !!participant?.surveyCompleted, isLoading};
-  }, [Meteor.userId(), participant, participantID]);
+  }, [Meteor.userId(), participantID, participant?.surveyCompleted]);
 };
