@@ -42,7 +42,7 @@ export function AudioPlayer() {
       setIsPlaying(true);
       audioRef.current?.play();
     }
-  }, [song]);
+  }, [song, useBackgroundMusic]);
 
   useEffect(() => {
     togglePlay();
