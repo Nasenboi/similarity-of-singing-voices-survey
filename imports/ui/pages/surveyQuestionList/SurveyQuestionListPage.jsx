@@ -8,11 +8,10 @@ import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
 import {AudioPlayer} from "../../customComponents/AudioPlayer";
 import {DataTable} from "../../customComponents/DataTable";
-import {DownloadButton} from "../../customComponents/DownLoadButton";
 import {SurveyQuestionInfoModal} from "./SurveyQuestionInfoModal";
 import {SurveyQuestionSearchForm} from "./SurveyQuestionSearchForm";
 
-export function SurveyQuestionListPage() {
+export default function SurveyQuestionListPage() {
   const isLoggedIn = useIsLoggedIn();
   const navigate = useNavigate();
   const [surveyQuestionID, setSurveyQuestionID] = useState(null);

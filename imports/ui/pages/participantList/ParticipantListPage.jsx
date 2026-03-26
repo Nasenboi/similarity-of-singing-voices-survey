@@ -11,7 +11,7 @@ import {DataTable} from "../../customComponents/DataTable";
 import {ParticipantInfoModal} from "./ParticipantInfoModal";
 import {ParticipantSearchForm} from "./ParticipantSearchForm";
 
-export function ParticipantListPage() {
+export default function ParticipantListPage() {
   const isLoggedIn = useIsLoggedIn();
   const navigate = useNavigate();
   const {t} = useTranslation();

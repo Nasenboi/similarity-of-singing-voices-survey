@@ -27,7 +27,7 @@ function DimToggle({dims, setDims}) {
   );
 }
 
-export function SimilarityPlotPage() {
+export default function SimilarityPlotPage() {
   const {participant, isLoading: isParticipantLoading} = useParticipantContext();
   const {hasRights, isLoading: isRightsLoading} = useIsAdminOrCompleted(participant?._id);
   const [dims, setDims] = useState("2D");

@@ -20,7 +20,7 @@ import {useParticipantContext} from "../../contextProvider/ParticipantContext";
 import {AudioPlayer} from "../../customComponents/AudioPlayer";
 import {SurveyCard} from "./SurveyCard";
 
-export function SurveyPage() {
+export default function SurveyPage() {
   const {t} = useTranslation();
   const {isPlaying, setIsPlaying} = useAudioContext();
   const {participant, isLoading: isParticipantLoading} = useParticipantContext();
