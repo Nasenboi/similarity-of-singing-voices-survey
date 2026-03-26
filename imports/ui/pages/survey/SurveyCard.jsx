@@ -67,9 +67,7 @@ export function SurveyCard({question, setSurveyAnswer, isSubmitted = false}) {
       </div>
       <div className="flex justify-center flex-col md:flex-row">
         <div className="p-4 size-full flex flex-row md:flex-col justify-center items-center">
-          <h1 className="md:mb-8 size-full md:text-4xl text-xl font-bold underline text-center">
-            {t("SurveyPage.targetVoice")}
-          </h1>
+          <h1 className="md:mb-8 size-full md:text-4xl text-xl font-bold text-center">{t("SurveyPage.targetVoice")}</h1>
           <div className="size-full flex justify-center">
             <Button onClick={() => onVoiceClick(question["X"], "X")}>
               <p className="text-bold md:text-4xl text-center">{t("SurveyPage.voice")} X</p>
@@ -80,9 +78,7 @@ export function SurveyCard({question, setSurveyAnswer, isSubmitted = false}) {
         <div
           className={`w-full max-w-screen p-4 flex flex-col justify-center items-center space-y-4 md:border-l-2 max-md:border-t-2 ${isSubmitted && "border-accent-foreground"}`}
         >
-          <h1 className="md:mb-8 w-full md:text-4xl text-xl font-bold underline text-center">
-            {t("SurveyPage.referenceVoices")}
-          </h1>
+          <h1 className="md:mb-8 w-full md:text-4xl text-xl font-bold text-center">{t("SurveyPage.referenceVoices")}</h1>
           <ButtonGroup className="max-w-sreen">
             <AudioButton trackID={question[[similarToX[0]]]} voice={similarToX[0]} onVoiceClick={onVoiceClick} />
             <ButtonGroupSeparator />
