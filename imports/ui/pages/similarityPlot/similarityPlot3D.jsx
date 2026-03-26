@@ -1,5 +1,5 @@
 import {useTheme} from "next-themes";
-import React from "react";
+import React, {useEffect} from "react";
 import {useTranslation} from "react-i18next";
 import Plot from "react-plotly.js";
 import {useAudioContext} from "../../contextProvider/AudioContext";
@@ -9,6 +9,10 @@ function SimilarityPlot3Dm({songs}) {
   const {setTrackID} = useAudioContext();
   const {t} = useTranslation();
   const {theme} = useTheme();
+
+  useEffect(() => {
+    setTrackID(null);
+  }, []);
 
   const x = songs.map((s) => s.UMAP3D.UMAP_1);
   const y = songs.map((s) => s.UMAP3D.UMAP_2);
