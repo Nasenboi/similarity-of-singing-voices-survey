@@ -1,4 +1,3 @@
-import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "@/components/ui/accordion";
 import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
 import {Progress} from "@/components/ui/progress";
 import {Spinner} from "@/components/ui/spinner";
@@ -111,21 +110,12 @@ export function SurveyPage() {
   return (
     <div className="w-screen h-screen max-w-screen max-h-screen flex flex-col justify-center items-center">
       <Card className="fixed top-0 ms-50 max-w-500 w-full m-2 md:m-4 bg-background z-10">
-        <Accordion className="p-0 m-0" type="single" collapsible defaultValue="content">
-          <AccordionItem className="p-0 m-0" value="content">
-            <AccordionTrigger className="max-md:w-full p-0 px-2 md:px-4">
-              <CardHeader className="w-full">
-                <CardTitle className="text-center max-md:text-lg max-md:w-full">{t("SurveyPage.title")}</CardTitle>
-              </CardHeader>
-            </AccordionTrigger>
-            <AccordionContent className="m-0 p-0">
-              <CardContent className="border-b-2 max-md:w-full max-md:px-0">
-                <p className="text-center max-md:text-xs">{t("SurveyPage.description")}</p>
-              </CardContent>
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
-
+        <CardHeader className="w-full">
+          <CardTitle className="text-center max-md:text-lg max-md:w-full">{t("SurveyPage.title")}</CardTitle>
+        </CardHeader>
+        <CardContent className="border-b-2 max-md:w-full max-md:px-0">
+          <p className="text-center max-md:text-xs">{t("SurveyPage.description")}</p>
+        </CardContent>
         <CardFooter>
           <div className="mt-2 md:space-y-4 space-y-2 w-full flex flex-col">
             <Pagination>
