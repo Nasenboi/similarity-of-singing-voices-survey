@@ -14,6 +14,7 @@ i18n
     lng: getCookieSave("language", "de"),
     fallbackLng: defaultLanguage,
     debug: false,
+    showSupportNotice: false,
   });
 
 export default i18n;
