@@ -33,7 +33,7 @@ export function SideBarToggle() {
             {open ? <ArrowLeft /> : <Settings />}
           </Button>
         </TooltipTrigger>
-        <TooltipContent side="right" className="m-4" sideOffset="0">
+        <TooltipContent side="right" className="max-w-screen" sideOffset={0}>
           <div className="flex flex-col space-y-4 p-2 justify-center items-center">
             <P>{t("Tooltips.settings")}</P>
             <div className="w-full flex justify-end items-center">
