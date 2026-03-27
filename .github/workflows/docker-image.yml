@@ -26,6 +26,12 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build the Docker image
-        run: docker build . --tag ${{ secrets.DOCKERHUB_USERNAME }}/similarity-of-singing-voices-survey:${{ env.VERSION }}
-      - name: Push the Docker image
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/similarity-of-singing-voices-survey:${{ env.VERSION }}
+        run: |
+          docker build . \
+            --tag ${{ secrets.DOCKERHUB_USERNAME }}/similarity-of-singing-voices-survey:${{ env.VERSION }} \
+            --tag ${{ secrets.DOCKERHUB_USERNAME }}/similarity-of-singing-voices-survey:latest
+
+      - name: Push the Docker images
+        run: |
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/similarity-of-singing-voices-survey:${{ env.VERSION }}
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/similarity-of-singing-voices-survey:latest
