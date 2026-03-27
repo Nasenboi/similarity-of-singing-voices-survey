@@ -1,4 +1,3 @@
-import {Button} from "@/components/ui/button";
 import {
   SidebarGroup,
   SidebarGroupContent,
@@ -7,13 +6,16 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import {Spinner} from "@/components/ui/spinner";
 import {useIsAdmin, useIsAdminOrCompleted} from "@/imports/api/users/hooks";
 import React from "react";
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
+import {useParticipantContext} from "../contextProvider/ParticipantContext";
 
 export function NavigationArea() {
-  const isAdminOrCompleted = useIsAdminOrCompleted();
+  const {participant, isLoading: isParticipantLoading} = useParticipantContext();
+  const {hasRights: isAdminOrCompleted, isLoading: isRightsLoading} = useIsAdminOrCompleted(participant?._id);
   const isAdmin = useIsAdmin();
   const navigate = useNavigate();
   const {t} = useTranslation();
@@ -26,10 +28,16 @@ export function NavigationArea() {
           <SidebarMenuItem>
             <SidebarMenuButton onClick={() => navigate("/")}>{t("Sidebar.Navigation.home")}</SidebarMenuButton>
             <SidebarMenuButton onClick={() => navigate("/survey")}>{t("Sidebar.Navigation.survey")}</SidebarMenuButton>
-            {isAdminOrCompleted && (
-              <SidebarMenuButton onClick={() => navigate("/plot")}>
-                {t("Sidebar.Navigation.similarityPlot")}
-              </SidebarMenuButton>
+            {isParticipantLoading || isRightsLoading ? (
+              <Spinner />
+            ) : (
+              <>
+                {isAdminOrCompleted && (
+                  <SidebarMenuButton onClick={() => navigate("/plot")}>
+                    {t("Sidebar.Navigation.similarityPlot")}
+                  </SidebarMenuButton>
+                )}
+              </>
             )}
             {isAdmin && (
               <>
