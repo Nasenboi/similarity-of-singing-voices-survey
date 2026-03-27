@@ -113,6 +113,7 @@ export function AudioPlayer() {
               </div>
             )}
             <audio ref={audioRef} onTimeUpdate={handleTimeUpdate} onEnded={() => setIsPlaying(false)} />
+
             <Button
               className="rounded-full md:size-10 size-8"
               onClick={() => {

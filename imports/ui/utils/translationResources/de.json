@@ -120,6 +120,10 @@
       "targetVoice": "Zielstimme",
       "title": "Ähnlichkeit von Gesangsstimmen",
       "voice": "Stimme"
+    },
+    "Tooltips": {
+      "dismiss": "Ok",
+      "settings": "Passen Sie hier die Umfrage an ihre Bedürfnisse an"
     }
   }
 }

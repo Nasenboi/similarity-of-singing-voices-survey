@@ -122,6 +122,10 @@
       "targetVoice": "Target Voice",
       "title": "Similarity of Singing Voices",
       "voice": "Voice"
+    },
+    "Tooltips": {
+      "dismiss": "Ok",
+      "settings": "Customize your survey experience here"
     }
   }
 }
