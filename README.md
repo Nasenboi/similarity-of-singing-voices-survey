@@ -1,11 +1,45 @@
-# similarity-of-singing-voices-survey
+# Similarity of Singing Voices Survey
 
-## Getting Started
+This code project is a custom built survey for my master thesis: _"Comparing Perceptual Similarity of Singing Voices with Digital Voice Representations"_ The goal of this survey is to gather a "golden standart" of perceptual similarity mapping model of singing voices.
+
+## Before you Start
+
+## Deploy the Survey
+
+To deploy the survey you can use the docker-compose.yml file as example.
+Edit the configuration and environment variables to fit your local setup.
+
+### Run from prebuild docker image:
+
+Edit the docker compose yaml file pull the image from docker hub.
+
+```yml
+services:
+  app:
+    container_name: similarity-of-singing-voices-survey-app-1
+    image: nasenboi/similarity-of-singing-voices-survey:latest
+```
+
+## Getting Started Locally
 
 To run this survey application locally:
 
-1. Clone the repository: `git clone https://github.com/username/similarity-of-singing-voices-survey.git`
-2. Navigate to the project directory: `cd similarity-of-singing-voices-survey`
-3. Install dependencies: `npm install`
-4. Start the development server: `npm start`
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/username/similarity-of-singing-voices-survey.git
+   ```
+2. Navigate to the project directory:
+   ```sh
+   cd similarity-of-singing-voices-survey
+   ```
+3. Install dependencies:
+   ```sh
+   npm install
+   ```
+4. Start the development server:
+   ```sh
+   npm start
+   ```
 5. Open `http://localhost:3000` in your browser.
+
+## Contributions
