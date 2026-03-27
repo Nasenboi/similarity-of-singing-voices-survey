@@ -125,7 +125,8 @@
     },
     "Tooltips": {
       "dismiss": "Ok",
-      "settings": "Customize your survey experience here"
+      "settings": "Customize your survey experience here",
+      "voiceMarker": "Jump here to the next voiced song part"
     }
   }
 }

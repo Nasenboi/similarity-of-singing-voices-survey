@@ -8,7 +8,7 @@ import {P} from "./Typography";
 
 function TooltipWrapper({children}) {
   const {t} = useTranslation();
-  const [tooltipOpen, setTooltipOpen] = React.useState(() => {
+  const [tooltipOpen, setTooltipOpen] = useState(() => {
     return !cookies.get("flagsTooltipRead");
   });
 
@@ -21,7 +21,7 @@ function TooltipWrapper({children}) {
     <Tooltip open={tooltipOpen}>
       <TooltipContent side="top" className="m-4" sideOffset="0">
         <div className="flex flex-col space-y-4 p-2 justify-center items-center">
-          <P>{t("Tooltips.settings")}</P>
+          <P>{t("Tooltips.voiceMarker")}</P>
           <div className="w-full flex justify-end items-center">
             <Button size="sm" onClick={dismissTooltip}>
               {t("Tooltips.dismiss")}

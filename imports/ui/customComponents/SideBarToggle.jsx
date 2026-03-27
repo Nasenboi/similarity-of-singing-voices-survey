@@ -10,7 +10,7 @@ import {P} from "./Typography";
 export function SideBarToggle() {
   const {open, toggleSidebar} = useSidebar();
   const {t} = useTranslation();
-  const [tooltipOpen, setTooltipOpen] = React.useState(() => {
+  const [tooltipOpen, setTooltipOpen] = useState(() => {
     return !cookies.get("settingsTooltipRead");
   });
 

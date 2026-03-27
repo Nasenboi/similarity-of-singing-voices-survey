@@ -123,7 +123,8 @@
     },
     "Tooltips": {
       "dismiss": "Ok",
-      "settings": "Passen Sie hier die Umfrage an ihre Bedürfnisse an"
+      "settings": "Passen Sie hier die Umfrage an ihre Bedürfnisse an",
+      "voiceMarker": "Springen Sie hier zu Liedabschnitten mit Gesangsstimmen"
     }
   }
 }
