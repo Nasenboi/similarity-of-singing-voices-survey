@@ -59,14 +59,12 @@ export default function ParticipantListPage() {
     setNext(pageInfo?.nextCursor);
     setPrevious(null);
     setDialogOpen(false);
-    setTrackID(null);
   };
 
   const handlePrevious = () => {
     setPrevious(pageInfo?.prevCursor);
     setNext(null);
     setDialogOpen(false);
-    setTrackID(null);
   };
 
   const onRowClick = (row) => {
