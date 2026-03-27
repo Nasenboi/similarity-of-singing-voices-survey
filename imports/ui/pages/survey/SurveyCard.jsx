@@ -20,7 +20,7 @@ function AudioButton({trackID, voice, onVoiceClick, isPlaying}) {
   );
 }
 
-export function SurveyCard({question, setSurveyAnswer, isSubmitted = false}) {
+export function SurveyCard({question, setSurveyAnswer, isMobile = false, isSubmitted = false}) {
   const {trackID, setTrackID, setIcon, isPlaying, setIsPlaying} = useAudioContext();
   const [similarToX, setSimilarToX] = useState(["A", "B"]);
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -60,7 +60,7 @@ export function SurveyCard({question, setSurveyAnswer, isSubmitted = false}) {
       >
         <CardTitle className="w-full flex justify-between items-center">
           <div />
-          <H1>
+          <H1 className={isMobile && "text-2xl"}>
             {t("SurveyPage.cardTitle")} {question.questionNumber + 1}
           </H1>
           <Dialog open={dialogOpen} onOpenChange={(open) => setDialogOpen(open)}>
@@ -74,8 +74,8 @@ export function SurveyCard({question, setSurveyAnswer, isSubmitted = false}) {
         </CardTitle>
       </CardHeader>
       <div className="flex justify-center flex-col md:flex-row">
-        <div className="p-4 size-full flex flex-row md:flex-col justify-center items-center">
-          <H2>{t("SurveyPage.targetVoice")}</H2>
+        <div className="md:p-4 p-2 size-full flex flex-row md:flex-col justify-center items-center">
+          <H2 className={isMobile && "text-xl"}>{t("SurveyPage.targetVoice")}</H2>
           <div className="size-full flex justify-center">
             <Button onClick={() => onVoiceClick(question["X"], "X")}>
               {t("SurveyPage.voice")} X {voicePlaying === "X" ? <Pause /> : <Play />}
@@ -86,7 +86,7 @@ export function SurveyCard({question, setSurveyAnswer, isSubmitted = false}) {
         <div
           className={`w-full max-w-screen p-4 flex flex-col justify-center items-center md:border-l-2 max-md:border-t-2 ${isSubmitted && "border-accent-foreground"}`}
         >
-          <H2>{t("SurveyPage.referenceVoices")}</H2>
+          <H2 className={isMobile && "text-xl"}>{t("SurveyPage.referenceVoices")}</H2>
           <ButtonGroup className="max-w-sreen">
             <AudioButton
               trackID={question[[similarToX[0]]]}
@@ -114,13 +114,13 @@ export function SurveyCard({question, setSurveyAnswer, isSubmitted = false}) {
             >
               <div className="flex items-center gap-3 max-md:justify-center">
                 <RadioGroupItem value="A" id="r1" />
-                <Large htmlFor="r1" className="hover:underline">
+                <Large htmlFor="r1" className={`hover:underline ${isMobile && "text-sm"}`}>
                   A {t("SurveyPage.and")} X {t("SurveyPage.areMoreSimilar")}
                 </Large>
               </div>
               <div className="flex items-center gap-3 max-md:justify-center">
                 <RadioGroupItem value="B" id="r2" />
-                <Large htmlFor="r2" className=" hover:underline">
+                <Large htmlFor="r2" className={`hover:underline ${isMobile && "text-sm"}`}>
                   B {t("SurveyPage.and")} X {t("SurveyPage.areMoreSimilar")}
                 </Large>
               </div>

@@ -113,9 +113,11 @@ export default function SurveyPage() {
         <CardHeader className="w-full">
           <CardTitle className="text-center max-md:text-lg max-md:w-full">{t("SurveyPage.title")}</CardTitle>
         </CardHeader>
-        <CardContent className="border-b-2 max-md:w-full max-md:px-0">
-          <p className="text-center max-md:text-xs">{t("SurveyPage.description")}</p>
-        </CardContent>
+        {!isMobile && (
+          <CardContent className="border-b-2 max-md:w-full max-md:px-0">
+            <p className="text-center max-md:text-xs">{t("SurveyPage.description")}</p>
+          </CardContent>
+        )}
         <CardFooter>
           <div className="mt-2 md:space-y-4 space-y-2 w-full flex flex-col">
             <Pagination>
@@ -181,8 +183,7 @@ export default function SurveyPage() {
       </Card>
 
       <div className="w-full flex flex-col justify-between items-center overflow-scroll md:overflow-hidden">
-        <div className="w-full h-60" />
-
+        <div className="w-full md:h-60 h-45" />
         <div className="w-full flex flex-col justify-between items-center overflow-hidden relative">
           <AnimatePresence mode="wait">
             {surveyQuestions?.find((q) => q.questionNumber === currentPage) ? (
@@ -195,6 +196,7 @@ export default function SurveyPage() {
               >
                 <div className="size-full flex justify-center items-center">
                   <SurveyCard
+                    isMobile={isMobile}
                     question={surveyQuestions?.find((q) => q.questionNumber === currentPage)}
                     setSurveyAnswer={setSurveyAnswer}
                     isSubmitted={questionsAnswered.includes(currentPage)}
