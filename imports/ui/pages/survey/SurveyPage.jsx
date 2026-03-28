@@ -56,11 +56,11 @@ export default function SurveyPage() {
     const numAnswers = surveyAnswers.length;
 
     const sp = Math.round((100 * numAnswers) / numQuestions);
-    setSurveyProgress(sp);
+    setSurveyProgress(sp ? sp : 0);
 
     const questionsAnswered = surveyAnswers.map((a) => surveyQuestions.find((q) => q._id === a.questionID)?.questionNumber);
     setQuestionsAnswered(questionsAnswered);
-  }, [surveyQuestions, surveyAnswers, isSurveyAnswersLoading, isSurveyQuestionsLoading]);
+  }, [surveyQuestions, surveyAnswers]);
 
   const handlePageChange = (newPage) => {
     if (!surveyQuestions) {
