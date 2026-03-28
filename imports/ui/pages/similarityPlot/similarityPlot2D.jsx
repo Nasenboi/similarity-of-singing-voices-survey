@@ -5,8 +5,6 @@ import Plot from "react-plotly.js";
 import {useAudioContext} from "../../contextProvider/AudioContext";
 import {AXIS_LAYOUT, CONFIG, LAYOUT, MARKER_COLORS} from "./plotConfig";
 
-// t("SimilarityPlot.2D.title")
-
 function SimilarityPlot2Dm({songs}) {
   const {setTrackID} = useAudioContext();
   const {t} = useTranslation();
