@@ -5,7 +5,7 @@
         "_id": "ID",
         "createDate": "Erstellt",
         "editDate": "Editiert",
-        "itemNumber": "Nummer"
+        "itemNumber": "Nr."
       },
       "Participants": {
         "participant": "Teilnehmer",
@@ -39,7 +39,7 @@
         "B": "B",
         "X": "X",
         "question": "Frage",
-        "questionNumber": "Frage",
+        "questionNumber": "Frage Nr.",
         "questionnaireID": "Umfrage ID",
         "skip": "Übersprungen"
       },
@@ -51,11 +51,12 @@
     },
     "Common": {
       "close": "Schließen",
-      "loading": "Läd..",
-      "next": "weiter",
+      "loading": "Läd...",
+      "next": "Weiter",
       "no": "Nein",
       "noResults": "Keine Ergebnisse",
-      "previous": "zurück",
+      "ok": "Ok",
+      "previous": "Zurück",
       "submit": "Bestätigen",
       "yes": "Ja"
     },
@@ -63,13 +64,17 @@
       "InfoTable": {
         "field": "Feld",
         "value": "Wert"
+      },
+      "Tooltips": {
+        "settings": "Passen Sie hier die Umfrage an ihre Bedürfnisse an",
+        "voiceMarker": "Springe zu Liedabschnitten mit Gesangsstimmen"
       }
     },
     "MainPage": {
-      "content": "Das Thema dieser Umfrage ist die Ähnlichkeit von Gesangsstimmen. Sie werden Drillinge an kurzen Musikausschnitten hören (A, B und X). X beinhaltet die Zielstimme, A und B sollen mit ihr verglichen werden. Wählen die nach dem Hören die Stimme, die X am ähnlichsten klingt. Ignorieren Sie für Ihre Entscheidungen die Instrumente im Hintergrund.",
+      "content": "In dieser Umfrage geht es um die Ähnlichkeit von Gesangsstimmen. Sie hören jeweils drei kurze Musikausschnitte (A, B und X). X enthält die Zielstimme, A und B sind Referenzstimmen. Wählen Sie nach dem Anhören jedes Ausschnitts die Referenzstimme aus, die der Zielstimme am ähnlichsten ist. Achten Sie bei der Beantwortung der Fragen nicht auf die im Hintergrund spielenden Instrumente. Wenn Sie die Instrumente stören, können Sie sie in den Einstellungen deaktivieren.",
       "description": "Diese Umfrage wird ungefähr 15 Minuten dauern.",
       "startSurvey": "Umfrage starten",
-      "title": "Willkommen zur Umfrage!"
+      "title": "Willkommen zur Umfrage"
     },
     "Sidebar": {
       "Navigation": {
@@ -87,15 +92,15 @@
       "backgroundMusic": "Instrumente",
       "language": "Sprache",
       "settings": "Einstellungen",
-      "skipSilence": "Stille Überspringen",
+      "skipSilence": "Zum Gesang springen",
       "theme": "Farbschema"
     },
     "SimilarityPlot": {
       "2D": {
-        "title": "2D Plot"
+        "title": "2D Graph"
       },
       "3D": {
-        "title": "3D Plot"
+        "title": "3D Graph"
       }
     },
     "SongInfoModal": {
@@ -120,11 +125,6 @@
       "targetVoice": "Zielstimme",
       "title": "Ähnlichkeit von Gesangsstimmen",
       "voice": "Stimme"
-    },
-    "Tooltips": {
-      "dismiss": "Ok",
-      "settings": "Passen Sie hier die Umfrage an ihre Bedürfnisse an",
-      "voiceMarker": "Springen Sie hier zu Liedabschnitten mit Gesangsstimmen"
     }
   }
 }

@@ -5,10 +5,10 @@
         "_id": "ID",
         "createDate": "Creation Date",
         "editDate": "Edit Date",
-        "itemNumber": "Item Number"
+        "itemNumber": "Item No."
       },
       "Participants": {
-        "participant": "Teilnehmer",
+        "participant": "PArticipant",
         "surveyCompleted": "Survey Completed"
       },
       "Songs": {
@@ -39,7 +39,7 @@
         "B": "B",
         "X": "X",
         "question": "Question",
-        "questionNumber": "Question Number",
+        "questionNumber": "Question No.",
         "questionnaireID": "Questionnaire ID",
         "skip": "Skipped"
       },
@@ -55,6 +55,7 @@
       "next": "Next",
       "no": "No",
       "noResults": "No Results",
+      "ok": "Ok",
       "previous": "Previous",
       "submit": "Submit",
       "yes": "Yes"
@@ -63,13 +64,17 @@
       "InfoTable": {
         "field": "Field",
         "value": "Value"
+      },
+      "Tooltips": {
+        "settings": "Customize your survey experience here",
+        "voiceMarker": "Jump to the next voiced song part"
       }
     },
     "MainPage": {
-      "content": "This Survey is about the similarity of singing voices. You will hear triplets of short music clips (A, B and X). X contains the target voice, A and B are to be compared to it. After listening, choose the reference voice in which the voice is the most similar with the one from the target audio clip X. Do not mind the instruments playing in the background while answering the questions.",
+      "content": "This Survey is about the similarity of singing voices. You will hear triplets of short music clips (A, B and X). X contains the target voice, A and B are reference voices. After listening to each of them, choose the reference voice which is the most similar to the target voice. Do not mind the instruments playing in the background while answering the questions. If the instruments irritate you, they can be disabled in the Settings.",
       "description": "This survey will take about 15 minutes of your time.",
       "startSurvey": "Start Survey",
-      "title": "Welcome to the survey!"
+      "title": "Welcome to the survey"
     },
     "Sidebar": {
       "Navigation": {
@@ -87,22 +92,22 @@
       "backgroundMusic": "Instruments",
       "language": "Lanugage",
       "settings": "Settings",
-      "skipSilence": "Skip Silence",
+      "skipSilence": "Jump to vocals",
       "theme": "Theme"
     },
     "SimilarityPlot": {
       "2D": {
-        "title": "2D Graph"
+        "title": "2D Plot"
       },
       "3D": {
-        "title": "3D Graph"
+        "title": "3D Plot"
       }
     },
     "SongInfoModal": {
       "showComplaints": "Audio Issues",
       "showInfo": "Song Info",
-      "skipInSurveyFalse": "Use in Survey",
-      "skipInSurveyTrue": "Skip in Survey"
+      "skipInSurveyFalse": "Used in Survey",
+      "skipInSurveyTrue": "Skiped in Survey"
     },
     "SurveyPage": {
       "ComplaintForm": {
@@ -122,11 +127,6 @@
       "targetVoice": "Target Voice",
       "title": "Similarity of Singing Voices",
       "voice": "Voice"
-    },
-    "Tooltips": {
-      "dismiss": "Ok",
-      "settings": "Customize your survey experience here",
-      "voiceMarker": "Jump here to the next voiced song part"
     }
   }
 }
