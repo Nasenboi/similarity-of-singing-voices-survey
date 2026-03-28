@@ -7,7 +7,7 @@
       "itemNumber": "Item No."
     },
     "Participants": {
-      "participant": "PArticipant",
+      "participant": "Participant",
       "surveyCompleted": "Survey Completed"
     },
     "Songs": {
@@ -105,8 +105,8 @@
   "SongInfoModal": {
     "showComplaints": "Audio Issues",
     "showInfo": "Song Info",
-    "skipInSurveyFalse": "Used in Survey",
-    "skipInSurveyTrue": "Skiped in Survey"
+    "skipInSurveyFalse": "Use in Survey",
+    "skipInSurveyTrue": "Skip in Survey"
   },
   "SurveyPage": {
     "ComplaintForm": {
