@@ -5,22 +5,6 @@ import {Log} from "meteor/logging";
 import ndarray from "ndarray";
 import {fromArrayBuffer} from "numpy-parser";
 
-/*
-await Promise.all(
-  TEST_QUESTIONNAIRE.map(async (q) => {
-    await SurveyQuestions.insertAsync(q);
-    return;
-  }),
-);
-
-
-function getObjectFromID(args) {
-  const oID = args.tripletArray.get(args.cluster, args.batchNo, args.pos);
-  const obj = args.dataset.find((a) => a.track_id === oID);
-  return convertToAudioSchema(obj);
-}
-*/
-
 const shuffle = (arr) =>
   arr
     .map((v) => ({v, r: Math.random()}))
