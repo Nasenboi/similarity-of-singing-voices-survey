@@ -23,7 +23,7 @@ export function DownloadButton({downloadMethod, downloadFilename}) {
   };
 
   return (
-    <Button onClick={onDownloadClick}>
+    <Button onClick={onDownloadClick} type="Button" size="sm">
       <Download />
     </Button>
   );

@@ -64,6 +64,9 @@
       "field": "Field",
       "value": "Value"
     },
+    "SongSearchForm": {
+      "downloadComplaints": "Download Audio Issues"
+    },
     "Tooltips": {
       "settings": "Customize your survey experience here",
       "voiceMarker": "Jump to the next voiced song part"

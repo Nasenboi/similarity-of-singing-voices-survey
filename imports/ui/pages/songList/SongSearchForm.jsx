@@ -1,6 +1,8 @@
 import {Button} from "@/components/ui/button";
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/components/ui/collapsible";
+import {Field, FieldLabel} from "@/components/ui/field";
+import {SONGS} from "@/imports/api/songs/methods";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {ChevronDown} from "lucide-react";
 import React, {useEffect} from "react";
@@ -8,6 +10,7 @@ import {useForm} from "react-hook-form";
 import {useTranslation} from "react-i18next";
 import {z} from "zod";
 import {AutoField} from "../../customComponents/AutoField";
+import {DownloadButton} from "../../customComponents/DownLoadButton";
 
 const searchFormSchema = z.object({
   trackID: z.string().optional(),
@@ -79,6 +82,13 @@ export function SongSearchForm({onFilterChange, query}) {
                 label={t("Collections.Songs.skipInSurvey")}
                 type="bool"
               />
+
+              <Field className="col-span-1">
+                <FieldLabel>{t("Components.SongSearchForm.downloadComplaints")}</FieldLabel>
+                <div>
+                  <DownloadButton downloadMethod={SONGS.downloadComplaintsCSV} downloadFilename="complaints.csv" />
+                </div>
+              </Field>
               <div className="col-span-3 flex justify-end">
                 <Button type="submit">{t("Common.submit")}</Button>
               </div>

@@ -6,7 +6,7 @@ import {isAdminUser} from "../users/helpers";
 import {toCSV} from "../utils";
 import {Songs} from "./collection";
 import {compaintSchema} from "./schema";
-import {transformSongToCSVRow} from "./utils";
+import {transformComplaintsToCSVRows, transformSongToCSVRow} from "./utils";
 
 export const SONGS = {
   addComplaint: new ValidatedMethod({
@@ -55,6 +55,18 @@ export const SONGS = {
       if (!(await isAdminUser(this.userId))) return;
       const songs = await Songs.find({}).fetch();
       const transformed = songs.map(transformSongToCSVRow);
+      const csv = toCSV(transformed);
+      return csv;
+    },
+  }),
+  downloadComplaintsCSV: new ValidatedMethod({
+    name: "songs.downloadComplaintsCSV",
+    validate: null,
+    async run() {
+      if (this.isSimulation) return;
+      if (!(await isAdminUser(this.userId))) return;
+      const songs = await Songs.find({}).fetch();
+      const transformed = songs.flatMap(transformComplaintsToCSVRows);
       const csv = toCSV(transformed);
       return csv;
     },

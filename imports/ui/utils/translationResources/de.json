@@ -64,6 +64,9 @@
       "field": "Feld",
       "value": "Wert"
     },
+    "SongSearchForm": {
+      "downloadComplaints": "Audiofehler herunterladen"
+    },
     "Tooltips": {
       "settings": "Passen Sie hier die Umfrage an ihre Bedürfnisse an",
       "voiceMarker": "Springe zu Liedabschnitten mit Gesangsstimmen"
