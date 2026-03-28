@@ -1,5 +1,6 @@
-import React, {Suspense} from "react";
+import React, {Suspense, useEffect} from "react";
 import {Route, Routes, useLocation} from "react-router-dom";
+import {useAudioContext} from "./contextProvider/AudioContext";
 import {PageLoading} from "./customComponents/PageLoading";
 
 const LoginPage = React.lazy(() => import("./pages/login/loginPage"));
@@ -26,8 +27,8 @@ export const RouteEffect = () => {
 export function RoutedContentArea() {
   return (
     <Suspense fallback={<PageLoading />}>
+      <RouteEffect />
       <Routes>
-        <RouteEffect />
         <Route path="/" element={<MainPage />} />
         <Route path="/survey" element={<SurveyPage />} />
         <Route path="/plot" element={<SimilarityPlotPage />} />
