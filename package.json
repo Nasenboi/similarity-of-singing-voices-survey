@@ -101,7 +101,8 @@
     "vaul": "^1.1.2",
     "yaml": "^2.8.2",
     "zod": "^4.3.5",
-    "zod-from-json-schema": "^0.5.2"
+    "zod-from-json-schema": "^0.5.2",
+    "zod-i18n-map": "^2.27.0"
   },
   "meteor": {
     "mainModule": {
