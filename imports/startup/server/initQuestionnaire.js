@@ -1,4 +1,4 @@
-import {SurveyQuestions} from "@/imports/api/surveyQuestions/collection";
+import {QuestionnaireStats, SurveyQuestions} from "@/imports/api/surveyQuestions/collection";
 import {NUM_QUESTIONNAIRES, NUM_QUESTIONS_PER_SURVEY} from "@/imports/common/config";
 import {TRIPLETS_FILE_PATH} from "@/imports/common/globals";
 import {Log} from "meteor/logging";
@@ -46,6 +46,7 @@ function generateQuestionnaires(args) {
   const minNumQuestionnairs = Math.floor(numQuestions / NUM_QUESTIONS_PER_SURVEY);
   const allBatchIndicies = Array.from({length: numQuestions}, (_, i) => i);
 
+  let questionnaireIDs = new Set();
   let batchIndicies = [];
 
   // evenly spaced indices
@@ -59,6 +60,7 @@ function generateQuestionnaires(args) {
         batchIndicies,
       }),
     );
+    questionnaireIDs.add(i);
   }
 
   // random unique indices
@@ -72,8 +74,10 @@ function generateQuestionnaires(args) {
         batchIndicies,
       }),
     );
+
+    questionnaireIDs.add(i);
   }
-  return all_questions;
+  return {all_questions, questionnaireIDs: Array.from(questionnaireIDs)};
 }
 
 export async function initQuestionnaire() {
@@ -88,11 +92,23 @@ export async function initQuestionnaire() {
 
     const num_questionnaires = Math.max(tripletArray.shape[0] / NUM_QUESTIONS_PER_SURVEY, NUM_QUESTIONNAIRES);
 
-    const questionnaires = generateQuestionnaires({num_questionnaires, tripletArray});
+    const {all_questions: questionnaires, questionnaireIDs} = generateQuestionnaires({num_questionnaires, tripletArray});
 
-    questionnaires.map(async (q) => {
-      await SurveyQuestions.insertAsync(q);
-    });
+    await Promise.all(
+      questionnaireIDs.map(async (ID) => {
+        await QuestionnaireStats.insertAsync({
+          questionnaireID: ID,
+          participantCount: 0,
+          skip: false,
+        });
+      }),
+    );
+
+    await Promise.all(
+      questionnaires.map(async (q) => {
+        await SurveyQuestions.insertAsync(q);
+      }),
+    );
   } catch (error) {
     Log.error(error);
     Log.info(tripletURL);

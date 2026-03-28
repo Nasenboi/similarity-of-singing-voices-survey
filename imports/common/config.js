@@ -1,5 +1,6 @@
 // Survey Parameters
 export const NUM_QUESTIONS_PER_SURVEY = 30;
+export const MIN_NUM_QUESTIONS_PER_SURVEY = NUM_QUESTIONS_PER_SURVEY / 2;
 export const NUM_QUESTIONNAIRES = 1;
 
 // UI Parameters
