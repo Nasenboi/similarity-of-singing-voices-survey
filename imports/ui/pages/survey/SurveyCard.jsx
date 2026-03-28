@@ -60,7 +60,7 @@ export function SurveyCard({question, setSurveyAnswer, isMobile = false, isSubmi
       >
         <CardTitle className="w-full flex justify-between items-center">
           <div />
-          <H1 className={isMobile && "text-2xl"}>
+          <H1>
             {t("SurveyPage.cardTitle")} {question.questionNumber + 1}
           </H1>
           <Dialog open={dialogOpen} onOpenChange={(open) => setDialogOpen(open)}>
@@ -75,7 +75,7 @@ export function SurveyCard({question, setSurveyAnswer, isMobile = false, isSubmi
       </CardHeader>
       <div className="flex justify-center flex-col md:flex-row">
         <div className="md:p-4 p-2 size-full flex flex-row md:flex-col justify-center items-center">
-          <H2 className={isMobile && "text-xl"}>{t("SurveyPage.targetVoice")}</H2>
+          <H2>{t("SurveyPage.targetVoice")}</H2>
           <div className="size-full flex justify-center">
             <Button onClick={() => onVoiceClick(question["X"], "X")}>
               {t("SurveyPage.voice")} X {voicePlaying === "X" ? <Pause /> : <Play />}
@@ -86,7 +86,7 @@ export function SurveyCard({question, setSurveyAnswer, isMobile = false, isSubmi
         <div
           className={`w-full max-w-screen p-4 flex flex-col justify-center items-center md:border-l-2 max-md:border-t-2 ${isSubmitted && "border-accent-foreground"}`}
         >
-          <H2 className={isMobile && "text-xl"}>{t("SurveyPage.referenceVoices")}</H2>
+          <H2>{t("SurveyPage.referenceVoices")}</H2>
           <ButtonGroup className="max-w-sreen">
             <AudioButton
               trackID={question[[similarToX[0]]]}
@@ -114,13 +114,13 @@ export function SurveyCard({question, setSurveyAnswer, isMobile = false, isSubmi
             >
               <div className="flex items-center gap-3 max-md:justify-center">
                 <RadioGroupItem value="A" id="r1" />
-                <Large htmlFor="r1" className={`hover:underline ${isMobile && "text-sm"}`}>
+                <Large htmlFor="r1" className="hover:underline">
                   A {t("SurveyPage.and")} X {t("SurveyPage.areMoreSimilar")}
                 </Large>
               </div>
               <div className="flex items-center gap-3 max-md:justify-center">
                 <RadioGroupItem value="B" id="r2" />
-                <Large htmlFor="r2" className={`hover:underline ${isMobile && "text-sm"}`}>
+                <Large htmlFor="r2" className="hover:underline">
                   B {t("SurveyPage.and")} X {t("SurveyPage.areMoreSimilar")}
                 </Large>
               </div>
