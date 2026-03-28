@@ -56,7 +56,6 @@ export default function ParticipantListPage() {
 
   const onFilterChange = (value) => {
     setQuery(value);
-    console.log(query);
     setNext(null);
     setPrevious(null);
   };

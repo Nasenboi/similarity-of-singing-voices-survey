@@ -30,11 +30,6 @@ export function SongSearchForm({onFilterChange, query}) {
     },
   });
 
-  const isFormEmpty = () => {
-    const values = form.getValues();
-    return !values.trackID && !values.artist && !values.album && !values.hasComplaints && !values.skipInSurvey;
-  };
-
   useEffect(() => {
     if (query) {
       form.reset(query);
@@ -43,7 +38,7 @@ export function SongSearchForm({onFilterChange, query}) {
 
   return (
     <Card>
-      <Collapsible className="data-[state=open]:bg-muted" defaultOpen={!isFormEmpty()}>
+      <Collapsible className="data-[state=open]:bg-muted" defaultOpen={true}>
         <CollapsibleTrigger asChild>
           <CardHeader className="group">
             <CardTitle className="w-full flex items-center justify-between">

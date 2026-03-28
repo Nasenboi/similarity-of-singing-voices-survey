@@ -24,11 +24,6 @@ export function ParticipantSearchForm({onFilterChange, query}) {
     },
   });
 
-  const isFormEmpty = () => {
-    const values = form.getValues();
-    return !values.surveyCompleted && !values.questionnaireID;
-  };
-
   useEffect(() => {
     if (query) {
       form.reset(query);
@@ -37,7 +32,7 @@ export function ParticipantSearchForm({onFilterChange, query}) {
 
   return (
     <Card>
-      <Collapsible className="data-[state=open]:bg-muted" defaultOpen={!isFormEmpty()}>
+      <Collapsible className="data-[state=open]:bg-muted" defaultOpen={true}>
         <CollapsibleTrigger asChild>
           <CardHeader className="group">
             <CardTitle className="w-full flex items-center justify-between">

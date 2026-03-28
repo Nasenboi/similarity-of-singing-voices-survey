@@ -26,11 +26,6 @@ export function SurveyQuestionSearchForm({onFilterChange, query}) {
     },
   });
 
-  const isFormEmpty = () => {
-    const values = form.getValues();
-    return !values.questionnaireID && !values.questionNumber && !values.skip;
-  };
-
   useEffect(() => {
     if (query) {
       form.reset(query);
@@ -39,7 +34,7 @@ export function SurveyQuestionSearchForm({onFilterChange, query}) {
 
   return (
     <Card>
-      <Collapsible className="data-[state=open]:bg-muted" defaultOpen={!isFormEmpty()}>
+      <Collapsible className="data-[state=open]:bg-muted" defaultOpen={true}>
         <CollapsibleTrigger asChild>
           <CardHeader className="group">
             <CardTitle className="w-full flex items-center justify-between">
