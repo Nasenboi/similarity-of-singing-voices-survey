@@ -21,7 +21,7 @@ export function AudioPlayer() {
     if (audioRef.current) {
       audioRef.current.volume = volume;
     }
-  }, [audioRef.current]);
+  }, [volume]);
 
   useEffect(() => {
     const getURL = () => {
