@@ -3,9 +3,10 @@ import {Spinner} from "@/components/ui/spinner";
 import {useSurveyAnswersPaginated} from "@/imports/api/surveyAnswers/hooks";
 import {SURVEY_ANSWERS} from "@/imports/api/surveyAnswers/methods";
 import {useIsLoggedIn} from "@/imports/api/users/hooks";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
+import {useAudioContext} from "../../contextProvider/AudioContext";
 import {AudioPlayer} from "../../customComponents/AudioPlayer";
 import {DataTable} from "../../customComponents/DataTable";
 import {SurveyAnswerInfoModal} from "./SurveyAnswerInfoModal";
@@ -29,6 +30,10 @@ export default function SurveyAnswerListPage() {
     next,
     previous,
   });
+  const {setTrackID} = useAudioContext();
+  useEffect(() => {
+    setTrackID(null);
+  }, []);
 
   const surveyAnswerColumns = [
     {
