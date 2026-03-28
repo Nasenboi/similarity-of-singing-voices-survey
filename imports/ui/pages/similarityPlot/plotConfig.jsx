@@ -27,6 +27,13 @@ export const MARKER_COLORS = {
   dark: {colorscale: "Picnic"},
 };
 
+export const LINE_COLORS = {
+  light: "black",
+  dark: "white",
+};
+
+export const LINE_OPACITY = 0.1;
+
 export const CONFIG = {
   displayModeBar: false,
   scrollZoom: true,

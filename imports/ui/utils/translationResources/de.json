@@ -103,6 +103,11 @@
     },
     "3D": {
       "title": "3D Graph"
+    },
+    "Settings": {
+      "hideTriplets": "Drillinge ausblenden",
+      "showTriplets": "Drillinge einblenden",
+      "triplets": "Drillinge"
     }
   },
   "SongInfoModal": {

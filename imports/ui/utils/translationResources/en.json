@@ -103,6 +103,11 @@
     },
     "3D": {
       "title": "3D Plot"
+    },
+    "Settings": {
+      "hideTriplets": "Hide Triplets",
+      "showTriplets": "Show Triplets",
+      "triplets": "Triplets"
     }
   },
   "SongInfoModal": {

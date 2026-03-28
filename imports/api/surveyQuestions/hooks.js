@@ -4,6 +4,7 @@ import {useTracker} from "meteor/react-meteor-data";
 import React from "react";
 import {Pagination} from "../collection/pagination";
 import {SurveyQuestions} from "./collection";
+import {LinesCollection} from "./lines";
 
 export const useSurveyQuestionsParticipant = (participantID) =>
   useTracker(() => {
@@ -28,6 +29,18 @@ export const useSurveyQuestionsSingle = (surveyQuestionID) =>
       isLoading: !subscriptionHandle.ready(),
     };
   }, [surveyQuestionID]);
+
+export const useSurveyQuestionsLines = ({participantID, dimensions}) =>
+  useTracker(() => {
+    if (!participantID || !dimensions) return {lines: null, isLoading: false};
+    const subscriptionHandle = Meteor.subscribe("surveyQuestions.lines", {participantID, dimensions});
+    const lines = LinesCollection.find().fetch();
+
+    return {
+      lines,
+      isLoading: !subscriptionHandle.ready(),
+    };
+  }, [participantID, dimensions]);
 
 export const useSurveyQuestionsPaginated = ({query, next, previous}) =>
   useTracker(() => {

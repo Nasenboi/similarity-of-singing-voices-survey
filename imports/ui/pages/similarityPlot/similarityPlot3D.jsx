@@ -3,9 +3,9 @@ import React, {useEffect} from "react";
 import {useTranslation} from "react-i18next";
 import Plot from "react-plotly.js";
 import {useAudioContext} from "../../contextProvider/AudioContext";
-import {AXIS_LAYOUT, CONFIG, LAYOUT, MARKER_COLORS} from "./plotConfig";
+import {AXIS_LAYOUT, CONFIG, LAYOUT, LINE_COLORS, LINE_OPACITY, MARKER_COLORS} from "./plotConfig";
 
-function SimilarityPlot3Dm({songs}) {
+function SimilarityPlot3Dm({songs, lines}) {
   const {setTrackID} = useAudioContext();
   const {t} = useTranslation();
   const {theme} = useTheme();
@@ -48,7 +48,29 @@ function SimilarityPlot3Dm({songs}) {
       line: {width: 0},
       opacity: 0.8,
     },
+    showlegend: false,
   };
+
+  const lineTraces =
+    lines?.map((l) => {
+      const {_id, ...cords} = l;
+
+      // Use RGBA to control opacity
+      const baseColor = LINE_COLORS[theme || "light"];
+      const colorWithOpacity = baseColor === "black" ? `rgba(0,0,0,${LINE_OPACITY})` : `rgba(255,255,255,${LINE_OPACITY})`;
+
+      return {
+        ...cords,
+        type: "scatter3d", // <- important for 3D`
+        mode: "lines",
+        line: {
+          color: colorWithOpacity,
+          width: 1,
+        },
+        hoverinfo: "skip",
+        showlegend: false,
+      };
+    }) || [];
 
   const axisLayout = AXIS_LAYOUT;
 
@@ -70,7 +92,7 @@ function SimilarityPlot3Dm({songs}) {
     setTrackID(points[0].customdata.trackID);
   };
 
-  return <Plot className="size-full" onClick={onPointClick} data={[trace]} layout={layout} config={config} />;
+  return <Plot className="size-full" onClick={onPointClick} data={[trace, ...lineTraces]} layout={layout} config={config} />;
 }
 
 export const SimilarityPlot3D = React.memo(SimilarityPlot3Dm);
