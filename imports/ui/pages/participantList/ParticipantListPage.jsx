@@ -21,10 +21,6 @@ export default function ParticipantListPage() {
   const [previous, setPrevious] = useState(null);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [participantID, setParticipantID] = useState(null);
-  const {setTrackID} = useAudioContext();
-  useEffect(() => {
-    setTrackID(null);
-  }, []);
 
   const {
     participants,

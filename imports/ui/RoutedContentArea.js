@@ -1,5 +1,5 @@
 import React, {Suspense} from "react";
-import {Route, Routes} from "react-router-dom";
+import {Route, Routes, useLocation} from "react-router-dom";
 import {PageLoading} from "./customComponents/PageLoading";
 
 const LoginPage = React.lazy(() => import("./pages/login/loginPage"));
@@ -12,10 +12,22 @@ const SurveyPage = React.lazy(() => import("./pages/survey/SurveyPage"));
 const SurveyAnswerListPage = React.lazy(() => import("./pages/surveyAnswerList/SurveyAnswerListPage"));
 const SurveyQuestionListPage = React.lazy(() => import("./pages/surveyQuestionList/SurveyQuestionListPage"));
 
+export const RouteEffect = () => {
+  const {setTrackID} = useAudioContext();
+  const location = useLocation();
+
+  useEffect(() => {
+    setTrackID(null);
+  }, [location.pathname]);
+
+  return null;
+};
+
 export function RoutedContentArea() {
   return (
     <Suspense fallback={<PageLoading />}>
       <Routes>
+        <RouteEffect />
         <Route path="/" element={<MainPage />} />
         <Route path="/survey" element={<SurveyPage />} />
         <Route path="/plot" element={<SimilarityPlotPage />} />

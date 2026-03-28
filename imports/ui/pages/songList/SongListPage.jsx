@@ -31,10 +31,6 @@ export default function SongListPage() {
     previous,
   });
 
-  useEffect(() => {
-    setTrackID(null);
-  }, []);
-
   const songColumns = [
     {
       accessorKey: "trackID",

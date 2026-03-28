@@ -30,10 +30,6 @@ export default function SurveyQuestionListPage() {
     next,
     previous,
   });
-  const {setTrackID} = useAudioContext();
-  useEffect(() => {
-    setTrackID(null);
-  }, []);
 
   const surveyQuestionColumns = [
     {
