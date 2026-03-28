@@ -45,7 +45,7 @@ Meteor.publish("songs.paginated", function ({query, next, previous}) {
 
     const numericFields = ["trackID"];
     const booleanFields = [];
-    const {hasComplaints, skipInSurvey, q} = query || {};
+    const {hasComplaints, skipInSurvey, ...q} = query || {};
 
     // note: buildPaginationQuery expects { query: ... }, not { q: ... }
     let newQuery = buildPaginationQuery({query: q, numericFields, booleanFields});
@@ -95,7 +95,7 @@ Meteor.publish("songs.paginated", function ({query, next, previous}) {
     await refreshPage();
     if (stopped) return;
 
-    const {hasComplaints, skipInSurvey, q} = query || {};
+    const {hasComplaints, skipInSurvey, ...q} = query || {};
     let reactiveQuery = buildPaginationQuery({query: q, numericFields: ["trackID"], booleanFields: []});
     if (hasComplaints) reactiveQuery["complaints.0"] = {$exists: true};
     if (skipInSurvey) reactiveQuery.skipInSurvey = true;

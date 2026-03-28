@@ -3,10 +3,9 @@ import {Spinner} from "@/components/ui/spinner";
 import {useParticipantsPaginated} from "@/imports/api/participants/hooks";
 import {PARTICIPANTS} from "@/imports/api/participants/methods";
 import {useIsLoggedIn} from "@/imports/api/users/hooks";
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
-import {useAudioContext} from "../../contextProvider/AudioContext";
 import {AudioPlayer} from "../../customComponents/AudioPlayer";
 import {DataTable} from "../../customComponents/DataTable";
 import {ParticipantInfoModal} from "./ParticipantInfoModal";
@@ -38,6 +37,10 @@ export default function ParticipantListPage() {
       header: t("Collections.DBMetaData.itemNumber"),
     },
     {
+      accessorKey: "questionnaireID",
+      header: t("Collections.SurveyQuestions.questionnaireID"),
+    },
+    {
       accessorKey: "surveyCompleted",
       header: t("Collections.Participants.surveyCompleted"),
     },
@@ -53,6 +56,7 @@ export default function ParticipantListPage() {
 
   const onFilterChange = (value) => {
     setQuery(value);
+    console.log(query);
     setNext(null);
     setPrevious(null);
   };
