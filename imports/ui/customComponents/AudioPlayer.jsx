@@ -25,7 +25,7 @@ export function AudioPlayer() {
 
   useEffect(() => {
     const getURL = () => {
-      if (!song || isSongLoading) {
+      if (!trackID || !song || isSongLoading) {
         return;
       }
       if (useBackgroundMusic) {
