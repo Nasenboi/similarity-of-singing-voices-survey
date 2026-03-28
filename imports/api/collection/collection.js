@@ -99,7 +99,7 @@ export class Collection extends Mongo.Collection {
    * @param {Object} query Optional query to filter by
    * @returns {Promise<Number>} The count of documents.
    */
-  async countAsync(query) {
+  async countAsync(query = {}) {
     return await this.find(query).countAsync();
   }
 }
