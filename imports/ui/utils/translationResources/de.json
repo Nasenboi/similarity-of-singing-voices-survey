@@ -70,7 +70,7 @@
     }
   },
   "MainPage": {
-    "content": "In dieser Umfrage geht es um die Ähnlichkeit von Gesangsstimmen. Sie hören jeweils drei kurze Musikausschnitte (A, B und X). X enthält die Zielstimme, A und B sind Referenzstimmen. Wählen Sie nach dem Anhören jedes Ausschnitts die Referenzstimme aus, die der Zielstimme am ähnlichsten ist. Achten Sie bei der Beantwortung der Fragen nicht auf die im Hintergrund spielenden Instrumente. Wenn Sie die Instrumente stören, können Sie sie in den Einstellungen deaktivieren.",
+    "content": "In dieser Umfrage geht es um die Ähnlichkeit von Gesangsstimmen. Sie hören jeweils drei kurze Musikausschnitte: 'A', 'B' und 'X'. 'X' enthält die Zielstimme, 'A' und 'B' sind Referenzstimmen. Wählen Sie nach dem Anhören jedes Ausschnitts die Referenzstimme aus, die der Zielstimme am ähnlichsten ist. Achten Sie bei der Beantwortung der Fragen nicht auf die im Hintergrund spielenden Instrumente. Wenn Sie die Instrumente stören, können Sie sie in den Einstellungen deaktivieren.",
     "description": "Diese Umfrage wird ungefähr 15 Minuten dauern.",
     "startSurvey": "Umfrage starten",
     "title": "Willkommen zur Umfrage"
