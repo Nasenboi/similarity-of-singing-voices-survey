@@ -25,7 +25,7 @@ Meteor.publish("surveyQuestions.single", async function (surveyQuestionID) {
   return SurveyQuestions.find(surveyQuestionID);
 });
 
-Meteor.publish("surveyQuestions.lines", async function ({participantID, dimensions}) {
+Meteor.publish("surveyQuestions.lines", async function ({participantID, dimensions, query}) {
   const isAdmin = await isAdminUser(this.userId);
   if (!participantID && !isAdmin) return this.ready();
   if (!isAdmin) {
@@ -34,7 +34,7 @@ Meteor.publish("surveyQuestions.lines", async function ({participantID, dimensio
   }
   if (dimensions !== "2D" && dimensions !== "3D") return this.ready();
 
-  const questions = await SurveyQuestions.find().fetchAsync();
+  const questions = await SurveyQuestions.find({...query}).fetchAsync();
   const songs = await Songs.find().fetchAsync();
 
   const getCoords = (trackID) => {

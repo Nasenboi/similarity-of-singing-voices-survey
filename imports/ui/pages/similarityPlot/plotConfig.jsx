@@ -32,7 +32,7 @@ export const LINE_COLORS = {
   dark: "white",
 };
 
-export const LINE_OPACITY = 0.1;
+export const LINE_OPACITY = 0.2;
 
 export const CONFIG = {
   displayModeBar: false,

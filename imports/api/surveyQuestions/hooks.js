@@ -30,17 +30,17 @@ export const useSurveyQuestionsSingle = (surveyQuestionID) =>
     };
   }, [surveyQuestionID]);
 
-export const useSurveyQuestionsLines = ({participantID, dimensions}) =>
+export const useSurveyQuestionsLines = ({participantID, dimensions, query}) =>
   useTracker(() => {
     if (!participantID || !dimensions) return {lines: null, isLoading: false};
-    const subscriptionHandle = Meteor.subscribe("surveyQuestions.lines", {participantID, dimensions});
+    const subscriptionHandle = Meteor.subscribe("surveyQuestions.lines", {participantID, dimensions, query});
     const lines = LinesCollection.find().fetch();
 
     return {
       lines,
       isLoading: !subscriptionHandle.ready(),
     };
-  }, [participantID, dimensions]);
+  }, [participantID, dimensions, query]);
 
 export const useSurveyQuestionsPaginated = ({query, next, previous}) =>
   useTracker(() => {
