@@ -114,15 +114,19 @@ export function SurveyCard({question, setSurveyAnswer, isMobile = false, isSubmi
             >
               <div className="flex items-center gap-3 max-md:justify-center">
                 <RadioGroupItem value="A" id="r1" />
-                <Large htmlFor="r1" className="hover:underline">
-                  A {t("SurveyPage.and")} X {t("SurveyPage.areMoreSimilar")}
-                </Large>
+                <label htmlFor="r1">
+                  <Large htmlFor="r1" className="hover:underline">
+                    A {t("SurveyPage.and")} X {t("SurveyPage.areMoreSimilar")}
+                  </Large>
+                </label>
               </div>
               <div className="flex items-center gap-3 max-md:justify-center">
                 <RadioGroupItem value="B" id="r2" />
-                <Large htmlFor="r2" className="hover:underline">
-                  B {t("SurveyPage.and")} X {t("SurveyPage.areMoreSimilar")}
-                </Large>
+                <label htmlFor="r2">
+                  <Large className="hover:underline">
+                    B {t("SurveyPage.and")} X {t("SurveyPage.areMoreSimilar")}
+                  </Large>
+                </label>
               </div>
             </RadioGroup>
             <div className="-mb-4 w-full flex justify-center">
