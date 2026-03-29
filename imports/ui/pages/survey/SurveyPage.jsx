@@ -1,4 +1,16 @@
+import {Button} from "@/components/ui/button";
+import {ButtonGroup, ButtonGroupSeparator} from "@/components/ui/button-group";
 import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+} from "@/components/ui/drawer";
+import {Field, FieldLabel} from "@/components/ui/field";
 import {Progress} from "@/components/ui/progress";
 import {Spinner} from "@/components/ui/spinner";
 import {useSurveyAnswersParticipant} from "@/imports/api/surveyAnswers/hooks";
@@ -15,6 +27,7 @@ import {
 import {AnimatePresence, motion} from "motion/react";
 import React, {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
+import {useNavigate} from "react-router-dom";
 import {useAudioContext} from "../../contextProvider/AudioContext";
 import {useParticipantContext} from "../../contextProvider/ParticipantContext";
 import {AudioPlayer} from "../../customComponents/AudioPlayer";
@@ -30,6 +43,8 @@ export default function SurveyPage() {
   const [surveyProgress, setSurveyProgress] = useState(0);
   const [questionsAnswered, setQuestionsAnswered] = useState([]);
   const [isMobile, setIsMobile] = useState(false);
+  const [drawerDismissed, setDrawerDismissed] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -217,6 +232,27 @@ export default function SurveyPage() {
       <div className="fixed bottom-0 max-w-500 w-full flex items-center">
         <AudioPlayer />
       </div>
+
+      <Drawer open={participant?.surveyCompleted && !drawerDismissed} dismissable>
+        <DrawerContent>
+          <DrawerHeader className="flex flex-col justify-center items-center">
+            <DrawerTitle>{t("SurveyPage.Completed.title")}</DrawerTitle>
+            <DrawerDescription>{t("SurveyPage.Completed.description")}</DrawerDescription>
+          </DrawerHeader>
+          <DrawerFooter className="flex justify-center items-center space-y-4">
+            <ButtonGroup>
+              <Button onClick={() => navigate("/")}>{t("Sidebar.Navigation.home")}</Button>
+              <ButtonGroupSeparator />
+              <Button onClick={() => navigate("/plot")}>{t("Sidebar.Navigation.similarityPlot")}</Button>
+            </ButtonGroup>
+            <DrawerClose asChild>
+              <Button variant="outline" onClick={() => setDrawerDismissed(true)}>
+                {t("Common.close")}
+              </Button>
+            </DrawerClose>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
     </div>
   );
 }

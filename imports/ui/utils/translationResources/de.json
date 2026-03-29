@@ -124,6 +124,10 @@
       "notVoiced": "Keine Stimme",
       "title": "Audiofehlermeldung"
     },
+    "Completed": {
+      "description": "Vielen Dank für Ihre Teinahme. Als kleine Belohnung können Sie nun den Ähnlichkeitsgraphen ansehen, welcher alle Songs beinhaltet, viel Spaß dabei!",
+      "title": "Umfrage beendet"
+    },
     "and": "und",
     "areMoreSimilar": "sind sich ähnlicher",
     "cardTitle": "Frage",

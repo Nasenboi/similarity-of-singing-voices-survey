@@ -124,6 +124,10 @@
       "notVoiced": "Not Voiced",
       "title": "Audio Issue Report"
     },
+    "Completed": {
+      "description": "Thank you very much for completing the survey. As a small reward you can now check out the similarity plot for all songs, have fun!",
+      "title": "Survey Completed"
+    },
     "and": "and",
     "areMoreSimilar": "are more similar",
     "cardTitle": "Question",
