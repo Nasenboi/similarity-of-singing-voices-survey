@@ -21,11 +21,11 @@ export function AudioPlayer() {
     if (audioRef.current) {
       audioRef.current.volume = volume;
     }
-  }, [audioRef.current]);
+  }, [volume]);
 
   useEffect(() => {
     const getURL = () => {
-      if (!song || isSongLoading) {
+      if (!trackID || !song || isSongLoading) {
         return;
       }
       if (useBackgroundMusic) {
@@ -42,7 +42,7 @@ export function AudioPlayer() {
       setIsPlaying(true);
       audioRef.current?.play();
     }
-  }, [song]);
+  }, [song, useBackgroundMusic]);
 
   useEffect(() => {
     togglePlay();
@@ -113,6 +113,7 @@ export function AudioPlayer() {
               </div>
             )}
             <audio ref={audioRef} onTimeUpdate={handleTimeUpdate} onEnded={() => setIsPlaying(false)} />
+
             <Button
               className="rounded-full md:size-10 size-8"
               onClick={() => {

@@ -15,7 +15,7 @@ export const App = () => {
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <AudioProvider>
             <ParticipantProvider>
-              <BrowserRouter>
+              <BrowserRouter future={{v7_startTransition: true, v7_relativeSplatPath: true}}>
                 <SideBarToggle />
                 <AppSideBar />
                 <RoutedContentArea />

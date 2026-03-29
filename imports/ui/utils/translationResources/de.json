@@ -1,125 +1,136 @@
 {
-  "translation": {
-    "Collections": {
-      "DBMetaData": {
-        "_id": "ID",
-        "createDate": "Erstellt",
-        "editDate": "Editiert",
-        "itemNumber": "Nummer"
-      },
-      "Participants": {
-        "participant": "Teilnehmer",
-        "surveyCompleted": "Umfrage beendet"
-      },
-      "Songs": {
-        "album": "Album",
-        "albumDateCreated": "Erstellt",
-        "albumDateReleased": "Veröffentlicht",
-        "artist": "Künstler",
-        "cluster": "Cluster",
-        "complaint": "Audiofehler",
-        "complaints": "Audiofehler",
-        "filename": "Dateiname",
-        "genre": "Genre",
-        "hasComplaints": "Hat Audiofehler",
-        "onsets": "Onsets",
-        "skipInSurvey": "Aus Umfrage löschen",
-        "song": "Lied",
-        "trackID": "Track ID",
-        "vocalContentLengthS": "Länge der Stimmaufnahme (s)"
-      },
-      "SurveyAnswers": {
-        "answer": "Antwort",
-        "answers": "Antworten",
-        "participantID": "Teilnehmer ID",
-        "questionID": "Fragen ID"
-      },
-      "SurveyQuestions": {
-        "A": "A",
-        "B": "B",
-        "X": "X",
-        "question": "Frage",
-        "questionNumber": "Frage",
-        "questionnaireID": "Umfrage ID",
-        "skip": "Übersprungen"
-      },
-      "metadata": "Metadaten",
-      "participants": "Teilnehmer",
-      "songs": "Lieder",
-      "surveyAnswers": "Antworten",
-      "surveyQuestions": "Fragen"
+  "Collections": {
+    "DBMetaData": {
+      "_id": "ID",
+      "createDate": "Erstellt",
+      "editDate": "Editiert",
+      "itemNumber": "Nr."
     },
-    "Common": {
-      "close": "Schließen",
-      "loading": "Läd..",
-      "next": "weiter",
-      "no": "Nein",
-      "noResults": "Keine Ergebnisse",
-      "previous": "zurück",
-      "submit": "Bestätigen",
-      "yes": "Ja"
+    "Participants": {
+      "participant": "Teilnehmer",
+      "surveyCompleted": "Umfrage beendet"
     },
-    "Components": {
-      "InfoTable": {
-        "field": "Feld",
-        "value": "Wert"
-      }
+    "Songs": {
+      "album": "Album",
+      "albumDateCreated": "Erstellt",
+      "albumDateReleased": "Veröffentlicht",
+      "artist": "Künstler",
+      "cluster": "Cluster",
+      "complaint": "Audiofehler",
+      "complaints": "Audiofehler",
+      "filename": "Dateiname",
+      "genre": "Genre",
+      "hasComplaints": "Hat Audiofehler",
+      "onsets": "Onsets",
+      "skipInSurvey": "Aus Umfrage löschen",
+      "song": "Lied",
+      "trackID": "Track ID",
+      "vocalContentLengthS": "Länge der Stimmaufnahme (s)"
     },
-    "MainPage": {
-      "content": "Das Thema dieser Umfrage ist die Ähnlichkeit von Gesangsstimmen. Sie werden Drillinge an kurzen Musikausschnitten hören (A, B und X). X beinhaltet die Zielstimme, A und B sollen mit ihr verglichen werden. Wählen die nach dem Hören die Stimme, die X am ähnlichsten klingt. Ignorieren Sie für Ihre Entscheidungen die Instrumente im Hintergrund.",
-      "description": "Diese Umfrage wird ungefähr 15 Minuten dauern.",
-      "startSurvey": "Umfrage starten",
-      "title": "Willkommen zur Umfrage!"
+    "SurveyAnswers": {
+      "answer": "Antwort",
+      "answers": "Antworten",
+      "participantID": "Teilnehmer ID",
+      "questionID": "Fragen ID"
     },
-    "Sidebar": {
-      "Navigation": {
-        "home": "Startseite",
-        "navigation": "Navigation",
-        "similarityPlot": "Ähnlichkeitsgraph",
-        "survey": "Umfrage"
-      },
-      "Theme": {
-        "dark": "Dunkel",
-        "light": "Hell",
-        "system": "System",
-        "toggle": "Farbschema wechseln"
-      },
-      "backgroundMusic": "Instrumente",
-      "language": "Sprache",
-      "settings": "Einstellungen",
-      "skipSilence": "Stille Überspringen",
-      "theme": "Farbschema"
+    "SurveyQuestions": {
+      "A": "A",
+      "B": "B",
+      "X": "X",
+      "question": "Frage",
+      "questionNumber": "Frage Nr.",
+      "questionnaireID": "Umfrage ID",
+      "skip": "Übersprungen"
     },
-    "SimilarityPlot": {
-      "2D": {
-        "title": "2D Plot"
-      },
-      "3D": {
-        "title": "3D Plot"
-      }
+    "metadata": "Metadaten",
+    "participants": "Teilnehmer",
+    "songs": "Lieder",
+    "surveyAnswers": "Antworten",
+    "surveyQuestions": "Fragen"
+  },
+  "Common": {
+    "close": "Schließen",
+    "loading": "Läd...",
+    "next": "Weiter",
+    "no": "Nein",
+    "noResults": "Keine Ergebnisse",
+    "ok": "Ok",
+    "previous": "Zurück",
+    "submit": "Bestätigen",
+    "yes": "Ja"
+  },
+  "Components": {
+    "InfoTable": {
+      "field": "Feld",
+      "value": "Wert"
     },
-    "SongInfoModal": {
-      "showComplaints": "Audioprobleme",
-      "showInfo": "Song Infos",
-      "skipInSurveyFalse": "In Umfrage behalten",
-      "skipInSurveyTrue": "Aus Umfrage löschen"
+    "SongSearchForm": {
+      "downloadComplaints": "Audiofehler herunterladen"
     },
-    "SurveyPage": {
-      "ComplaintForm": {
-        "badVoiceQuality": "Schlechte Stimmqualität",
-        "message": "Nachricht",
-        "multipleVoices": "Mehrere Stimmen",
-        "notVoiced": "Keine Stimme",
-        "title": "Audiofehlermeldung"
-      },
-      "and": "und",
-      "areMoreSimilar": "sind sich ähnlicher",
-      "cardTitle": "Frage",
-      "description": "Wählen Sie die Stimmoption, die der Zielstimme am ähnlichsten klingt",
-      "referenceVoices": "Referenzstimmen",
-      "targetVoice": "Zielstimme",
-      "title": "Ähnlichkeit von Gesangsstimmen",
-      "voice": "Stimme"
+    "Tooltips": {
+      "settings": "Passen Sie hier die Umfrage an ihre Bedürfnisse an",
+      "voiceMarker": "Springe zu Liedabschnitten mit Gesangsstimmen"
     }
+  },
+  "MainPage": {
+    "content": "In dieser Umfrage geht es um die Ähnlichkeit von Gesangsstimmen. Sie hören jeweils drei kurze Musikausschnitte: 'A', 'B' und 'X'. 'X' enthält die Zielstimme, 'A' und 'B' sind Referenzstimmen. Wählen Sie nach dem Anhören jedes Ausschnitts die Referenzstimme aus, die der Zielstimme am ähnlichsten ist. Achten Sie bei der Beantwortung der Fragen nicht auf die im Hintergrund spielenden Instrumente. Wenn Sie die Instrumente stören, können Sie sie in den Einstellungen deaktivieren.",
+    "description": "Diese Umfrage wird ungefähr 15 Minuten dauern.",
+    "startSurvey": "Umfrage starten",
+    "title": "Willkommen zur Umfrage"
+  },
+  "Sidebar": {
+    "Navigation": {
+      "home": "Startseite",
+      "navigation": "Navigation",
+      "similarityPlot": "Ähnlichkeitsgraph",
+      "survey": "Umfrage"
+    },
+    "Theme": {
+      "dark": "Dunkel",
+      "light": "Hell",
+      "system": "System",
+      "toggle": "Farbschema wechseln"
+    },
+    "backgroundMusic": "Instrumente",
+    "language": "Sprache",
+    "settings": "Einstellungen",
+    "skipSilence": "Zum Gesang springen",
+    "theme": "Farbschema"
+  },
+  "SimilarityPlot": {
+    "2D": {
+      "title": "2D Graph"
+    },
+    "3D": {
+      "title": "3D Graph"
+    },
+    "Settings": {
+      "hideTriplets": "Drillinge ausblenden",
+      "showTriplets": "Drillinge einblenden",
+      "triplets": "Drillinge"
+    }
+  },
+  "SongInfoModal": {
+    "showComplaints": "Audioprobleme",
+    "showInfo": "Song Infos",
+    "skipInSurveyFalse": "In Umfrage behalten",
+    "skipInSurveyTrue": "Aus Umfrage löschen"
+  },
+  "SurveyPage": {
+    "ComplaintForm": {
+      "badVoiceQuality": "Schlechte Stimmqualität",
+      "message": "Nachricht",
+      "multipleVoices": "Mehrere Stimmen",
+      "notVoiced": "Keine Stimme",
+      "title": "Audiofehlermeldung"
+    },
+    "and": "und",
+    "areMoreSimilar": "sind sich ähnlicher",
+    "cardTitle": "Frage",
+    "description": "Wählen Sie die Stimmoption, die der Zielstimme am ähnlichsten klingt",
+    "referenceVoices": "Referenzstimmen",
+    "targetVoice": "Zielstimme",
+    "title": "Ähnlichkeit von Gesangsstimmen",
+    "voice": "Stimme"
   }
 }

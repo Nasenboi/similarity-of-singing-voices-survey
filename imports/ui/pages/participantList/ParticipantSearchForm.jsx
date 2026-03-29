@@ -11,6 +11,7 @@ import {AutoField} from "../../customComponents/AutoField";
 
 const searchFormSchema = z.object({
   surveyCompleted: z.boolean().optional().default(false),
+  questionnaireID: z.number().optional(),
 });
 
 export function ParticipantSearchForm({onFilterChange, query}) {
@@ -19,13 +20,9 @@ export function ParticipantSearchForm({onFilterChange, query}) {
     resolver: zodResolver(searchFormSchema),
     defaultValues: {
       surveyCompleted: query?.surveyCompleted || false,
+      questionnaireID: query?.questionnaireID || undefined,
     },
   });
-
-  const isFormEmpty = () => {
-    const values = form.getValues();
-    return !values.surveyCompleted;
-  };
 
   useEffect(() => {
     if (query) {
@@ -35,7 +32,7 @@ export function ParticipantSearchForm({onFilterChange, query}) {
 
   return (
     <Card>
-      <Collapsible className="data-[state=open]:bg-muted" defaultOpen={!isFormEmpty()}>
+      <Collapsible className="data-[state=open]:bg-muted" defaultOpen={true}>
         <CollapsibleTrigger asChild>
           <CardHeader className="group">
             <CardTitle className="w-full flex items-center justify-between">
@@ -53,6 +50,13 @@ export function ParticipantSearchForm({onFilterChange, query}) {
                 name="surveyCompleted"
                 label={t("Collections.Participants.surveyCompleted")}
                 type="bool"
+              />
+              <AutoField
+                className="col-span-1"
+                form={form}
+                name="questionnaireID"
+                label={t("Collections.SurveyQuestions.questionnaireID")}
+                type="number"
               />
               <div className="col-span-3 flex justify-end">
                 <Button type="submit">{t("Common.submit")}</Button>

@@ -1,4 +1,3 @@
-import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "@/components/ui/accordion";
 import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
 import {Progress} from "@/components/ui/progress";
 import {Spinner} from "@/components/ui/spinner";
@@ -21,7 +20,7 @@ import {useParticipantContext} from "../../contextProvider/ParticipantContext";
 import {AudioPlayer} from "../../customComponents/AudioPlayer";
 import {SurveyCard} from "./SurveyCard";
 
-export function SurveyPage() {
+export default function SurveyPage() {
   const {t} = useTranslation();
   const {isPlaying, setIsPlaying} = useAudioContext();
   const {participant, isLoading: isParticipantLoading} = useParticipantContext();
@@ -57,11 +56,11 @@ export function SurveyPage() {
     const numAnswers = surveyAnswers.length;
 
     const sp = Math.round((100 * numAnswers) / numQuestions);
-    setSurveyProgress(sp);
+    setSurveyProgress(sp ? sp : 0);
 
     const questionsAnswered = surveyAnswers.map((a) => surveyQuestions.find((q) => q._id === a.questionID)?.questionNumber);
     setQuestionsAnswered(questionsAnswered);
-  }, [surveyQuestions, surveyAnswers, isSurveyAnswersLoading, isSurveyQuestionsLoading]);
+  }, [surveyQuestions, surveyAnswers]);
 
   const handlePageChange = (newPage) => {
     if (!surveyQuestions) {
@@ -111,21 +110,14 @@ export function SurveyPage() {
   return (
     <div className="w-screen h-screen max-w-screen max-h-screen flex flex-col justify-center items-center">
       <Card className="fixed top-0 ms-50 max-w-500 w-full m-2 md:m-4 bg-background z-10">
-        <Accordion className="p-0 m-0" type="single" collapsible defaultValue="content">
-          <AccordionItem className="p-0 m-0" value="content">
-            <AccordionTrigger className="max-md:w-full p-0 px-2 md:px-4">
-              <CardHeader className="w-full">
-                <CardTitle className="text-center max-md:text-lg max-md:w-full">{t("SurveyPage.title")}</CardTitle>
-              </CardHeader>
-            </AccordionTrigger>
-            <AccordionContent className="m-0 p-0">
-              <CardContent className="border-b-2 max-md:w-full max-md:px-0">
-                <p className="text-center max-md:text-xs">{t("SurveyPage.description")}</p>
-              </CardContent>
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
-
+        <CardHeader className="w-full">
+          <CardTitle className="text-center max-md:text-lg max-md:w-full">{t("SurveyPage.title")}</CardTitle>
+        </CardHeader>
+        {!isMobile && (
+          <CardContent className="border-b-2 max-md:w-full max-md:px-0">
+            <p className="text-center max-md:text-xs">{t("SurveyPage.description")}</p>
+          </CardContent>
+        )}
         <CardFooter>
           <div className="mt-2 md:space-y-4 space-y-2 w-full flex flex-col">
             <Pagination>
@@ -191,8 +183,7 @@ export function SurveyPage() {
       </Card>
 
       <div className="w-full flex flex-col justify-between items-center overflow-scroll md:overflow-hidden">
-        <div className="w-full h-60" />
-
+        <div className="w-full md:h-60 h-45" />
         <div className="w-full flex flex-col justify-between items-center overflow-hidden relative">
           <AnimatePresence mode="wait">
             {surveyQuestions?.find((q) => q.questionNumber === currentPage) ? (
@@ -205,6 +196,7 @@ export function SurveyPage() {
               >
                 <div className="size-full flex justify-center items-center">
                   <SurveyCard
+                    isMobile={isMobile}
                     question={surveyQuestions?.find((q) => q.questionNumber === currentPage)}
                     setSurveyAnswer={setSurveyAnswer}
                     isSubmitted={questionsAnswered.includes(currentPage)}

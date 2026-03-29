@@ -1,5 +1,5 @@
 import {ValidatedMethod} from "meteor/mdg:validated-method";
-import {getNextQuestionnaireID} from "../surveyQuestions/helpers";
+import {getQuestionnaireIDAtomic} from "../surveyQuestions/helpers";
 import {isAdminUser} from "../users/helpers";
 import {toCSV} from "../utils";
 import {Participants} from "./collection";
@@ -12,7 +12,7 @@ export const PARTICIPANTS = {
       if (this.isSimulation) return;
 
       const itemID = await Participants.insertAsync({
-        questionnaireID: await getNextQuestionnaireID(),
+        questionnaireID: await getQuestionnaireIDAtomic(),
       });
 
       return itemID;

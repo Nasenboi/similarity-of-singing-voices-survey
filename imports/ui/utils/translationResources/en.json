@@ -1,127 +1,138 @@
 {
-  "translation": {
-    "Collections": {
-      "DBMetaData": {
-        "_id": "ID",
-        "createDate": "Creation Date",
-        "editDate": "Edit Date",
-        "itemNumber": "Item Number"
-      },
-      "Participants": {
-        "participant": "Teilnehmer",
-        "surveyCompleted": "Survey Completed"
-      },
-      "Songs": {
-        "album": "Album",
-        "albumDateCreated": "Creation Date",
-        "albumDateReleased": "Release Date",
-        "artist": "Artist",
-        "cluster": "Cluster",
-        "complaint": "Audio Issue",
-        "complaints": "Audio Issues",
-        "filename": "File Name",
-        "genre": "Genre",
-        "hasComplaints": "Has Audio Issues",
-        "onsets": "Onsets",
-        "skipInSurvey": "Skip in Survey",
-        "song": "song",
-        "trackID": "Track ID",
-        "vocalContentLengthS": "Vocal Content Length (s)"
-      },
-      "SurveyAnswers": {
-        "answer": "Answer",
-        "answers": "Answers",
-        "participantID": "Participant ID",
-        "questionID": "Question ID"
-      },
-      "SurveyQuestions": {
-        "A": "A",
-        "B": "B",
-        "X": "X",
-        "question": "Question",
-        "questionNumber": "Question Number",
-        "questionnaireID": "Questionnaire ID",
-        "skip": "Skipped"
-      },
-      "metadata": "Metadata",
-      "participants": "Participants",
-      "songs": "Songs",
-      "surveyAnswers": "Survey Answers",
-      "surveyQuestions": "Survey Questions"
+  "Collections": {
+    "DBMetaData": {
+      "_id": "ID",
+      "createDate": "Creation Date",
+      "editDate": "Edit Date",
+      "itemNumber": "Item No."
     },
-    "Common": {
-      "close": "Close",
-      "loading": "Loading...",
-      "next": "Next",
-      "no": "No",
-      "noResults": "No Results",
-      "previous": "Previous",
-      "submit": "Submit",
-      "yes": "Yes"
+    "Participants": {
+      "participant": "Participant",
+      "surveyCompleted": "Survey Completed"
     },
-    "Components": {
-      "InfoTable": {
-        "field": "Field",
-        "value": "Value"
-      }
+    "Songs": {
+      "album": "Album",
+      "albumDateCreated": "Creation Date",
+      "albumDateReleased": "Release Date",
+      "artist": "Artist",
+      "cluster": "Cluster",
+      "complaint": "Audio Issue",
+      "complaints": "Audio Issues",
+      "filename": "File Name",
+      "genre": "Genre",
+      "hasComplaints": "Has Audio Issues",
+      "onsets": "Onsets",
+      "skipInSurvey": "Skip in Survey",
+      "song": "song",
+      "trackID": "Track ID",
+      "vocalContentLengthS": "Vocal Content Length (s)"
     },
-    "MainPage": {
-      "content": "This Survey is about the similarity of singing voices. You will hear triplets of short music clips (A, B and X). X contains the target voice, A and B are to be compared to it. After listening, choose the reference voice in which the voice is the most similar with the one from the target audio clip X. Do not mind the instruments playing in the background while answering the questions.",
-      "description": "This survey will take about 15 minutes of your time.",
-      "startSurvey": "Start Survey",
-      "title": "Welcome to the survey!"
+    "SurveyAnswers": {
+      "answer": "Answer",
+      "answers": "Answers",
+      "participantID": "Participant ID",
+      "questionID": "Question ID"
     },
-    "Sidebar": {
-      "Navigation": {
-        "home": "Home",
-        "navigation": "Navigation",
-        "similarityPlot": "Similarity Plot",
-        "survey": "Survey"
-      },
-      "Theme": {
-        "dark": "Dark",
-        "light": "Light",
-        "system": "System",
-        "toggle": "Toggle Theme"
-      },
-      "backgroundMusic": "Instruments",
-      "language": "Lanugage",
-      "settings": "Settings",
-      "skipSilence": "Skip Silence",
-      "theme": "Theme"
+    "SurveyQuestions": {
+      "A": "A",
+      "B": "B",
+      "X": "X",
+      "question": "Question",
+      "questionNumber": "Question No.",
+      "questionnaireID": "Questionnaire ID",
+      "skip": "Skipped"
     },
-    "SimilarityPlot": {
-      "2D": {
-        "title": "2D Graph"
-      },
-      "3D": {
-        "title": "3D Graph"
-      }
+    "metadata": "Metadata",
+    "participants": "Participants",
+    "songs": "Songs",
+    "surveyAnswers": "Survey Answers",
+    "surveyQuestions": "Survey Questions"
+  },
+  "Common": {
+    "close": "Close",
+    "loading": "Loading...",
+    "next": "Next",
+    "no": "No",
+    "noResults": "No Results",
+    "ok": "Ok",
+    "previous": "Previous",
+    "submit": "Submit",
+    "yes": "Yes"
+  },
+  "Components": {
+    "InfoTable": {
+      "field": "Field",
+      "value": "Value"
     },
-    "SongInfoModal": {
-      "showComplaints": "Audio Issues",
-      "showInfo": "Song Info",
-      "skipInSurveyFalse": "Use in Survey",
-      "skipInSurveyTrue": "Skip in Survey"
+    "SongSearchForm": {
+      "downloadComplaints": "Download Audio Issues"
     },
-    "SurveyPage": {
-      "ComplaintForm": {
-        "badVoiceQuality": "Bad Voice Quality",
-        "message": "Message",
-        "multipleVoices": "Multiple Voices",
-        "notVoiced": "Not Voiced",
-        "title": "Audio Issue Report"
-      },
-      "and": "and",
-      "areMoreSimilar": "are more similar",
-      "cardTitle": "Question",
-      "description": "Select the voice option which sounds the most similar to the target voice",
-      "next": "next",
-      "previous": "previous",
-      "referenceVoices": "Reference Voices",
-      "targetVoice": "Target Voice",
-      "title": "Similarity of Singing Voices",
-      "voice": "Voice"
+    "Tooltips": {
+      "settings": "Customize your survey experience here",
+      "voiceMarker": "Jump to the next voiced song part"
     }
+  },
+  "MainPage": {
+    "content": "This Survey is about the similarity of singing voices. You will hear triplets of short music clips: 'A', 'B' and 'X'. 'X' contains the target voice, 'A' and 'B' are reference voices. After listening to each of them, choose the reference voice which is the most similar to the target voice. Do not mind the instruments playing in the background while answering the questions. If the instruments irritate you, they can be disabled in the Settings.",
+    "description": "This survey will take about 15 minutes of your time.",
+    "startSurvey": "Start Survey",
+    "title": "Welcome to the survey"
+  },
+  "Sidebar": {
+    "Navigation": {
+      "home": "Home",
+      "navigation": "Navigation",
+      "similarityPlot": "Similarity Plot",
+      "survey": "Survey"
+    },
+    "Theme": {
+      "dark": "Dark",
+      "light": "Light",
+      "system": "System",
+      "toggle": "Toggle Theme"
+    },
+    "backgroundMusic": "Instruments",
+    "language": "Lanugage",
+    "settings": "Settings",
+    "skipSilence": "Jump to vocals",
+    "theme": "Theme"
+  },
+  "SimilarityPlot": {
+    "2D": {
+      "title": "2D Plot"
+    },
+    "3D": {
+      "title": "3D Plot"
+    },
+    "Settings": {
+      "hideTriplets": "Hide Triplets",
+      "showTriplets": "Show Triplets",
+      "triplets": "Triplets"
+    }
+  },
+  "SongInfoModal": {
+    "showComplaints": "Audio Issues",
+    "showInfo": "Song Info",
+    "skipInSurveyFalse": "Use in Survey",
+    "skipInSurveyTrue": "Skip in Survey"
+  },
+  "SurveyPage": {
+    "ComplaintForm": {
+      "badVoiceQuality": "Bad Voice Quality",
+      "message": "Message",
+      "multipleVoices": "Multiple Voices",
+      "notVoiced": "Not Voiced",
+      "title": "Audio Issue Report"
+    },
+    "and": "and",
+    "areMoreSimilar": "are more similar",
+    "cardTitle": "Question",
+    "description": "Select the voice option which sounds the most similar to the target voice",
+    "next": "next",
+    "previous": "previous",
+    "referenceVoices": "Reference Voices",
+    "targetVoice": "Target Voice",
+    "title": "Similarity of Singing Voices",
+    "voice": "Voice"
   }
 }

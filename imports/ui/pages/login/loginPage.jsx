@@ -9,7 +9,7 @@ import {useNavigate} from "react-router-dom";
 import {AutoField} from "../../customComponents/AutoField";
 import {loginFormSchema} from "./loginSchema";
 
-export function LoginPage() {
+export default function LoginPage() {
   const navigate = useNavigate();
   const isLoggedIn = useIsLoggedIn();
 

@@ -1,9 +1,9 @@
-import * as _ from "lodash";
+import {isEqual, isObject, transform} from "lodash";
 
 function isFlatArray(obj) {
   if (!Array.isArray(obj)) return false;
   for (const e of obj) {
-    if (_.isObject(e)) return false;
+    if (isObject(e)) return false;
   }
   return true;
 }
@@ -13,7 +13,7 @@ function isFlatArray(obj) {
  * @returns {object[]} [] if newDoc and oldDoc are equal. If not, returns array of {new: ..., old: ..., key: ...}
  */
 export function getDocumentDiffArray(newDoc, oldDoc, key) {
-  if (_.isEqual(newDoc, oldDoc)) return [];
+  if (isEqual(newDoc, oldDoc)) return [];
 
   // handle recursive calls when newDoc and oldDoc are "final" objects, i.e. dates
   if (newDoc instanceof Date) return [{new: newDoc, old: oldDoc, key: key}];
@@ -21,10 +21,10 @@ export function getDocumentDiffArray(newDoc, oldDoc, key) {
 
   let DiffArray = [];
   // do not use the built-in result array! subsequent calls are not pushed correctly
-  _.transform(newDoc, function (result, value, key) {
-    if (!_.isEqual(value, oldDoc[key])) {
+  transform(newDoc, function (result, value, key) {
+    if (!isEqual(value, oldDoc[key])) {
       //objects not equal! need to search for differences
-      if (_.isObject(value) && _.isObject(oldDoc[key])) {
+      if (isObject(value) && isObject(oldDoc[key])) {
         //it's an object, probably need to dig deeper for diffs ...
         if (isFlatArray(value) && isFlatArray(oldDoc[key])) {
           // it's a flat array (like assignedUserIDs) -> push it directly

@@ -1,4 +1,5 @@
 import {DATASET_FILE_PATH} from "@/imports/common/globals";
+import {Log} from "meteor/logging";
 
 export async function waitForFiles({retries = 30, delayMs = 1000} = {}) {
   const url = `${Meteor.settings.private.FILE_SERVER_URL}${DATASET_FILE_PATH}`;
@@ -8,14 +9,10 @@ export async function waitForFiles({retries = 30, delayMs = 1000} = {}) {
       const res = await fetch(url);
 
       if (res.ok) {
-        console.log("File server is ready");
         return;
       }
-    } catch (err) {
-      // ignore errors, server not ready yet
-    }
+    } catch (err) {}
 
-    console.log(`Waiting for file server... (${i + 1}/${retries})`);
     await new Promise((r) => setTimeout(r, delayMs));
   }
 

@@ -11,7 +11,7 @@ import {DataTable} from "../../customComponents/DataTable";
 import {ParticipantInfoModal} from "./ParticipantInfoModal";
 import {ParticipantSearchForm} from "./ParticipantSearchForm";
 
-export function ParticipantListPage() {
+export default function ParticipantListPage() {
   const isLoggedIn = useIsLoggedIn();
   const navigate = useNavigate();
   const {t} = useTranslation();
@@ -20,6 +20,7 @@ export function ParticipantListPage() {
   const [previous, setPrevious] = useState(null);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [participantID, setParticipantID] = useState(null);
+
   const {
     participants,
     pageInfo,
@@ -34,6 +35,10 @@ export function ParticipantListPage() {
     {
       accessorKey: "itemNumber",
       header: t("Collections.DBMetaData.itemNumber"),
+    },
+    {
+      accessorKey: "questionnaireID",
+      header: t("Collections.SurveyQuestions.questionnaireID"),
     },
     {
       accessorKey: "surveyCompleted",
@@ -59,14 +64,12 @@ export function ParticipantListPage() {
     setNext(pageInfo?.nextCursor);
     setPrevious(null);
     setDialogOpen(false);
-    setTrackID(null);
   };
 
   const handlePrevious = () => {
     setPrevious(pageInfo?.prevCursor);
     setNext(null);
     setDialogOpen(false);
-    setTrackID(null);
   };
 
   const onRowClick = (row) => {

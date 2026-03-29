@@ -3,16 +3,16 @@ import {Spinner} from "@/components/ui/spinner";
 import {useSurveyQuestionsPaginated} from "@/imports/api/surveyQuestions/hooks";
 import {SURVEY_QUESTIONS} from "@/imports/api/surveyQuestions/methods";
 import {useIsLoggedIn} from "@/imports/api/users/hooks";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
+import {useAudioContext} from "../../contextProvider/AudioContext";
 import {AudioPlayer} from "../../customComponents/AudioPlayer";
 import {DataTable} from "../../customComponents/DataTable";
-import {DownloadButton} from "../../customComponents/DownLoadButton";
 import {SurveyQuestionInfoModal} from "./SurveyQuestionInfoModal";
 import {SurveyQuestionSearchForm} from "./SurveyQuestionSearchForm";
 
-export function SurveyQuestionListPage() {
+export default function SurveyQuestionListPage() {
   const isLoggedIn = useIsLoggedIn();
   const navigate = useNavigate();
   const [surveyQuestionID, setSurveyQuestionID] = useState(null);

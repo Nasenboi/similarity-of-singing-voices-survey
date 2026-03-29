@@ -14,3 +14,12 @@ export function transformSongToCSVRow(song) {
     UMAP_3D_3: UMAP3D?.UMAP_3 ?? null,
   };
 }
+
+export function transformComplaintsToCSVRows(song) {
+  if (!song.complaints) return [];
+
+  return song.complaints.map((c) => ({
+    trackID: song.trackID,
+    ...c,
+  }));
+}
