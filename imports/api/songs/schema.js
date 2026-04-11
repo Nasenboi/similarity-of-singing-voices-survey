@@ -25,7 +25,14 @@ export const songSchema = new SimpleSchema({
   filename: {type: String},
   genre: {type: String, optional: true},
 
+  license: {type: String, optional: true},
+
   artist: {type: String, optional: true},
+  artistID: {type: Number, optional: true},
+  artistWebsite: {type: String, optional: true},
+
+  members: {type: Array, optional: true},
+  "members.$": {type: String, optional: true},
 
   album: {type: String, optional: true},
   albumDateCreated: {type: Date, optional: true},

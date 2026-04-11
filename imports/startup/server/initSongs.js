@@ -11,6 +11,13 @@ function parseOnsets(onsets) {
     .map(Number);
 }
 
+function parseMembers(members) {
+  return members
+    .replace(/[\[\]]/g, "")
+    .trim()
+    .split(/\s+/);
+}
+
 function convertToSongSchema(audio) {
   const track_id_zp = String(audio.track_id).padStart(6, "0");
   const main_folder = track_id_zp.slice(0, 3);
@@ -19,7 +26,11 @@ function convertToSongSchema(audio) {
     trackID: audio.track_id,
     filename: audio.filename,
     genre: audio.genre_top,
+    license: audio.license,
     artist: audio.artist,
+    artistID: audio.artist_id,
+    artistWebsite: audio.artist_website,
+    members: audio.members && audio.members.length > 0 ? parseMembers(audio.members) : [],
     album: audio.album,
     albumDateCreated: audio.creation_date,
     albumDateReleased: audio.release_date,
