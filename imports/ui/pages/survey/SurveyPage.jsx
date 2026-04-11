@@ -10,7 +10,6 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from "@/components/ui/drawer";
-import {Field, FieldLabel} from "@/components/ui/field";
 import {Progress} from "@/components/ui/progress";
 import {Spinner} from "@/components/ui/spinner";
 import {useSurveyAnswersParticipant} from "@/imports/api/surveyAnswers/hooks";
@@ -35,7 +34,7 @@ import {SurveyCard} from "./SurveyCard";
 
 export default function SurveyPage() {
   const {t} = useTranslation();
-  const {isPlaying, setIsPlaying} = useAudioContext();
+  const {isPlaying, setIsPlaying, useBackgroundMusic} = useAudioContext();
   const {participant, isLoading: isParticipantLoading} = useParticipantContext();
   const [participantID, setParticipantID] = useState(participant?._id);
   const [currentPage, setCurrentPage] = useState(0);
@@ -104,6 +103,7 @@ export default function SurveyPage() {
         questionID,
         answer,
         participantID: participant._id,
+        backgroundMusic: useBackgroundMusic,
       });
       const numQuestions = surveyQuestions.length;
       if (currentPage + 1 < numQuestions) {

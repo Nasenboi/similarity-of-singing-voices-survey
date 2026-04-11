@@ -30,6 +30,7 @@
     "SurveyAnswers": {
       "answer": "Antwort",
       "answers": "Antworten",
+      "backgroundMusic": "Begleitmusik",
       "participantID": "Teilnehmer ID",
       "questionID": "Fragen ID"
     },

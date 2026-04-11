@@ -4,6 +4,7 @@ import {dbMetadataSchema} from "../collection/schema";
 export const surveyAnswersSchema = new SimpleSchema({
   participantID: {type: String},
   questionID: {type: String},
+  backgroundMusic: {type: Boolean, optional: true},
   answer: {
     type: Array,
     custom() {

@@ -44,6 +44,10 @@ export default function SurveyAnswerListPage() {
       accessorKey: "answer",
       header: t("Collections.SurveyAnswers.answer"),
     },
+    {
+      accessorKey: "backgroundMusic",
+      header: t("Collections.SurveyAnswers.backgroundMusic"),
+    },
   ];
 
   const onFilterChange = (value) => {
