@@ -237,7 +237,9 @@ export default function SurveyPage() {
         <DrawerContent>
           <DrawerHeader className="flex flex-col justify-center items-center">
             <DrawerTitle>{t("SurveyPage.Completed.title")}</DrawerTitle>
-            <DrawerDescription>{t("SurveyPage.Completed.description")}</DrawerDescription>
+            <DrawerDescription>
+              {t("SurveyPage.Completed.description", {questionnaireID: participant.questionnaireID})}
+            </DrawerDescription>
           </DrawerHeader>
           <DrawerFooter className="flex justify-center items-center space-y-4">
             <ButtonGroup>
