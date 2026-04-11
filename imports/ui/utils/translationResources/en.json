@@ -69,6 +69,7 @@
       "downloadComplaints": "Download Audio Issues"
     },
     "Tooltips": {
+      "complaints": "Audio issues can be reported here",
       "settings": "Customize your survey experience here",
       "voiceMarker": "Jump to the next voiced song part"
     }

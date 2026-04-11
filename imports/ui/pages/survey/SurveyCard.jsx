@@ -3,11 +3,13 @@ import {ButtonGroup, ButtonGroupSeparator} from "@/components/ui/button-group";
 import {CardHeader, CardTitle} from "@/components/ui/card";
 import {Dialog, DialogTrigger} from "@/components/ui/dialog";
 import {RadioGroup, RadioGroupItem} from "@/components/ui/radio-group";
+import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
 import {ArrowRightLeft, Flag, Pause, Play} from "lucide-react";
 import React, {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useAudioContext} from "../../contextProvider/AudioContext";
-import {H1, H2, Large} from "../../customComponents/Typography";
+import {cookies} from "../../customComponents/Cookies";
+import {H1, H2, Large, P} from "../../customComponents/Typography";
 import {ComplaintForm} from "./ComplaintForm";
 
 function AudioButton({trackID, voice, onVoiceClick, isPlaying}) {
@@ -17,6 +19,34 @@ function AudioButton({trackID, voice, onVoiceClick, isPlaying}) {
     <Button onClick={() => onVoiceClick(trackID, voice)}>
       {t("SurveyPage.voice")} {voice} {isPlaying ? <Pause /> : <Play />}
     </Button>
+  );
+}
+
+function TooltipWrapper({children}) {
+  const {t} = useTranslation();
+  const [tooltipOpen, setTooltipOpen] = useState(() => {
+    return !cookies.get("complaintTooltipRead");
+  });
+
+  const dismissTooltip = () => {
+    cookies.set("complaintTooltipRead", true);
+    setTooltipOpen(false);
+  };
+
+  return (
+    <Tooltip open={tooltipOpen}>
+      <TooltipContent side="top" className="max-w-screen" sideOffset={0}>
+        <div className="flex flex-col space-y-4 p-2 justify-center items-center">
+          <P>{t("Components.Tooltips.complaints")}</P>
+          <div className="w-full flex justify-end items-center">
+            <Button size="sm" onClick={dismissTooltip}>
+              {t("Common.ok")}
+            </Button>
+          </div>
+        </div>
+      </TooltipContent>
+      <TooltipTrigger asChild>{children}</TooltipTrigger>
+    </Tooltip>
   );
 }
 
@@ -65,9 +95,11 @@ export function SurveyCard({question, setSurveyAnswer, isMobile = false, isSubmi
           </H1>
           <Dialog open={dialogOpen} onOpenChange={(open) => setDialogOpen(open)}>
             <DialogTrigger asChild>
-              <Button variant="secondary" size="icon" className={isSubmitted && "border"}>
-                <Flag />
-              </Button>
+              <TooltipWrapper>
+                <Button variant="secondary" size="icon" className={isSubmitted && "border"}>
+                  <Flag />
+                </Button>
+              </TooltipWrapper>
             </DialogTrigger>
             <ComplaintForm surveyQuestion={question} setDialogOpen={setDialogOpen} />
           </Dialog>

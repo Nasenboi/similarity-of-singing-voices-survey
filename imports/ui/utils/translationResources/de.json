@@ -69,6 +69,7 @@
       "downloadComplaints": "Audiofehler herunterladen"
     },
     "Tooltips": {
+      "complaints": "Audiofehler können hier gemeldet werden",
       "settings": "Passen Sie hier die Umfrage an ihre Bedürfnisse an",
       "voiceMarker": "Springe zu Liedabschnitten mit Gesangsstimmen"
     }
