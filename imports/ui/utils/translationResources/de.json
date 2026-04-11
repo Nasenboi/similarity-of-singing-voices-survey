@@ -74,8 +74,63 @@
       "voiceMarker": "Springe zu Liedabschnitten mit Gesangsstimmen"
     }
   },
+  "Legal": {
+    "Imprint": {
+      "Content": {
+        "01origin": "Angaben gemäß § 5 DDG:",
+        "01origin-1": "Name und Anschrift",
+        "01origin-2": "Vollständiger Name und ladungsfähige Anschrift der verantwortlichen Person.",
+
+        "02contact": "Kontakt",
+        "02contact-1": "Kontaktmöglichkeiten",
+        "02contact-2": "E-Mail-Adresse zur schnellen elektronischen Kontaktaufnahme.",
+
+        "03Institution": "Institution",
+        "03Institution-2": "Fachbereich Medien",
+
+        "04contentResponsibility": "Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV:"
+      },
+      "title": "Impressum"
+    },
+    "PrivacyPolicy": {
+      "Content": {
+        "01responsible1": "1. Verantwortlicher",
+        "01responsible2": "Verantwortlich für die Datenverarbeitung auf dieser Website ist:",
+
+        "02purpose1": "2. Zweck der Datenverarbeitung",
+        "02purpose2": "Diese Website dient der Durchführung einer wissenschaftlichen Studie im Rahmen einer Masterarbeit.\n\nZiel der Studie ist die wissenschaftliche Auswertung von Nutzerantworten im Zusammenhang mit audiobasierten Aufgaben.\n\nDie Teilnahme an der Studie ist freiwillig.",
+
+        "03dataCollected1": "3. Welche Daten werden erhoben",
+        "03dataCollected2": "Im Rahmen der Nutzung dieser Website werden folgende Daten erhoben und gespeichert:\n\n- Antworten auf die Umfrage\n- Zeit und Datum der jeweiligen Eingaben\n- Eine zufällig generierte Teilnehmer-ID zur Gruppierung der Antworten\n- Technisch notwendige Server-Logdaten (z. B. IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene Seite), sofern diese vom Hosting-Anbieter erfasst werden.",
+
+        "04legalBasis1": "4. Rechtsgrundlage der Verarbeitung",
+        "04legalBasis2": "Die Verarbeitung der Daten erfolgt auf Grundlage der Einwilligung der teilnehmenden Personen gemäß Art. 6 Abs. 1 lit. a DSGVO.\n\nDie Verarbeitung erfolgt ausschließlich zu wissenschaftlichen Forschungszwecken im Rahmen einer Masterarbeit.",
+
+        "05cookies1": "5. Cookies",
+        "05cookies2": "Diese Website verwendet ausschließlich technisch notwendige Cookies, die für den Betrieb der Website erforderlich sind.\n\nEs werden keine Cookies von Drittanbietern eingesetzt.",
+
+        "06storageDuration1": "6. Speicherdauer",
+        "06storageDuration2": "Die erhobenen Daten werden nur so lange gespeichert, wie es für die Durchführung und Auswertung der wissenschaftlichen Studie erforderlich ist.\n\nNach Abschluss der Masterarbeit werden die Daten gelöscht oder anonymisiert, sofern keine gesetzlichen Aufbewahrungspflichten bestehen.",
+
+        "07dataSharing1": "7. Weitergabe von Daten",
+        "07dataSharing2": "Die erhobenen Daten werden nicht an Dritte weitergegeben.\n\nEine Weitergabe kann ausschließlich im Rahmen der wissenschaftlichen Auswertung an betreuende Personen oder Prüfer der Masterarbeit erfolgen, sofern dies erforderlich ist.",
+
+        "08hosting1": "8. Hosting und Server-Logfiles",
+        "08hosting2": "Die Website wird bei einem externen Hosting-Anbieter betrieben.\n\nBeim Aufruf der Website können durch den Hosting-Anbieter automatisch Informationen in sogenannten Server-Logfiles gespeichert werden. Dies können insbesondere folgende Daten sein:\n\n- IP-Adresse\n- Datum und Uhrzeit des Zugriffs\n- Aufgerufene Seite\n- Browsertyp und Betriebssystem\n\nDiese Daten dienen ausschließlich der technischen Bereitstellung und Sicherheit der Website",
+        "08hosting3": "Webhosting-Anbieter",
+
+        "09userRights1": "9. Rechte der betroffenen Personen",
+        "09userRights2": "Sie haben im Rahmen der geltenden gesetzlichen Bestimmungen jederzeit das Recht auf:\n\n- Auskunft über Ihre gespeicherten Daten\n- Berichtigung unrichtiger Daten\n- Löschung Ihrer Daten\n- Einschränkung der Verarbeitung\n- Widerruf einer erteilten Einwilligung mit Wirkung für die Zukunft.",
+
+        "10voluntary1": "10. Freiwilligkeit der Teilnahme",
+        "10voluntary2": "Die Teilnahme an der Studie ist freiwillig.\n\nEs werden keine personenbezogenen Daten erhoben, die eine direkte Identifizierung der teilnehmenden Personen ermöglichen."
+      },
+      "title": "Datenschutzerklärung"
+    }
+  },
   "MainPage": {
     "content": "In dieser Umfrage geht es um die Ähnlichkeit von Gesangsstimmen. Sie hören jeweils drei kurze Musikausschnitte: 'A', 'B' und 'X'. 'X' enthält die Zielstimme, 'A' und 'B' sind Referenzstimmen. Wählen Sie nach dem Anhören jedes Ausschnitts die Referenzstimme aus, die der Zielstimme am ähnlichsten ist. Achten Sie bei der Beantwortung der Fragen nicht auf die im Hintergrund spielenden Instrumente. Wenn die Instrumente Sie stören, können Sie sie in den Einstellungen deaktivieren.",
+    "contentSmall": "Mit dem Start der Umfrage bestätigen Sie, dass Sie die <1>Datenschutzerklärung</1> gelesen haben und in die Verarbeitung Ihrer Daten im Rahmen dieser wissenschaftlichen Studie einwilligen.",
     "description": "Diese Umfrage wird ungefähr 15 Minuten dauern.",
     "startSurvey": "Umfrage starten",
     "title": "Willkommen zur Umfrage"

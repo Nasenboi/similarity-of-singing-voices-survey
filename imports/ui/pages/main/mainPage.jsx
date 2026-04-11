@@ -1,8 +1,9 @@
 import {Button} from "@/components/ui/button";
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
 import React from "react";
-import {useTranslation} from "react-i18next";
+import {Trans, useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
+import {Muted, P} from "../../customComponents/Typography";
 
 export default function MainPage() {
   const navigate = useNavigate();
@@ -16,7 +17,15 @@ export default function MainPage() {
           <CardDescription>{t("MainPage.description")}</CardDescription>
         </CardHeader>
         <CardContent>
-          <p className="max-md:text-sm">{t("MainPage.content")}</p>
+          <P>{t("MainPage.content")}</P>
+          <Muted className="mt-4">
+            <Trans
+              i18nKey="MainPage.contentSmall"
+              components={{
+                1: <a href="/privacyPolicy" className="underline" />,
+              }}
+            />
+          </Muted>
         </CardContent>
         <CardFooter>
           <Button onClick={() => navigate("/survey")}>{t("MainPage.startSurvey")}</Button>

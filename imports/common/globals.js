@@ -1,5 +1,3 @@
-import {Meteor} from "meteor/meteor";
-
 // App info
 export const APP_NAME = "Similarity of Singing Voices Survey";
 export const APP_VERSION = "0.2.2";

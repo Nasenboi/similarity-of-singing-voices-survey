@@ -12,6 +12,8 @@ const SongListPage = React.lazy(() => import("./pages/songList/SongListPage"));
 const SurveyPage = React.lazy(() => import("./pages/survey/SurveyPage"));
 const SurveyAnswerListPage = React.lazy(() => import("./pages/surveyAnswerList/SurveyAnswerListPage"));
 const SurveyQuestionListPage = React.lazy(() => import("./pages/surveyQuestionList/SurveyQuestionListPage"));
+const ImprintPage = React.lazy(() => import("./pages/imprint/imprintPage"));
+const PrivacyPolicyPage = React.lazy(() => import("./pages/privacyPolicy/PrivacyPolicyPage"));
 
 export const RouteEffect = () => {
   const {setTrackID} = useAudioContext();
@@ -37,6 +39,8 @@ export function RoutedContentArea() {
         <Route path="/participants" element={<ParticipantListPage />} />
         <Route path="/answers" element={<SurveyAnswerListPage />} />
         <Route path="/questions" element={<SurveyQuestionListPage />} />
+        <Route path="/imprint" element={<ImprintPage />} />
+        <Route path="/privacyPolicy" element={<PrivacyPolicyPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Suspense>
