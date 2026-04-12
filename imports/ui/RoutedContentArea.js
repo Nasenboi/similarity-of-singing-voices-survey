@@ -12,7 +12,6 @@ const SongListPage = React.lazy(() => import("./pages/songList/SongListPage"));
 const SurveyPage = React.lazy(() => import("./pages/survey/SurveyPage"));
 const SurveyAnswerListPage = React.lazy(() => import("./pages/surveyAnswerList/SurveyAnswerListPage"));
 const SurveyQuestionListPage = React.lazy(() => import("./pages/surveyQuestionList/SurveyQuestionListPage"));
-const ImprintPage = React.lazy(() => import("./pages/imprint/imprintPage"));
 const PrivacyPolicyPage = React.lazy(() => import("./pages/privacyPolicy/PrivacyPolicyPage"));
 
 export const RouteEffect = () => {
