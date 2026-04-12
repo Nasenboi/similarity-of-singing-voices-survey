@@ -1,4 +1,5 @@
 import {ValidatedMethod} from "meteor/mdg:validated-method";
+import SimpleSchema from "simpl-schema";
 import {getQuestionnaireIDAtomic} from "../surveyQuestions/helpers";
 import {isAdminUser} from "../users/helpers";
 import {toCSV} from "../utils";
@@ -16,6 +17,19 @@ export const PARTICIPANTS = {
       });
 
       return itemID;
+    },
+  }),
+  getParticipant: new ValidatedMethod({
+    name: "participants.getParticipant",
+    validate: new SimpleSchema({
+      participantID: {type: String},
+    }).validator(),
+    async run({participantID}) {
+      if (this.isSimulation) return;
+
+      const participant = await Participants.findOneAsync(participantID);
+
+      return participant;
     },
   }),
   downloadCSV: new ValidatedMethod({
