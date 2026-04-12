@@ -23,6 +23,7 @@ export const compaintSchema = new SimpleSchema({
 export const songSchema = new SimpleSchema({
   trackID: {type: SimpleSchema.Integer},
   filename: {type: String},
+  title: {type: String, optional: true},
   genre: {type: String, optional: true},
 
   license: {type: String, optional: true},

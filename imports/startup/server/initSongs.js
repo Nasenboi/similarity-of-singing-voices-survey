@@ -25,6 +25,7 @@ function convertToSongSchema(audio) {
   return {
     trackID: audio.track_id,
     filename: audio.filename,
+    title: audio.title,
     genre: audio.genre_top,
     license: audio.license,
     artist: audio.artist,
