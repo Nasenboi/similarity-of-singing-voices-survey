@@ -22,11 +22,12 @@
       "filename": "Dateiname",
       "genre": "Genre",
       "hasComplaints": "Hat Audiofehler",
-      "licence": "Lizenz",
+      "license": "Lizenz",
       "members": "Mitglieder",
       "onsets": "Onsets",
       "skipInSurvey": "Aus Umfrage löschen",
       "song": "Lied",
+      "source": "Quelle",
       "title": "Titel",
       "trackID": "Track ID",
       "vocalContentLengthS": "Länge der Stimmaufnahme (s)"

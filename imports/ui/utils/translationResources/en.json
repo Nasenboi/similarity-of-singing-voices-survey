@@ -22,11 +22,12 @@
       "filename": "File Name",
       "genre": "Genre",
       "hasComplaints": "Has Audio Issues",
-      "licence": "License",
+      "license": "License",
       "members": "Members",
       "onsets": "Onsets",
       "skipInSurvey": "Skip in Survey",
       "song": "song",
+      "source": "Source",
       "title": "Title",
       "trackID": "Track ID",
       "vocalContentLengthS": "Vocal Content Length (s)"
