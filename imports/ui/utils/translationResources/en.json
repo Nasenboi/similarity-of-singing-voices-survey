@@ -122,17 +122,18 @@
         "05cookies2": "This website uses only technically necessary cookies that are required for the operation of the website.\n\nNo third-party cookies are used.",
 
         "06storageDuration1": "6. Storage Duration",
-        "06storageDuration2": "The collected data will only be stored for as long as necessary to conduct and evaluate the scientific study.\n\nAfter completion of the master's thesis, the data will be deleted or anonymized unless statutory retention obligations apply.",
+        "06storageDuration2": "The collected data is stored permanently. Once anonymized, the data can no longer be deleted, as it can no longer be linked to a specific natural person.\nTherefore, due to anonymization, the data can no longer be deleted or corrected upon request, as the controller can no longer identify the data subject (see Art. 11(2) GDPR).\n\nThe storage serves exclusively for scientific research purposes within the scope of the master’s thesis.",
 
         "07dataSharing1": "7. Data Sharing",
         "07dataSharing2": "The collected data will not be shared with third parties.\n\nData may only be shared within the scope of scientific evaluation with supervising persons or examiners of the master's thesis if necessary.",
 
         "08hosting1": "8. Hosting and Server Log Files",
         "08hosting2": "This website is hosted by an external hosting provider.\n\nWhen accessing the website, information may be automatically stored in so-called server log files by the hosting provider. This may include in particular:\n\n- IP address\n- Date and time of access\n- Accessed page\n- Browser type and operating system\n\nThese data are used exclusively for the technical provision and security of the website.",
+
         "08hosting3": "Hosting Provider",
 
         "09userRights1": "9. Rights of Data Subjects",
-        "09userRights2": "Within the framework of the applicable legal provisions, you have the right at any time to:\n\n- Obtain information about your stored data\n- Request correction of inaccurate data\n- Request deletion of your data\n- Request restriction of processing\n- Withdraw consent at any time with effect for the future",
+        "09userRights2": "If personal data are processed, you generally have the following rights within the framework of the applicable legal provisions:\n\n- Right of access to your stored data (Art. 15 GDPR)\n- Right to rectification of inaccurate data (Art. 16 GDPR)\n- Right to erasure of your data (Art. 17 GDPR)\n- Right to restriction of processing (Art. 18 GDPR)\n- Right to withdraw a given consent with effect for the future (Art. 7(3) GDPR)\n\nSince the data collected within the scope of this study are stored in anonymized form and no link to an identifiable natural person can be established, these rights cannot be exercised in practice in accordance with Art. 11(2) GDPR.",
 
         "10voluntary1": "10. Voluntary Participation",
         "10voluntary2": "Participation in the study is voluntary.\n\nNo personal data that directly identify participants are collected."

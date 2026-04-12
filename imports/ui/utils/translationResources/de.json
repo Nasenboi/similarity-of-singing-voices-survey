@@ -122,7 +122,7 @@
         "05cookies2": "Diese Website verwendet ausschließlich technisch notwendige Cookies, die für den Betrieb der Website erforderlich sind.\n\nEs werden keine Cookies von Drittanbietern eingesetzt.",
 
         "06storageDuration1": "6. Speicherdauer",
-        "06storageDuration2": "Die erhobenen Daten werden nur so lange gespeichert, wie es für die Durchführung und Auswertung der wissenschaftlichen Studie erforderlich ist.\n\nNach Abschluss der Masterarbeit werden die Daten gelöscht oder anonymisiert, sofern keine gesetzlichen Aufbewahrungspflichten bestehen.",
+        "06storageDuration2": "Die erhobenen Daten werden dauerhaft (permanent) gespeichert. Eine Löschung der Daten ist durch die Anonymisierung nicht mehr möglich, da die Zuordnung zu einer konkreten natürlichen Person nicht hergestellt werden kann.\nDie Daten können daher aufgrund der Anonymisierung nicht mehr auf Verlangen gelöscht oder berichtigt werden, da der Verantwortliche die betroffene Person nicht mehr identifizieren kann (vgl. Art. 11 Abs. 2 DSGVO).\n\nDie Speicherung dient ausschließlich wissenschaftlichen Forschungszwecken im Rahmen der Masterarbeit.",
 
         "07dataSharing1": "7. Weitergabe von Daten",
         "07dataSharing2": "Die erhobenen Daten werden nicht an Dritte weitergegeben.\n\nEine Weitergabe kann ausschließlich im Rahmen der wissenschaftlichen Auswertung an betreuende Personen oder Prüfer der Masterarbeit erfolgen, sofern dies erforderlich ist.",
@@ -132,7 +132,7 @@
         "08hosting3": "Webhosting-Anbieter",
 
         "09userRights1": "9. Rechte der betroffenen Personen",
-        "09userRights2": "Sie haben im Rahmen der geltenden gesetzlichen Bestimmungen jederzeit das Recht auf:\n\n- Auskunft über Ihre gespeicherten Daten\n- Berichtigung unrichtiger Daten\n- Löschung Ihrer Daten\n- Einschränkung der Verarbeitung\n- Widerruf einer erteilten Einwilligung mit Wirkung für die Zukunft",
+        "09userRights2": "Sofern personenbezogene Daten verarbeitet werden, haben Sie im Rahmen der geltenden gesetzlichen Bestimmungen grundsätzlich das Recht auf:\n\n- Auskunft über Ihre gespeicherten Daten (Art. 15 DSGVO)\n- Berichtigung unrichtiger Daten (Art. 16 DSGVO)\n- Löschung Ihrer Daten (Art. 17 DSGVO)\n- Einschränkung der Verarbeitung (Art. 18 DSGVO)\n- Widerruf einer erteilten Einwilligung mit Wirkung für die Zukunft (Art. 7 Abs. 3 DSGVO)\n\nDa die im Rahmen dieser Studie erhobenen Daten anonymisiert gespeichert werden und kein Bezug zu einer identifizierbaren natürlichen Person hergestellt werden kann, können diese Rechte gemäß Art. 11 Abs. 2 DSGVO in der Praxis nicht ausgeübt werden.",
 
         "10voluntary1": "10. Freiwilligkeit der Teilnahme",
         "10voluntary2": "Die Teilnahme an der Studie ist freiwillig.\n\nEs werden keine personenbezogenen Daten erhoben, die eine direkte Identifizierung der teilnehmenden Personen ermöglichen."
