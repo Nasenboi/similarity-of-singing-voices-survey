@@ -27,6 +27,7 @@
       "members": "Members",
       "onsets": "Onsets",
       "skipInSurvey": "Skip in Survey",
+      "skippedInSurvey": "Skipped in Survey",
       "song": "song",
       "source": "Source",
       "title": "Title",
@@ -83,7 +84,7 @@
   "Legal": {
     "Credits": {
       "Content": {
-        "01fmaGitHub-1": "The metadata for the audio dataset originally came from the project ‘FMA: A Dataset For Music Analysis’. This metadata was further processed for the survey and enriched with additional information."
+        "01fmaGitHub-1": "The metadata for the audio dataset originally came from the project ‘FMA: A Dataset For Music Analysis’. This metadata was further processed for the survey and combined with additional information."
       },
       "title": "Credits"
     },

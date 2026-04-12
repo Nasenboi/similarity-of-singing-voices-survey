@@ -27,6 +27,7 @@
       "members": "Mitglieder",
       "onsets": "Onsets",
       "skipInSurvey": "Aus Umfrage löschen",
+      "skippedInSurvey": "Aus Umfrage gelöscht",
       "song": "Lied",
       "source": "Quelle",
       "title": "Titel",
@@ -83,7 +84,7 @@
   "Legal": {
     "Credits": {
       "Content": {
-        "01fmaGitHub-1": "Die Metadaten des Audiodatensatzes stammen ursprünglich aus dem Projekt 'FMA: A Dataset For Music Analysis'. Diese wurden für die Umfrage weiterverarbeitet und mit weiteren Informationen bereichert."
+        "01fmaGitHub-1": "Die Metadaten des Audiodatensatzes stammen ursprünglich aus dem Projekt 'FMA: A Dataset For Music Analysis'. Diese wurden für die Umfrage weiterverarbeitet und mit weiteren Informationen zusammengeführt."
       },
       "title": "Datenquellen"
     },

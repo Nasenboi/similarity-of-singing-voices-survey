@@ -79,7 +79,7 @@ export function SongSearchForm({onFilterChange, query}) {
                 className="col-span-1"
                 form={form}
                 name="skipInSurvey"
-                label={t("Collections.Songs.skipInSurvey")}
+                label={t("Collections.Songs.skippedInSurvey")}
                 type="bool"
               />
 
