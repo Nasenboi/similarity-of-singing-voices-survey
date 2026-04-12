@@ -39,7 +39,6 @@ export function RoutedContentArea() {
         <Route path="/participants" element={<ParticipantListPage />} />
         <Route path="/answers" element={<SurveyAnswerListPage />} />
         <Route path="/questions" element={<SurveyQuestionListPage />} />
-        <Route path="/imprint" element={<ImprintPage />} />
         <Route path="/privacyPolicy" element={<PrivacyPolicyPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

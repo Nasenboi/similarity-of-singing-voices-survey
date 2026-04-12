@@ -106,7 +106,7 @@
         "02purpose2": "Diese Website dient der Durchführung einer wissenschaftlichen Studie im Rahmen einer Masterarbeit.\n\nZiel der Studie ist die wissenschaftliche Auswertung von Nutzerantworten im Zusammenhang mit audiobasierten Aufgaben.\n\nDie Teilnahme an der Studie ist freiwillig.",
 
         "03dataCollected1": "3. Welche Daten werden erhoben",
-        "03dataCollected2": "Im Rahmen der Nutzung dieser Website werden folgende Daten erhoben und gespeichert:\n\n- Antworten auf die Umfrage\n- Zeit und Datum der jeweiligen Eingaben\n- Eine zufällig generierte Teilnehmer-ID zur Gruppierung der Antworten\n- Technisch notwendige Server-Logdaten (z. B. IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene Seite), sofern diese vom Hosting-Anbieter erfasst werden.",
+        "03dataCollected2": "Im Rahmen der Nutzung dieser Website werden folgende Daten erhoben und gespeichert:\n\n- Bestätigte Umfrageantworten\n- Zeit und Datum der jeweiligen Eingaben\n- Eine zufällig generierte Teilnehmer-ID zur Gruppierung der Antworten\n- Technisch notwendige Server-Logdaten (z. B. IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene Seite), sofern diese vom Hosting-Anbieter erfasst werden.",
 
         "04legalBasis1": "4. Rechtsgrundlage der Verarbeitung",
         "04legalBasis2": "Die Verarbeitung der Daten erfolgt auf Grundlage der Einwilligung der teilnehmenden Personen gemäß Art. 6 Abs. 1 lit. a DSGVO.\n\nDie Verarbeitung erfolgt ausschließlich zu wissenschaftlichen Forschungszwecken im Rahmen einer Masterarbeit.",
@@ -125,7 +125,7 @@
         "08hosting3": "Webhosting-Anbieter",
 
         "09userRights1": "9. Rechte der betroffenen Personen",
-        "09userRights2": "Sie haben im Rahmen der geltenden gesetzlichen Bestimmungen jederzeit das Recht auf:\n\n- Auskunft über Ihre gespeicherten Daten\n- Berichtigung unrichtiger Daten\n- Löschung Ihrer Daten\n- Einschränkung der Verarbeitung\n- Widerruf einer erteilten Einwilligung mit Wirkung für die Zukunft.",
+        "09userRights2": "Sie haben im Rahmen der geltenden gesetzlichen Bestimmungen jederzeit das Recht auf:\n\n- Auskunft über Ihre gespeicherten Daten\n- Berichtigung unrichtiger Daten\n- Löschung Ihrer Daten\n- Einschränkung der Verarbeitung\n- Widerruf einer erteilten Einwilligung mit Wirkung für die Zukunft",
 
         "10voluntary1": "10. Freiwilligkeit der Teilnahme",
         "10voluntary2": "Die Teilnahme an der Studie ist freiwillig.\n\nEs werden keine personenbezogenen Daten erhoben, die eine direkte Identifizierung der teilnehmenden Personen ermöglichen."

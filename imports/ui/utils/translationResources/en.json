@@ -106,7 +106,7 @@
         "02purpose2": "This website is used to conduct a scientific study as part of a master's thesis.\n\nThe aim of the study is the scientific evaluation of user responses in connection with audio-based tasks.\n\nParticipation in the study is voluntary.",
 
         "03dataCollected1": "3. Data Collected",
-        "03dataCollected2": "As part of using this website, the following data are collected and stored:\n\n- Responses to the survey\n- Date and time of each submission\n- A randomly generated participant ID used to group responses\n- Technically necessary server log data (e.g., IP address, date and time of access, accessed page), if recorded by the hosting provider.",
+        "03dataCollected2": "As part of using this website, the following data are collected and stored:\n\n- Submitted Survey Responses\n- Date and time of each submission\n- A randomly generated participant ID used to group responses\n- Technically necessary server log data (e.g., IP address, date and time of access, accessed page), if recorded by the hosting provider.",
 
         "04legalBasis1": "4. Legal Basis for Processing",
         "04legalBasis2": "Data processing is carried out on the basis of the consent of the participating persons in accordance with Art. 6(1)(a) GDPR.\n\nProcessing is carried out exclusively for scientific research purposes within the framework of a master's thesis.",

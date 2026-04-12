@@ -14,7 +14,7 @@ export default function ImprintPage() {
         </CardHeader>
         <CardContent>
           {/* §5 DDG */}
-          <div className="space-y-2">
+          <div className="space-y-1">
             <H3>{t("Legal.Imprint.Content.01origin")}</H3>
 
             <H4>{t("Legal.Imprint.Content.01origin-1")}</H4>
@@ -27,7 +27,7 @@ export default function ImprintPage() {
           </div>
 
           {/* Institution (optional) */}
-          <div className="mt-8 space-y-2">
+          <div className="mt-8 space-y-1">
             <H3>{t("Legal.Imprint.Content.03Institution")}</H3>
 
             <P>Hochschule Düsseldorf (HSD)</P>
@@ -35,7 +35,7 @@ export default function ImprintPage() {
           </div>
 
           {/* Content Responsibility */}
-          <div className="mt-8 space-y-2">
+          <div className="mt-8 space-y-1">
             <H3>{t("Legal.Imprint.Content.04contentResponsibility")}</H3>
 
             <P>Christian Böndgen</P>

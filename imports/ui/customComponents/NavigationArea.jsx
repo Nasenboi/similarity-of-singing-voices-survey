@@ -54,7 +54,6 @@ export function NavigationArea() {
             <SidebarMenuButton onClick={() => navigate("/privacyPolicy")}>
               {t("Legal.PrivacyPolicy.title")}
             </SidebarMenuButton>
-            <SidebarMenuButton onClick={() => navigate("/imprint")}>{t("Legal.Imprint.title")}</SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarGroupContent>
