@@ -16,6 +16,7 @@
       "albumDateReleased": "Release Date",
       "artist": "Artist",
       "artistID": "Artist ID",
+      "artistWebsite": "Artist Website",
       "cluster": "Cluster",
       "complaint": "Audio Issue",
       "complaints": "Audio Issues",

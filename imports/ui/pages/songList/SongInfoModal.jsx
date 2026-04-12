@@ -1,16 +1,17 @@
 import {Button} from "@/components/ui/button";
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import {Checkbox} from "@/components/ui/checkbox";
-import {DialogContent, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog";
+import {DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog";
 import {Field, FieldLabel} from "@/components/ui/field";
 import {ScrollArea} from "@/components/ui/scroll-area";
 import {Spinner} from "@/components/ui/spinner";
 import {Textarea} from "@/components/ui/textarea";
 import {useSongsSingle} from "@/imports/api/songs/hooks";
 import {SONGS} from "@/imports/api/songs/methods";
-import {ArrowLeftRight} from "lucide-react";
+import {ArrowLeftRight, Pause, Play} from "lucide-react";
 import React, {useState} from "react";
 import {useTranslation} from "react-i18next";
+import {useAudioContext} from "../../contextProvider/AudioContext";
 import {InfoTable} from "../../customComponents/InfoTable";
 
 function SongComplaint({complaint, index}) {
@@ -53,6 +54,7 @@ export function SongInfoModal({trackID}) {
   const {song, isLoading: isSongLoading} = useSongsSingle(trackID);
   const [showComplaints, setShowComplaints] = useState(false);
   const {t} = useTranslation();
+  const {trackID: audioTrackID, setTrackID: setAudioTrackID, isPlaying, setIsPlaying} = useAudioContext();
 
   if (isSongLoading || !trackID || !song) {
     return (
@@ -60,6 +62,7 @@ export function SongInfoModal({trackID}) {
         <DialogHeader>
           <DialogTitle className="w-full flex items-center justify-start">{t("Common.loading")}</DialogTitle>
         </DialogHeader>
+        <DialogDescription />
         <Spinner />
       </DialogContent>
     );
@@ -68,11 +71,16 @@ export function SongInfoModal({trackID}) {
   const songInfoFields = [
     {field: t("Collections.DBMetaData.itemNumber"), value: song.itemNumber},
     {field: t("Collections.Songs.trackID"), value: song.trackID},
+    {field: t("Collections.Songs.cluster"), value: song.cluster},
+    {field: t("Collections.Songs.title"), value: song.title},
     {field: t("Collections.Songs.album"), value: song.album},
     {field: t("Collections.Songs.artist"), value: song.artist},
-    {field: t("Collections.Songs.cluster"), value: song.cluster},
+    {field: t("Collections.Songs.artistID"), value: song.artistID},
+    {field: t("Collections.Songs.artistWebsite"), value: song.artistWebsite},
+    {field: t("Collections.Songs.members"), value: song.members.join("\n")},
     {field: t("Collections.Songs.genre"), value: song.genre},
     {field: t("Collections.Songs.vocalContentLengthS"), value: song.vocalContentLengthS},
+    {field: t("Collections.Songs.license"), value: song.license},
   ];
 
   const onSkipButtonClick = async () => {
@@ -86,6 +94,14 @@ export function SongInfoModal({trackID}) {
     }
   };
 
+  const onPlayButtonClick = () => {
+    if (audioTrackID !== trackID) {
+      setAudioTrackID(trackID);
+      return;
+    }
+    setIsPlaying(!isPlaying);
+  };
+
   return (
     <DialogContent>
       <DialogHeader>
@@ -93,7 +109,7 @@ export function SongInfoModal({trackID}) {
           {t("Collections.Songs.song")} {song.trackID}
         </DialogTitle>
       </DialogHeader>
-      <div className="max-h-full">
+      <div className="max-h-full h-full">
         {!showComplaints ? (
           <InfoTable className="w-full h-full" fields={songInfoFields} />
         ) : (
@@ -108,14 +124,20 @@ export function SongInfoModal({trackID}) {
         )}
       </div>
       <DialogFooter>
-        <div className="w-full flex justify-between items-center">
-          {song.complaints ? (
-            <Button variant="secondary" onClick={() => setShowComplaints(!showComplaints)} type="button">
-              <ArrowLeftRight /> {showComplaints ? t("SongInfoModal.showInfo") : t("SongInfoModal.showComplaints")}
-            </Button>
-          ) : (
-            <div />
-          )}
+        <div className="w-full grid grid-cols-3">
+          <div className="col-span-1 flex items-center justify-center">
+            {song.complaints && (
+              <Button variant="secondary" onClick={() => setShowComplaints(!showComplaints)} type="button">
+                <ArrowLeftRight /> {showComplaints ? t("SongInfoModal.showInfo") : t("SongInfoModal.showComplaints")}
+              </Button>
+            )}
+          </div>
+          <div className="col-span-1 flex items-center justify-center"></div>
+          <Button size="icon" type="button" onClick={onPlayButtonClick}>
+            {isPlaying && audioTrackID ? <Pause /> : <Play />}
+          </Button>
+        </div>
+        <div className="col-span-1 flex items-center justify-center">
           <Button variant={song.skipInSurvey ? "secondary" : "destructive"} onClick={onSkipButtonClick} type="button">
             {song.skipInSurvey ? t("SongInfoModal.skipInSurveyFalse") : t("SongInfoModal.skipInSurveyTrue")}
           </Button>
