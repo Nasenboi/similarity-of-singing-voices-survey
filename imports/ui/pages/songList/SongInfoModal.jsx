@@ -99,7 +99,7 @@ export function SongInfoModal({trackID}) {
       setAudioTrackID(trackID);
       return;
     }
-    setIsPlaying(!isPlaying);
+    setIsPlaying((prev) => !prev);
   };
 
   return (

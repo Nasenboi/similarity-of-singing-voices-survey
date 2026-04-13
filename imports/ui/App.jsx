@@ -5,6 +5,7 @@ import {AudioProvider} from "./contextProvider/AudioContext";
 import {ParticipantProvider} from "./contextProvider/ParticipantContext";
 import {ThemeProvider} from "./contextProvider/ThemeProvider";
 import {AppSideBar} from "./customComponents/AppSideBar";
+import {GlobalKeyEvents} from "./customComponents/GlobalKeyEvents";
 import {SideBarToggle} from "./customComponents/SideBarToggle";
 import {RoutedContentArea} from "./RoutedContentArea";
 
@@ -15,11 +16,13 @@ export const App = () => {
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <AudioProvider>
             <ParticipantProvider>
-              <BrowserRouter future={{v7_startTransition: true, v7_relativeSplatPath: true}}>
-                <SideBarToggle />
-                <AppSideBar />
-                <RoutedContentArea />
-              </BrowserRouter>
+              <GlobalKeyEvents>
+                <BrowserRouter future={{v7_startTransition: true, v7_relativeSplatPath: true}}>
+                  <SideBarToggle />
+                  <AppSideBar />
+                  <RoutedContentArea />
+                </BrowserRouter>
+              </GlobalKeyEvents>
             </ParticipantProvider>
           </AudioProvider>
         </ThemeProvider>

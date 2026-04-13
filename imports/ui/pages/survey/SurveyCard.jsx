@@ -63,7 +63,7 @@ export function SurveyCard({question, setSurveyAnswer, isMobile = false, isSubmi
 
   const onVoiceClick = (newTrackID, voice) => {
     if (newTrackID === trackID) {
-      setIsPlaying(!isPlaying);
+      setIsPlaying((prev) => !prev);
     } else {
       setIcon(voice);
       setTrackID(newTrackID);

@@ -154,7 +154,7 @@ export function AudioPlayer() {
             <Button
               className="rounded-full md:size-10 size-8"
               onClick={() => {
-                setIsPlaying(!isPlaying);
+                setIsPlaying((prev) => !prev);
               }}
             >
               {isPlaying ? (
