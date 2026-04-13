@@ -10,6 +10,7 @@ import {z} from "zod";
 import {AutoField} from "../../customComponents/AutoField";
 
 const searchFormSchema = z.object({
+  _id: z.string().optional(),
   surveyCompleted: z.boolean().optional().default(false),
   questionnaireID: z.number().optional(),
 });
@@ -19,6 +20,7 @@ export function ParticipantSearchForm({onFilterChange, query}) {
   const form = useForm({
     resolver: zodResolver(searchFormSchema),
     defaultValues: {
+      _id: query?._id || "",
       surveyCompleted: query?.surveyCompleted || false,
       questionnaireID: query?.questionnaireID || undefined,
     },
@@ -44,6 +46,13 @@ export function ParticipantSearchForm({onFilterChange, query}) {
         <CollapsibleContent>
           <CardContent>
             <form onSubmit={form.handleSubmit(onFilterChange)} className="grid grid-cols-3 gap-4">
+              <AutoField
+                className="col-span-1"
+                form={form}
+                name="_id"
+                label={t("Collections.DBMetaData._id")}
+                type="input"
+              />
               <AutoField
                 className="col-span-1"
                 form={form}

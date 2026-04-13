@@ -33,12 +33,12 @@ export default function SurveyQuestionListPage() {
 
   const surveyQuestionColumns = [
     {
-      accessorKey: "questionnaireID",
-      header: t("Collections.SurveyQuestions.questionnaireID"),
-    },
-    {
       accessorKey: "_id",
       header: t("Collections.DBMetaData._id"),
+    },
+    {
+      accessorKey: "questionnaireID",
+      header: t("Collections.SurveyQuestions.questionnaireID"),
     },
     {
       accessorKey: "questionNumber",
