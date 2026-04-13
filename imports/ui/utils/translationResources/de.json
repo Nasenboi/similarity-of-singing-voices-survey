@@ -206,7 +206,7 @@
       "title": "Audiofehlermeldung"
     },
     "Completed": {
-      "description": "Vielen Dank für Ihre Teinahme. Ihre Umfrage ID ist '{{questionnaireID}}'. Als kleine Belohnung können Sie nun den Ähnlichkeitsgraphen ansehen, welcher alle Songs beinhaltet, viel Spaß dabei!",
+      "description": "Vielen Dank für Ihre Teilnahme. Ihre Umfrage ID ist '{{questionnaireID}}'. Als kleine Belohnung können Sie nun den Ähnlichkeitsgraphen ansehen, welcher alle Songs beinhaltet, viel Spaß dabei!",
       "title": "Umfrage beendet"
     },
     "and": "und",

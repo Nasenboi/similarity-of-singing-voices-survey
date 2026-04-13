@@ -174,7 +174,7 @@
     },
     "backgroundMusic": "Instruments",
     "controls": "Keyboard Controls",
-    "language": "Lanugage",
+    "language": "Language",
     "settings": "Settings",
     "skipSilence": "Jump to vocals",
     "theme": "Theme"
@@ -214,8 +214,6 @@
     "areMoreSimilar": "are more similar",
     "cardTitle": "Question",
     "description": "Select the voice option which sounds the most similar to the target voice",
-    "next": "next",
-    "previous": "previous",
     "referenceVoices": "Reference Voices",
     "targetVoice": "Target Voice",
     "title": "Similarity of Singing Voices",
