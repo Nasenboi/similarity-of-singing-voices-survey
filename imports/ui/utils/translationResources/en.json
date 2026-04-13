@@ -47,7 +47,7 @@
       "X": "X",
       "question": "Question",
       "questionNumber": "Question No.",
-      "questionnaireID": "Questionnaire ID",
+      "questionnaireID": "Questionnaire No.",
       "skip": "Skipped"
     },
     "metadata": "Metadata",
@@ -214,7 +214,7 @@
       "title": "Audio Issue Report"
     },
     "Completed": {
-      "description": "Thank you very much for completing the survey. Your Questionnaire ID is '{{questionnaireID}}'. As a small reward you can now check out the similarity plot for all songs, have fun!",
+      "description": "Thank you very much for completing the survey. Your Questionnaire No. is '{{questionnaireID}}'. As a small reward you can now check out the similarity plot for all songs, have fun!",
       "title": "Survey Completed"
     },
     "and": "and",

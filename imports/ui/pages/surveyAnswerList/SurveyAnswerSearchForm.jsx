@@ -12,6 +12,7 @@ import {AutoField} from "../../customComponents/AutoField";
 const searchFormSchema = z.object({
   _id: z.string().optional(),
   questionID: z.string().optional(),
+  _id: z.string().optional(),
   participantID: z.string().optional(),
 });
 
@@ -22,6 +23,7 @@ export function SurveyAnswerSearchForm({onFilterChange, query}) {
     defaultValues: {
       _id: query?._id || "",
       questionID: query?.questionID || "",
+      _id: query?._id || "",
       participantID: query?.participantID || "",
     },
   });
