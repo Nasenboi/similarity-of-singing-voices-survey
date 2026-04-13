@@ -50,7 +50,7 @@ function TooltipWrapper({children}) {
   );
 }
 
-export function SurveyCard({question, similarToX, setSimilarToX, setSurveyAnswer, initAnswer, isSubmitted = false}) {
+export function SurveyCard({question, similarToX, toggleVoices, setSurveyAnswer, initAnswer, isSubmitted = false}) {
   const {trackID, setTrackID, setIcon, isPlaying, setIsPlaying} = useAudioContext();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [voicePlaying, setVoicePlaying] = useState(null);
@@ -69,16 +69,6 @@ export function SurveyCard({question, similarToX, setSimilarToX, setSurveyAnswer
       setTrackID(newTrackID);
     }
     setVoicePlaying(!isPlaying || newTrackID != trackID ? voice : null);
-  };
-
-  const toggleVoices = ({value}) => {
-    if (value === "A") {
-      setSimilarToX(["A", "B"]);
-    } else if (value === "B") {
-      setSimilarToX(["B", "A"]);
-    } else {
-      setSimilarToX([similarToX[1], similarToX[0]]);
-    }
   };
 
   return (

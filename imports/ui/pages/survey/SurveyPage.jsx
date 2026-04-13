@@ -100,6 +100,16 @@ export default function SurveyPage() {
     setSimilarToX(currentAnswer || ["A", "B"]);
   };
 
+  const toggleVoices = ({value}) => {
+    if (value === "A") {
+      setSimilarToX(["A", "B"]);
+    } else if (value === "B") {
+      setSimilarToX(["B", "A"]);
+    } else {
+      setSimilarToX([similarToX[1], similarToX[0]]);
+    }
+  };
+
   const setSurveyAnswer = async (questionID) => {
     if (isPlaying) {
       setIsPlaying(false);
@@ -226,7 +236,7 @@ export default function SurveyPage() {
                     setSurveyAnswer={setSurveyAnswer}
                     isSubmitted={questionsAnswered.includes(currentPage)}
                     similarToX={similarToX}
-                    setSimilarToX={setSimilarToX}
+                    toggleVoices={toggleVoices}
                     initAnswer={initAnswer}
                   />
                 </div>
