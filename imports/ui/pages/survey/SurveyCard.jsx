@@ -50,15 +50,15 @@ function TooltipWrapper({children}) {
   );
 }
 
-export function SurveyCard({question, setSurveyAnswer, isMobile = false, isSubmitted = false}) {
+export function SurveyCard({question, similarToX, setSimilarToX, setSurveyAnswer, initAnswer, isSubmitted = false}) {
   const {trackID, setTrackID, setIcon, isPlaying, setIsPlaying} = useAudioContext();
-  const [similarToX, setSimilarToX] = useState(["A", "B"]);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [voicePlaying, setVoicePlaying] = useState(null);
   const {t} = useTranslation();
 
   useEffect(() => {
     setTrackID(null);
+    initAnswer();
   }, []);
 
   const onVoiceClick = (newTrackID, voice) => {
@@ -162,7 +162,7 @@ export function SurveyCard({question, setSurveyAnswer, isMobile = false, isSubmi
               </div>
             </RadioGroup>
             <div className="-mb-4 w-full flex justify-center">
-              <Button onClick={() => setSurveyAnswer(question._id, similarToX)}>{t("Common.submit")}</Button>
+              <Button onClick={() => setSurveyAnswer(question._id)}>{t("Common.submit")}</Button>
             </div>
           </div>
         </div>

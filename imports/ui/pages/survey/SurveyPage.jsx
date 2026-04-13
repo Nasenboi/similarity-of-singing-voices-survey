@@ -44,6 +44,7 @@ export default function SurveyPage() {
   const [isMobile, setIsMobile] = useState(false);
   const [drawerDismissed, setDrawerDismissed] = useState(false);
   const navigate = useNavigate();
+  const [similarToX, setSimilarToX] = useState(["A", "B"]);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -93,7 +94,13 @@ export default function SurveyPage() {
     }
   };
 
-  const setSurveyAnswer = async (questionID, answer) => {
+  const initAnswer = () => {
+    const currentQuestionID = surveyQuestions.find((q) => q.questionNumber === currentPage)?._id;
+    const currentAnswer = surveyAnswers.find((a) => a.questionID === currentQuestionID)?.answer;
+    setSimilarToX(currentAnswer || ["A", "B"]);
+  };
+
+  const setSurveyAnswer = async (questionID) => {
     if (isPlaying) {
       setIsPlaying(false);
     }
@@ -101,7 +108,7 @@ export default function SurveyPage() {
     try {
       await SURVEY_ANSWERS.setAnswer.callAsync({
         questionID,
-        answer,
+        answer: similarToX,
         participantID: participant._id,
         backgroundMusic: useBackgroundMusic,
       });
@@ -211,10 +218,12 @@ export default function SurveyPage() {
               >
                 <div className="size-full flex justify-center items-center">
                   <SurveyCard
-                    isMobile={isMobile}
                     question={surveyQuestions?.find((q) => q.questionNumber === currentPage)}
                     setSurveyAnswer={setSurveyAnswer}
                     isSubmitted={questionsAnswered.includes(currentPage)}
+                    similarToX={similarToX}
+                    setSimilarToX={setSimilarToX}
+                    initAnswer={initAnswer}
                   />
                 </div>
               </motion.div>
