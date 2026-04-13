@@ -3,11 +3,27 @@ import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} f
 import React from "react";
 import {Trans, useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
+import {useParticipantContext} from "../../contextProvider/ParticipantContext";
 import {Muted, P} from "../../customComponents/Typography";
 
 export default function MainPage() {
   const navigate = useNavigate();
   const {t} = useTranslation();
+  const {participant, isLoading, newParticipant} = useParticipantContext();
+
+  const navigateToSurvey = () => {
+    if (!participant && !isLoading) {
+      newParticipant()
+        .then(() => {
+          navigate("/survey");
+        })
+        .catch((error) => {
+          console.error("Error creating new participant:", error);
+        });
+    } else {
+      navigate("/survey");
+    }
+  };
 
   return (
     <div className="w-full flex justify-center items-center">
@@ -28,7 +44,7 @@ export default function MainPage() {
           </Muted>
         </CardContent>
         <CardFooter>
-          <Button onClick={() => navigate("/survey")}>{t("MainPage.startSurvey")}</Button>
+          <Button onClick={navigateToSurvey}>{t("MainPage.startSurvey")}</Button>
         </CardFooter>
       </Card>
     </div>
