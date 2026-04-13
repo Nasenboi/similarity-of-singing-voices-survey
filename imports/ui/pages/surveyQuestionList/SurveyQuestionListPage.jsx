@@ -37,6 +37,10 @@ export default function SurveyQuestionListPage() {
       header: t("Collections.SurveyQuestions.questionnaireID"),
     },
     {
+      accessorKey: "_id",
+      header: t("Collections.DBMetaData._id"),
+    },
+    {
       accessorKey: "questionNumber",
       header: t("Collections.SurveyQuestions.questionNumber"),
     },

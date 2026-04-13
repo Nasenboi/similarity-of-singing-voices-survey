@@ -65,7 +65,7 @@ export function SurveyQuestionSearchForm({onFilterChange, query}) {
                 form={form}
                 name="skip"
                 label={t("Collections.SurveyQuestions.skip")}
-                type="boolean"
+                type="bool"
               />
               <div className="col-span-3 flex justify-end">
                 <Button type="submit">{t("Common.submit")}</Button>

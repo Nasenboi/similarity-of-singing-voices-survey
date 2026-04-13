@@ -33,7 +33,7 @@ export function ParticipantInfoModal({participantID, setDialogOpen}) {
   }
 
   const participantInfoFields = [
-    {field: t("Collections.DBMetaData.itemNumber"), value: participant.itemNumber},
+    {field: t("Collections.DBMetaData._id"), value: participant._id},
     {field: t("Collections.DBMetaData.createDate"), value: participant.createDate},
     {field: t("Collections.DBMetaData.editDate"), value: participant.editDate},
     {field: t("Collections.Participants.surveyCompleted"), value: participant.surveyCompleted},

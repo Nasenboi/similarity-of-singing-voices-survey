@@ -37,6 +37,10 @@ export default function ParticipantListPage() {
       header: t("Collections.DBMetaData.itemNumber"),
     },
     {
+      accessorKey: "_id",
+      header: t("Collections.DBMetaData._id"),
+    },
+    {
       accessorKey: "questionnaireID",
       header: t("Collections.SurveyQuestions.questionnaireID"),
     },
