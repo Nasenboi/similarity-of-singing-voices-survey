@@ -47,7 +47,7 @@
       "X": "X",
       "question": "Frage",
       "questionNumber": "Frage Nr.",
-      "questionnaireID": "Umfrage ID",
+      "questionnaireID": "Umfrage Nr.",
       "skip": "Übersprungen"
     },
     "metadata": "Metadaten",
@@ -213,7 +213,7 @@
       "title": "Audiofehlermeldung"
     },
     "Completed": {
-      "description": "Vielen Dank für Ihre Teilnahme. Ihre Umfrage ID ist '{{questionnaireID}}'. Als kleine Belohnung können Sie nun den Ähnlichkeitsgraphen ansehen, welcher alle Songs beinhaltet, viel Spaß dabei!",
+      "description": "Vielen Dank für Ihre Teilnahme. Ihre Umfragenummer ist '{{questionnaireID}}'. Als kleine Belohnung können Sie nun den Ähnlichkeitsgraphen ansehen, welcher alle Songs beinhaltet, viel Spaß dabei!",
       "title": "Umfrage beendet"
     },
     "and": "und",
