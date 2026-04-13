@@ -1,4 +1,4 @@
-import {Kbd, KbdGroup} from "@/components/ui/kbd";
+import {Kbd} from "@/components/ui/kbd";
 import {
   Sidebar,
   SidebarContent,
@@ -17,6 +17,7 @@ import {LanguageToggle} from "./LanguageToggle";
 import {LoginButton} from "./LoginButton";
 import {NavigationArea} from "./NavigationArea";
 import {ThemeToggle} from "./ThemeToggle";
+import {H4} from "./Typography";
 
 function ControlsKey({name, children}) {
   return (
@@ -35,9 +36,7 @@ export function AppSideBar() {
     <Sidebar className="z-40">
       <SidebarHeader className="border-b-2">
         <div className="m-2 md:ml-16">
-          <h1 className="text-2xl font-semibold leading-none tracking-tight text-center justify-center m-2">
-            {t("Sidebar.settings")}
-          </h1>
+          <H4>{t("Sidebar.settings")}</H4>
         </div>
       </SidebarHeader>
       <SidebarContent>

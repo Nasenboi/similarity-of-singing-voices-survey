@@ -11,7 +11,7 @@ import {useTranslation} from "react-i18next";
 import {useAudioContext} from "../contextProvider/AudioContext";
 import {cookies, getCookieSave} from "./Cookies";
 import {MarkerSlider} from "./MarkerSlider";
-import {P} from "./Typography";
+import {H1, P} from "./Typography";
 
 function AudioDetails({song}) {
   const {t} = useTranslation();
@@ -134,7 +134,7 @@ export function AudioPlayer() {
   return (
     <>
       {!isSongLoading && song && (
-        <div className="w-full md:max-h-22 md:h-22 sticky bottom-0 left-0 right-0 border-t-2 bg-background border-sidebar-border flex items-center md:p-2 px-2">
+        <div className="w-full md:max-h-22 md:h-22 sticky bottom-0 left-0 right-0 rounded-t-xl border-2 border-b-0 bg-background flex items-center md:p-2 px-2">
           <div className="w-full md:h-20 h-18 space-x-2 flex justify-center items-center">
             {icon && (
               <HoverCard openDelay={5} closeDelay={100}>
@@ -142,7 +142,7 @@ export function AudioPlayer() {
                   <div className="relative size-16">
                     <CreativeCommons className="absolute -top-1 -right-1 bg-accent rounded-full" />
                     <div className="size-16 bg-accent rounded-md border-2 flex items-center justify-center">
-                      <h1 className="text-center text-2xl font-bold">{icon}</h1>
+                      <H1>{icon}</H1>
                     </div>
                   </div>
                 </HoverCardTrigger>

@@ -13,6 +13,7 @@ import React, {useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useAudioContext} from "../../contextProvider/AudioContext";
 import {InfoTable} from "../../customComponents/InfoTable";
+import {H1} from "../../customComponents/Typography";
 
 function SongComplaint({complaint, index}) {
   const {t} = useTranslation();
@@ -114,7 +115,7 @@ export function SongInfoModal({trackID}) {
           <InfoTable className="w-full h-full" fields={songInfoFields} />
         ) : (
           <>
-            <h1>{t("Collections.Songs.complaints")}</h1>
+            <H1>{t("Collections.Songs.complaints")}</H1>
             <ScrollArea className="w-full h-full max-h-[30vh] -pb-4">
               {song.complaints?.map((complaint, idx) => (
                 <SongComplaint key={`sc_${idx}`} complaint={complaint} index={idx} />
