@@ -21,9 +21,12 @@ export function SurveyQuestionInfoModal({surveyQuestionID}) {
   }
 
   const surveyQuestionInfoFields = [
-    {field: t("Collections.DBMetaData.itemNumber"), value: surveyQuestion.itemNumber},
+    {field: t("Collections.DBMetaData._id"), value: surveyQuestion._id},
     {field: t("Collections.SurveyQuestions.questionnaireID"), value: surveyQuestion.questionnaireID},
     {field: t("Collections.SurveyQuestions.questionNumber"), value: surveyQuestion.questionNumber},
+    {field: t("Collections.SurveyQuestions.X"), value: surveyQuestion.X},
+    {field: t("Collections.SurveyQuestions.A"), value: surveyQuestion.A},
+    {field: t("Collections.SurveyQuestions.B"), value: surveyQuestion.B},
   ];
 
   return (
