@@ -30,6 +30,7 @@ import {useNavigate} from "react-router-dom";
 import {useAudioContext} from "../../contextProvider/AudioContext";
 import {useParticipantContext} from "../../contextProvider/ParticipantContext";
 import {AudioPlayer} from "../../customComponents/AudioPlayer";
+import {cookies} from "../../customComponents/Cookies";
 import {SurveyCard} from "./SurveyCard";
 
 export default function SurveyPage() {
@@ -81,6 +82,10 @@ export default function SurveyPage() {
     if (!surveyQuestions) {
       return;
     }
+
+    // dismiss toolips on question navigation
+    cookies.set("complaintTooltipRead", true);
+    cookies.set("flagsTooltipRead", true);
 
     if (isPlaying) {
       setIsPlaying(false);
