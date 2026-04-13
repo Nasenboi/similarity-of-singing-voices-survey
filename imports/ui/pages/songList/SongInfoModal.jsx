@@ -13,7 +13,6 @@ import React, {useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useAudioContext} from "../../contextProvider/AudioContext";
 import {InfoTable} from "../../customComponents/InfoTable";
-import {H1} from "../../customComponents/Typography";
 
 function SongComplaint({complaint, index}) {
   const {t} = useTranslation();
@@ -114,14 +113,11 @@ export function SongInfoModal({trackID}) {
         {!showComplaints ? (
           <InfoTable className="w-full h-full" fields={songInfoFields} />
         ) : (
-          <>
-            <H1>{t("Collections.Songs.complaints")}</H1>
-            <ScrollArea className="w-full h-full max-h-[30vh] -pb-4">
-              {song.complaints?.map((complaint, idx) => (
-                <SongComplaint key={`sc_${idx}`} complaint={complaint} index={idx} />
-              ))}
-            </ScrollArea>
-          </>
+          <ScrollArea className="w-full h-full max-h-[30vh] -pb-4">
+            {song.complaints?.map((complaint, idx) => (
+              <SongComplaint key={`sc_${idx}`} complaint={complaint} index={idx} />
+            ))}
+          </ScrollArea>
         )}
       </div>
       <DialogFooter>
@@ -133,15 +129,16 @@ export function SongInfoModal({trackID}) {
               </Button>
             )}
           </div>
-          <div className="col-span-1 flex items-center justify-center"></div>
-          <Button size="icon" type="button" onClick={onPlayButtonClick}>
-            {isPlaying && audioTrackID ? <Pause /> : <Play />}
-          </Button>
-        </div>
-        <div className="col-span-1 flex items-center justify-center">
-          <Button variant={song.skipInSurvey ? "secondary" : "destructive"} onClick={onSkipButtonClick} type="button">
-            {song.skipInSurvey ? t("SongInfoModal.skipInSurveyFalse") : t("SongInfoModal.skipInSurveyTrue")}
-          </Button>
+          <div className="col-span-1 flex items-center justify-center">
+            <Button size="icon" type="button" onClick={onPlayButtonClick}>
+              {isPlaying && audioTrackID ? <Pause /> : <Play />}
+            </Button>
+          </div>
+          <div className="col-span-1 flex items-center justify-center">
+            <Button variant={song.skipInSurvey ? "secondary" : "destructive"} onClick={onSkipButtonClick} type="button">
+              {song.skipInSurvey ? t("SongInfoModal.skipInSurveyFalse") : t("SongInfoModal.skipInSurveyTrue")}
+            </Button>
+          </div>
         </div>
       </DialogFooter>
     </DialogContent>

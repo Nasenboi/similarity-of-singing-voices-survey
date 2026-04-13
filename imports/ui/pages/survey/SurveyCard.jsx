@@ -105,8 +105,13 @@ export function SurveyCard({question, similarToX, toggleVoices, setSurveyAnswer,
           </H1>
           <Dialog open={dialogOpen} onOpenChange={(open) => setDialogOpen(open)}>
             <DialogTrigger asChild>
-              <TooltipWrapper>
-                <Button variant="secondary" size="icon" className={isSubmitted && "border"}>
+              <TooltipWrapper asChild>
+                <Button
+                  variant="secondary"
+                  size="icon"
+                  className={isSubmitted && "border"}
+                  onClick={() => setDialogOpen(true)}
+                >
                   <Flag />
                 </Button>
               </TooltipWrapper>

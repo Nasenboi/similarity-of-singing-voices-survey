@@ -1,5 +1,5 @@
 import {Button} from "@/components/ui/button";
-import {DialogContent, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog";
+import {DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog";
 import {Spinner} from "@/components/ui/spinner";
 import {zodResolver} from "@hookform/resolvers/zod";
 import React from "react";
@@ -53,6 +53,7 @@ export function ComplaintForm({surveyQuestion, setDialogOpen}) {
       <DialogContent>
         <DialogHeader>
           <DialogTitle className="w-full flex items-center justify-start">{t("Common.loading")}</DialogTitle>
+          <DialogDescription />
         </DialogHeader>
         <Spinner />
       </DialogContent>
@@ -63,6 +64,7 @@ export function ComplaintForm({surveyQuestion, setDialogOpen}) {
     <DialogContent>
       <DialogHeader>
         <DialogTitle className="w-full flex items-center justify-start">{t("SurveyPage.ComplaintForm.title")}</DialogTitle>
+        <DialogDescription />
       </DialogHeader>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <div className="w-full grid grid-cols-3 gap-4">

@@ -25,8 +25,8 @@ export function ParticipantInfoModal({participantID, setDialogOpen}) {
       <DialogContent>
         <DialogHeader>
           <DialogTitle className="w-full flex items-center justify-start">{t("Common.loading")}</DialogTitle>
+          <DialogDescription />
         </DialogHeader>
-        <DialogDescription />
         <Spinner />
       </DialogContent>
     );
