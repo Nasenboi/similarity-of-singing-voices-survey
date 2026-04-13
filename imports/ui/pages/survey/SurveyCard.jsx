@@ -71,6 +71,26 @@ export function SurveyCard({question, similarToX, toggleVoices, setSurveyAnswer,
     setVoicePlaying(!isPlaying || newTrackID != trackID ? voice : null);
   };
 
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      const tag = e.target.tagName;
+      const isEditable = e.target.isContentEditable;
+      const inputLike = ["INPUT", "TEXTAREA", "SELECT", "BUTTON"];
+      if (inputLike.includes(tag) || isEditable) return;
+
+      if (e.code === "KeyX" || e.code === "Digit1" || e.code === "Numpad1") {
+        onVoiceClick(question["X"], "X");
+      } else if (e.code === "KeyA" || e.code === "Digit2" || e.code === "Numpad2") {
+        onVoiceClick(question["A"], "A");
+      } else if (e.code === "KeyB" || e.code === "Digit3" || e.code === "Numpad3") {
+        onVoiceClick(question["B"], "B");
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
   return (
     <div
       className={`w-220 max-w-screen h-min rounded-md border-2 flex flex-col justifiy-center ${isSubmitted && "bg-accent border-accent-foreground"}`}

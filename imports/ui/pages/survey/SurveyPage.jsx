@@ -94,6 +94,43 @@ export default function SurveyPage() {
     }
   };
 
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      const tag = e.target.tagName;
+      const isEditable = e.target.isContentEditable;
+      const inputLike = ["INPUT", "TEXTAREA", "SELECT", "BUTTON"];
+      if (inputLike.includes(tag) || isEditable) return;
+
+      const currentQuestion = surveyQuestions?.find((q) => q.questionNumber === currentPage);
+
+      switch (e.code) {
+        case "Enter":
+          if (currentQuestion) setSurveyAnswer(currentQuestion._id);
+          break;
+        case "ArrowLeft":
+          handlePageChange(currentPage - 1);
+          break;
+        case "ArrowRight":
+          handlePageChange(currentPage + 1);
+          break;
+        /*
+        case "KeyA":
+          toggleVoices({value: "A"});
+          break;
+        case "KeyB":
+          toggleVoices({value: "B"});
+          break;
+        */
+        case "KeyT":
+          toggleVoices({value: "toggle"});
+          break;
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [currentPage, surveyQuestions, similarToX]);
+
   const initAnswer = () => {
     const currentQuestionID = surveyQuestions.find((q) => q.questionNumber === currentPage)?._id;
     const currentAnswer = surveyAnswers.find((a) => a.questionID === currentQuestionID)?.answer;
