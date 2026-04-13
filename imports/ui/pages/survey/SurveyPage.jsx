@@ -168,6 +168,12 @@ export default function SurveyPage() {
     }
   };
 
+  useEffect(() => {
+    if (!isParticipantLoading && !participant) {
+      navigate("/");
+    }
+  }, [isParticipantLoading, participant, navigate]);
+
   if (isParticipantLoading || isSurveyAnswersLoading || isSurveyQuestionsLoading) {
     return (
       <div className="w-screen h-screen flex justify-center items-center">
@@ -176,8 +182,8 @@ export default function SurveyPage() {
     );
   }
 
-  if (!isParticipantLoading && !participant) {
-    navigate("/");
+  if (!participant) {
+    return null;
   }
 
   return (
@@ -298,7 +304,7 @@ export default function SurveyPage() {
           <DrawerHeader className="flex flex-col justify-center items-center">
             <DrawerTitle>{t("SurveyPage.Completed.title")}</DrawerTitle>
             <DrawerDescription>
-              {t("SurveyPage.Completed.description", {questionnaireID: participant.questionnaireID})}
+              {t("SurveyPage.Completed.description", {questionnaireID: participant?.questionnaireID || "N/A"})}
             </DrawerDescription>
           </DrawerHeader>
           <DrawerFooter className="flex justify-center items-center space-y-4">
