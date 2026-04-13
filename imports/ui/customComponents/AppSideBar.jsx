@@ -52,7 +52,7 @@ export default function AppSideBar() {
           </SidebarGroupContent>
         </SidebarGroup>
         <NavigationArea />
-        <SidebarGroup>
+        <SidebarGroup className="hidden md:block">
           <SidebarGroupLabel>{t("Sidebar.controls")}</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>

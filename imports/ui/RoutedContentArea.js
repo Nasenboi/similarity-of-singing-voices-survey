@@ -16,11 +16,12 @@ const PrivacyPolicyPage = React.lazy(() => import("./pages/privacyPolicy/Privacy
 const CreditsPage = React.lazy(() => import("./pages/credits/CreditsPage"));
 
 export const RouteEffect = () => {
-  const {setTrackID} = useAudioContext();
+  const {setTrackID, setIcon} = useAudioContext();
   const location = useLocation();
 
   useEffect(() => {
     setTrackID(null);
+    setIcon(null);
   }, [location.pathname]);
 
   return null;
