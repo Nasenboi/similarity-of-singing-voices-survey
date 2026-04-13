@@ -73,6 +73,12 @@
       "field": "Feld",
       "value": "Wert"
     },
+    "LoginForm": {
+      "description": "Bitte geben Sie Ihren Benutzernamen und Ihr Passwort ein, um auf die Umfrage zuzugreifen. Wenn Sie kein Konto haben, kontaktieren Sie bitte den Administrator.",
+      "password": "Passwort",
+      "title": "Melden Sie sich in Ihrem Konto an",
+      "username": "Benutzername"
+    },
     "SongSearchForm": {
       "downloadComplaints": "Audiofehler herunterladen"
     },

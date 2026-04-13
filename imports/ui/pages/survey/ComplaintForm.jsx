@@ -108,7 +108,7 @@ export function ComplaintForm({surveyQuestion, setDialogOpen}) {
         </div>
         <DialogFooter>
           <div className="w-full flex justify-end">
-            <Button type="submit">Submit</Button>
+            <Button type="submit">{t("Common.submit")}</Button>
           </div>
         </DialogFooter>
       </form>

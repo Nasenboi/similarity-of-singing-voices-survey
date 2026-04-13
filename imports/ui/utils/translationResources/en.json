@@ -73,6 +73,12 @@
       "field": "Field",
       "value": "Value"
     },
+    "LoginForm": {
+      "description": "Please enter your username and password to access the survey. If you don't have an account, please contact the administrator.",
+      "password": "Password",
+      "title": "Login to your account",
+      "username": "Username"
+    },
     "SongSearchForm": {
       "downloadComplaints": "Download Audio Issues"
     },
