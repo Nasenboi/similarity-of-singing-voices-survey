@@ -149,6 +149,16 @@
     "title": "Willkommen zur Umfrage"
   },
   "Sidebar": {
+    "Controls": {
+      "navigate": "Navigation",
+      "playA": "Spiele Stimme A",
+      "playB": "Spiele Stimme B",
+      "playPause": "Spiele / Stoppe Audio",
+      "playX": "Spiele Stimme X",
+      "settings": "Einstellungen",
+      "submit": "Antwort bestätigen",
+      "toggle": "Antwort wechseln"
+    },
     "Navigation": {
       "home": "Startseite",
       "navigation": "Navigation",
@@ -162,6 +172,7 @@
       "toggle": "Farbschema wechseln"
     },
     "backgroundMusic": "Instrumente",
+    "controls": "Tastatursteuerung",
     "language": "Sprache",
     "settings": "Einstellungen",
     "skipSilence": "Zum Gesang springen",

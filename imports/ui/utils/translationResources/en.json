@@ -150,6 +150,16 @@
     "title": "Welcome to the survey"
   },
   "Sidebar": {
+    "Controls": {
+      "navigate": "Navigate Questions",
+      "playA": "Play Voice A",
+      "playB": "Play Voice B",
+      "playPause": "Play / Pause Audio",
+      "playX": "Play Voice X",
+      "settings": "Open Settings",
+      "submit": "Submit Answer",
+      "toggle": "Toggle Options"
+    },
     "Navigation": {
       "home": "Home",
       "navigation": "Navigation",
@@ -163,6 +173,7 @@
       "toggle": "Toggle Theme"
     },
     "backgroundMusic": "Instruments",
+    "controls": "Keyboard Controls",
     "language": "Lanugage",
     "settings": "Settings",
     "skipSilence": "Jump to vocals",
