@@ -22,7 +22,7 @@ export default function MainPage() {
             <Trans
               i18nKey="MainPage.contentSmall"
               components={{
-                1: <a href="/privacyPolicy" className="underline" />,
+                1: <a href="/privacyPolicy" target="_blank" rel="noopener noreferrer" className="underline" />,
               }}
             />
           </Muted>
