@@ -84,12 +84,16 @@ export default function SimilarityPlotPage() {
     <div className="w-screen h-screen max-w-screen max-h-screen flex flex-col justify-center items-center">
       <div className="size-full flex flex-col justify-between items-center overflow-scroll md:overflow-hidden">
         <Card className="size-full">
-          <CardHeader className="w-full md:px-24 px-4 flex flex-row justify-between items-center">
-            <div />
-            <CardTitle>{dims === "2D" ? t("SimilarityPlot.2D.title") : t("SimilarityPlot.3D.title")}</CardTitle>
-            <div className="flex justify-center items-center space-x-2">
+          <CardHeader className="py-2  w-full h-min grid gap-4 space-y-0 grid-cols-1 md:grid-cols-3">
+            <div className="hidden md:block md:col-span-1" />
+            <CardTitle className="col-span-1 h-min row-span-1 flex justify-center items-center">
+              {dims === "2D" ? t("SimilarityPlot.2D.title") : t("SimilarityPlot.3D.title")}
+            </CardTitle>
+            <div className="col-span-1 row-span-1 h-min flex flex-col md:flex-row justify-end items-end md:items-center space-y-2 md:space-y-0 md:space-x-2">
               <Field orientation="horizontal">
-                <FieldLabel className="whitespace-nowrap">{t("Collections.SurveyQuestions.questionnaireID")}</FieldLabel>
+                <FieldLabel className="flex justify-end whitespace-nowrap">
+                  {t("Collections.SurveyQuestions.questionnaireID")}
+                </FieldLabel>
                 <NumberInput value={questionnaireID} onChange={(e) => setQuestionnaireID(e)} />
               </Field>
               <ButtonGroup>
