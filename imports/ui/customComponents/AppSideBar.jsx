@@ -29,7 +29,7 @@ function ControlsKey({name, children}) {
 }
 
 // ToDo: add translations for toggle buttons
-export function AppSideBar() {
+export default function AppSideBar() {
   const {t} = useTranslation();
 
   return (

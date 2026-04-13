@@ -2,7 +2,7 @@ import {useSidebar} from "@/components/ui/sidebar";
 import React, {useEffect} from "react";
 import {useAudioContext} from "../contextProvider/AudioContext";
 
-export function GlobalKeyEvents({children}) {
+export default function GlobalKeyEvents({children}) {
   const {setIsPlaying, trackID} = useAudioContext();
   const {toggleSidebar} = useSidebar();
 
