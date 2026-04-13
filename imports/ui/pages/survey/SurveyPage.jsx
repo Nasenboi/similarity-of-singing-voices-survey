@@ -113,14 +113,6 @@ export default function SurveyPage() {
         case "ArrowRight":
           handlePageChange(currentPage + 1);
           break;
-        /*
-        case "KeyA":
-          toggleVoices({value: "A"});
-          break;
-        case "KeyB":
-          toggleVoices({value: "B"});
-          break;
-        */
         case "KeyT":
           toggleVoices({value: "toggle"});
           break;
