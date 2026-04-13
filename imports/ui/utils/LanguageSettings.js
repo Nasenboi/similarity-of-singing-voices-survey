@@ -9,6 +9,12 @@ import {getCookieSave} from "../customComponents/Cookies";
 import de from "./translationResources/de.json";
 import en from "./translationResources/en.json";
 
+const detectUserLocale = () => {
+  const browserLanguage = navigator.language || navigator.userLanguage || DEFAULT_LANGUAGE;
+  const languageCode = browserLanguage.split("-")[0].toLowerCase();
+  return languageCode === "de" ? "de" : "en";
+};
+
 const resources = {
   en: {
     translation: en,
@@ -22,7 +28,7 @@ const resources = {
 
 i18n.use(initReactI18next).init({
   resources,
-  lng: getCookieSave("language", DEFAULT_LANGUAGE),
+  lng: getCookieSave("language", detectUserLocale()),
   fallbackLng: DEFAULT_LANGUAGE,
   debug: false,
   showSupportNotice: false,

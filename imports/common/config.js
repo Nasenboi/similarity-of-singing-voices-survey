@@ -6,7 +6,7 @@ export const NUM_QUESTIONNAIRES = 1;
 // UI Parameters
 export const ITEMS_PER_PAGE = 10;
 export const INITIAL_VOLUME = 0.5;
-export const DEFAULT_LANGUAGE = "de";
+export const DEFAULT_LANGUAGE = "en";
 
 // Collections
 export const INDEX_MAP = {
