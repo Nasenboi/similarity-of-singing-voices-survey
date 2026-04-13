@@ -129,6 +129,10 @@ export default function SurveyPage() {
     );
   }
 
+  if (!isParticipantLoading && !participant) {
+    navigate("/");
+  }
+
   return (
     <div className="w-screen h-screen max-w-screen max-h-screen flex flex-col justify-center items-center">
       <Card className="fixed top-0 ms-50 max-w-500 w-full m-2 md:m-4 bg-background z-10">
