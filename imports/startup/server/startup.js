@@ -30,7 +30,7 @@ async function initServer() {
   await waitForFiles();
   Log.info("file server ready");
 
-  if (Meteor.settings.private.reset) {
+  if (Meteor.settings.private.RESET) {
     await resetDB();
     Log.info("DB reset finished");
 

@@ -1,7 +1,10 @@
 import {Songs} from "@/imports/api/songs/collection";
 import {DATASET_FILE_PATH} from "@/imports/common/globals";
 import {Log} from "meteor/logging";
+import {Meteor} from "meteor/meteor";
 import Papa from "papaparse";
+
+const PRE_SKIP_TRACK_IDS = Meteor.settings.private.PRE_SKIP_TRACK_IDS || [];
 
 function parseOnsets(onsets) {
   return onsets
@@ -40,7 +43,7 @@ function convertToSongSchema(audio) {
     vocalContentLengthS: audio.vocal_content_length_s,
     onsets: audio.onsets && audio.onsets.length > 0 ? parseOnsets(audio.onsets) : [],
     cluster: audio.cluster,
-    skipInSurvey: false,
+    skipInSurvey: PRE_SKIP_TRACK_IDS.includes(audio.track_id),
     UMAP2D: {
       UMAP_1: audio.UMAP_2D_1,
       UMAP_2: audio.UMAP_2D_2,
