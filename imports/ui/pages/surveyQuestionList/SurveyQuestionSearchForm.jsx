@@ -10,6 +10,7 @@ import {z} from "zod";
 import {AutoField} from "../../customComponents/AutoField";
 
 const searchFormSchema = z.object({
+  _id: z.string().optional(),
   questionnaireID: z.string().optional(),
   _id: z.string().optional(),
   questionNumber: z.string().optional(),
@@ -21,6 +22,7 @@ export function SurveyQuestionSearchForm({onFilterChange, query}) {
   const form = useForm({
     resolver: zodResolver(searchFormSchema),
     defaultValues: {
+      _id: query?._id || "",
       questionnaireID: query?.questionnaireID || "",
       _id: query?._id || "",
       questionNumber: query?.questionNumber || "",

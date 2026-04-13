@@ -33,12 +33,12 @@ export default function ParticipantListPage() {
 
   const participantColumns = [
     {
-      accessorKey: "itemNumber",
-      header: t("Collections.DBMetaData.itemNumber"),
-    },
-    {
       accessorKey: "_id",
       header: t("Collections.DBMetaData._id"),
+    },
+    {
+      accessorKey: "itemNumber",
+      header: t("Collections.DBMetaData.itemNumber"),
     },
     {
       accessorKey: "questionnaireID",
