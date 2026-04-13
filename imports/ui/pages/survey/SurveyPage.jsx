@@ -10,7 +10,6 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from "@/components/ui/drawer";
-import {Field, FieldLabel} from "@/components/ui/field";
 import {Progress} from "@/components/ui/progress";
 import {Spinner} from "@/components/ui/spinner";
 import {useSurveyAnswersParticipant} from "@/imports/api/surveyAnswers/hooks";
@@ -31,11 +30,12 @@ import {useNavigate} from "react-router-dom";
 import {useAudioContext} from "../../contextProvider/AudioContext";
 import {useParticipantContext} from "../../contextProvider/ParticipantContext";
 import {AudioPlayer} from "../../customComponents/AudioPlayer";
+import {cookies} from "../../customComponents/Cookies";
 import {SurveyCard} from "./SurveyCard";
 
 export default function SurveyPage() {
   const {t} = useTranslation();
-  const {isPlaying, setIsPlaying} = useAudioContext();
+  const {isPlaying, setIsPlaying, useBackgroundMusic} = useAudioContext();
   const {participant, isLoading: isParticipantLoading} = useParticipantContext();
   const [participantID, setParticipantID] = useState(participant?._id);
   const [currentPage, setCurrentPage] = useState(0);
@@ -45,6 +45,7 @@ export default function SurveyPage() {
   const [isMobile, setIsMobile] = useState(false);
   const [drawerDismissed, setDrawerDismissed] = useState(false);
   const navigate = useNavigate();
+  const [similarToX, setSimilarToX] = useState(["A", "B"]);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -82,6 +83,10 @@ export default function SurveyPage() {
       return;
     }
 
+    // dismiss toolips on question navigation
+    cookies.set("complaintTooltipRead", true);
+    cookies.set("flagsTooltipRead", true);
+
     if (isPlaying) {
       setIsPlaying(false);
     }
@@ -94,7 +99,52 @@ export default function SurveyPage() {
     }
   };
 
-  const setSurveyAnswer = async (questionID, answer) => {
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      const tag = e.target.tagName;
+      const isEditable = e.target.isContentEditable;
+      const inputLike = ["INPUT", "TEXTAREA", "SELECT", "BUTTON"];
+      if (inputLike.includes(tag) || isEditable) return;
+
+      const currentQuestion = surveyQuestions?.find((q) => q.questionNumber === currentPage);
+
+      switch (e.code) {
+        case "Enter":
+          if (currentQuestion) setSurveyAnswer(currentQuestion._id);
+          break;
+        case "ArrowLeft":
+          handlePageChange(currentPage - 1);
+          break;
+        case "ArrowRight":
+          handlePageChange(currentPage + 1);
+          break;
+        case "KeyT":
+          toggleVoices({value: "toggle"});
+          break;
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [currentPage, surveyQuestions, similarToX]);
+
+  const initAnswer = () => {
+    const currentQuestionID = surveyQuestions.find((q) => q.questionNumber === currentPage)?._id;
+    const currentAnswer = surveyAnswers.find((a) => a.questionID === currentQuestionID)?.answer;
+    setSimilarToX(currentAnswer || ["A", "B"]);
+  };
+
+  const toggleVoices = ({value}) => {
+    if (value === "A") {
+      setSimilarToX(["A", "B"]);
+    } else if (value === "B") {
+      setSimilarToX(["B", "A"]);
+    } else {
+      setSimilarToX([similarToX[1], similarToX[0]]);
+    }
+  };
+
+  const setSurveyAnswer = async (questionID) => {
     if (isPlaying) {
       setIsPlaying(false);
     }
@@ -102,8 +152,9 @@ export default function SurveyPage() {
     try {
       await SURVEY_ANSWERS.setAnswer.callAsync({
         questionID,
-        answer,
+        answer: similarToX,
         participantID: participant._id,
+        backgroundMusic: useBackgroundMusic,
       });
       const numQuestions = surveyQuestions.length;
       if (currentPage + 1 < numQuestions) {
@@ -114,12 +165,22 @@ export default function SurveyPage() {
     }
   };
 
+  useEffect(() => {
+    if (!isParticipantLoading && !participant) {
+      navigate("/");
+    }
+  }, [isParticipantLoading, participant, navigate]);
+
   if (isParticipantLoading || isSurveyAnswersLoading || isSurveyQuestionsLoading) {
     return (
       <div className="w-screen h-screen flex justify-center items-center">
         <Spinner className="w-40 h-40" />
       </div>
     );
+  }
+
+  if (!participant) {
+    return null;
   }
 
   return (
@@ -211,10 +272,12 @@ export default function SurveyPage() {
               >
                 <div className="size-full flex justify-center items-center">
                   <SurveyCard
-                    isMobile={isMobile}
                     question={surveyQuestions?.find((q) => q.questionNumber === currentPage)}
                     setSurveyAnswer={setSurveyAnswer}
                     isSubmitted={questionsAnswered.includes(currentPage)}
+                    similarToX={similarToX}
+                    toggleVoices={toggleVoices}
+                    initAnswer={initAnswer}
                   />
                 </div>
               </motion.div>
@@ -237,7 +300,9 @@ export default function SurveyPage() {
         <DrawerContent>
           <DrawerHeader className="flex flex-col justify-center items-center">
             <DrawerTitle>{t("SurveyPage.Completed.title")}</DrawerTitle>
-            <DrawerDescription>{t("SurveyPage.Completed.description")}</DrawerDescription>
+            <DrawerDescription>
+              {t("SurveyPage.Completed.description", {questionnaireID: participant?.questionnaireID || "N/A"})}
+            </DrawerDescription>
           </DrawerHeader>
           <DrawerFooter className="flex justify-center items-center space-y-4">
             <ButtonGroup>

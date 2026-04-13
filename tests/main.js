@@ -1,8 +1,15 @@
 import assert from "assert";
+import {Meteor} from "meteor/meteor";
+import "./imports.js";
+
+before((done) => {
+  // wait until all server modules are loaded (in Meteor.startup)
+  Meteor.startup(done);
+});
 
 describe("similarity-of-singing-voices-survey", function () {
   it("package.json has correct name", async function () {
-    const { name } = await import("../package.json");
+    const {name} = await import("../package.json");
     assert.strictEqual(name, "similarity-of-singing-voices-survey");
   });
 

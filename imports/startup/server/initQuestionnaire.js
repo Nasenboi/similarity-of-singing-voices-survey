@@ -2,8 +2,11 @@ import {QuestionnaireStats, SurveyQuestions} from "@/imports/api/surveyQuestions
 import {NUM_QUESTIONNAIRES, NUM_QUESTIONS_PER_SURVEY} from "@/imports/common/config";
 import {TRIPLETS_FILE_PATH} from "@/imports/common/globals";
 import {Log} from "meteor/logging";
+import {Meteor} from "meteor/meteor";
 import ndarray from "ndarray";
 import {fromArrayBuffer} from "numpy-parser";
+
+const PRE_SKIP_TRACK_IDS = Meteor.settings.private.PRE_SKIP_TRACK_IDS || [];
 
 const shuffle = (arr) =>
   arr
@@ -20,22 +23,30 @@ function generateQuestion(args) {
   const A = getTrackID({...args, pos: 1});
   const B = getTrackID({...args, pos: 2});
 
+  const skip = PRE_SKIP_TRACK_IDS.includes(X) || PRE_SKIP_TRACK_IDS.includes(A) || PRE_SKIP_TRACK_IDS.includes(B);
+
   return {
     questionnaireID: args.questionnaireID,
     questionNumber: args.questionNumber,
     X,
     A,
     B,
-    skip: false,
+    skip: skip,
   };
 }
 
 function generateSingleQuestionnaire(args) {
   let questions = [];
+  let nonSkippedQuestions = 0;
 
-  args.batchIndicies.map((batchNo) =>
-    questions.push(generateQuestion({...args, questionNumber: questions.length, batchNo})),
-  );
+  args.batchIndicies.map((batchNo) => {
+    const question = generateQuestion({...args, questionNumber: 0, batchNo});
+    if (!question.skip) {
+      question.questionNumber = nonSkippedQuestions;
+      nonSkippedQuestions += 1;
+    }
+    questions.push(question);
+  });
 
   return questions;
 }

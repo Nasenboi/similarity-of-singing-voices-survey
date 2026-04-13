@@ -15,21 +15,29 @@
       "albumDateCreated": "Creation Date",
       "albumDateReleased": "Release Date",
       "artist": "Artist",
+      "artistID": "Artist ID",
+      "artistWebsite": "Artist Website",
       "cluster": "Cluster",
       "complaint": "Audio Issue",
       "complaints": "Audio Issues",
       "filename": "File Name",
       "genre": "Genre",
       "hasComplaints": "Has Audio Issues",
+      "license": "License",
+      "members": "Members",
       "onsets": "Onsets",
       "skipInSurvey": "Skip in Survey",
+      "skippedInSurvey": "Skipped in Survey",
       "song": "song",
+      "source": "Source",
+      "title": "Title",
       "trackID": "Track ID",
       "vocalContentLengthS": "Vocal Content Length (s)"
     },
     "SurveyAnswers": {
       "answer": "Answer",
       "answers": "Answers",
+      "backgroundMusic": "Instrumentals",
       "participantID": "Participant ID",
       "questionID": "Question ID"
     },
@@ -56,6 +64,7 @@
     "noResults": "No Results",
     "ok": "Ok",
     "previous": "Previous",
+    "remove": "Remove",
     "submit": "Submit",
     "yes": "Yes"
   },
@@ -64,21 +73,100 @@
       "field": "Field",
       "value": "Value"
     },
+    "LoginForm": {
+      "description": "Please enter your username and password to access the survey. If you don't have an account, please contact the administrator.",
+      "password": "Password",
+      "title": "Login to your account",
+      "username": "Username"
+    },
     "SongSearchForm": {
       "downloadComplaints": "Download Audio Issues"
     },
     "Tooltips": {
+      "complaints": "Audio issues can be reported here",
       "settings": "Customize your survey experience here",
       "voiceMarker": "Jump to the next voiced song part"
     }
   },
+  "Legal": {
+    "Credits": {
+      "Content": {
+        "01fmaGitHub-1": "The metadata for the audio dataset originally came from the project ‘FMA: A Dataset For Music Analysis’. This metadata was further processed for the survey and combined with additional information."
+      },
+      "title": "Credits"
+    },
+    "Imprint": {
+      "Content": {
+        "01origin": "Information according to § 5 DDG:",
+        "01origin-1": "Name and Address",
+        "01origin-2": "Full name and legal address of the responsible person.",
+
+        "02contact": "Contact",
+        "02contact-1": "Contact Details",
+        "02contact-2": "Email address for fast electronic communication.",
+
+        "03Institution": "Institution",
+        "03Institution-2": "Faculty of Media",
+
+        "04contentResponsibility": "Responsible for content according to § 18 Abs. 2 MStV:"
+      },
+      "title": "Imprint"
+    },
+    "PrivacyPolicy": {
+      "Content": {
+        "01responsible1": "1. Data Controller",
+        "01responsible2": "The person responsible for data processing on this website is:",
+
+        "02purpose1": "2. Purpose of Data Processing",
+        "02purpose2": "This website is used to conduct a scientific study as part of a master's thesis.\n\nThe aim of the study is the scientific evaluation of user responses in connection with audio-based tasks.\n\nParticipation in the study is voluntary.",
+
+        "03dataCollected1": "3. Data Collected",
+        "03dataCollected2": "As part of using this website, the following data are collected and stored:\n\n- Submitted Survey Responses\n- Date and time of each submission\n- A randomly generated participant ID used to group responses\n- Technically necessary server log data (e.g., IP address, date and time of access, accessed page), if recorded by the hosting provider.",
+
+        "04legalBasis1": "4. Legal Basis for Processing",
+        "04legalBasis2": "Data processing is carried out on the basis of the consent of the participating persons in accordance with Art. 6(1)(a) GDPR.\n\nProcessing is carried out exclusively for scientific research purposes within the framework of a master's thesis.",
+
+        "05cookies1": "5. Cookies",
+        "05cookies2": "This website uses only technically necessary cookies that are required for the operation of the website.\n\nNo third-party cookies are used.",
+
+        "06storageDuration1": "6. Storage Duration",
+        "06storageDuration2": "The collected data is stored permanently. Once anonymized, the data can no longer be deleted, as it can no longer be linked to a specific natural person.\nTherefore, due to anonymization, the data can no longer be deleted or corrected upon request, as the controller can no longer identify the data subject (see Art. 11(2) GDPR).\n\nThe storage serves exclusively for scientific research purposes within the scope of the master’s thesis.",
+
+        "07dataSharing1": "7. Data Sharing",
+        "07dataSharing2": "The collected data will not be shared with third parties.\n\nData may only be shared within the scope of scientific evaluation with supervising persons or examiners of the master's thesis if necessary.",
+
+        "08hosting1": "8. Hosting and Server Log Files",
+        "08hosting2": "This website is hosted by an external hosting provider.\n\nWhen accessing the website, information may be automatically stored in so-called server log files by the hosting provider. This may include in particular:\n\n- IP address\n- Date and time of access\n- Accessed page\n- Browser type and operating system\n\nThese data are used exclusively for the technical provision and security of the website.",
+
+        "08hosting3": "Hosting Provider",
+
+        "09userRights1": "9. Rights of Data Subjects",
+        "09userRights2": "If personal data are processed, you generally have the following rights within the framework of the applicable legal provisions:\n\n- Right of access to your stored data (Art. 15 GDPR)\n- Right to rectification of inaccurate data (Art. 16 GDPR)\n- Right to erasure of your data (Art. 17 GDPR)\n- Right to restriction of processing (Art. 18 GDPR)\n- Right to withdraw a given consent with effect for the future (Art. 7(3) GDPR)\n\nSince the data collected within the scope of this study are stored in anonymized form and no link to an identifiable natural person can be established, these rights cannot be exercised in practice in accordance with Art. 11(2) GDPR.",
+
+        "10voluntary1": "10. Voluntary Participation",
+        "10voluntary2": "Participation in the study is voluntary.\n\nNo personal data that directly identify participants are collected."
+      },
+      "title": "Privacy Policy"
+    }
+  },
   "MainPage": {
-    "content": "This Survey is about the similarity of singing voices. You will hear triplets of short music clips: 'A', 'B' and 'X'. 'X' contains the target voice, 'A' and 'B' are reference voices. After listening to each of them, choose the reference voice which is the most similar to the target voice. Do not mind the instruments playing in the background while answering the questions. If the instruments irritate you, they can be disabled in the Settings.",
+    "content": "This Survey is about the similarity of singing voices. You will hear triplets of short music clips: 'A', 'B' and 'X'. 'X' is the target voice, 'A' and 'B' are reference voices. After listening to each of them, choose the reference voice which is the most similar to the target voice. Do not mind the instruments playing in the background while answering the questions. If the instruments irritate you, they can be disabled in the Settings.",
+    "contentSmall": "By starting the survey, you confirm that you have read the <1>privacy policy</1> and consent to the processing of your data as part of this scientific study.",
     "description": "This survey will take about 15 minutes of your time.",
     "startSurvey": "Start Survey",
     "title": "Welcome to the survey"
   },
   "Sidebar": {
+    "Controls": {
+      "navigate": "Navigate Questions",
+      "playA": "Play Voice A",
+      "playB": "Play Voice B",
+      "playPause": "Play / Pause Audio",
+      "playX": "Play Voice X",
+      "settings": "Open Settings",
+      "submit": "Submit Answer",
+      "toggle": "Toggle Options"
+    },
     "Navigation": {
       "home": "Home",
       "navigation": "Navigation",
@@ -92,7 +180,8 @@
       "toggle": "Toggle Theme"
     },
     "backgroundMusic": "Instruments",
-    "language": "Lanugage",
+    "controls": "Keyboard Controls",
+    "language": "Language",
     "settings": "Settings",
     "skipSilence": "Jump to vocals",
     "theme": "Theme"
@@ -125,15 +214,13 @@
       "title": "Audio Issue Report"
     },
     "Completed": {
-      "description": "Thank you very much for completing the survey. As a small reward you can now check out the similarity plot for all songs, have fun!",
+      "description": "Thank you very much for completing the survey. Your Questionnaire ID is '{{questionnaireID}}'. As a small reward you can now check out the similarity plot for all songs, have fun!",
       "title": "Survey Completed"
     },
     "and": "and",
     "areMoreSimilar": "are more similar",
     "cardTitle": "Question",
     "description": "Select the voice option which sounds the most similar to the target voice",
-    "next": "next",
-    "previous": "previous",
     "referenceVoices": "Reference Voices",
     "targetVoice": "Target Voice",
     "title": "Similarity of Singing Voices",

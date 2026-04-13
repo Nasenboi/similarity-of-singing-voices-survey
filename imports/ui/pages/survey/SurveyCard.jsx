@@ -3,11 +3,13 @@ import {ButtonGroup, ButtonGroupSeparator} from "@/components/ui/button-group";
 import {CardHeader, CardTitle} from "@/components/ui/card";
 import {Dialog, DialogTrigger} from "@/components/ui/dialog";
 import {RadioGroup, RadioGroupItem} from "@/components/ui/radio-group";
+import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
 import {ArrowRightLeft, Flag, Pause, Play} from "lucide-react";
 import React, {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useAudioContext} from "../../contextProvider/AudioContext";
-import {H1, H2, Large} from "../../customComponents/Typography";
+import {cookies} from "../../customComponents/Cookies";
+import {H1, H2, Large, P} from "../../customComponents/Typography";
 import {ComplaintForm} from "./ComplaintForm";
 
 function AudioButton({trackID, voice, onVoiceClick, isPlaying}) {
@@ -20,20 +22,48 @@ function AudioButton({trackID, voice, onVoiceClick, isPlaying}) {
   );
 }
 
-export function SurveyCard({question, setSurveyAnswer, isMobile = false, isSubmitted = false}) {
+function TooltipWrapper({children}) {
+  const {t} = useTranslation();
+  const [tooltipOpen, setTooltipOpen] = useState(() => {
+    return !cookies.get("complaintTooltipRead");
+  });
+
+  const dismissTooltip = () => {
+    cookies.set("complaintTooltipRead", true);
+    setTooltipOpen(false);
+  };
+
+  return (
+    <Tooltip open={tooltipOpen}>
+      <TooltipContent side="top" className="max-w-screen" sideOffset={0}>
+        <div className="flex flex-col space-y-4 p-2 justify-center items-center">
+          <P>{t("Components.Tooltips.complaints")}</P>
+          <div className="w-full flex justify-end items-center">
+            <Button size="sm" onClick={dismissTooltip}>
+              {t("Common.ok")}
+            </Button>
+          </div>
+        </div>
+      </TooltipContent>
+      <TooltipTrigger asChild>{children}</TooltipTrigger>
+    </Tooltip>
+  );
+}
+
+export function SurveyCard({question, similarToX, toggleVoices, setSurveyAnswer, initAnswer, isSubmitted = false}) {
   const {trackID, setTrackID, setIcon, isPlaying, setIsPlaying} = useAudioContext();
-  const [similarToX, setSimilarToX] = useState(["A", "B"]);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [voicePlaying, setVoicePlaying] = useState(null);
   const {t} = useTranslation();
 
   useEffect(() => {
     setTrackID(null);
+    initAnswer();
   }, []);
 
   const onVoiceClick = (newTrackID, voice) => {
     if (newTrackID === trackID) {
-      setIsPlaying(!isPlaying);
+      setIsPlaying((prev) => !prev);
     } else {
       setIcon(voice);
       setTrackID(newTrackID);
@@ -41,15 +71,25 @@ export function SurveyCard({question, setSurveyAnswer, isMobile = false, isSubmi
     setVoicePlaying(!isPlaying || newTrackID != trackID ? voice : null);
   };
 
-  const toggleVoices = ({value}) => {
-    if (value === "A") {
-      setSimilarToX(["A", "B"]);
-    } else if (value === "B") {
-      setSimilarToX(["B", "A"]);
-    } else {
-      setSimilarToX([similarToX[1], similarToX[0]]);
-    }
-  };
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      const tag = e.target.tagName;
+      const isEditable = e.target.isContentEditable;
+      const inputLike = ["INPUT", "TEXTAREA", "SELECT", "BUTTON"];
+      if (inputLike.includes(tag) || isEditable) return;
+
+      if (e.code === "KeyX" || e.code === "Digit1" || e.code === "Numpad1") {
+        onVoiceClick(question["X"], "X");
+      } else if (e.code === "KeyA" || e.code === "Digit2" || e.code === "Numpad2") {
+        onVoiceClick(question["A"], "A");
+      } else if (e.code === "KeyB" || e.code === "Digit3" || e.code === "Numpad3") {
+        onVoiceClick(question["B"], "B");
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   return (
     <div
@@ -65,9 +105,16 @@ export function SurveyCard({question, setSurveyAnswer, isMobile = false, isSubmi
           </H1>
           <Dialog open={dialogOpen} onOpenChange={(open) => setDialogOpen(open)}>
             <DialogTrigger asChild>
-              <Button variant="secondary" size="icon" className={isSubmitted && "border"}>
-                <Flag />
-              </Button>
+              <TooltipWrapper asChild>
+                <Button
+                  variant="secondary"
+                  size="icon"
+                  className={isSubmitted && "border"}
+                  onClick={() => setDialogOpen(true)}
+                >
+                  <Flag />
+                </Button>
+              </TooltipWrapper>
             </DialogTrigger>
             <ComplaintForm surveyQuestion={question} setDialogOpen={setDialogOpen} />
           </Dialog>
@@ -130,7 +177,7 @@ export function SurveyCard({question, setSurveyAnswer, isMobile = false, isSubmi
               </div>
             </RadioGroup>
             <div className="-mb-4 w-full flex justify-center">
-              <Button onClick={() => setSurveyAnswer(question._id, similarToX)}>{t("Common.submit")}</Button>
+              <Button onClick={() => setSurveyAnswer(question._id)}>{t("Common.submit")}</Button>
             </div>
           </div>
         </div>

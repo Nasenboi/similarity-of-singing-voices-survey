@@ -1,8 +1,6 @@
-import {Meteor} from "meteor/meteor";
-
 // App info
 export const APP_NAME = "Similarity of Singing Voices Survey";
-export const APP_VERSION = "0.2.2";
+export const APP_VERSION = "1.0.0";
 
 // Paths
 export const SONG_FILE_PATH = "songs";

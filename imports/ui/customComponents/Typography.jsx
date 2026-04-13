@@ -20,15 +20,23 @@ export function H2({children, className}) {
 }
 
 export function H3({children, className}) {
-  return <h3 className={cn("scroll-m-20 md:text-2xl text-xl font-semibold tracking-tight ", className)}>{children}</h3>;
+  return (
+    <h3 className={cn("scroll-m-20 md:text-2xl text-xl font-semibold tracking-tight whitespace-nowrap ", className)}>
+      {children}
+    </h3>
+  );
 }
 
 export function H4({children, className}) {
-  return <h4 className={cn("scroll-m-20 md:text-xl text-lg font-semibold tracking-tight ", className)}>{children}</h4>;
+  return (
+    <h4 className={cn("scroll-m-20 md:text-xl text-lg font-semibold tracking-tight whitespace-nowrap ", className)}>
+      {children}
+    </h4>
+  );
 }
 
 export function P({children, className}) {
-  return <p className={cn("leading-7 md:text-base text-sm not-first:mt-6 ", className)}>{children}</p>;
+  return <p className={cn("leading-7 md:text-base text-sm whitespace-pre-line", className)}>{children}</p>;
 }
 
 export function Lead({children, className}) {

@@ -1,7 +1,10 @@
 import {Songs} from "@/imports/api/songs/collection";
 import {DATASET_FILE_PATH} from "@/imports/common/globals";
 import {Log} from "meteor/logging";
+import {Meteor} from "meteor/meteor";
 import Papa from "papaparse";
+
+const PRE_SKIP_TRACK_IDS = Meteor.settings.private.PRE_SKIP_TRACK_IDS || [];
 
 function parseOnsets(onsets) {
   return onsets
@@ -11,6 +14,13 @@ function parseOnsets(onsets) {
     .map(Number);
 }
 
+function parseMembers(members) {
+  return members
+    .replace(/[\[\]]/g, "")
+    .trim()
+    .split(/\s+/);
+}
+
 function convertToSongSchema(audio) {
   const track_id_zp = String(audio.track_id).padStart(6, "0");
   const main_folder = track_id_zp.slice(0, 3);
@@ -18,8 +28,13 @@ function convertToSongSchema(audio) {
   return {
     trackID: audio.track_id,
     filename: audio.filename,
+    title: audio.title,
     genre: audio.genre_top,
+    license: audio.license,
     artist: audio.artist,
+    artistID: audio.artist_id,
+    artistWebsite: audio.artist_website,
+    members: audio.members && audio.members.length > 0 ? parseMembers(audio.members) : [],
     album: audio.album,
     albumDateCreated: audio.creation_date,
     albumDateReleased: audio.release_date,
@@ -28,7 +43,7 @@ function convertToSongSchema(audio) {
     vocalContentLengthS: audio.vocal_content_length_s,
     onsets: audio.onsets && audio.onsets.length > 0 ? parseOnsets(audio.onsets) : [],
     cluster: audio.cluster,
-    skipInSurvey: false,
+    skipInSurvey: PRE_SKIP_TRACK_IDS.includes(audio.track_id),
     UMAP2D: {
       UMAP_1: audio.UMAP_2D_1,
       UMAP_2: audio.UMAP_2D_2,

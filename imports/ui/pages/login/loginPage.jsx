@@ -5,6 +5,7 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {Meteor} from "meteor/meteor";
 import React, {useEffect} from "react";
 import {useForm} from "react-hook-form";
+import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
 import {AutoField} from "../../customComponents/AutoField";
 import {loginFormSchema} from "./loginSchema";
@@ -12,6 +13,7 @@ import {loginFormSchema} from "./loginSchema";
 export default function LoginPage() {
   const navigate = useNavigate();
   const isLoggedIn = useIsLoggedIn();
+  const {t} = useTranslation();
 
   const form = useForm({
     resolver: zodResolver(loginFormSchema),
@@ -37,15 +39,15 @@ export default function LoginPage() {
         <div className="flex flex-col gap-6">
           <Card>
             <CardHeader>
-              <CardTitle>Login to your account</CardTitle>
-              <CardDescription>Enter your username and password below to login to your account</CardDescription>
+              <CardTitle>{t("Components.LoginForm.title")}</CardTitle>
+              <CardDescription>{t("Components.LoginForm.description")}</CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                <AutoField form={form} name="username" label="Username" type="input" />
-                <AutoField form={form} name="password" label="Password" type="password" />
+                <AutoField form={form} name="username" label={t("Components.LoginForm.username")} type="input" />
+                <AutoField form={form} name="password" label={t("Components.LoginForm.password")} type="password" />
                 <div className="w-full flex justify-end">
-                  <Button type="submit">Submit</Button>
+                  <Button type="submit">{t("Common.submit")}</Button>
                 </div>
               </form>
             </CardContent>

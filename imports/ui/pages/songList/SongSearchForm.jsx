@@ -15,7 +15,7 @@ import {DownloadButton} from "../../customComponents/DownLoadButton";
 const searchFormSchema = z.object({
   trackID: z.string().optional(),
   artist: z.string().optional(),
-  album: z.string().optional(),
+  genre: z.string().optional(),
   hasComplaints: z.boolean().optional(),
   skipInSurvey: z.boolean().optional(),
 });
@@ -27,7 +27,7 @@ export function SongSearchForm({onFilterChange, query}) {
     defaultValues: {
       trackID: query?.trackID || "",
       artist: query?.artist || "",
-      album: query?.album || "",
+      genre: query?.genre || "",
       hasComplaints: query?.hasComplaints || false,
       skipInSurvey: query?.skipInSurvey || false,
     },
@@ -79,7 +79,7 @@ export function SongSearchForm({onFilterChange, query}) {
                 className="col-span-1"
                 form={form}
                 name="skipInSurvey"
-                label={t("Collections.Songs.skipInSurvey")}
+                label={t("Collections.Songs.skippedInSurvey")}
                 type="bool"
               />
 

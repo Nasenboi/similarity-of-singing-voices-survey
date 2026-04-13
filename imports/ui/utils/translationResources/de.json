@@ -15,21 +15,29 @@
       "albumDateCreated": "Erstellt",
       "albumDateReleased": "Veröffentlicht",
       "artist": "Künstler",
+      "artistID": "Künstler ID",
+      "artistWebsite": "Künstler Website",
       "cluster": "Cluster",
       "complaint": "Audiofehler",
       "complaints": "Audiofehler",
       "filename": "Dateiname",
       "genre": "Genre",
       "hasComplaints": "Hat Audiofehler",
+      "license": "Lizenz",
+      "members": "Mitglieder",
       "onsets": "Onsets",
       "skipInSurvey": "Aus Umfrage löschen",
+      "skippedInSurvey": "Aus Umfrage gelöscht",
       "song": "Lied",
+      "source": "Quelle",
+      "title": "Titel",
       "trackID": "Track ID",
       "vocalContentLengthS": "Länge der Stimmaufnahme (s)"
     },
     "SurveyAnswers": {
       "answer": "Antwort",
       "answers": "Antworten",
+      "backgroundMusic": "Begleitmusik",
       "participantID": "Teilnehmer ID",
       "questionID": "Fragen ID"
     },
@@ -56,6 +64,7 @@
     "noResults": "Keine Ergebnisse",
     "ok": "Ok",
     "previous": "Zurück",
+    "remove": "Löschen",
     "submit": "Bestätigen",
     "yes": "Ja"
   },
@@ -64,21 +73,99 @@
       "field": "Feld",
       "value": "Wert"
     },
+    "LoginForm": {
+      "description": "Bitte geben Sie Ihren Benutzernamen und Ihr Passwort ein, um auf die Umfrage zuzugreifen. Wenn Sie kein Konto haben, kontaktieren Sie bitte den Administrator.",
+      "password": "Passwort",
+      "title": "Melden Sie sich in Ihrem Konto an",
+      "username": "Benutzername"
+    },
     "SongSearchForm": {
       "downloadComplaints": "Audiofehler herunterladen"
     },
     "Tooltips": {
+      "complaints": "Audiofehler können hier gemeldet werden",
       "settings": "Passen Sie hier die Umfrage an ihre Bedürfnisse an",
       "voiceMarker": "Springe zu Liedabschnitten mit Gesangsstimmen"
     }
   },
+  "Legal": {
+    "Credits": {
+      "Content": {
+        "01fmaGitHub-1": "Die Metadaten des Audiodatensatzes stammen ursprünglich aus dem Projekt 'FMA: A Dataset For Music Analysis'. Diese wurden für die Umfrage weiterverarbeitet und mit weiteren Informationen zusammengeführt."
+      },
+      "title": "Datenquellen"
+    },
+    "Imprint": {
+      "Content": {
+        "01origin": "Angaben gemäß § 5 DDG:",
+        "01origin-1": "Name und Anschrift",
+        "01origin-2": "Vollständiger Name und ladungsfähige Anschrift der verantwortlichen Person.",
+
+        "02contact": "Kontakt",
+        "02contact-1": "Kontaktmöglichkeiten",
+        "02contact-2": "E-Mail-Adresse zur schnellen elektronischen Kontaktaufnahme.",
+
+        "03Institution": "Institution",
+        "03Institution-2": "Fachbereich Medien",
+
+        "04contentResponsibility": "Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV:"
+      },
+      "title": "Impressum"
+    },
+    "PrivacyPolicy": {
+      "Content": {
+        "01responsible1": "1. Verantwortlicher",
+        "01responsible2": "Verantwortlich für die Datenverarbeitung auf dieser Website ist:",
+
+        "02purpose1": "2. Zweck der Datenverarbeitung",
+        "02purpose2": "Diese Website dient der Durchführung einer wissenschaftlichen Studie im Rahmen einer Masterarbeit.\n\nZiel der Studie ist die wissenschaftliche Auswertung von Nutzerantworten im Zusammenhang mit audiobasierten Aufgaben.\n\nDie Teilnahme an der Studie ist freiwillig.",
+
+        "03dataCollected1": "3. Welche Daten werden erhoben",
+        "03dataCollected2": "Im Rahmen der Nutzung dieser Website werden folgende Daten erhoben und gespeichert:\n\n- Bestätigte Umfrageantworten\n- Zeit und Datum der jeweiligen Eingaben\n- Eine zufällig generierte Teilnehmer-ID zur Gruppierung der Antworten\n- Technisch notwendige Server-Logdaten (z. B. IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene Seite), sofern diese vom Hosting-Anbieter erfasst werden.",
+
+        "04legalBasis1": "4. Rechtsgrundlage der Verarbeitung",
+        "04legalBasis2": "Die Verarbeitung der Daten erfolgt auf Grundlage der Einwilligung der teilnehmenden Personen gemäß Art. 6 Abs. 1 lit. a DSGVO.\n\nDie Verarbeitung erfolgt ausschließlich zu wissenschaftlichen Forschungszwecken im Rahmen einer Masterarbeit.",
+
+        "05cookies1": "5. Cookies",
+        "05cookies2": "Diese Website verwendet ausschließlich technisch notwendige Cookies, die für den Betrieb der Website erforderlich sind.\n\nEs werden keine Cookies von Drittanbietern eingesetzt.",
+
+        "06storageDuration1": "6. Speicherdauer",
+        "06storageDuration2": "Die erhobenen Daten werden dauerhaft (permanent) gespeichert. Eine Löschung der Daten ist durch die Anonymisierung nicht mehr möglich, da die Zuordnung zu einer konkreten natürlichen Person nicht hergestellt werden kann.\nDie Daten können daher aufgrund der Anonymisierung nicht mehr auf Verlangen gelöscht oder berichtigt werden, da der Verantwortliche die betroffene Person nicht mehr identifizieren kann (vgl. Art. 11 Abs. 2 DSGVO).\n\nDie Speicherung dient ausschließlich wissenschaftlichen Forschungszwecken im Rahmen der Masterarbeit.",
+
+        "07dataSharing1": "7. Weitergabe von Daten",
+        "07dataSharing2": "Die erhobenen Daten werden nicht an Dritte weitergegeben.\n\nEine Weitergabe kann ausschließlich im Rahmen der wissenschaftlichen Auswertung an betreuende Personen oder Prüfer der Masterarbeit erfolgen, sofern dies erforderlich ist.",
+
+        "08hosting1": "8. Hosting und Server-Logfiles",
+        "08hosting2": "Die Website wird bei einem externen Hosting-Anbieter betrieben.\n\nBeim Aufruf der Website können durch den Hosting-Anbieter automatisch Informationen in sogenannten Server-Logfiles gespeichert werden. Dies können insbesondere folgende Daten sein:\n\n- IP-Adresse\n- Datum und Uhrzeit des Zugriffs\n- Aufgerufene Seite\n- Browsertyp und Betriebssystem\n\nDiese Daten dienen ausschließlich der technischen Bereitstellung und Sicherheit der Website",
+        "08hosting3": "Webhosting-Anbieter",
+
+        "09userRights1": "9. Rechte der betroffenen Personen",
+        "09userRights2": "Sofern personenbezogene Daten verarbeitet werden, haben Sie im Rahmen der geltenden gesetzlichen Bestimmungen grundsätzlich das Recht auf:\n\n- Auskunft über Ihre gespeicherten Daten (Art. 15 DSGVO)\n- Berichtigung unrichtiger Daten (Art. 16 DSGVO)\n- Löschung Ihrer Daten (Art. 17 DSGVO)\n- Einschränkung der Verarbeitung (Art. 18 DSGVO)\n- Widerruf einer erteilten Einwilligung mit Wirkung für die Zukunft (Art. 7 Abs. 3 DSGVO)\n\nDa die im Rahmen dieser Studie erhobenen Daten anonymisiert gespeichert werden und kein Bezug zu einer identifizierbaren natürlichen Person hergestellt werden kann, können diese Rechte gemäß Art. 11 Abs. 2 DSGVO in der Praxis nicht ausgeübt werden.",
+
+        "10voluntary1": "10. Freiwilligkeit der Teilnahme",
+        "10voluntary2": "Die Teilnahme an der Studie ist freiwillig.\n\nEs werden keine personenbezogenen Daten erhoben, die eine direkte Identifizierung der teilnehmenden Personen ermöglichen."
+      },
+      "title": "Datenschutzerklärung"
+    }
+  },
   "MainPage": {
-    "content": "In dieser Umfrage geht es um die Ähnlichkeit von Gesangsstimmen. Sie hören jeweils drei kurze Musikausschnitte: 'A', 'B' und 'X'. 'X' enthält die Zielstimme, 'A' und 'B' sind Referenzstimmen. Wählen Sie nach dem Anhören jedes Ausschnitts die Referenzstimme aus, die der Zielstimme am ähnlichsten ist. Achten Sie bei der Beantwortung der Fragen nicht auf die im Hintergrund spielenden Instrumente. Wenn die Instrumente Sie stören, können Sie sie in den Einstellungen deaktivieren.",
+    "content": "In dieser Umfrage geht es um die Ähnlichkeit von Gesangsstimmen. Sie hören jeweils drei kurze Musikausschnitte: 'A', 'B' und 'X'. 'X' ist die Zielstimme, 'A' und 'B' sind Referenzstimmen. Wählen Sie nach dem Anhören jedes Ausschnitts die Referenzstimme aus, die der Zielstimme am ähnlichsten ist. Achten Sie bei der Beantwortung der Fragen nicht auf die im Hintergrund spielenden Instrumente. Falls die Instrumente Sie stören, können Sie diese in den Einstellungen deaktivieren.",
+    "contentSmall": "Mit dem Start der Umfrage bestätigen Sie, dass Sie die <1>Datenschutzerklärung</1> gelesen haben und in die Verarbeitung Ihrer Daten im Rahmen dieser wissenschaftlichen Studie einwilligen.",
     "description": "Diese Umfrage wird ungefähr 15 Minuten dauern.",
     "startSurvey": "Umfrage starten",
     "title": "Willkommen zur Umfrage"
   },
   "Sidebar": {
+    "Controls": {
+      "navigate": "Navigation",
+      "playA": "Spiele Stimme A",
+      "playB": "Spiele Stimme B",
+      "playPause": "Spiele / Stoppe Audio",
+      "playX": "Spiele Stimme X",
+      "settings": "Einstellungen",
+      "submit": "Antwort bestätigen",
+      "toggle": "Antwort wechseln"
+    },
     "Navigation": {
       "home": "Startseite",
       "navigation": "Navigation",
@@ -92,6 +179,7 @@
       "toggle": "Farbschema wechseln"
     },
     "backgroundMusic": "Instrumente",
+    "controls": "Tastatursteuerung",
     "language": "Sprache",
     "settings": "Einstellungen",
     "skipSilence": "Zum Gesang springen",
@@ -125,7 +213,7 @@
       "title": "Audiofehlermeldung"
     },
     "Completed": {
-      "description": "Vielen Dank für Ihre Teinahme. Als kleine Belohnung können Sie nun den Ähnlichkeitsgraphen ansehen, welcher alle Songs beinhaltet, viel Spaß dabei!",
+      "description": "Vielen Dank für Ihre Teilnahme. Ihre Umfrage ID ist '{{questionnaireID}}'. Als kleine Belohnung können Sie nun den Ähnlichkeitsgraphen ansehen, welcher alle Songs beinhaltet, viel Spaß dabei!",
       "title": "Umfrage beendet"
     },
     "and": "und",

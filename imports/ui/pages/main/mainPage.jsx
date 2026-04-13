@@ -1,12 +1,29 @@
 import {Button} from "@/components/ui/button";
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
 import React from "react";
-import {useTranslation} from "react-i18next";
+import {Trans, useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
+import {useParticipantContext} from "../../contextProvider/ParticipantContext";
+import {Muted, P} from "../../customComponents/Typography";
 
 export default function MainPage() {
   const navigate = useNavigate();
   const {t} = useTranslation();
+  const {participant, isLoading, newParticipant} = useParticipantContext();
+
+  const navigateToSurvey = () => {
+    if (!participant && !isLoading) {
+      newParticipant()
+        .then(() => {
+          navigate("/survey");
+        })
+        .catch((error) => {
+          console.error("Error creating new participant:", error);
+        });
+    } else {
+      navigate("/survey");
+    }
+  };
 
   return (
     <div className="w-full flex justify-center items-center">
@@ -16,10 +33,18 @@ export default function MainPage() {
           <CardDescription>{t("MainPage.description")}</CardDescription>
         </CardHeader>
         <CardContent>
-          <p className="max-md:text-sm">{t("MainPage.content")}</p>
+          <P>{t("MainPage.content")}</P>
+          <Muted className="mt-4">
+            <Trans
+              i18nKey="MainPage.contentSmall"
+              components={{
+                1: <a href="/privacyPolicy" target="_blank" rel="noopener noreferrer" className="underline" />,
+              }}
+            />
+          </Muted>
         </CardContent>
         <CardFooter>
-          <Button onClick={() => navigate("/survey")}>{t("MainPage.startSurvey")}</Button>
+          <Button onClick={navigateToSurvey}>{t("MainPage.startSurvey")}</Button>
         </CardFooter>
       </Card>
     </div>
