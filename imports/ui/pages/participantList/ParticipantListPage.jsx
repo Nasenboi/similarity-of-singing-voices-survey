@@ -120,7 +120,7 @@ export default function ParticipantListPage() {
             />
           </div>
           <div className="w-full h-24" />
-          <ParticipantInfoModal participantID={participantID} />
+          <ParticipantInfoModal participantID={participantID} setDialogOpen={setDialogOpen} />
         </Dialog>
       </div>
       <div className="fixed bottom-0 max-w-500 w-full flex items-center">
