@@ -52,6 +52,10 @@ export default function SurveyAnswerListPage() {
       accessorKey: "backgroundMusic",
       header: t("Collections.SurveyAnswers.backgroundMusic"),
     },
+    {
+      accessorKey: "editDate",
+      header: t("Collections.DBMetaData.editDate"),
+    },
   ];
 
   const onFilterChange = (value) => {
