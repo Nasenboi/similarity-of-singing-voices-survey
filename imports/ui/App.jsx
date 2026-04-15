@@ -2,6 +2,7 @@ import {SidebarProvider} from "@/components/ui/sidebar";
 import React, {Suspense, useEffect, useState} from "react";
 import {BrowserRouter} from "react-router-dom";
 import {AudioProvider} from "./contextProvider/AudioContext";
+import {MobileProvider} from "./contextProvider/MobileContext";
 import {ParticipantProvider} from "./contextProvider/ParticipantContext";
 import {ThemeProvider} from "./contextProvider/ThemeProvider";
 import {SideBarToggle} from "./customComponents/SideBarToggle";
@@ -63,21 +64,23 @@ function OptionalAppSideBar() {
 export const App = () => {
   return (
     <div className="min-w-screen min-h-screen max-h-screen mx-auto flex-col justify-center bg-background">
-      <SidebarProvider defaultOpen={false}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <AudioProvider>
-            <ParticipantProvider>
-              <BrowserRouter future={{v7_startTransition: true, v7_relativeSplatPath: true}}>
-                <OptionalGlobalKeyEvents>
-                  <SideBarToggle />
-                  <OptionalAppSideBar />
-                  <RoutedContentArea />
-                </OptionalGlobalKeyEvents>
-              </BrowserRouter>
-            </ParticipantProvider>
-          </AudioProvider>
-        </ThemeProvider>
-      </SidebarProvider>
+      <MobileProvider>
+        <SidebarProvider defaultOpen={false}>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+            <AudioProvider>
+              <ParticipantProvider>
+                <BrowserRouter future={{v7_startTransition: true, v7_relativeSplatPath: true}}>
+                  <OptionalGlobalKeyEvents>
+                    <SideBarToggle />
+                    <OptionalAppSideBar />
+                    <RoutedContentArea />
+                  </OptionalGlobalKeyEvents>
+                </BrowserRouter>
+              </ParticipantProvider>
+            </AudioProvider>
+          </ThemeProvider>
+        </SidebarProvider>
+      </MobileProvider>
     </div>
   );
 };

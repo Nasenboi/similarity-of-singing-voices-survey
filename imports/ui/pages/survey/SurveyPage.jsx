@@ -1,4 +1,3 @@
-import {useIsMobile} from "@/components/hooks/use-mobile";
 import {Button} from "@/components/ui/button";
 import {ButtonGroup, ButtonGroupSeparator} from "@/components/ui/button-group";
 import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
@@ -29,6 +28,7 @@ import React, {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
 import {useAudioContext} from "../../contextProvider/AudioContext";
+import {useMobileContext} from "../../contextProvider/MobileContext";
 import {useParticipantContext} from "../../contextProvider/ParticipantContext";
 import {AudioPlayer} from "../../customComponents/AudioPlayer";
 import {cookies} from "../../customComponents/Cookies";
@@ -37,7 +37,7 @@ import {SurveyCard} from "./SurveyCard";
 
 function ProgressHeader({className, surveyQuestions, currentPage, questionsAnswered, surveyProgress, handlePageChange}) {
   const {t} = useTranslation();
-  const isMobile = useIsMobile();
+  const {isMobile} = useMobileContext();
 
   return (
     <Card className={cn("w-full m-0 mb-4 bg-background sticky top-0 z-30 rounded-t-none", className)}>
