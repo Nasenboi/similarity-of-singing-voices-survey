@@ -1,3 +1,4 @@
+import {useIsMobile} from "@/components/hooks/use-mobile";
 import {Button} from "@/components/ui/button";
 import {ButtonGroup, ButtonGroupSeparator} from "@/components/ui/button-group";
 import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
@@ -23,6 +24,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/imports/ui/customComponents/pagination";
+import {cn} from "@/lib/utils";
 import {AnimatePresence, motion} from "motion/react";
 import React, {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
@@ -33,8 +35,160 @@ import {AudioPlayer} from "../../customComponents/AudioPlayer";
 import {cookies} from "../../customComponents/Cookies";
 import {SurveyCard} from "./SurveyCard";
 
-export default function SurveyPage() {
+function ProgressHeader({className, surveyQuestions, currentPage, questionsAnswered, surveyProgress, handlePageChange}) {
   const {t} = useTranslation();
+  const isMobile = useIsMobile();
+
+  return (
+    <Card className={cn("w-full m-0 mb-4 bg-background sticky top-0 z-30 rounded-t-none", className)}>
+      <CardHeader className="py-4 px-10">
+        <CardTitle className="text-center max-md:text-lg max-md:w-full">{t("SurveyPage.title")}</CardTitle>
+      </CardHeader>
+      {!isMobile && (
+        <CardContent className="border-b-2 max-md:w-full max-md:px-0">
+          <p className="text-center max-md:text-xs">{t("SurveyPage.description")}</p>
+        </CardContent>
+      )}
+      <CardFooter className="pb-2 bg-background border-t">
+        <div className="mt-2 md:space-y-4 space-y-1 w-full flex flex-col">
+          <Pagination>
+            <PaginationContent>
+              <PaginationPrevious
+                className={currentPage === 0 && "text-background hover:text-background hover:bg-background"}
+                text={isMobile ? "" : t("Common.previous")}
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handlePageChange(currentPage - 1);
+                }}
+              />
+              {surveyQuestions?.map((_, index) => {
+                if (isMobile && (index > currentPage + 2 || index < currentPage - 2)) {
+                  return null;
+                } else if (currentPage <= 4 && index >= 9) {
+                  return null;
+                } else if (currentPage >= surveyQuestions.length - 4 && index <= surveyQuestions.length - 10) {
+                  return null;
+                } else if (
+                  currentPage > 4 &&
+                  currentPage < surveyQuestions.length - 4 &&
+                  (index > currentPage + 4 || index < currentPage - 4)
+                ) {
+                  return null;
+                }
+                return (
+                  <PaginationItem key={index}>
+                    <PaginationLink
+                      className={questionsAnswered.includes(index) && "bg-accent border-accent-foreground"}
+                      href="#"
+                      isActive={index === currentPage}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handlePageChange(index);
+                      }}
+                    >
+                      {index + 1}
+                    </PaginationLink>
+                  </PaginationItem>
+                );
+              })}
+              <PaginationNext
+                className={
+                  currentPage + 1 === (surveyQuestions?.length || 1) &&
+                  "text-background hover:text-background hover:bg-background"
+                }
+                text={isMobile ? "" : t("Common.next")}
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handlePageChange(currentPage + 1);
+                }}
+              />
+            </PaginationContent>
+          </Pagination>
+          <div className="flex items-center justify-center w-full">
+            <Progress className="w-full" value={[surveyProgress]} min={0} max={100} step={1} disabled />
+          </div>
+        </div>
+      </CardFooter>
+    </Card>
+  );
+}
+
+function SurveyFinishedDrawer({participant}) {
+  const [drawerDismissed, setDrawerDismissed] = useState(false);
+  const navigate = useNavigate();
+  const {t} = useTranslation();
+
+  return (
+    <Drawer open={participant?.surveyCompleted && !drawerDismissed} dismissable>
+      <DrawerContent>
+        <DrawerHeader className="flex flex-col justify-center items-center">
+          <DrawerTitle>{t("SurveyPage.Completed.title")}</DrawerTitle>
+          <DrawerDescription>
+            {t("SurveyPage.Completed.description", {questionnaireID: participant?.questionnaireID || "N/A"})}
+          </DrawerDescription>
+        </DrawerHeader>
+        <DrawerFooter className="flex justify-center items-center space-y-4">
+          <ButtonGroup>
+            <Button onClick={() => navigate("/")}>{t("Sidebar.Navigation.home")}</Button>
+            <ButtonGroupSeparator />
+            <Button onClick={() => navigate("/plot")}>{t("Sidebar.Navigation.similarityPlot")}</Button>
+          </ButtonGroup>
+          <DrawerClose asChild>
+            <Button variant="outline" onClick={() => setDrawerDismissed(true)}>
+              {t("Common.close")}
+            </Button>
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  );
+}
+
+function CardCarousel({
+  className,
+  surveyQuestions,
+  currentPage,
+  setSurveyAnswer,
+  questionsAnswered,
+  similarToX,
+  toggleVoices,
+  initAnswer,
+  direction,
+}) {
+  return (
+    <div className={cn("size-full relative", className)}>
+      <AnimatePresence mode="wait">
+        {surveyQuestions?.find((q) => q.questionNumber === currentPage) ? (
+          <motion.div
+            key={currentPage}
+            initial={{x: direction * 300, opacity: 0}}
+            animate={{x: 0, opacity: 1}}
+            transition={{duration: 0.3}}
+            className="w-full"
+          >
+            <div className="size-full flex justify-center items-center">
+              <SurveyCard
+                question={surveyQuestions?.find((q) => q.questionNumber === currentPage)}
+                setSurveyAnswer={setSurveyAnswer}
+                isSubmitted={questionsAnswered.includes(currentPage)}
+                similarToX={similarToX}
+                toggleVoices={toggleVoices}
+                initAnswer={initAnswer}
+              />
+            </div>
+          </motion.div>
+        ) : (
+          <div className="size-full flex justify-center items-center">
+            <Spinner className="w-40 h-40" />
+          </div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+export default function SurveyPage() {
   const {isPlaying, setIsPlaying, useBackgroundMusic} = useAudioContext();
   const {participant, isLoading: isParticipantLoading} = useParticipantContext();
   const [participantID, setParticipantID] = useState(participant?._id);
@@ -42,17 +196,9 @@ export default function SurveyPage() {
   const [direction, setDirection] = useState(1);
   const [surveyProgress, setSurveyProgress] = useState(0);
   const [questionsAnswered, setQuestionsAnswered] = useState([]);
-  const [isMobile, setIsMobile] = useState(false);
-  const [drawerDismissed, setDrawerDismissed] = useState(false);
+
   const navigate = useNavigate();
   const [similarToX, setSimilarToX] = useState(["A", "B"]);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
 
   useEffect(() => {
     if (participant?._id && participant._id !== participantID) {
@@ -74,8 +220,8 @@ export default function SurveyPage() {
     const sp = Math.round((100 * numAnswers) / numQuestions);
     setSurveyProgress(sp ? sp : 0);
 
-    const questionsAnswered = surveyAnswers.map((a) => surveyQuestions.find((q) => q._id === a.questionID)?.questionNumber);
-    setQuestionsAnswered(questionsAnswered);
+    const qA = surveyAnswers.map((a) => surveyQuestions.find((q) => q._id === a.questionID)?.questionNumber);
+    setQuestionsAnswered(qA);
   }, [surveyQuestions, surveyAnswers]);
 
   const handlePageChange = (newPage) => {
@@ -184,140 +330,26 @@ export default function SurveyPage() {
   }
 
   return (
-    <div className="w-screen h-screen max-w-screen max-h-screen flex flex-col justify-center items-center">
-      <Card className="fixed top-0 ms-50 max-w-500 w-full m-2 md:m-4 bg-background z-10">
-        <CardHeader className="w-full">
-          <CardTitle className="text-center max-md:text-lg max-md:w-full">{t("SurveyPage.title")}</CardTitle>
-        </CardHeader>
-        {!isMobile && (
-          <CardContent className="border-b-2 max-md:w-full max-md:px-0">
-            <p className="text-center max-md:text-xs">{t("SurveyPage.description")}</p>
-          </CardContent>
-        )}
-        <CardFooter>
-          <div className="mt-2 md:space-y-4 space-y-2 w-full flex flex-col">
-            <Pagination>
-              <PaginationContent>
-                <PaginationPrevious
-                  className={currentPage === 0 && "text-background hover:text-background hover:bg-background"}
-                  text={isMobile ? "" : t("Common.previous")}
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handlePageChange(currentPage - 1);
-                  }}
-                />
-                {surveyQuestions?.map((_, index) => {
-                  if (isMobile && (index > currentPage + 2 || index < currentPage - 2)) {
-                    return null;
-                  } else if (currentPage <= 4 && index >= 9) {
-                    return null;
-                  } else if (currentPage >= surveyQuestions.length - 4 && index <= surveyQuestions.length - 10) {
-                    return null;
-                  } else if (
-                    currentPage > 4 &&
-                    currentPage < surveyQuestions.length - 4 &&
-                    (index > currentPage + 4 || index < currentPage - 4)
-                  ) {
-                    return null;
-                  }
-                  return (
-                    <PaginationItem key={index}>
-                      <PaginationLink
-                        className={questionsAnswered.includes(index) && "bg-accent border-accent-foreground"}
-                        href="#"
-                        isActive={index === currentPage}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handlePageChange(index);
-                        }}
-                      >
-                        {index + 1}
-                      </PaginationLink>
-                    </PaginationItem>
-                  );
-                })}
-                <PaginationNext
-                  className={
-                    currentPage + 1 === (surveyQuestions?.length || 1) &&
-                    "text-background hover:text-background hover:bg-background"
-                  }
-                  text={isMobile ? "" : t("Common.next")}
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handlePageChange(currentPage + 1);
-                  }}
-                />
-              </PaginationContent>
-            </Pagination>
-            <div className="flex items-center justify-center w-full">
-              <Progress className="w-full" value={[surveyProgress]} min={0} max={100} step={1} disabled />
-            </div>
-          </div>
-        </CardFooter>
-      </Card>
-
-      <div className="w-full flex flex-col justify-between items-center overflow-scroll md:overflow-hidden">
-        <div className="w-full md:h-60 h-45" />
-        <div className="w-full flex flex-col justify-between items-center overflow-hidden relative">
-          <AnimatePresence mode="wait">
-            {surveyQuestions?.find((q) => q.questionNumber === currentPage) ? (
-              <motion.div
-                key={currentPage}
-                initial={{x: direction * 300, opacity: 0}}
-                animate={{x: 0, opacity: 1}}
-                transition={{duration: 0.3}}
-                className="w-full"
-              >
-                <div className="size-full flex justify-center items-center">
-                  <SurveyCard
-                    question={surveyQuestions?.find((q) => q.questionNumber === currentPage)}
-                    setSurveyAnswer={setSurveyAnswer}
-                    isSubmitted={questionsAnswered.includes(currentPage)}
-                    similarToX={similarToX}
-                    toggleVoices={toggleVoices}
-                    initAnswer={initAnswer}
-                  />
-                </div>
-              </motion.div>
-            ) : (
-              <div className="size-full flex justify-center items-center">
-                <Spinner className="w-40 h-40" />
-              </div>
-            )}
-          </AnimatePresence>
-        </div>
-
-        <div className="w-full h-24" />
-      </div>
-
-      <div className="fixed bottom-0 max-w-500 w-full flex items-center">
-        <AudioPlayer />
-      </div>
-
-      <Drawer open={participant?.surveyCompleted && !drawerDismissed} dismissable>
-        <DrawerContent>
-          <DrawerHeader className="flex flex-col justify-center items-center">
-            <DrawerTitle>{t("SurveyPage.Completed.title")}</DrawerTitle>
-            <DrawerDescription>
-              {t("SurveyPage.Completed.description", {questionnaireID: participant?.questionnaireID || "N/A"})}
-            </DrawerDescription>
-          </DrawerHeader>
-          <DrawerFooter className="flex justify-center items-center space-y-4">
-            <ButtonGroup>
-              <Button onClick={() => navigate("/")}>{t("Sidebar.Navigation.home")}</Button>
-              <ButtonGroupSeparator />
-              <Button onClick={() => navigate("/plot")}>{t("Sidebar.Navigation.similarityPlot")}</Button>
-            </ButtonGroup>
-            <DrawerClose asChild>
-              <Button variant="outline" onClick={() => setDrawerDismissed(true)}>
-                {t("Common.close")}
-              </Button>
-            </DrawerClose>
-          </DrawerFooter>
-        </DrawerContent>
-      </Drawer>
+    <div className="w-screen h-screen max-w-screen max-h-screen">
+      <ProgressHeader
+        surveyQuestions={surveyQuestions}
+        currentPage={currentPage}
+        questionsAnswered={questionsAnswered}
+        surveyProgress={surveyProgress}
+        handlePageChange={handlePageChange}
+      />
+      <CardCarousel
+        surveyQuestions={surveyQuestions}
+        currentPage={currentPage}
+        setSurveyAnswer={setSurveyAnswer}
+        questionsAnswered={questionsAnswered}
+        similarToX={similarToX}
+        toggleVoices={toggleVoices}
+        initAnswer={initAnswer}
+        direction={direction}
+      />
+      <AudioPlayer />
+      <SurveyFinishedDrawer />
     </div>
   );
 }

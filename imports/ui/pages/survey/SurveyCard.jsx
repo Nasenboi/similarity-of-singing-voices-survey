@@ -1,15 +1,17 @@
+import {useIsMobile} from "@/components/hooks/use-mobile";
 import {Button} from "@/components/ui/button";
 import {ButtonGroup, ButtonGroupSeparator} from "@/components/ui/button-group";
-import {CardHeader, CardTitle} from "@/components/ui/card";
+import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
 import {Dialog, DialogTrigger} from "@/components/ui/dialog";
 import {RadioGroup, RadioGroupItem} from "@/components/ui/radio-group";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
+import {cn} from "@/lib/utils";
 import {ArrowRightLeft, Flag, Pause, Play} from "lucide-react";
 import React, {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useAudioContext} from "../../contextProvider/AudioContext";
 import {cookies} from "../../customComponents/Cookies";
-import {H1, H2, Large, P} from "../../customComponents/Typography";
+import {H2, H3, Large, P} from "../../customComponents/Typography";
 import {ComplaintForm} from "./ComplaintForm";
 
 function AudioButton({trackID, voice, onVoiceClick, isPlaying}) {
@@ -47,6 +49,98 @@ function TooltipWrapper({children}) {
       </TooltipContent>
       <TooltipTrigger asChild>{children}</TooltipTrigger>
     </Tooltip>
+  );
+}
+
+function XSection({className, onVoiceClick, question, voicePlaying}) {
+  const {t} = useTranslation();
+
+  return (
+    <div className={cn("md:p-4 p-2 size-full grid grid-cols-2 gap-2", className)}>
+      <H3 className="col-span-1 text-foreground flex items-center justify-end">{t("SurveyPage.targetVoice")}</H3>
+      <div className="col-span-1 flex justify-start">
+        <Button onClick={() => onVoiceClick(question["X"], "X")}>
+          {t("SurveyPage.voice")} X {voicePlaying === "X" ? <Pause /> : <Play />}
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+function ReferenceSection({
+  className,
+  question,
+  similarToX,
+  onVoiceClick,
+  voicePlaying,
+  toggleVoices,
+  setSurveyAnswer,
+  isSubmitted,
+}) {
+  const {t} = useTranslation();
+  const isMobile = useIsMobile();
+
+  return (
+    <div
+      className={cn(
+        "w-full max-w-screen space-y-4 pt-4 flex flex-col justify-center items-center",
+        isSubmitted && "border-accent-foreground",
+        className,
+      )}
+    >
+      <div className="w-full grid grid-cols-2 gap-2">
+        <H3 className="col-span-1 flex justify-end items-center">{t("SurveyPage.referenceVoices")}</H3>
+        <ButtonGroup
+          className="col-span-1 flex justify-start items-center"
+          orientation={isMobile ? "vertical" : "horizontal"}
+        >
+          <AudioButton
+            trackID={question[[similarToX[0]]]}
+            voice={similarToX[0]}
+            onVoiceClick={onVoiceClick}
+            isPlaying={voicePlaying === similarToX[0]}
+          />
+          <ButtonGroupSeparator orientation={isMobile ? "horizontal" : "vertical"} />
+          {!isMobile && (
+            <>
+              <Button size="icon" onClick={() => toggleVoices(similarToX[1])}>
+                <ArrowRightLeft />
+              </Button>
+              <ButtonGroupSeparator />
+            </>
+          )}
+          <AudioButton
+            trackID={question[[similarToX[1]]]}
+            voice={similarToX[1]}
+            onVoiceClick={onVoiceClick}
+            isPlaying={voicePlaying === similarToX[1]}
+          />
+        </ButtonGroup>
+      </div>
+      <div className="space-y-4">
+        <RadioGroup className="" value={similarToX[0]} onValueChange={(value) => toggleVoices(value)}>
+          <div className="flex items-center gap-3 max-md:justify-center">
+            <RadioGroupItem value="A" id="r1" />
+            <label htmlFor="r1">
+              <Large htmlFor="r1" className="hover:underline">
+                A {t("SurveyPage.and")} X {t("SurveyPage.areMoreSimilar")}
+              </Large>
+            </label>
+          </div>
+          <div className="flex items-center gap-3 max-md:justify-center">
+            <RadioGroupItem value="B" id="r2" />
+            <label htmlFor="r2">
+              <Large className="hover:underline">
+                B {t("SurveyPage.and")} X {t("SurveyPage.areMoreSimilar")}
+              </Large>
+            </label>
+          </div>
+        </RadioGroup>
+        <div className="w-full flex justify-center">
+          <Button onClick={() => setSurveyAnswer(question._id)}>{t("Common.submit")}</Button>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -91,25 +185,24 @@ export function SurveyCard({question, similarToX, toggleVoices, setSurveyAnswer,
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
+  const getColors = () => {
+    return isSubmitted && "bg-accent border-accent-foreground";
+  };
+
   return (
-    <div
-      className={`w-220 max-w-screen h-min rounded-md border-2 flex flex-col justifiy-center ${isSubmitted && "bg-accent border-accent-foreground"}`}
-    >
-      <CardHeader
-        className={`w-full flex items-center px-4 justify-center border-b-2 rounded-t-md ${isSubmitted && "bg-accent border-accent-foreground"}`}
-      >
-        <CardTitle className="w-full flex justify-between items-center">
-          <div />
-          <H1>
+    <Card className={cn("w-220 max-w-screen h-min", getColors())}>
+      <CardHeader className={cn("border-b-2 p-0", getColors())}>
+        <CardTitle className={cn("w-full pb-2 relative flex justify-center items-center border-b-2", getColors())}>
+          <H2>
             {t("SurveyPage.cardTitle")} {question.questionNumber + 1}
-          </H1>
+          </H2>
           <Dialog open={dialogOpen} onOpenChange={(open) => setDialogOpen(open)}>
             <DialogTrigger asChild>
               <TooltipWrapper asChild>
                 <Button
                   variant="secondary"
                   size="icon"
-                  className={isSubmitted && "border"}
+                  className={cn("absolute right-1 top-1", isSubmitted && "border")}
                   onClick={() => setDialogOpen(true)}
                 >
                   <Flag />
@@ -119,69 +212,21 @@ export function SurveyCard({question, similarToX, toggleVoices, setSurveyAnswer,
             <ComplaintForm surveyQuestion={question} setDialogOpen={setDialogOpen} />
           </Dialog>
         </CardTitle>
+        <CardDescription>
+          <XSection onVoiceClick={onVoiceClick} question={question} voicePlaying={voicePlaying} />
+        </CardDescription>
       </CardHeader>
-      <div className="flex justify-center flex-col md:flex-row">
-        <div className="md:p-4 p-2 size-full flex flex-row md:flex-col justify-center items-center">
-          <H2>{t("SurveyPage.targetVoice")}</H2>
-          <div className="size-full flex justify-center">
-            <Button onClick={() => onVoiceClick(question["X"], "X")}>
-              {t("SurveyPage.voice")} X {voicePlaying === "X" ? <Pause /> : <Play />}
-            </Button>
-          </div>
-        </div>
-
-        <div
-          className={`w-full max-w-screen p-4 flex flex-col justify-center items-center md:border-l-2 max-md:border-t-2 ${isSubmitted && "border-accent-foreground"}`}
-        >
-          <H2>{t("SurveyPage.referenceVoices")}</H2>
-          <ButtonGroup className="max-w-sreen">
-            <AudioButton
-              trackID={question[[similarToX[0]]]}
-              voice={similarToX[0]}
-              onVoiceClick={onVoiceClick}
-              isPlaying={voicePlaying === similarToX[0]}
-            />
-            <ButtonGroupSeparator />
-            <Button size="icon" onClick={() => toggleVoices(similarToX[1])}>
-              <ArrowRightLeft />
-            </Button>
-            <ButtonGroupSeparator />
-            <AudioButton
-              trackID={question[[similarToX[1]]]}
-              voice={similarToX[1]}
-              onVoiceClick={onVoiceClick}
-              isPlaying={voicePlaying === similarToX[1]}
-            />
-          </ButtonGroup>
-          <div className="p-4 space-y-4 w-full">
-            <RadioGroup
-              className="max-md:flex max-md:flex-col max-md:w-full max-md:justify-center "
-              value={similarToX[0]}
-              onValueChange={(value) => toggleVoices(value)}
-            >
-              <div className="flex items-center gap-3 max-md:justify-center">
-                <RadioGroupItem value="A" id="r1" />
-                <label htmlFor="r1">
-                  <Large htmlFor="r1" className="hover:underline">
-                    A {t("SurveyPage.and")} X {t("SurveyPage.areMoreSimilar")}
-                  </Large>
-                </label>
-              </div>
-              <div className="flex items-center gap-3 max-md:justify-center">
-                <RadioGroupItem value="B" id="r2" />
-                <label htmlFor="r2">
-                  <Large className="hover:underline">
-                    B {t("SurveyPage.and")} X {t("SurveyPage.areMoreSimilar")}
-                  </Large>
-                </label>
-              </div>
-            </RadioGroup>
-            <div className="-mb-4 w-full flex justify-center">
-              <Button onClick={() => setSurveyAnswer(question._id)}>{t("Common.submit")}</Button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+      <CardContent className="flex justify-center flex-col md:flex-row">
+        <ReferenceSection
+          question={question}
+          similarToX={similarToX}
+          onVoiceClick={onVoiceClick}
+          voicePlaying={voicePlaying}
+          toggleVoices={toggleVoices}
+          setSurveyAnswer={setSurveyAnswer}
+          isSubmitted={isSubmitted}
+        />
+      </CardContent>
+    </Card>
   );
 }

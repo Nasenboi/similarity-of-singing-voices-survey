@@ -1,4 +1,3 @@
-import {useIsMobile} from "@/components/hooks/use-mobile";
 import {Button} from "@/components/ui/button";
 import {HoverCard, HoverCardContent, HoverCardTrigger} from "@/components/ui/hover-card";
 import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
@@ -40,10 +39,32 @@ function AudioDetails({song}) {
   );
 }
 
+function Icon({icon, song}) {
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+
+  return (
+    <HoverCard open={isDetailsOpen} onOpenChange={setIsDetailsOpen} openDelay={5} closeDelay={100}>
+      <HoverCardTrigger asChild>
+        <button
+          type="button"
+          className="relative size-12"
+          onClick={() => {
+            setIsDetailsOpen((prev) => !prev);
+          }}
+        >
+          <CreativeCommons className="absolute -top-2 -left-2 bg-accent rounded-full" />
+          <div className="size-12 bg-accent rounded-md border-2 flex items-center justify-center">
+            <H1 className="flex justify-center items-center">{icon}</H1>
+          </div>
+        </button>
+      </HoverCardTrigger>
+      <AudioDetails song={song} />
+    </HoverCard>
+  );
+}
+
 export function AudioPlayer() {
   const {trackID, icon, isPlaying, setIsPlaying, useBackgroundMusic, jumpToFirstOnset} = useAudioContext();
-  const isMobile = useIsMobile();
-  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [progress, setProgress] = useState(0);
   const [volume, setVolume] = useState(getCookieSave("audioPlayerVolume", INITIAL_VOLUME));
   const audioRef = useRef(null);
@@ -139,25 +160,7 @@ export function AudioPlayer() {
       {!isSongLoading && song && (
         <div className="w-full md:max-h-22 md:h-22 sticky bottom-0 left-0 right-0 rounded-t-xl border-2 border-b-0 bg-background flex items-center md:p-2 px-2">
           <div className="w-full md:h-20 h-18 space-x-2 flex justify-center items-center">
-            {icon && (
-              <HoverCard open={isDetailsOpen} onOpenChange={setIsDetailsOpen} openDelay={5} closeDelay={100}>
-                <HoverCardTrigger asChild>
-                  <button
-                    type="button"
-                    className="relative size-16"
-                    onClick={() => {
-                      setIsDetailsOpen((prev) => !prev);
-                    }}
-                  >
-                    <CreativeCommons className="absolute -top-1 -right-1 bg-accent rounded-full" />
-                    <div className="size-16 bg-accent rounded-md border-2 flex items-center justify-center">
-                      <H1>{icon}</H1>
-                    </div>
-                  </button>
-                </HoverCardTrigger>
-                <AudioDetails song={song} />
-              </HoverCard>
-            )}
+            {icon && <Icon icon={icon} song={song} />}
             <audio ref={audioRef} onTimeUpdate={handleTimeUpdate} onEnded={() => setIsPlaying(false)} />
 
             <Button
