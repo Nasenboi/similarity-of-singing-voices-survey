@@ -1,4 +1,3 @@
-import {useIsMobile} from "@/components/hooks/use-mobile";
 import {Button} from "@/components/ui/button";
 import {ButtonGroup, ButtonGroupSeparator} from "@/components/ui/button-group";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
@@ -10,6 +9,7 @@ import {ArrowRightLeft, Flag, Pause, Play} from "lucide-react";
 import React, {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useAudioContext} from "../../contextProvider/AudioContext";
+import {useMobileContext} from "../../contextProvider/MobileContext";
 import {cookies} from "../../customComponents/Cookies";
 import {H2, H3, Large, P} from "../../customComponents/Typography";
 import {ComplaintForm} from "./ComplaintForm";
@@ -78,7 +78,7 @@ function ReferenceSection({
   isSubmitted,
 }) {
   const {t} = useTranslation();
-  const isMobile = useIsMobile();
+  const {isMobile} = useMobileContext();
 
   return (
     <div
