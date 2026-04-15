@@ -1,12 +1,11 @@
-import {Dialog} from "@/components/ui/dialog";
 import {useSurveyQuestionsPaginated} from "@/imports/api/surveyQuestions/hooks";
 import {SURVEY_QUESTIONS} from "@/imports/api/surveyQuestions/methods";
 import {useIsLoggedIn} from "@/imports/api/users/hooks";
 import React, {useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
-import {AudioPlayer} from "../../customComponents/AudioPlayer";
 import {DataTable} from "../../customComponents/DataTable";
+import {ListPage} from "../../customComponents/ListPage";
 import {PageLoading} from "../../customComponents/PageLoading";
 import {SurveyQuestionInfoModal} from "./SurveyQuestionInfoModal";
 import {SurveyQuestionSearchForm} from "./SurveyQuestionSearchForm";
@@ -90,31 +89,21 @@ export default function SurveyQuestionListPage() {
   }
 
   return (
-    <div className="w-screen h-screen max-w-screen max-h-screen flex flex-col justify-center items-center">
-      <div className="w-full flex flex-col justify-between items-center overflow-scroll md:overflow-hidden">
-        <Dialog open={dialogOpen} onOpenChange={(open) => onDialogOpen(open)}>
-          <div className="py-24 md:max-w-300 size-full">
-            <SurveyQuestionSearchForm onFilterChange={onFilterChange} query={query} />
-            <DataTable
-              columns={surveyQuestionColumns}
-              data={surveyQuestions}
-              onNext={handleNext}
-              onPrevious={handlePrevious}
-              hasNext={pageInfo?.hasNext}
-              hasPrevious={pageInfo?.hasPrevious}
-              onRowCLick={onRowClick}
-              setRowColor={setRowColor}
-              downloadFilename="surveyQuestions.csv"
-              downloadMethod={SURVEY_QUESTIONS.downloadCSV}
-            />
-          </div>
-          <div className="w-full h-24" />
-          <SurveyQuestionInfoModal surveyQuestionID={surveyQuestionID} />
-        </Dialog>
-      </div>
-      <div className="fixed bottom-0 max-w-500 w-full flex items-center">
-        <AudioPlayer />
-      </div>
-    </div>
+    <ListPage dialogOpen={dialogOpen} onDialogOpen={onDialogOpen}>
+      <SurveyQuestionSearchForm onFilterChange={onFilterChange} query={query} />
+      <DataTable
+        columns={surveyQuestionColumns}
+        data={surveyQuestions}
+        onNext={handleNext}
+        onPrevious={handlePrevious}
+        hasNext={pageInfo?.hasNext}
+        hasPrevious={pageInfo?.hasPrevious}
+        onRowClick={onRowClick}
+        setRowColor={setRowColor}
+        downloadFilename="surveyQuestions.csv"
+        downloadMethod={SURVEY_QUESTIONS.downloadCSV}
+      />
+      <SurveyQuestionInfoModal surveyQuestionID={surveyQuestionID} />
+    </ListPage>
   );
 }

@@ -1,12 +1,11 @@
-import {Dialog} from "@/components/ui/dialog";
 import {useSurveyAnswersPaginated} from "@/imports/api/surveyAnswers/hooks";
 import {SURVEY_ANSWERS} from "@/imports/api/surveyAnswers/methods";
 import {useIsLoggedIn} from "@/imports/api/users/hooks";
 import React, {useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
-import {AudioPlayer} from "../../customComponents/AudioPlayer";
 import {DataTable} from "../../customComponents/DataTable";
+import {ListPage} from "../../customComponents/ListPage";
 import {PageLoading} from "../../customComponents/PageLoading";
 import {SurveyAnswerInfoModal} from "./SurveyAnswerInfoModal";
 import {SurveyAnswerSearchForm} from "./SurveyAnswerSearchForm";
@@ -96,30 +95,20 @@ export default function SurveyAnswerListPage() {
   }
 
   return (
-    <div className="w-screen h-screen max-w-screen max-h-screen flex flex-col justify-center items-center">
-      <div className="w-full flex flex-col justify-between items-center overflow-scroll md:overflow-hidden">
-        <Dialog open={dialogOpen} onOpenChange={(open) => onDialogOpen(open)}>
-          <div className="py-24 md:max-w-300 size-full">
-            <SurveyAnswerSearchForm onFilterChange={onFilterChange} query={query} />
-            <DataTable
-              columns={surveyAnswerColumns}
-              data={surveyAnswers}
-              onNext={handleNext}
-              onPrevious={handlePrevious}
-              hasNext={pageInfo?.hasNext}
-              hasPrevious={pageInfo?.hasPrevious}
-              onRowCLick={onRowClick}
-              downloadFilename="surveyAnswers.csv"
-              downloadMethod={SURVEY_ANSWERS.downloadCSV}
-            />
-          </div>
-          <div className="w-full h-24" />
-          <SurveyAnswerInfoModal surveyAnswerID={surveyAnswerID} />
-        </Dialog>
-      </div>
-      <div className="fixed bottom-0 max-w-500 w-full flex items-center">
-        <AudioPlayer />
-      </div>
-    </div>
+    <ListPage dialogOpen={dialogOpen} onDialogOpen={onDialogOpen}>
+      <SurveyAnswerSearchForm onFilterChange={onFilterChange} query={query} />
+      <DataTable
+        columns={surveyAnswerColumns}
+        data={surveyAnswers}
+        onNext={handleNext}
+        onPrevious={handlePrevious}
+        hasNext={pageInfo?.hasNext}
+        hasPrevious={pageInfo?.hasPrevious}
+        onRowClick={onRowClick}
+        downloadFilename="surveyAnswers.csv"
+        downloadMethod={SURVEY_ANSWERS.downloadCSV}
+      />
+      <SurveyAnswerInfoModal surveyAnswerID={surveyAnswerID} />
+    </ListPage>
   );
 }

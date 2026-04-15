@@ -11,7 +11,7 @@ export function DataTable({
   onPrevious,
   hasNext,
   hasPrevious,
-  onRowCLick,
+  onRowClick,
   setRowColor,
   downloadMethod,
   downloadFilename,
@@ -20,7 +20,7 @@ export function DataTable({
 
   return (
     <div>
-      <div className="size-full p-4 overflow-hidden rounded-md border">
+      <div className="size-full p-4 rounded-md border rounded-t-none">
         <Table>
           <TableHeader>
             <TableRow>
@@ -29,12 +29,12 @@ export function DataTable({
               ))}
             </TableRow>
           </TableHeader>
-          <TableBody>
+          <TableBody className="overflow-scroll">
             {data.length ? (
               data.map((row) => {
                 const rowColor = setRowColor?.(row);
                 return (
-                  <TableRow key={row._id} onClick={() => onRowCLick(row)}>
+                  <TableRow key={row._id} onClick={() => onRowClick(row)}>
                     {columns.map((c) => (
                       <TableCell key={`c_${c.accessorKey}_${row._id}`} className={rowColor && `border-y ${rowColor}`}>
                         {String(row[c.accessorKey])}

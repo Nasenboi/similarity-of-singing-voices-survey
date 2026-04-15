@@ -1,4 +1,3 @@
-import {Dialog} from "@/components/ui/dialog";
 import {useParticipantsPaginated} from "@/imports/api/participants/hooks";
 import {PARTICIPANTS} from "@/imports/api/participants/methods";
 import {useIsLoggedIn} from "@/imports/api/users/hooks";
@@ -6,8 +5,8 @@ import React, {useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
 import {useParticipantContext} from "../../contextProvider/ParticipantContext";
-import {AudioPlayer} from "../../customComponents/AudioPlayer";
 import {DataTable} from "../../customComponents/DataTable";
+import {ListPage} from "../../customComponents/ListPage";
 import {PageLoading} from "../../customComponents/PageLoading";
 import {ParticipantInfoModal} from "./ParticipantInfoModal";
 import {ParticipantSearchForm} from "./ParticipantSearchForm";
@@ -105,31 +104,21 @@ export default function ParticipantListPage() {
   }
 
   return (
-    <div className="w-screen h-screen max-w-screen max-h-screen flex flex-col justify-center items-center">
-      <div className="w-full flex flex-col justify-between items-center overflow-scroll md:overflow-hidden">
-        <Dialog open={dialogOpen} onOpenChange={(open) => onDialogOpen(open)}>
-          <div className="py-24 md:max-w-300 size-full">
-            <ParticipantSearchForm onFilterChange={onFilterChange} query={query} />
-            <DataTable
-              columns={participantColumns}
-              data={participants}
-              onNext={handleNext}
-              onPrevious={handlePrevious}
-              hasNext={pageInfo?.hasNext}
-              hasPrevious={pageInfo?.hasPrevious}
-              onRowCLick={onRowClick}
-              setRowColor={setRowColor}
-              downloadFilename="participants.csv"
-              downloadMethod={PARTICIPANTS.downloadCSV}
-            />
-          </div>
-          <div className="w-full h-24" />
-          <ParticipantInfoModal participantID={participantID} setDialogOpen={setDialogOpen} />
-        </Dialog>
-      </div>
-      <div className="fixed bottom-0 max-w-500 w-full flex items-center">
-        <AudioPlayer />
-      </div>
-    </div>
+    <ListPage dialogOpen={dialogOpen} onDialogOpen={onDialogOpen}>
+      <ParticipantSearchForm onFilterChange={onFilterChange} query={query} />
+      <DataTable
+        columns={participantColumns}
+        data={participants}
+        onNext={handleNext}
+        onPrevious={handlePrevious}
+        hasNext={pageInfo?.hasNext}
+        hasPrevious={pageInfo?.hasPrevious}
+        onRowClick={onRowClick}
+        setRowColor={setRowColor}
+        downloadFilename="participants.csv"
+        downloadMethod={PARTICIPANTS.downloadCSV}
+      />
+      <ParticipantInfoModal participantID={participantID} setDialogOpen={setDialogOpen} />
+    </ListPage>
   );
 }
