@@ -1,6 +1,6 @@
 // App info
 export const APP_NAME = "Similarity of Singing Voices Survey";
-export const APP_VERSION = "1.0.4";
+export const APP_VERSION = "1.1.0";
 
 // Paths
 export const SONG_FILE_PATH = "songs";
