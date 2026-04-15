@@ -6,6 +6,7 @@ import {useIsLoggedIn} from "@/imports/api/users/hooks";
 import React, {useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
+import {useParticipantContext} from "../../contextProvider/ParticipantContext";
 import {AudioPlayer} from "../../customComponents/AudioPlayer";
 import {DataTable} from "../../customComponents/DataTable";
 import {ParticipantInfoModal} from "./ParticipantInfoModal";
@@ -19,6 +20,7 @@ export default function ParticipantListPage() {
   const [next, setNext] = useState(null);
   const [previous, setPrevious] = useState(null);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const {participant, isLoading: isParticipantContextLoading} = useParticipantContext();
   const [participantID, setParticipantID] = useState(null);
 
   const {
@@ -84,7 +86,7 @@ export default function ParticipantListPage() {
   const setRowColor = (row) => {
     if (row.surveyCompleted) {
       return "border-green-500";
-    } else if (row._id === participantID) {
+    } else if (row._id === participant._id) {
       return "border-gray-500";
     }
   };
@@ -98,7 +100,7 @@ export default function ParticipantListPage() {
     return null;
   }
 
-  if (isParticipantsLoading) {
+  if (isParticipantsLoading || isParticipantContextLoading) {
     return (
       <div className="w-screen h-screen flex justify-center items-center">
         <Spinner className="w-40 h-40" />
