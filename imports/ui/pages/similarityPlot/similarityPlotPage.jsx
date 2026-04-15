@@ -3,7 +3,6 @@ import {ButtonGroup, ButtonGroupSeparator} from "@/components/ui/button-group";
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/ui/dropdown-menu";
 import {Field, FieldLabel} from "@/components/ui/field";
-import {Spinner} from "@/components/ui/spinner";
 import {useSongsAll} from "@/imports/api/songs/hooks";
 import {useSurveyQuestionsLines} from "@/imports/api/surveyQuestions/hooks";
 import {useIsAdminOrCompleted} from "@/imports/api/users/hooks";
@@ -14,6 +13,7 @@ import {useNavigate} from "react-router-dom";
 import {useParticipantContext} from "../../contextProvider/ParticipantContext";
 import {AudioPlayer} from "../../customComponents/AudioPlayer";
 import {NumberInput} from "../../customComponents/NumberInput";
+import {PageLoading} from "../../customComponents/PageLoading";
 import {SimilarityPlot2D} from "./similarityPlot2D";
 import {SimilarityPlot3D} from "./similarityPlot3D";
 
@@ -70,11 +70,7 @@ export default function SimilarityPlotPage() {
   const {t} = useTranslation();
 
   if (isParticipantLoading || isRightsLoading || isSongsLoading || isLinesLoading) {
-    return (
-      <div className="w-screen h-screen flex justify-center items-center">
-        <Spinner className="w-40 h-40" />
-      </div>
-    );
+    return <PageLoading />;
   }
   if (!hasRights) {
     navigate("/");

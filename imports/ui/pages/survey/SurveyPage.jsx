@@ -12,7 +12,6 @@ import {
   DrawerTitle,
 } from "@/components/ui/drawer";
 import {Progress} from "@/components/ui/progress";
-import {Spinner} from "@/components/ui/spinner";
 import {useSurveyAnswersParticipant} from "@/imports/api/surveyAnswers/hooks";
 import {SURVEY_ANSWERS} from "@/imports/api/surveyAnswers/methods";
 import {useSurveyQuestionsParticipant} from "@/imports/api/surveyQuestions/hooks";
@@ -33,6 +32,7 @@ import {useAudioContext} from "../../contextProvider/AudioContext";
 import {useParticipantContext} from "../../contextProvider/ParticipantContext";
 import {AudioPlayer} from "../../customComponents/AudioPlayer";
 import {cookies} from "../../customComponents/Cookies";
+import {PageLoading} from "../../customComponents/PageLoading";
 import {SurveyCard} from "./SurveyCard";
 
 function ProgressHeader({className, surveyQuestions, currentPage, questionsAnswered, surveyProgress, handlePageChange}) {
@@ -180,9 +180,7 @@ function CardCarousel({
             </div>
           </motion.div>
         ) : (
-          <div className="size-full flex justify-center items-center">
-            <Spinner className="w-40 h-40" />
-          </div>
+          <PageLoading />
         )}
       </AnimatePresence>
     </div>
@@ -318,11 +316,7 @@ export default function SurveyPage() {
   }, [isParticipantLoading, participant, navigate]);
 
   if (isParticipantLoading || isSurveyAnswersLoading || isSurveyQuestionsLoading) {
-    return (
-      <div className="w-screen h-screen flex justify-center items-center">
-        <Spinner className="w-40 h-40" />
-      </div>
-    );
+    return <PageLoading />;
   }
 
   if (!participant) {

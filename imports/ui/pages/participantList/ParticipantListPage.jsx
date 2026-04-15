@@ -1,5 +1,4 @@
 import {Dialog} from "@/components/ui/dialog";
-import {Spinner} from "@/components/ui/spinner";
 import {useParticipantsPaginated} from "@/imports/api/participants/hooks";
 import {PARTICIPANTS} from "@/imports/api/participants/methods";
 import {useIsLoggedIn} from "@/imports/api/users/hooks";
@@ -9,6 +8,7 @@ import {useNavigate} from "react-router-dom";
 import {useParticipantContext} from "../../contextProvider/ParticipantContext";
 import {AudioPlayer} from "../../customComponents/AudioPlayer";
 import {DataTable} from "../../customComponents/DataTable";
+import {PageLoading} from "../../customComponents/PageLoading";
 import {ParticipantInfoModal} from "./ParticipantInfoModal";
 import {ParticipantSearchForm} from "./ParticipantSearchForm";
 
@@ -101,11 +101,7 @@ export default function ParticipantListPage() {
   }
 
   if (isParticipantsLoading || isParticipantContextLoading) {
-    return (
-      <div className="w-screen h-screen flex justify-center items-center">
-        <Spinner className="w-40 h-40" />
-      </div>
-    );
+    return <PageLoading />;
   }
 
   return (

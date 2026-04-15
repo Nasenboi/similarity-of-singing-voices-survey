@@ -1,14 +1,13 @@
 import {Dialog} from "@/components/ui/dialog";
-import {Spinner} from "@/components/ui/spinner";
 import {useSurveyAnswersPaginated} from "@/imports/api/surveyAnswers/hooks";
 import {SURVEY_ANSWERS} from "@/imports/api/surveyAnswers/methods";
 import {useIsLoggedIn} from "@/imports/api/users/hooks";
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
-import {useAudioContext} from "../../contextProvider/AudioContext";
 import {AudioPlayer} from "../../customComponents/AudioPlayer";
 import {DataTable} from "../../customComponents/DataTable";
+import {PageLoading} from "../../customComponents/PageLoading";
 import {SurveyAnswerInfoModal} from "./SurveyAnswerInfoModal";
 import {SurveyAnswerSearchForm} from "./SurveyAnswerSearchForm";
 
@@ -93,11 +92,7 @@ export default function SurveyAnswerListPage() {
   }
 
   if (isSurveyAnswersLoading) {
-    return (
-      <div className="w-screen h-screen flex justify-center items-center">
-        <Spinner className="w-40 h-40" />
-      </div>
-    );
+    return <PageLoading />;
   }
 
   return (
