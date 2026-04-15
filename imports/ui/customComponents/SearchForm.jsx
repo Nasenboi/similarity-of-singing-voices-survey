@@ -13,7 +13,7 @@ export function SearchForm({children, className, title, form, onFilterChange}) {
     <Card className={cn("sticky top-0 z-30 rounded-b-none", className)}>
       <Collapsible className="data-[state=open]:bg-muted" defaultOpen={true}>
         <CollapsibleTrigger asChild>
-          <CardHeader className="group">
+          <CardHeader className="group pl-12">
             <CardTitle className="w-full flex items-center justify-between">
               {title}
               <ChevronDown className="ml-auto group-data-[state=open]:rotate-180" />
