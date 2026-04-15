@@ -2,6 +2,7 @@ import {check} from "meteor/check";
 import {Meteor} from "meteor/meteor";
 import {find as findPagination} from "mongo-cursor-pagination";
 import {INDEX_MAP, ITEMS_PER_PAGE} from "../../common/config";
+import {SurveyAnswers} from "../surveyAnswers/collection";
 import {isAdminUser} from "../users/helpers";
 import {buildPaginationQuery} from "../utils";
 import {Participants} from "./collection";
@@ -17,10 +18,16 @@ Meteor.publish("participants.paginated", async function ({query, next, previous}
 
   const numericFields = ["questionnaireID"];
   const booleanFields = [];
-  const {surveyCompleted, ...q} = query;
+  const {surveyCompleted, noQuestionsAnswered, ...q} = query;
 
   let newQuery = buildPaginationQuery({query: q, numericFields, booleanFields});
   if (surveyCompleted) newQuery["surveyCompleted"] = true;
+  if (noQuestionsAnswered) {
+    const participantsWithAnswers = await SurveyAnswers.rawCollection().distinct("participantID", {
+      questionnaireID: newQuery.questionnaireID,
+    });
+    newQuery["_id"] = {$nin: participantsWithAnswers};
+  }
 
   const result = await findPagination(Participants.rawCollection(), {
     query: newQuery,

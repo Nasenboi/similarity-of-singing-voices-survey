@@ -1,17 +1,15 @@
-import {Button} from "@/components/ui/button";
-import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
-import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/components/ui/collapsible";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {ChevronDown} from "lucide-react";
 import React, {useEffect} from "react";
 import {useForm} from "react-hook-form";
 import {useTranslation} from "react-i18next";
 import {z} from "zod";
 import {AutoField} from "../../customComponents/AutoField";
+import {SearchForm} from "../../customComponents/SearchForm";
 
 const searchFormSchema = z.object({
   _id: z.string().optional(),
   surveyCompleted: z.boolean().optional().default(false),
+  noQuestionsAnswered: z.boolean().optional().default(false),
   questionnaireID: z.number().optional(),
 });
 
@@ -22,6 +20,7 @@ export function ParticipantSearchForm({onFilterChange, query}) {
     defaultValues: {
       _id: query?._id || "",
       surveyCompleted: query?.surveyCompleted || false,
+      noQuestionsAnswered: query?.noQuestionsAnswered || false,
       questionnaireID: query?.questionnaireID || undefined,
     },
   });
@@ -33,47 +32,29 @@ export function ParticipantSearchForm({onFilterChange, query}) {
   }, [query, form]);
 
   return (
-    <Card>
-      <Collapsible className="data-[state=open]:bg-muted" defaultOpen={true}>
-        <CollapsibleTrigger asChild>
-          <CardHeader className="group">
-            <CardTitle className="w-full flex items-center justify-between">
-              {t("Collections.participants")}
-              <ChevronDown className="ml-auto group-data-[state=open]:rotate-180" />
-            </CardTitle>
-          </CardHeader>
-        </CollapsibleTrigger>
-        <CollapsibleContent>
-          <CardContent>
-            <form onSubmit={form.handleSubmit(onFilterChange)} className="grid grid-cols-3 gap-4">
-              <AutoField
-                className="col-span-1"
-                form={form}
-                name="_id"
-                label={t("Collections.DBMetaData._id")}
-                type="input"
-              />
-              <AutoField
-                className="col-span-1"
-                form={form}
-                name="surveyCompleted"
-                label={t("Collections.Participants.surveyCompleted")}
-                type="bool"
-              />
-              <AutoField
-                className="col-span-1"
-                form={form}
-                name="questionnaireID"
-                label={t("Collections.SurveyQuestions.questionnaireID")}
-                type="number"
-              />
-              <div className="col-span-3 flex justify-end">
-                <Button type="submit">{t("Common.submit")}</Button>
-              </div>
-            </form>
-          </CardContent>
-        </CollapsibleContent>
-      </Collapsible>
-    </Card>
+    <SearchForm title={t("Collections.participants")} form={form} onFilterChange={onFilterChange}>
+      <AutoField className="col-span-1" form={form} name="_id" label={t("Collections.DBMetaData._id")} type="input" />
+      <AutoField
+        className="col-span-1"
+        form={form}
+        name="surveyCompleted"
+        label={t("Collections.Participants.surveyCompleted")}
+        type="bool"
+      />
+      <AutoField
+        className="col-span-1"
+        form={form}
+        name="noQuestionsAnswered"
+        label={t("Collections.Participants.noQuestionsAnswered")}
+        type="bool"
+      />
+      <AutoField
+        className="col-span-1"
+        form={form}
+        name="questionnaireID"
+        label={t("Collections.SurveyQuestions.questionnaireID")}
+        type="number"
+      />
+    </SearchForm>
   );
 }

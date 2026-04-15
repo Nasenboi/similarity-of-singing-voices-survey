@@ -11,7 +11,7 @@ export function DataTable({
   onPrevious,
   hasNext,
   hasPrevious,
-  onRowCLick,
+  onRowClick,
   setRowColor,
   downloadMethod,
   downloadFilename,
@@ -19,41 +19,40 @@ export function DataTable({
   const {t} = useTranslation();
 
   return (
-    <div>
-      <div className="size-full p-4 overflow-hidden rounded-md border">
-        <Table>
-          <TableHeader>
+    <div className="flex flex-col flex-1 min-h-0">
+      <Table className="flex-1 min-h-0 overflow-auto">
+        <TableHeader className="sticky top-0 z-10 bg-background">
+          <TableRow>
+            {columns.map((c) => (
+              <TableHead key={`c_${c.accessorKey}`}>{c.header}</TableHead>
+            ))}
+          </TableRow>
+        </TableHeader>
+        <TableBody className="flex-1 min-h-0 overflow-auto">
+          {data.length ? (
+            data.map((row) => {
+              const rowColor = setRowColor?.(row);
+              return (
+                <TableRow key={row._id} onClick={() => onRowClick(row)}>
+                  {columns.map((c) => (
+                    <TableCell key={`c_${c.accessorKey}_${row._id}`} className={rowColor && `border-y ${rowColor}`}>
+                      {String(row[c.accessorKey])}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              );
+            })
+          ) : (
             <TableRow>
-              {columns.map((c) => (
-                <TableHead key={`c_${c.accessorKey}`}>{c.header}</TableHead>
-              ))}
+              <TableCell colSpan={columns.length} className="h-24 text-center">
+                {t("Common.noResults")}
+              </TableCell>
             </TableRow>
-          </TableHeader>
-          <TableBody>
-            {data.length ? (
-              data.map((row) => {
-                const rowColor = setRowColor?.(row);
-                return (
-                  <TableRow key={row._id} onClick={() => onRowCLick(row)}>
-                    {columns.map((c) => (
-                      <TableCell key={`c_${c.accessorKey}_${row._id}`} className={rowColor && `border-y ${rowColor}`}>
-                        {String(row[c.accessorKey])}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                );
-              })
-            ) : (
-              <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center">
-                  {t("Common.noResults")}
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </div>
-      <div className="flex items-center justify-between space-x-2 py-4">
+          )}
+        </TableBody>
+      </Table>
+
+      <div className="flex items-center justify-between space-x-2 py-4 shrink-0">
         <Button variant="outline" size="sm" onClick={onPrevious} disabled={!hasPrevious}>
           {t("Common.previous")}
         </Button>

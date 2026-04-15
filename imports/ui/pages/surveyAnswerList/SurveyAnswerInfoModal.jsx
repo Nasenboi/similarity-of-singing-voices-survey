@@ -25,6 +25,8 @@ export function SurveyAnswerInfoModal({surveyAnswerID}) {
     {field: t("Collections.SurveyAnswers.participantID"), value: surveyAnswer.participantID},
     {field: t("Collections.SurveyAnswers.questionID"), value: surveyAnswer.questionID},
     {field: t("Collections.SurveyAnswers.answer"), value: surveyAnswer.answer},
+    {field: t("Collections.DBMetaData.createDate"), value: surveyAnswer.createDate},
+    {field: t("Collections.DBMetaData.editDate"), value: surveyAnswer.editDate},
   ];
 
   return (

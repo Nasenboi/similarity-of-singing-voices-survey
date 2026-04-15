@@ -1,5 +1,3 @@
-import {Dialog} from "@/components/ui/dialog";
-import {Spinner} from "@/components/ui/spinner";
 import {useSongsPaginated} from "@/imports/api/songs/hooks";
 import {SONGS} from "@/imports/api/songs/methods";
 import {useIsLoggedIn} from "@/imports/api/users/hooks";
@@ -7,8 +5,9 @@ import React, {useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
 import {useAudioContext} from "../../contextProvider/AudioContext";
-import {AudioPlayer} from "../../customComponents/AudioPlayer";
 import {DataTable} from "../../customComponents/DataTable";
+import {ListPage} from "../../customComponents/ListPage";
+import {PageLoading} from "../../customComponents/PageLoading";
 import {SongInfoModal} from "./SongInfoModal";
 import {SongSearchForm} from "./SongSearchForm";
 
@@ -99,39 +98,25 @@ export default function SongListPage() {
   }
 
   if (isSongsLoading) {
-    return (
-      <div className="w-screen h-screen flex justify-center items-center">
-        <Spinner className="w-40 h-40" />
-      </div>
-    );
+    return <PageLoading />;
   }
 
   return (
-    <div className="w-screen h-screen max-w-screen max-h-screen flex flex-col justify-center items-center">
-      <div className="w-full flex flex-col justify-between items-center overflow-scroll md:overflow-hidden">
-        <Dialog open={dialogOpen} onOpenChange={(open) => onDialogOpen(open)}>
-          <div className="py-24 md:max-w-300 size-full">
-            <SongSearchForm onFilterChange={onFilterChange} query={query} />
-            <DataTable
-              columns={songColumns}
-              data={songs}
-              onNext={handleNext}
-              onPrevious={handlePrevious}
-              hasNext={pageInfo?.hasNext}
-              hasPrevious={pageInfo?.hasPrevious}
-              onRowCLick={onRowClick}
-              setRowColor={setRowColor}
-              downloadFilename="songs.csv"
-              downloadMethod={SONGS.downloadCSV}
-            />
-          </div>
-          <div className="w-full h-24" />
-          <SongInfoModal trackID={trackID} />
-        </Dialog>
-      </div>
-      <div className="fixed bottom-0 max-w-500 w-full flex items-center">
-        <AudioPlayer />
-      </div>
-    </div>
+    <ListPage dialogOpen={dialogOpen} onDialogOpen={onDialogOpen}>
+      <SongSearchForm onFilterChange={onFilterChange} query={query} />
+      <DataTable
+        columns={songColumns}
+        data={songs}
+        onNext={handleNext}
+        onPrevious={handlePrevious}
+        hasNext={pageInfo?.hasNext}
+        hasPrevious={pageInfo?.hasPrevious}
+        onRowClick={onRowClick}
+        setRowColor={setRowColor}
+        downloadFilename="songs.csv"
+        downloadMethod={SONGS.downloadCSV}
+      />
+      <SongInfoModal trackID={trackID} />
+    </ListPage>
   );
 }
