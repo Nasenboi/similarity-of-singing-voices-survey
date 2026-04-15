@@ -7,6 +7,7 @@
       "itemNumber": "Nr."
     },
     "Participants": {
+      "noQuestionsAnswered": "Keine Fragen beantwortet",
       "participant": "Teilnehmer",
       "surveyCompleted": "Umfrage beendet"
     },

@@ -7,6 +7,7 @@
       "itemNumber": "Item No."
     },
     "Participants": {
+      "noQuestionsAnswered": "No Questions Answered",
       "participant": "Participant",
       "surveyCompleted": "Survey Completed"
     },
