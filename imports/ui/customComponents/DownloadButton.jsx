@@ -1,9 +1,8 @@
 import {Button} from "@/components/ui/button";
 import {Download} from "lucide-react";
-import {Meteor} from "meteor/meteor";
 import React from "react";
 
-export function DownloadButton({downloadMethod, downloadFilename}) {
+export function DownloadButton({downloadMethod, downloadFilename, className, variant, size = "sm"}) {
   const onDownloadClick = async () => {
     try {
       const csv = await downloadMethod.callAsync({});
@@ -23,7 +22,7 @@ export function DownloadButton({downloadMethod, downloadFilename}) {
   };
 
   return (
-    <Button onClick={onDownloadClick} type="Button" size="sm">
+    <Button onClick={onDownloadClick} type="Button" className={className} variant={variant} size={size}>
       <Download />
     </Button>
   );

@@ -1,8 +1,9 @@
 import {Button} from "@/components/ui/button";
+import {ButtonGroup, ButtonGroupSeparator} from "@/components/ui/button-group";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
 import React from "react";
 import {useTranslation} from "react-i18next";
-import {DownloadButton} from "./DownLoadButton";
+import {DownloadButton} from "./DownloadButton";
 
 export function DataTable({
   columns,
@@ -52,14 +53,27 @@ export function DataTable({
         </TableBody>
       </Table>
 
-      <div className="flex items-center justify-between space-x-2 py-4 shrink-0">
-        <Button variant="outline" size="sm" onClick={onPrevious} disabled={!hasPrevious}>
-          {t("Common.previous")}
-        </Button>
-        {downloadFilename && <DownloadButton downloadFilename={downloadFilename} downloadMethod={downloadMethod} />}
-        <Button variant="outline" size="sm" onClick={onNext} disabled={!hasNext}>
-          {t("Common.next")}
-        </Button>
+      <div className="flex items-center justify-end py-4 shrink-0">
+        <ButtonGroup>
+          <Button variant="outline" size="sm" onClick={onPrevious} disabled={!hasPrevious}>
+            {t("Common.previous")}
+          </Button>
+          <ButtonGroupSeparator />
+          {downloadFilename && (
+            <>
+              <DownloadButton
+                variant="outline"
+                size="sm"
+                downloadFilename={downloadFilename}
+                downloadMethod={downloadMethod}
+              />
+              <ButtonGroupSeparator />
+            </>
+          )}
+          <Button variant="outline" size="sm" onClick={onNext} disabled={!hasNext}>
+            {t("Common.next")}
+          </Button>
+        </ButtonGroup>
       </div>
     </div>
   );
