@@ -125,7 +125,8 @@ export function SongInfoModal({trackID}) {
           <div className="col-span-1 flex items-center justify-center">
             {song.complaints && (
               <Button variant="secondary" onClick={() => setShowComplaints(!showComplaints)} type="button">
-                <ArrowLeftRight /> {showComplaints ? t("SongInfoModal.showInfo") : t("SongInfoModal.showComplaints")}
+                <ArrowLeftRight />{" "}
+                {showComplaints ? t("SongListPage.SongInfoModal.showInfo") : t("SongListPage.SongInfoModal.showComplaints")}
               </Button>
             )}
           </div>
@@ -136,7 +137,9 @@ export function SongInfoModal({trackID}) {
           </div>
           <div className="col-span-1 flex items-center justify-center">
             <Button variant={song.skipInSurvey ? "secondary" : "destructive"} onClick={onSkipButtonClick} type="button">
-              {song.skipInSurvey ? t("SongInfoModal.skipInSurveyFalse") : t("SongInfoModal.skipInSurveyTrue")}
+              {song.skipInSurvey
+                ? t("SongListPage.SongInfoModal.skipInSurveyFalse")
+                : t("SongListPage.SongInfoModal.skipInSurveyTrue")}
             </Button>
           </div>
         </div>

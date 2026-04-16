@@ -1,5 +1,11 @@
 import {isEqual, isObject, transform} from "lodash";
 
+export const getYesterday = () => {
+  const yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
+  return yesterday;
+};
+
 function isFlatArray(obj) {
   if (!Array.isArray(obj)) return false;
   for (const e of obj) {

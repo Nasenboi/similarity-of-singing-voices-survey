@@ -156,6 +156,11 @@
     "startSurvey": "Umfrage starten",
     "title": "Willkommen zur Umfrage"
   },
+  "ParticipantListPage": {
+    "ParticipantSearchForm": {
+      "removeInactive": "Inaktive löschen"
+    }
+  },
   "Sidebar": {
     "Controls": {
       "navigate": "Navigation",

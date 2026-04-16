@@ -1,3 +1,5 @@
+import {Button} from "@/components/ui/button";
+import {PARTICIPANTS} from "@/imports/api/participants/methods";
 import {zodResolver} from "@hookform/resolvers/zod";
 import React, {useEffect} from "react";
 import {useForm} from "react-hook-form";
@@ -31,6 +33,14 @@ export function ParticipantSearchForm({onFilterChange, query}) {
     }
   }, [query, form]);
 
+  const removeInactiveParticipants = async () => {
+    try {
+      const numParticipantsRemoved = await PARTICIPANTS.removeInactiveParticipants.callAsync();
+    } catch (error) {
+      console.error("Error removing inactive participants:", error);
+    }
+  };
+
   return (
     <SearchForm title={t("Collections.participants")} form={form} onFilterChange={onFilterChange}>
       <AutoField className="flex-1" form={form} name="_id" label={t("Collections.DBMetaData._id")} type="input" />
@@ -55,6 +65,11 @@ export function ParticipantSearchForm({onFilterChange, query}) {
         label={t("Collections.Participants.noQuestionsAnswered")}
         type="bool"
       />
+      <div className="flex-1">
+        <Button variant="destructive" onClick={removeInactiveParticipants}>
+          {t("ParticipantListPage.ParticipantSearchForm.removeInactive")}
+        </Button>
+      </div>
     </SearchForm>
   );
 }
