@@ -33,27 +33,33 @@ export function ParticipantSearchForm({onFilterChange, query}) {
 
   return (
     <SearchForm title={t("Collections.participants")} form={form} onFilterChange={onFilterChange}>
-      <AutoField className="col-span-1" form={form} name="_id" label={t("Collections.DBMetaData._id")} type="input" />
       <AutoField
-        className="col-span-1"
+        className="max-w-1/2 min-w-40 px-2"
+        form={form}
+        name="_id"
+        label={t("Collections.DBMetaData._id")}
+        type="input"
+      />
+      <AutoField
+        className="max-w-1/2 min-w-40 px-2"
+        form={form}
+        name="questionnaireID"
+        label={t("Collections.SurveyQuestions.questionnaireID")}
+        type="number"
+      />
+      <AutoField
+        className="flex-1"
         form={form}
         name="surveyCompleted"
         label={t("Collections.Participants.surveyCompleted")}
         type="bool"
       />
       <AutoField
-        className="col-span-1"
+        className="flex-1"
         form={form}
         name="noQuestionsAnswered"
         label={t("Collections.Participants.noQuestionsAnswered")}
         type="bool"
-      />
-      <AutoField
-        className="col-span-1"
-        form={form}
-        name="questionnaireID"
-        label={t("Collections.SurveyQuestions.questionnaireID")}
-        type="number"
       />
     </SearchForm>
   );

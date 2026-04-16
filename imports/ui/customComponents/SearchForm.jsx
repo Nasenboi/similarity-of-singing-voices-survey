@@ -13,7 +13,7 @@ export function SearchForm({children, className, title, form, onFilterChange}) {
     <Card className={cn("sticky top-0 z-30 rounded-b-none", className)}>
       <Collapsible className="data-[state=open]:bg-muted" defaultOpen={true}>
         <CollapsibleTrigger asChild>
-          <CardHeader className="group pl-12">
+          <CardHeader className="group">
             <CardTitle className="w-full flex items-center justify-between">
               {title}
               <ChevronDown className="ml-auto group-data-[state=open]:rotate-180" />
@@ -22,9 +22,9 @@ export function SearchForm({children, className, title, form, onFilterChange}) {
         </CollapsibleTrigger>
         <CollapsibleContent>
           <CardContent>
-            <form onSubmit={form.handleSubmit(onFilterChange)} className="grid grid-cols-3 gap-4">
-              {children}
-              <div className="col-span-3 flex justify-end">
+            <form onSubmit={form.handleSubmit(onFilterChange)}>
+              <div className="flex flex-row flex-wrap justify-start items-center gap-2">{children}</div>
+              <div className="w-full flex justify-end pt-2">
                 <Button type="submit">{t("Common.submit")}</Button>
               </div>
             </form>

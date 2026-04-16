@@ -33,16 +33,16 @@ export function SurveyAnswerSearchForm({onFilterChange, query}) {
 
   return (
     <SearchForm title={t("Collections.surveyAnswers")} form={form} onFilterChange={onFilterChange}>
-      <AutoField className="col-span-1" form={form} name="_id" label={t("Collections.DBMetaData._id")} type="input" />
+      <AutoField className="flex-1" form={form} name="_id" label={t("Collections.DBMetaData._id")} type="input" />
       <AutoField
-        className="col-span-1"
+        className="flex-1"
         form={form}
         name="questionID"
         label={t("Collections.SurveyAnswers.questionID")}
         type="input"
       />
       <AutoField
-        className="col-span-1"
+        className="flex-1"
         form={form}
         name="participantID"
         label={t("Collections.SurveyAnswers.participantID")}

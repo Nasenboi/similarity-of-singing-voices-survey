@@ -118,7 +118,7 @@ function ReferenceSection({
         </ButtonGroup>
       </div>
       <div className="space-y-4">
-        <RadioGroup className="" value={similarToX[0]} onValueChange={(value) => toggleVoices(value)}>
+        <RadioGroup className="flex-1" value={similarToX[0]} onValueChange={(value) => toggleVoices(value)}>
           <div className="flex items-center gap-3 max-md:justify-center">
             <RadioGroupItem value="A" id="r1" />
             <label htmlFor="r1">
