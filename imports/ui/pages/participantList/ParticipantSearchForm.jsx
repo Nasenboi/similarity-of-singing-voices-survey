@@ -33,15 +33,9 @@ export function ParticipantSearchForm({onFilterChange, query}) {
 
   return (
     <SearchForm title={t("Collections.participants")} form={form} onFilterChange={onFilterChange}>
+      <AutoField className="flex-1" form={form} name="_id" label={t("Collections.DBMetaData._id")} type="input" />
       <AutoField
-        className="max-w-1/2 min-w-40 px-2"
-        form={form}
-        name="_id"
-        label={t("Collections.DBMetaData._id")}
-        type="input"
-      />
-      <AutoField
-        className="max-w-1/2 min-w-40 px-2"
+        className="flex-1"
         form={form}
         name="questionnaireID"
         label={t("Collections.SurveyQuestions.questionnaireID")}
