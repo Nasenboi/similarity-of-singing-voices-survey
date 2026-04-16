@@ -237,6 +237,7 @@
   "Toasts": {
     "errorRemovingInactiveParticipants": "Error removing inactive participants!",
     "noParticipantsRemoved": "No inactive participants to remove!",
+    "participantRemoved": "Participant removed!",
     "removedInactiveParticipants": "{{numRemoved}} inactive participants removed!"
   }
 }

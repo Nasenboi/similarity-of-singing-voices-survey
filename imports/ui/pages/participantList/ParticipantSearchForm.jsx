@@ -16,7 +16,7 @@ const searchFormSchema = z.object({
   questionnaireID: z.number().optional(),
 });
 
-export function ParticipantSearchForm({onFilterChange, query}) {
+export function ParticipantSearchForm({onFilterChange, query, refreshData}) {
   const {t} = useTranslation();
   const form = useForm({
     resolver: zodResolver(searchFormSchema),
@@ -41,6 +41,7 @@ export function ParticipantSearchForm({onFilterChange, query}) {
         toast.success(t("Toasts.noParticipantsRemoved"));
       } else {
         toast.success(t("Toasts.removedInactiveParticipants", {numRemoved}));
+        refreshData();
       }
     } catch (error) {
       console.error("Error removing inactive participants:", error);

@@ -18,6 +18,7 @@ export default function ParticipantListPage() {
   const [query, setQuery] = useState({});
   const [next, setNext] = useState(null);
   const [previous, setPrevious] = useState(null);
+  const [reloadKey, setReloadKey] = useState(0);
   const [dialogOpen, setDialogOpen] = useState(false);
   const {participant, isLoading: isParticipantContextLoading} = useParticipantContext();
   const [participantID, setParticipantID] = useState(null);
@@ -30,6 +31,7 @@ export default function ParticipantListPage() {
     query,
     next,
     previous,
+    reloadKey,
   });
 
   const participantColumns = [
@@ -63,6 +65,13 @@ export default function ParticipantListPage() {
     setQuery(value);
     setNext(null);
     setPrevious(null);
+  };
+
+  const refreshData = () => {
+    setReloadKey((key) => key + 1);
+    setNext(null);
+    setPrevious(null);
+    console.log(reloadKey);
   };
 
   const handleNext = () => {
@@ -105,7 +114,7 @@ export default function ParticipantListPage() {
 
   return (
     <ListPage dialogOpen={dialogOpen} onDialogOpen={onDialogOpen}>
-      <ParticipantSearchForm onFilterChange={onFilterChange} query={query} />
+      <ParticipantSearchForm refreshData={refreshData} onFilterChange={onFilterChange} query={query} />
       <DataTable
         columns={participantColumns}
         data={participants}
@@ -118,7 +127,7 @@ export default function ParticipantListPage() {
         downloadFilename="participants.csv"
         downloadMethod={PARTICIPANTS.downloadCSV}
       />
-      <ParticipantInfoModal participantID={participantID} setDialogOpen={setDialogOpen} />
+      <ParticipantInfoModal refreshData={refreshData} participantID={participantID} setDialogOpen={setDialogOpen} />
     </ListPage>
   );
 }

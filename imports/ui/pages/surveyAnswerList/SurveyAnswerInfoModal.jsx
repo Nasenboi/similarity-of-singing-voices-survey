@@ -9,7 +9,7 @@ export function SurveyAnswerInfoModal({surveyAnswerID}) {
   const {surveyAnswer, isLoading: isSurveyAnswerLoading} = useSurveyAnswersSingle(surveyAnswerID);
   const {t} = useTranslation();
 
-  if (isSurveyAnswerLoading || !surveyAnswerID) {
+  if (isSurveyAnswerLoading || !surveyAnswerID || !surveyAnswer) {
     return (
       <DialogContent>
         <DialogHeader>

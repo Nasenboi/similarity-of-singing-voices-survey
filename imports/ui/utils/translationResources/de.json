@@ -233,6 +233,7 @@
   },
   "Toasts": {
     "errorRemovingInactiveParticipants": "Fehler beim Entfernen inaktiver Teilnehmer!",
+    "participantRemoved": "Teilnehmer gelöscht!",
     "removedInactiveParticipants": "{{numRemoved}} inaktive(r) Teilnehmer entfernt!"
   }
 }

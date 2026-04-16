@@ -13,7 +13,7 @@ Meteor.publish("participants.single", async function (participantID) {
   return Participants.find(participantID);
 });
 
-Meteor.publish("participants.paginated", async function ({query, next, previous}) {
+Meteor.publish("participants.paginated", async function ({query, next, previous, reloadKey}) {
   if (!(await isAdminUser(this.userId))) return this.ready();
 
   const numericFields = ["questionnaireID"];

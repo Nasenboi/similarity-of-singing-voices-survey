@@ -5,9 +5,10 @@ import {useParticipantSingle} from "@/imports/api/participants/hooks";
 import {PARTICIPANTS} from "@/imports/api/participants/methods";
 import React from "react";
 import {useTranslation} from "react-i18next";
+import {toast} from "sonner";
 import {InfoTable} from "../../customComponents/InfoTable";
 
-export function ParticipantInfoModal({participantID, setDialogOpen}) {
+export function ParticipantInfoModal({participantID, setDialogOpen, refreshData}) {
   const {participant, isLoading: isParticipantLoading} = useParticipantSingle(participantID);
   const {t} = useTranslation();
 
@@ -15,12 +16,14 @@ export function ParticipantInfoModal({participantID, setDialogOpen}) {
     try {
       await PARTICIPANTS.removeParticipant.callAsync({participantID});
       setDialogOpen(false);
+      refreshData();
+      toast.success(t("Toasts.participantRemoved"));
     } catch (error) {
       console.error("Error removing participant:", error);
     }
   };
 
-  if (isParticipantLoading || !participantID) {
+  if (isParticipantLoading || !participantID || !participant) {
     return (
       <DialogContent>
         <DialogHeader>
