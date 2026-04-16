@@ -48,12 +48,12 @@ export const PARTICIPANTS = {
   }),
   removeInactiveParticipants: new ValidatedMethod({
     name: "participants.removeInactiveParticipant",
-    validate: new SimpleSchema({
-      toDate: {type: Date, optional: true},
-    }).validator(),
-    async run({toDate = getYesterday()}) {
+    validate: null,
+    async run() {
       if (this.isSimulation) return;
       if (!(await isAdminUser(this.userId))) return;
+
+      const toDate = getYesterday();
 
       const query = {};
       if (toDate) query.createDate = {$lte: toDate};
