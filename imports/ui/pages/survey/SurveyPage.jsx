@@ -343,7 +343,7 @@ export default function SurveyPage() {
         direction={direction}
       />
       <AudioPlayer />
-      <SurveyFinishedDrawer />
+      <SurveyFinishedDrawer participant={participant} />
     </div>
   );
 }
