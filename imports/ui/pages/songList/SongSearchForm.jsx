@@ -35,18 +35,18 @@ export function SongSearchForm({onFilterChange, query}) {
 
   return (
     <SearchForm title={t("Collections.songs")} form={form} onFilterChange={onFilterChange}>
-      <AutoField className="col-span-1" form={form} name="trackID" label={t("Collections.Songs.trackID")} type="input" />
-      <AutoField className="col-span-1" form={form} name="artist" label={t("Collections.Songs.artist")} type="input" />
-      <AutoField className="col-span-1" form={form} name="album" label={t("Collections.Songs.album")} type="input" />
+      <AutoField className="flex-1" form={form} name="trackID" label={t("Collections.Songs.trackID")} type="input" />
+      <AutoField className="flex-1" form={form} name="artist" label={t("Collections.Songs.artist")} type="input" />
+      <AutoField className="flex-1" form={form} name="album" label={t("Collections.Songs.album")} type="input" />
       <AutoField
-        className="col-span-1"
+        className="flex-1"
         form={form}
         name="hasComplaints"
         label={t("Collections.Songs.hasComplaints")}
         type="bool"
       />
       <AutoField
-        className="col-span-1"
+        className="flex-1"
         form={form}
         name="skipInSurvey"
         label={t("Collections.Songs.skippedInSurvey")}

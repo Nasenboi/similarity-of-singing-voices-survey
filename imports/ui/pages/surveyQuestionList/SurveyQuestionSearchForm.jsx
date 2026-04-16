@@ -35,22 +35,22 @@ export function SurveyQuestionSearchForm({onFilterChange, query}) {
 
   return (
     <SearchForm title={t("Collections.surveyQuestions")} form={form} onFilterChange={onFilterChange}>
-      <AutoField className="col-span-1" form={form} name="_id" label={t("Collections.DBMetaData._id")} type="input" />
+      <AutoField className="flex-1" form={form} name="_id" label={t("Collections.DBMetaData._id")} type="input" />
       <AutoField
-        className="col-span-1"
+        className="flex-1"
         form={form}
         name="questionnaireID"
         label={t("Collections.SurveyQuestions.questionnaireID")}
         type="input"
       />
       <AutoField
-        className="col-span-1"
+        className="flex-1"
         form={form}
         name="questionNumber"
         label={t("Collections.SurveyQuestions.questionNumber")}
         type="input"
       />
-      <AutoField className="col-span-1" form={form} name="skip" label={t("Collections.SurveyQuestions.skip")} type="bool" />
+      <AutoField className="flex-1" form={form} name="skip" label={t("Collections.SurveyQuestions.skip")} type="bool" />
     </SearchForm>
   );
 }

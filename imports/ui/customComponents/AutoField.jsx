@@ -3,6 +3,7 @@ import {Input} from "@/components/ui/input";
 import {PasswordInput} from "@/components/ui/password-input";
 import {Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
 import {Textarea} from "@/components/ui/textarea";
+import {cn} from "@/lib/utils";
 import React from "react";
 import {FieldWrapper} from "./FieldWrapper";
 import {NumberInput} from "./NumberInput";
@@ -25,9 +26,18 @@ export function AutoField({
   customFieldState,
   autoComplete = "off",
 }) {
+  const minWidths = {
+    input: "min-w-40",
+    text: "min-w-40",
+    password: "min-w-40",
+    number: "min-w-40",
+    bool: "min-w-30",
+    select: "min-w-40",
+  };
+
   return (
     <FieldWrapper
-      className={className}
+      className={cn(minWidths[type], className)}
       form={form}
       name={name}
       label={label}

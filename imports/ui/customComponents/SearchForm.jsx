@@ -22,9 +22,9 @@ export function SearchForm({children, className, title, form, onFilterChange}) {
         </CollapsibleTrigger>
         <CollapsibleContent>
           <CardContent>
-            <form onSubmit={form.handleSubmit(onFilterChange)} className="grid grid-cols-3 gap-4">
-              {children}
-              <div className="col-span-3 flex justify-end">
+            <form onSubmit={form.handleSubmit(onFilterChange)}>
+              <div className="flex flex-row flex-wrap justify-start items-center gap-2">{children}</div>
+              <div className="w-full flex justify-end pt-2">
                 <Button type="submit">{t("Common.submit")}</Button>
               </div>
             </form>
