@@ -324,7 +324,7 @@ export default function SurveyPage() {
   }
 
   return (
-    <div className="w-screen h-screen max-w-screen max-h-screen">
+    <div className="w-full h-screen max-h-screen flex flex-col overflow-hidden">
       <ProgressHeader
         surveyQuestions={surveyQuestions}
         currentPage={currentPage}
@@ -332,16 +332,18 @@ export default function SurveyPage() {
         surveyProgress={surveyProgress}
         handlePageChange={handlePageChange}
       />
-      <CardCarousel
-        surveyQuestions={surveyQuestions}
-        currentPage={currentPage}
-        setSurveyAnswer={setSurveyAnswer}
-        questionsAnswered={questionsAnswered}
-        similarToX={similarToX}
-        toggleVoices={toggleVoices}
-        initAnswer={initAnswer}
-        direction={direction}
-      />
+      <div className="flex-1 min-h-0 overflow-y-auto">
+        <CardCarousel
+          surveyQuestions={surveyQuestions}
+          currentPage={currentPage}
+          setSurveyAnswer={setSurveyAnswer}
+          questionsAnswered={questionsAnswered}
+          similarToX={similarToX}
+          toggleVoices={toggleVoices}
+          initAnswer={initAnswer}
+          direction={direction}
+        />
+      </div>
       <AudioPlayer />
       <SurveyFinishedDrawer participant={participant} />
     </div>
