@@ -94,7 +94,7 @@ export default function ParticipantListPage() {
   const setRowColor = (row) => {
     if (row.surveyCompleted) {
       return "border-green-500";
-    } else if (row._id === participant._id) {
+    } else if (row._id === participant?._id) {
       return "border-gray-500";
     }
   };
