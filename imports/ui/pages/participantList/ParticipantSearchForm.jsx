@@ -4,6 +4,7 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import React, {useEffect} from "react";
 import {useForm} from "react-hook-form";
 import {useTranslation} from "react-i18next";
+import {toast} from "sonner";
 import {z} from "zod";
 import {AutoField} from "../../customComponents/AutoField";
 import {SearchForm} from "../../customComponents/SearchForm";
@@ -35,9 +36,15 @@ export function ParticipantSearchForm({onFilterChange, query}) {
 
   const removeInactiveParticipants = async () => {
     try {
-      const numParticipantsRemoved = await PARTICIPANTS.removeInactiveParticipants.callAsync();
+      const numRemoved = await PARTICIPANTS.removeInactiveParticipants.callAsync({});
+      if (numRemoved === 0) {
+        toast.success(t("Toasts.noParticipantsRemoved"));
+      } else {
+        toast.success(t("Toasts.removedInactiveParticipants", {numRemoved}));
+      }
     } catch (error) {
       console.error("Error removing inactive participants:", error);
+      toast.error(t("Toasts.errorRemovingInactiveParticipants"));
     }
   };
 

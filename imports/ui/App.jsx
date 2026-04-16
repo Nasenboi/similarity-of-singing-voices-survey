@@ -1,4 +1,5 @@
 import {SidebarProvider} from "@/components/ui/sidebar";
+import {Toaster} from "@/components/ui/sonner";
 import React, {Suspense, useEffect, useState} from "react";
 import {BrowserRouter} from "react-router-dom";
 import {AudioProvider} from "./contextProvider/AudioContext";
@@ -74,6 +75,7 @@ export const App = () => {
                     <SideBarToggle />
                     <OptionalAppSideBar />
                     <RoutedContentArea />
+                    <Toaster />
                   </OptionalGlobalKeyEvents>
                 </BrowserRouter>
               </ParticipantProvider>

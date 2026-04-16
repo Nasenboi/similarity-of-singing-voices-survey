@@ -230,5 +230,9 @@
     "targetVoice": "Zielstimme",
     "title": "Ähnlichkeit von Gesangsstimmen",
     "voice": "Stimme"
+  },
+  "Toasts": {
+    "errorRemovingInactiveParticipants": "Fehler beim Entfernen inaktiver Teilnehmer!",
+    "removedInactiveParticipants": "{{numRemoved}} inaktive(r) Teilnehmer entfernt!"
   }
 }
