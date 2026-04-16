@@ -44,11 +44,11 @@ git tag "$versionLabel"
 # push tag to origin
 git push origin "$versionLabel"
 git push origin $mainBranch
-git push origin $devBranch
 
 # merge main back into develop
 git checkout $devBranch
 git merge --no-ff -m "merge main back into develop" $mainBranch
+git push origin $devBranch
 
 # remove release branch
 git branch -d "$releaseBranch"
