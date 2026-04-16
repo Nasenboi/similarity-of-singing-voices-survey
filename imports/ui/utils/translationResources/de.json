@@ -226,8 +226,8 @@
     "areMoreSimilar": "sind sich ähnlicher",
     "cardTitle": "Frage",
     "description": "Wählen Sie die Stimmoption, die der Zielstimme am ähnlichsten klingt",
-    "referenceVoices": "Referenzstimmen",
-    "targetVoice": "Zielstimme",
+    "referenceVoices": "Referenz\u00ADstimmen",
+    "targetVoice": "Ziel\u00ADstimme",
     "title": "Ähnlichkeit von Gesangsstimmen",
     "voice": "Stimme"
   },
