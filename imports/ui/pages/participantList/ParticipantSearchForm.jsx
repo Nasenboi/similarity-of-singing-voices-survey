@@ -1,7 +1,10 @@
+import {Button} from "@/components/ui/button";
+import {PARTICIPANTS} from "@/imports/api/participants/methods";
 import {zodResolver} from "@hookform/resolvers/zod";
 import React, {useEffect} from "react";
 import {useForm} from "react-hook-form";
 import {useTranslation} from "react-i18next";
+import {toast} from "sonner";
 import {z} from "zod";
 import {AutoField} from "../../customComponents/AutoField";
 import {SearchForm} from "../../customComponents/SearchForm";
@@ -13,7 +16,7 @@ const searchFormSchema = z.object({
   questionnaireID: z.number().optional(),
 });
 
-export function ParticipantSearchForm({onFilterChange, query}) {
+export function ParticipantSearchForm({onFilterChange, query, refreshData}) {
   const {t} = useTranslation();
   const form = useForm({
     resolver: zodResolver(searchFormSchema),
@@ -31,17 +34,26 @@ export function ParticipantSearchForm({onFilterChange, query}) {
     }
   }, [query, form]);
 
+  const removeInactiveParticipants = async () => {
+    try {
+      const numRemoved = await PARTICIPANTS.removeInactiveParticipants.callAsync({});
+      if (numRemoved === 0) {
+        toast.success(t("Toasts.noParticipantsRemoved"));
+      } else {
+        toast.success(t("Toasts.removedInactiveParticipants", {numRemoved}));
+        refreshData();
+      }
+    } catch (error) {
+      console.error("Error removing inactive participants:", error);
+      toast.error(t("Toasts.errorRemovingInactiveParticipants"));
+    }
+  };
+
   return (
     <SearchForm title={t("Collections.participants")} form={form} onFilterChange={onFilterChange}>
+      <AutoField className="flex-1" form={form} name="_id" label={t("Collections.DBMetaData._id")} type="input" />
       <AutoField
-        className="max-w-1/2 min-w-40 px-2"
-        form={form}
-        name="_id"
-        label={t("Collections.DBMetaData._id")}
-        type="input"
-      />
-      <AutoField
-        className="max-w-1/2 min-w-40 px-2"
+        className="flex-1"
         form={form}
         name="questionnaireID"
         label={t("Collections.SurveyQuestions.questionnaireID")}
@@ -61,6 +73,11 @@ export function ParticipantSearchForm({onFilterChange, query}) {
         label={t("Collections.Participants.noQuestionsAnswered")}
         type="bool"
       />
+      <div className="flex-1">
+        <Button variant="destructive" onClick={removeInactiveParticipants}>
+          {t("ParticipantListPage.ParticipantSearchForm.removeInactive")}
+        </Button>
+      </div>
     </SearchForm>
   );
 }

@@ -56,9 +56,11 @@ function XSection({className, onVoiceClick, question, voicePlaying}) {
   const {t} = useTranslation();
 
   return (
-    <div className={cn("md:p-4 p-2 size-full grid grid-cols-2 gap-2", className)}>
-      <H3 className="col-span-1 text-foreground flex items-center justify-end">{t("SurveyPage.targetVoice")}</H3>
-      <div className="col-span-1 flex justify-start">
+    <div className={cn("md:p-4 p-2 size-full grid grid-cols-2 md:grid-cols-3 gap-2", className)}>
+      <H3 className="col-span-1 text-foreground flex items-center justify-end hyphens-manual whitespace-normal">
+        {t("SurveyPage.targetVoice")}
+      </H3>
+      <div className="md:col-span-2 col-span-1 flex justify-start">
         <Button onClick={() => onVoiceClick(question["X"], "X")}>
           {t("SurveyPage.voice")} X {voicePlaying === "X" ? <Pause /> : <Play />}
         </Button>
@@ -88,10 +90,12 @@ function ReferenceSection({
         className,
       )}
     >
-      <div className="w-full grid grid-cols-2 gap-2">
-        <H3 className="col-span-1 flex justify-end items-center">{t("SurveyPage.referenceVoices")}</H3>
+      <div className="w-full grid grid-cols-2 md:grid-cols-3 gap-2">
+        <H3 className="col-span-1 flex justify-end items-center hyphens-manual whitespace-normal">
+          {t("SurveyPage.referenceVoices")}
+        </H3>
         <ButtonGroup
-          className="col-span-1 flex justify-start items-center"
+          className="md:col-span-2 col-span-1 flex justify-start items-center"
           orientation={isMobile ? "vertical" : "horizontal"}
         >
           <AudioButton

@@ -18,9 +18,9 @@ export const useParticipantSingle = (participantID) =>
     };
   }, [participantID]);
 
-export const useParticipantsPaginated = ({query, next, previous}) =>
+export const useParticipantsPaginated = ({query, next, previous, reloadKey}) =>
   useTracker(() => {
-    const subscriptionHandle = Meteor.subscribe("participants.paginated", {query, next, previous});
+    const subscriptionHandle = Meteor.subscribe("participants.paginated", {query, next, previous, reloadKey});
     const sortField = INDEX_MAP.PARTICIPANTS;
     const participants = Participants.find({}, {sort: {[sortField]: 1}, limit: ITEMS_PER_PAGE}).fetch();
     const pageInfo = Pagination.findOne("participants");
@@ -30,4 +30,4 @@ export const useParticipantsPaginated = ({query, next, previous}) =>
       pageInfo,
       isLoading: !subscriptionHandle.ready(),
     };
-  }, [Meteor.userId(), next, previous, JSON.stringify(query)]);
+  }, [Meteor.userId(), next, previous, JSON.stringify(query), reloadKey]);

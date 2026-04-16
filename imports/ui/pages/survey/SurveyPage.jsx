@@ -45,7 +45,7 @@ function ProgressHeader({className, surveyQuestions, currentPage, questionsAnswe
         <CardTitle className="text-center max-md:text-lg max-md:w-full">{t("SurveyPage.title")}</CardTitle>
       </CardHeader>
       {!isMobile && (
-        <CardContent className="border-b-2 max-md:w-full max-md:px-0">
+        <CardContent className="border-b max-md:w-full max-md:px-0">
           <p className="text-center max-md:text-xs">{t("SurveyPage.description")}</p>
         </CardContent>
       )}

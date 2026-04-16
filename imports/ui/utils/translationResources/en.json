@@ -157,6 +157,11 @@
     "startSurvey": "Start Survey",
     "title": "Welcome to the survey"
   },
+  "ParticipantListPage": {
+    "ParticipantSearchForm": {
+      "removeInactive": "Remove Inactive"
+    }
+  },
   "Sidebar": {
     "Controls": {
       "navigate": "Navigate Questions",
@@ -200,11 +205,13 @@
       "triplets": "Triplets"
     }
   },
-  "SongInfoModal": {
-    "showComplaints": "Audio Issues",
-    "showInfo": "Song Info",
-    "skipInSurveyFalse": "Use in Survey",
-    "skipInSurveyTrue": "Skip in Survey"
+  "SongListPage": {
+    "SongInfoModal": {
+      "showComplaints": "Audio Issues",
+      "showInfo": "Song Info",
+      "skipInSurveyFalse": "Use in Survey",
+      "skipInSurveyTrue": "Skip in Survey"
+    }
   },
   "SurveyPage": {
     "ComplaintForm": {
@@ -226,5 +233,11 @@
     "targetVoice": "Target Voice",
     "title": "Similarity of Singing Voices",
     "voice": "Voice"
+  },
+  "Toasts": {
+    "errorRemovingInactiveParticipants": "Error removing inactive participants!",
+    "noParticipantsRemoved": "No inactive participants to remove!",
+    "participantRemoved": "Participant removed!",
+    "removedInactiveParticipants": "{{numRemoved}} inactive participants removed!"
   }
 }

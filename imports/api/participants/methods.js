@@ -3,7 +3,7 @@ import SimpleSchema from "simpl-schema";
 import {SurveyAnswers} from "../surveyAnswers/collection";
 import {getQuestionnaireIDAtomic} from "../surveyQuestions/helpers";
 import {isAdminUser} from "../users/helpers";
-import {toCSV} from "../utils";
+import {getYesterday, toCSV} from "../utils";
 import {Participants} from "./collection";
 
 export const PARTICIPANTS = {
@@ -44,6 +44,23 @@ export const PARTICIPANTS = {
 
       await Participants.removeAsync(participantID);
       await SurveyAnswers.removeAsync({participantID});
+    },
+  }),
+  removeInactiveParticipants: new ValidatedMethod({
+    name: "participants.removeInactiveParticipant",
+    validate: null,
+    async run() {
+      if (this.isSimulation) return;
+      if (!(await isAdminUser(this.userId))) return;
+
+      const toDate = getYesterday();
+
+      const query = {};
+      if (toDate) query.createDate = {$lte: toDate};
+      const participantsWithAnswers = await SurveyAnswers.rawCollection().distinct("participantID");
+      query["_id"] = {$nin: participantsWithAnswers};
+
+      return await Participants.removeAsync(query);
     },
   }),
   downloadCSV: new ValidatedMethod({
