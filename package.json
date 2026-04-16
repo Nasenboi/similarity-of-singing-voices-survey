@@ -55,7 +55,6 @@
     "cypress": "^15.6.0",
     "date-fns": "^4.1.0",
     "embla-carousel-react": "^8.6.0",
-    "faker": "^5.5.3",
     "i18next": "^25.8.6",
     "i18next-http-backend": "^3.0.2",
     "ical.js": "^2.2.1",
