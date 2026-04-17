@@ -6,7 +6,7 @@ import {RadioGroup, RadioGroupItem} from "@/components/ui/radio-group";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
 import {cn} from "@/lib/utils";
 import {ArrowRightLeft, Flag, Pause, Play} from "lucide-react";
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useAudioContext} from "../../contextProvider/AudioContext";
 import {useMobileContext} from "../../contextProvider/MobileContext";
@@ -159,15 +159,22 @@ export function SurveyCard({question, similarToX, toggleVoices, setSurveyAnswer,
     initAnswer();
   }, []);
 
-  const onVoiceClick = (newTrackID, voice) => {
-    if (newTrackID === trackID) {
-      setIsPlaying((prev) => !prev);
-    } else {
-      setIcon(voice);
-      setTrackID(newTrackID);
-    }
-    setVoicePlaying(!isPlaying || newTrackID != trackID ? voice : null);
-  };
+  const onVoiceClick = useCallback(
+    (newTrackID, voice) => {
+      const isSameTrack = newTrackID === trackID;
+
+      if (isSameTrack) {
+        console.log("pause track");
+        setIsPlaying((prev) => !prev);
+      } else {
+        console.log("set track from", trackID, "to", newTrackID);
+        setIcon(voice);
+        setTrackID(newTrackID);
+      }
+      setVoicePlaying(!isPlaying || !isSameTrack ? voice : null);
+    },
+    [trackID, isPlaying, setIcon, setIsPlaying, setTrackID],
+  );
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -187,7 +194,7 @@ export function SurveyCard({question, similarToX, toggleVoices, setSurveyAnswer,
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [question, onVoiceClick]);
 
   const getColors = () => {
     return isSubmitted && "bg-accent border-accent-foreground";
