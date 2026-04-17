@@ -164,10 +164,8 @@ export function SurveyCard({question, similarToX, toggleVoices, setSurveyAnswer,
       const isSameTrack = newTrackID === trackID;
 
       if (isSameTrack) {
-        console.log("pause track");
         setIsPlaying((prev) => !prev);
       } else {
-        console.log("set track from", trackID, "to", newTrackID);
         setIcon(voice);
         setTrackID(newTrackID);
       }

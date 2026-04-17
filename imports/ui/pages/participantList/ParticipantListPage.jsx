@@ -71,7 +71,6 @@ export default function ParticipantListPage() {
     setReloadKey((key) => key + 1);
     setNext(null);
     setPrevious(null);
-    console.log(reloadKey);
   };
 
   const handleNext = () => {
