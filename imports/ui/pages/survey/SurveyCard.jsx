@@ -6,7 +6,7 @@ import {RadioGroup, RadioGroupItem} from "@/components/ui/radio-group";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
 import {cn} from "@/lib/utils";
 import {ArrowRightLeft, Flag, Pause, Play} from "lucide-react";
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useAudioContext} from "../../contextProvider/AudioContext";
 import {useMobileContext} from "../../contextProvider/MobileContext";
@@ -52,7 +52,7 @@ function TooltipWrapper({children}) {
   );
 }
 
-function XSection({className, onVoiceClick, question, voicePlaying}) {
+function XSection({className, onVoiceClick, question, voicePlaying, isPlaying}) {
   const {t} = useTranslation();
 
   return (
@@ -62,7 +62,7 @@ function XSection({className, onVoiceClick, question, voicePlaying}) {
       </H3>
       <div className="md:col-span-2 col-span-1 flex justify-start">
         <Button onClick={() => onVoiceClick(question["X"], "X")}>
-          {t("SurveyPage.voice")} X {voicePlaying === "X" ? <Pause /> : <Play />}
+          {t("SurveyPage.voice")} X {voicePlaying === "X" && isPlaying ? <Pause /> : <Play />}
         </Button>
       </div>
     </div>
@@ -78,6 +78,7 @@ function ReferenceSection({
   toggleVoices,
   setSurveyAnswer,
   isSubmitted,
+  isPlaying,
 }) {
   const {t} = useTranslation();
   const {isMobile} = useMobileContext();
@@ -102,7 +103,7 @@ function ReferenceSection({
             trackID={question[[similarToX[0]]]}
             voice={similarToX[0]}
             onVoiceClick={onVoiceClick}
-            isPlaying={voicePlaying === similarToX[0]}
+            isPlaying={voicePlaying === similarToX[0] && isPlaying}
           />
           <ButtonGroupSeparator orientation={isMobile ? "horizontal" : "vertical"} />
           {!isMobile && (
@@ -117,7 +118,7 @@ function ReferenceSection({
             trackID={question[[similarToX[1]]]}
             voice={similarToX[1]}
             onVoiceClick={onVoiceClick}
-            isPlaying={voicePlaying === similarToX[1]}
+            isPlaying={voicePlaying === similarToX[1] && isPlaying}
           />
         </ButtonGroup>
       </div>
@@ -159,15 +160,20 @@ export function SurveyCard({question, similarToX, toggleVoices, setSurveyAnswer,
     initAnswer();
   }, []);
 
-  const onVoiceClick = (newTrackID, voice) => {
-    if (newTrackID === trackID) {
-      setIsPlaying((prev) => !prev);
-    } else {
-      setIcon(voice);
-      setTrackID(newTrackID);
-    }
-    setVoicePlaying(!isPlaying || newTrackID != trackID ? voice : null);
-  };
+  const onVoiceClick = useCallback(
+    (newTrackID, voice) => {
+      const isSameTrack = newTrackID === trackID;
+
+      if (isSameTrack) {
+        setIsPlaying((prev) => !prev);
+      } else {
+        setIcon(voice);
+        setTrackID(newTrackID);
+      }
+      setVoicePlaying(!isPlaying || !isSameTrack ? voice : null);
+    },
+    [trackID, isPlaying, setIcon, setIsPlaying, setTrackID],
+  );
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -187,7 +193,7 @@ export function SurveyCard({question, similarToX, toggleVoices, setSurveyAnswer,
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [question, onVoiceClick]);
 
   const getColors = () => {
     return isSubmitted && "bg-accent border-accent-foreground";
@@ -217,7 +223,7 @@ export function SurveyCard({question, similarToX, toggleVoices, setSurveyAnswer,
           </Dialog>
         </CardTitle>
         <CardDescription>
-          <XSection onVoiceClick={onVoiceClick} question={question} voicePlaying={voicePlaying} />
+          <XSection onVoiceClick={onVoiceClick} question={question} voicePlaying={voicePlaying} isPlaying={isPlaying} />
         </CardDescription>
       </CardHeader>
       <CardContent className="flex justify-center flex-col md:flex-row">
@@ -229,6 +235,7 @@ export function SurveyCard({question, similarToX, toggleVoices, setSurveyAnswer,
           toggleVoices={toggleVoices}
           setSurveyAnswer={setSurveyAnswer}
           isSubmitted={isSubmitted}
+          isPlaying={isPlaying}
         />
       </CardContent>
     </Card>
