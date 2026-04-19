@@ -2,6 +2,7 @@ import {check} from "meteor/check";
 import {Meteor} from "meteor/meteor";
 import {find as findPagination} from "mongo-cursor-pagination";
 import {INDEX_MAP, ITEMS_PER_PAGE} from "../../common/config";
+import {publishPagination} from "../collection/pagination";
 import {Participants} from "../participants/collection";
 import {Songs} from "../songs/collection";
 import {isAdminUser} from "../users/helpers";
@@ -83,7 +84,7 @@ Meteor.publish("surveyQuestions.paginated", async function ({query, next, previo
     this.added("surveyQuestions", doc._id, doc);
   });
 
-  this.added("pagination", "surveyQuestions", {
+  await publishPagination(this, "surveyQuestions", {
     hasNext,
     hasPrevious,
     nextCursor: result.next,
@@ -117,7 +118,7 @@ Meteor.publish("questionnaires.paginated", async function ({query, next, previou
     this.added("questionnaires", doc._id, doc);
   });
 
-  this.added("pagination", "questionnaires", {
+  await publishPagination(this, "questionnaires", {
     hasNext,
     hasPrevious,
     nextCursor: result.next,

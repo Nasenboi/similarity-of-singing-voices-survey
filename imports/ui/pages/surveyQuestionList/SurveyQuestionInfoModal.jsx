@@ -1,4 +1,4 @@
-import {Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog";
+import {DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog";
 import {Spinner} from "@/components/ui/spinner";
 import {useSurveyQuestionsSingle} from "@/imports/api/surveyQuestions/hooks";
 import React from "react";
