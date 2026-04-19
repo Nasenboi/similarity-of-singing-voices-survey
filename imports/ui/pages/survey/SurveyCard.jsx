@@ -201,8 +201,8 @@ export function SurveyCard({question, similarToX, toggleVoices, setSurveyAnswer,
 
   return (
     <Card className={cn("w-220 max-w-screen h-min", getColors())}>
-      <CardHeader className={cn("border-b-2 p-0", getColors())}>
-        <CardTitle className={cn("w-full pb-2 relative flex justify-center items-center border-b-2", getColors())}>
+      <CardHeader className={cn("border-b-2 p-0 rounded-t-lg", getColors())}>
+        <CardTitle className={cn("w-full pb-1 relative flex justify-center border-b-2 rounded-t-lg", getColors())}>
           <H2>
             {t("SurveyPage.cardTitle")} {question.questionNumber + 1}
           </H2>
