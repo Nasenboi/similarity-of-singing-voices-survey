@@ -103,7 +103,7 @@ export default function SongListPage() {
 
   return (
     <ListPage dialogOpen={dialogOpen} onDialogOpen={onDialogOpen}>
-      <SongSearchForm onFilterChange={onFilterChange} query={query} />
+      <SongSearchForm onFilterChange={onFilterChange} query={query} count={pageInfo?.count} total={pageInfo?.total} />
       <DataTable
         columns={songColumns}
         data={songs}

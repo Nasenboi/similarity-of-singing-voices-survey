@@ -1,5 +1,12 @@
 import {isEqual, isObject, transform} from "lodash";
 
+export const getPaginationCounts = async ({collection, query}) => {
+  return {
+    count: await collection.rawCollection().countDocuments(query),
+    total: await collection.rawCollection().estimatedDocumentCount(),
+  };
+};
+
 export const getYesterday = () => {
   const yesterday = new Date();
   yesterday.setDate(yesterday.getDate() - 1);

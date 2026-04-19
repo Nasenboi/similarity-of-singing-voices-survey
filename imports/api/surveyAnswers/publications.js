@@ -3,7 +3,7 @@ import {Meteor} from "meteor/meteor";
 import {find as findPagination} from "mongo-cursor-pagination";
 import {INDEX_MAP, ITEMS_PER_PAGE} from "../../common/config";
 import {isAdminUser} from "../users/helpers";
-import {buildPaginationQuery} from "../utils";
+import {buildPaginationQuery, getPaginationCounts} from "../utils";
 import {SurveyAnswers} from "./collection";
 
 Meteor.publish("surveyAnswers.participant", async function (participantID) {
@@ -44,6 +44,7 @@ Meteor.publish("surveyAnswers.paginated", async function ({query, next, previous
     hasPrevious,
     nextCursor: result.next,
     prevCursor: result.previous,
+    ...(await getPaginationCounts({collection: SurveyAnswers, query: newQuery})),
   });
 
   this.ready();

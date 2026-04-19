@@ -14,7 +14,7 @@ const searchFormSchema = z.object({
   skipInSurvey: z.boolean().optional(),
 });
 
-export function SongSearchForm({onFilterChange, query}) {
+export function SongSearchForm({onFilterChange, query, count, total}) {
   const {t} = useTranslation();
   const form = useForm({
     resolver: zodResolver(searchFormSchema),
@@ -34,7 +34,7 @@ export function SongSearchForm({onFilterChange, query}) {
   }, [query, form]);
 
   return (
-    <SearchForm title={t("Collections.songs")} form={form} onFilterChange={onFilterChange}>
+    <SearchForm title={t("Collections.songs")} form={form} onFilterChange={onFilterChange} count={count} total={total}>
       <AutoField className="flex-1" form={form} name="trackID" label={t("Collections.Songs.trackID")} type="input" />
       <AutoField className="flex-1" form={form} name="artist" label={t("Collections.Songs.artist")} type="input" />
       <AutoField className="flex-1" form={form} name="album" label={t("Collections.Songs.album")} type="input" />

@@ -90,7 +90,12 @@ export default function SurveyQuestionListPage() {
 
   return (
     <ListPage dialogOpen={dialogOpen} onDialogOpen={onDialogOpen}>
-      <SurveyQuestionSearchForm onFilterChange={onFilterChange} query={query} />
+      <SurveyQuestionSearchForm
+        onFilterChange={onFilterChange}
+        query={query}
+        count={pageInfo?.count}
+        total={pageInfo?.total}
+      />
       <DataTable
         columns={surveyQuestionColumns}
         data={surveyQuestions}

@@ -6,8 +6,14 @@ import {ChevronDown} from "lucide-react";
 import React from "react";
 import {useTranslation} from "react-i18next";
 
-export function SearchForm({children, className, title, form, onFilterChange}) {
+export function SearchForm({children, className, title, form, onFilterChange, count = null, total = null}) {
   const {t} = useTranslation();
+
+  const getCountString = () => {
+    if (count === null && total === null) return null;
+    if (total === null || total <= count) return `(${count})`;
+    return `(${count}/${total})`;
+  };
 
   return (
     <Card className={cn("sticky top-0 z-30 rounded-b-none", className)}>
@@ -15,7 +21,7 @@ export function SearchForm({children, className, title, form, onFilterChange}) {
         <CollapsibleTrigger asChild>
           <CardHeader className="group">
             <CardTitle className="w-full flex items-center justify-between">
-              {title}
+              {title} {getCountString()}
               <ChevronDown className="ml-auto group-data-[state=open]:rotate-180" />
             </CardTitle>
           </CardHeader>

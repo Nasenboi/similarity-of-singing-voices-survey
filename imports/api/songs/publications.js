@@ -3,7 +3,7 @@ import {find as findPagination} from "mongo-cursor-pagination";
 import {INDEX_MAP, ITEMS_PER_PAGE} from "../../common/config";
 import {Participants} from "../participants/collection";
 import {isAdminUser} from "../users/helpers";
-import {buildPaginationQuery} from "../utils";
+import {buildPaginationQuery, getPaginationCounts} from "../utils";
 import {Songs} from "./collection";
 
 Meteor.publish("songs.single", async function ({trackID}) {
@@ -77,6 +77,7 @@ Meteor.publish("songs.paginated", function ({query, next, previous}) {
       hasPrevious: result.hasPrevious,
       nextCursor: result.next,
       prevCursor: result.previous,
+      ...(await getPaginationCounts({collection: Songs, query: newQuery})),
     };
 
     if (!paginationAdded) {

@@ -113,7 +113,13 @@ export default function ParticipantListPage() {
 
   return (
     <ListPage dialogOpen={dialogOpen} onDialogOpen={onDialogOpen}>
-      <ParticipantSearchForm refreshData={refreshData} onFilterChange={onFilterChange} query={query} />
+      <ParticipantSearchForm
+        refreshData={refreshData}
+        onFilterChange={onFilterChange}
+        query={query}
+        count={pageInfo?.count}
+        total={pageInfo?.total}
+      />
       <DataTable
         columns={participantColumns}
         data={participants}

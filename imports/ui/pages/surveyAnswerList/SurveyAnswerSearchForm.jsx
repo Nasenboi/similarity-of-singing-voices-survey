@@ -13,7 +13,7 @@ const searchFormSchema = z.object({
   participantID: z.string().optional(),
 });
 
-export function SurveyAnswerSearchForm({onFilterChange, query}) {
+export function SurveyAnswerSearchForm({onFilterChange, query, count, total}) {
   const {t} = useTranslation();
   const form = useForm({
     resolver: zodResolver(searchFormSchema),
@@ -32,7 +32,13 @@ export function SurveyAnswerSearchForm({onFilterChange, query}) {
   }, [query, form]);
 
   return (
-    <SearchForm title={t("Collections.surveyAnswers")} form={form} onFilterChange={onFilterChange}>
+    <SearchForm
+      title={t("Collections.surveyAnswers")}
+      form={form}
+      onFilterChange={onFilterChange}
+      count={count}
+      total={total}
+    >
       <AutoField className="flex-1" form={form} name="_id" label={t("Collections.DBMetaData._id")} type="input" />
       <AutoField
         className="flex-1"
