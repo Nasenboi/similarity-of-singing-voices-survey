@@ -5,7 +5,7 @@ import React, {useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
 import {useAudioContext} from "../../contextProvider/AudioContext";
-import {DataTable} from "../../customComponents/DataTable";
+import {DataTable, getRowColorString} from "../../customComponents/DataTable";
 import {ListPage} from "../../customComponents/ListPage";
 import {PageLoading} from "../../customComponents/PageLoading";
 import {SongInfoModal} from "./SongInfoModal";
@@ -52,9 +52,9 @@ export default function SongListPage() {
 
   const setRowColor = (row) => {
     if (row.skipInSurvey) {
-      return "bg-red-100 dark:bg-red-900";
+      return getRowColorString("red");
     } else if (row.complaints?.length > 0) {
-      return "bg-yellow-100 dark:bg-yellow-900";
+      return getRowColorString("yellow");
     }
   };
 

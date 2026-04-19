@@ -5,6 +5,10 @@ import React from "react";
 import {useTranslation} from "react-i18next";
 import {DownloadButton} from "./DownloadButton";
 
+export const getRowColorString = (color) => {
+  return `bg-${color}-100 dark:bg-${color}-900 hover:bg-${color}-200 dark:hover:bg-${color}-800`;
+};
+
 export function DataTable({
   columns,
   data,
@@ -34,11 +38,9 @@ export function DataTable({
             data.map((row) => {
               const rowColor = setRowColor?.(row);
               return (
-                <TableRow key={row._id} onClick={() => onRowClick(row)}>
+                <TableRow key={row._id} onClick={() => onRowClick(row)} className={rowColor}>
                   {columns.map((c) => (
-                    <TableCell key={`c_${c.accessorKey}_${row._id}`} className={rowColor}>
-                      {String(row[c.accessorKey])}
-                    </TableCell>
+                    <TableCell key={`c_${c.accessorKey}_${row._id}`}>{String(row[c.accessorKey])}</TableCell>
                   ))}
                 </TableRow>
               );

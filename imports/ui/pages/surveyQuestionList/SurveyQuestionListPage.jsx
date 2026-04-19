@@ -4,7 +4,7 @@ import {useIsLoggedIn} from "@/imports/api/users/hooks";
 import React, {useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
-import {DataTable} from "../../customComponents/DataTable";
+import {DataTable, getRowColorString} from "../../customComponents/DataTable";
 import {ListPage} from "../../customComponents/ListPage";
 import {PageLoading} from "../../customComponents/PageLoading";
 import {SurveyQuestionInfoModal} from "./SurveyQuestionInfoModal";
@@ -71,7 +71,7 @@ export default function SurveyQuestionListPage() {
 
   const setRowColor = (row) => {
     if (row.skip) {
-      return "bg-red-100 dark:bg-red-900";
+      return getRowColorString("red");
     }
   };
 
