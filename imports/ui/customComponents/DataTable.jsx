@@ -1,12 +1,16 @@
 import {Button} from "@/components/ui/button";
 import {ButtonGroup, ButtonGroupSeparator} from "@/components/ui/button-group";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
+import {cn} from "@/lib/utils";
 import React from "react";
 import {useTranslation} from "react-i18next";
 import {DownloadButton} from "./DownloadButton";
 
-export const getRowColorString = (color) => {
-  return `bg-${color}-100 dark:bg-${color}-900 hover:bg-${color}-200 dark:hover:bg-${color}-800`;
+export const ROW_COLOR_STRINGS = {
+  red: "bg-red-100 dark:bg-red-900 hover:bg-red-200 dark:hover:bg-red-800",
+  yellow: "bg-yellow-100 dark:bg-yellow-900 hover:bg-yellow-200 dark:hover:bg-yellow-800",
+  gray: "bg-gray-100 dark:bg-gray-900 hover:bg-gray-200 dark:hover:bg-gray-800",
+  green: "bg-green-100 dark:bg-green-900 hover:bg-green-200 dark:hover:bg-green-800",
 };
 
 export function DataTable({
@@ -38,7 +42,7 @@ export function DataTable({
             data.map((row) => {
               const rowColor = setRowColor?.(row);
               return (
-                <TableRow key={row._id} onClick={() => onRowClick(row)} className={rowColor}>
+                <TableRow key={row._id} onClick={() => onRowClick?.(row)} className={cn(rowColor)}>
                   {columns.map((c) => (
                     <TableCell key={`c_${c.accessorKey}_${row._id}`}>{String(row[c.accessorKey])}</TableCell>
                   ))}

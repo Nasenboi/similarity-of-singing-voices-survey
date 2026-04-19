@@ -5,7 +5,7 @@ import React, {useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
 import {useParticipantContext} from "../../contextProvider/ParticipantContext";
-import {DataTable, getRowColorString} from "../../customComponents/DataTable";
+import {DataTable, ROW_COLOR_STRINGS} from "../../customComponents/DataTable";
 import {ListPage} from "../../customComponents/ListPage";
 import {PageLoading} from "../../customComponents/PageLoading";
 import {ParticipantInfoModal} from "./ParticipantInfoModal";
@@ -92,9 +92,9 @@ export default function ParticipantListPage() {
 
   const setRowColor = (row) => {
     if (row.surveyCompleted) {
-      return getRowColorString("green");
+      return ROW_COLOR_STRINGS.green;
     } else if (row._id === participant?._id) {
-      return getRowColorString("gray");
+      return ROW_COLOR_STRINGS.gray;
     }
   };
 
