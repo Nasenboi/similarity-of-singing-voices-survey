@@ -45,6 +45,10 @@
     "SurveyQuestions": {
       "A": "A",
       "B": "B",
+      "Questionnaires": {
+        "participantCount": "Participant Count",
+        "questionsSkipped": "Skipped Questions"
+      },
       "X": "X",
       "question": "Question",
       "questionNumber": "Question No.",
@@ -53,6 +57,7 @@
     },
     "metadata": "Metadata",
     "participants": "Participants",
+    "questionnaires": "Questionnaires",
     "songs": "Songs",
     "surveyAnswers": "Survey Answers",
     "surveyQuestions": "Survey Questions"

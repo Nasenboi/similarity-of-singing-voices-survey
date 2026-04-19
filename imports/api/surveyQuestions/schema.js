@@ -7,5 +7,12 @@ export const surveyQuestionSchema = new SimpleSchema({
   X: {type: Number},
   A: {type: Number},
   B: {type: Number},
-  skip: {type: Boolean, optional: true, defaultValue: false},
+  skip: {type: Boolean, optional: true},
 }).extend(dbMetadataSchema);
+
+export const questionnairesSchema = new SimpleSchema({
+  questionnaireID: {type: SimpleSchema.Integer},
+  participantCount: {type: SimpleSchema.Integer, optional: true},
+  questionsSkipped: {type: SimpleSchema.Integer, optional: true},
+  skip: {type: Boolean, optional: true},
+});

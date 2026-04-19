@@ -1,9 +1,9 @@
 import {MIN_NUM_QUESTIONS_PER_SURVEY} from "@/imports/common/config";
 import {Meteor} from "meteor/meteor";
-import {QuestionnaireStats, SurveyQuestions} from "./collection";
+import {Questionnaires, SurveyQuestions} from "./collection";
 
 export async function getQuestionnaireIDAtomic() {
-  const result = await QuestionnaireStats.rawCollection().findOneAndUpdate(
+  const result = await Questionnaires.rawCollection().findOneAndUpdate(
     {skip: {$ne: true}},
     {$inc: {participantCount: 1}},
     {
@@ -41,7 +41,8 @@ export async function toggleQuestionSkip({trackID, skipInSurvey}) {
       }
     }
     const skip = counter + 1 < MIN_NUM_QUESTIONS_PER_SURVEY;
+    const questionsSkipped = await SurveyQuestions.countAsync({questionnaireID, skip: true});
 
-    await QuestionnaireStats.updateAsync({questionnaireID}, {$set: {skip}});
+    await Questionnaires.updateAsync({questionnaireID}, {$set: {skip, questionsSkipped}});
   }
 }

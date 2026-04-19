@@ -6,7 +6,7 @@ import {Participants} from "../participants/collection";
 import {Songs} from "../songs/collection";
 import {isAdminUser} from "../users/helpers";
 import {buildPaginationQuery, getPaginationCounts} from "../utils";
-import {SurveyQuestions} from "./collection";
+import {Questionnaires, SurveyQuestions} from "./collection";
 
 Meteor.publish("surveyQuestions.participant", async function (participantID) {
   check(participantID, String);
@@ -89,6 +89,40 @@ Meteor.publish("surveyQuestions.paginated", async function ({query, next, previo
     nextCursor: result.next,
     prevCursor: result.previous,
     ...(await getPaginationCounts({collection: SurveyQuestions, query: newQuery})),
+  });
+
+  this.ready();
+});
+
+Meteor.publish("questionnaires.paginated", async function ({query, next, previous}) {
+  if (!(await isAdminUser(this.userId))) return this.ready();
+
+  const numericFields = ["questionnaireID"];
+  const booleanFields = [];
+  const {skip, ...q} = query || {};
+  let newQuery = buildPaginationQuery({query: q, numericFields, booleanFields});
+  if (skip) newQuery["skip"] = true;
+
+  const result = await findPagination(Questionnaires.rawCollection(), {
+    query: newQuery,
+    limit: ITEMS_PER_PAGE,
+    paginatedField: INDEX_MAP.QUESTIONNAIRES,
+    next,
+    previous,
+  });
+
+  const {results, hasNext, hasPrevious} = result;
+
+  results.forEach((doc) => {
+    this.added("questionnaires", doc._id, doc);
+  });
+
+  this.added("pagination", "questionnaires", {
+    hasNext,
+    hasPrevious,
+    nextCursor: result.next,
+    prevCursor: result.previous,
+    ...(await getPaginationCounts({collection: Questionnaires, query: newQuery})),
   });
 
   this.ready();

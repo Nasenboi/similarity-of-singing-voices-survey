@@ -3,7 +3,7 @@ import {Meteor} from "meteor/meteor";
 import {useTracker} from "meteor/react-meteor-data";
 import React from "react";
 import {Pagination} from "../collection/pagination";
-import {SurveyQuestions} from "./collection";
+import {Questionnaires, SurveyQuestions} from "./collection";
 import {LinesCollection} from "./lines";
 
 export const useSurveyQuestionsParticipant = (participantID) =>
@@ -51,6 +51,20 @@ export const useSurveyQuestionsPaginated = ({query, next, previous}) =>
 
     return {
       surveyQuestions,
+      pageInfo,
+      isLoading: !subscriptionHandle.ready(),
+    };
+  }, [Meteor.userId(), next, previous, JSON.stringify(query)]);
+
+export const useQuestionnairesPaginated = ({query, next, previous}) =>
+  useTracker(() => {
+    const subscriptionHandle = Meteor.subscribe("questionnaires.paginated", {query, next, previous});
+
+    const questionnaires = Questionnaires.find({}, {limit: ITEMS_PER_PAGE}).fetch();
+    const pageInfo = Pagination.findOne("questionnaires");
+
+    return {
+      questionnaires,
       pageInfo,
       isLoading: !subscriptionHandle.ready(),
     };

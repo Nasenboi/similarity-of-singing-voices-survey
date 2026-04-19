@@ -1,4 +1,4 @@
-import {QuestionnaireStats, SurveyQuestions} from "@/imports/api/surveyQuestions/collection";
+import {Questionnaires, SurveyQuestions} from "@/imports/api/surveyQuestions/collection";
 import {NUM_QUESTIONNAIRES, NUM_QUESTIONS_PER_SURVEY} from "@/imports/common/config";
 import {TRIPLETS_FILE_PATH} from "@/imports/common/globals";
 import {Log} from "meteor/logging";
@@ -107,10 +107,11 @@ export async function initQuestionnaire() {
 
     await Promise.all(
       questionnaireIDs.map(async (ID) => {
-        await QuestionnaireStats.insertAsync({
+        await Questionnaires.insertAsync({
           questionnaireID: ID,
           participantCount: 0,
           skip: false,
+          questionsSkipped: await SurveyQuestions.countAsync({questionnaireID: ID, skip: true}),
         });
       }),
     );

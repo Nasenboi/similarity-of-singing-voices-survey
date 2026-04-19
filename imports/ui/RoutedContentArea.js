@@ -12,6 +12,7 @@ const SongListPage = React.lazy(() => import("./pages/songList/SongListPage"));
 const SurveyPage = React.lazy(() => import("./pages/survey/SurveyPage"));
 const SurveyAnswerListPage = React.lazy(() => import("./pages/surveyAnswerList/SurveyAnswerListPage"));
 const SurveyQuestionListPage = React.lazy(() => import("./pages/surveyQuestionList/SurveyQuestionListPage"));
+const QuestionnaireListPage = React.lazy(() => import("./pages/questionnaireList/QuestionnaireListPage"));
 const PrivacyPolicyPage = React.lazy(() => import("./pages/privacyPolicy/PrivacyPolicyPage"));
 const CreditsPage = React.lazy(() => import("./pages/credits/CreditsPage"));
 
@@ -40,6 +41,7 @@ export function RoutedContentArea() {
         <Route path="/participants" element={<ParticipantListPage />} />
         <Route path="/answers" element={<SurveyAnswerListPage />} />
         <Route path="/questions" element={<SurveyQuestionListPage />} />
+        <Route path="/questionnaires" element={<QuestionnaireListPage />} />
         <Route path="/privacyPolicy" element={<PrivacyPolicyPage />} />
         <Route path="/credits" element={<CreditsPage />} />
         <Route path="*" element={<NotFoundPage />} />
