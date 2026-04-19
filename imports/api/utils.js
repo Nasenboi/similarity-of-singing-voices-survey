@@ -111,3 +111,22 @@ export function toCSV(data) {
 
   return [headers.join(","), ...rows].join("\n");
 }
+
+function isIgnorableRenameError(error) {
+  const message = error?.message || "";
+  return (
+    error?.codeName === "NamespaceNotFound" ||
+    error?.codeName === "NamespaceExists" ||
+    /ns not found|namespace does not exist|target namespace exists|already exists/i.test(message)
+  );
+}
+
+export async function renameCollectionIfNeeded(fromName, toName) {
+  try {
+    await new Mongo.Collection(fromName).rawCollection().rename(toName, {dropTarget: false});
+  } catch (error) {
+    if (!isIgnorableRenameError(error)) {
+      throw error;
+    }
+  }
+}

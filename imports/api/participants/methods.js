@@ -13,9 +13,12 @@ export const PARTICIPANTS = {
     async run() {
       if (this.isSimulation) return;
 
+      const questionnaireID = await getQuestionnaireIDAtomic();
       const itemID = await Participants.insertAsync({
-        questionnaireID: await getQuestionnaireIDAtomic(),
+        questionnaireID,
       });
+
+      console.log(`Created new participant with questionnaire ID ${questionnaireID}`);
 
       return itemID;
     },

@@ -1,5 +1,6 @@
 import {MIN_NUM_QUESTIONS_PER_SURVEY} from "@/imports/common/config";
 import {Meteor} from "meteor/meteor";
+import {Participants} from "../participants/collection";
 import {Questionnaires, SurveyQuestions} from "./collection";
 
 export async function getQuestionnaireIDAtomic() {
@@ -12,11 +13,27 @@ export async function getQuestionnaireIDAtomic() {
     },
   );
 
-  if (!result && result !== 0) {
-    Meteor.Error("No valid questionnaire found!");
+  if (!result?.questionnaireID) {
+    throw Meteor.Error("No valid questionnaire found!");
   }
 
   return result.questionnaireID;
+}
+
+export async function refreshQuestionnaires() {
+  const questionnaireIDs = await SurveyQuestions.rawCollection().distinct("questionnaireID");
+  await Questionnaires.removeAsync({});
+
+  const processQuestionnaire = async (questionnaireID) => {
+    const questionnaire = {questionnaireID};
+    questionnaire.participantCount = await Participants.countAsync({questionnaireID});
+    questionnaire.questionsSkipped = await SurveyQuestions.countAsync({questionnaireID, skip: true});
+    questionnaire.skip = (await SurveyQuestions.countAsync({questionnaireID, skip: false})) < MIN_NUM_QUESTIONS_PER_SURVEY;
+
+    await Questionnaires.insertAsync(questionnaire);
+  };
+
+  await Promise.all(questionnaireIDs.map(processQuestionnaire));
 }
 
 export async function toggleQuestionSkip({trackID, skipInSurvey}) {

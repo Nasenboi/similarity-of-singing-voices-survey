@@ -7,11 +7,16 @@ import {INDEX_MAP} from "@/imports/common/config";
 async function indexCollection({collection, indexField}) {
   try {
     const rawCollection = collection.rawCollection();
+    dropCollectionIndices(rawCollection);
 
     await rawCollection.createIndex({[indexField]: 1}, {unique: true});
   } catch (e) {
     console.error(e);
   }
+}
+
+async function dropCollectionIndices(rawCollection) {
+  await rawCollection.dropIndexes().catch((e) => console.error("could not drop collection indices. Codename", e.codeName));
 }
 
 const indexMap = [
