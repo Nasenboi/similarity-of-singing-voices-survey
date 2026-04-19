@@ -36,7 +36,7 @@ export function DataTable({
               return (
                 <TableRow key={row._id} onClick={() => onRowClick(row)}>
                   {columns.map((c) => (
-                    <TableCell key={`c_${c.accessorKey}_${row._id}`} className={rowColor && `border-y ${rowColor}`}>
+                    <TableCell key={`c_${c.accessorKey}_${row._id}`} className={rowColor}>
                       {String(row[c.accessorKey])}
                     </TableCell>
                   ))}

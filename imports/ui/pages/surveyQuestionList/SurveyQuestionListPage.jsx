@@ -71,7 +71,7 @@ export default function SurveyQuestionListPage() {
 
   const setRowColor = (row) => {
     if (row.skip) {
-      return "border-red-500";
+      return "bg-red-100 dark:bg-red-900";
     }
   };
 
