@@ -17,6 +17,7 @@ export default function SongListPage() {
   const [trackID, setTrackID] = useState(null);
   const {t} = useTranslation();
   const [query, setQuery] = useState({});
+  const [reloadKey, setReloadKey] = useState(0);
   const [next, setNext] = useState(null);
   const [previous, setPrevious] = useState(null);
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -29,6 +30,7 @@ export default function SongListPage() {
     query,
     next,
     previous,
+    reloadKey,
   });
 
   const songColumns = [
@@ -64,6 +66,7 @@ export default function SongListPage() {
     setPrevious(null);
     setTrackID(null);
     setAudioTrackID(null);
+    setReloadKey((prev) => prev + 1);
   };
 
   const handleNext = () => {

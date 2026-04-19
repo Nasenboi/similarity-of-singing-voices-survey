@@ -42,7 +42,7 @@ export const useSurveyQuestionsLines = ({participantID, dimensions, query}) =>
     };
   }, [participantID, dimensions, query]);
 
-export const useSurveyQuestionsPaginated = ({query, next, previous}) =>
+export const useSurveyQuestionsPaginated = ({query, next, previous, reloadKey}) =>
   useTracker(() => {
     const subscriptionHandle = Meteor.subscribe("surveyQuestions.paginated", {query, next, previous});
     const sortField = INDEX_MAP.SONGS;
@@ -54,9 +54,9 @@ export const useSurveyQuestionsPaginated = ({query, next, previous}) =>
       pageInfo,
       isLoading: !subscriptionHandle.ready(),
     };
-  }, [Meteor.userId(), next, previous, JSON.stringify(query)]);
+  }, [Meteor.userId(), next, previous, JSON.stringify(query), reloadKey]);
 
-export const useQuestionnairesPaginated = ({query, next, previous}) =>
+export const useQuestionnairesPaginated = ({query, next, previous, reloadKey}) =>
   useTracker(() => {
     const subscriptionHandle = Meteor.subscribe("questionnaires.paginated", {query, next, previous});
 
@@ -68,4 +68,4 @@ export const useQuestionnairesPaginated = ({query, next, previous}) =>
       pageInfo,
       isLoading: !subscriptionHandle.ready(),
     };
-  }, [Meteor.userId(), next, previous, JSON.stringify(query)]);
+  }, [Meteor.userId(), next, previous, JSON.stringify(query), reloadKey]);

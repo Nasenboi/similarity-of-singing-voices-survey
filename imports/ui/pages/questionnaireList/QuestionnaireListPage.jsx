@@ -13,6 +13,7 @@ export default function QuestionnaireListPage() {
   const navigate = useNavigate();
   const {t} = useTranslation();
   const [query, setQuery] = useState({});
+  const [reloadKey, setReloadKey] = useState(0);
   const [next, setNext] = useState(null);
   const [previous, setPrevious] = useState(null);
   const {
@@ -23,6 +24,7 @@ export default function QuestionnaireListPage() {
     query,
     next,
     previous,
+    reloadKey,
   });
 
   const questionnaireColumns = [
@@ -44,6 +46,7 @@ export default function QuestionnaireListPage() {
     setQuery(value);
     setNext(null);
     setPrevious(null);
+    setReloadKey((prev) => prev + 1);
   };
 
   const handleNext = () => {

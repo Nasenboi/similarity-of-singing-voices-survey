@@ -24,7 +24,7 @@ export const useSongsSingle = (trackID) =>
     };
   }, [trackID]);
 
-export const useSongsPaginated = ({query, next, previous}) =>
+export const useSongsPaginated = ({query, next, previous, reloadKey}) =>
   useTracker(() => {
     const subscriptionHandle = Meteor.subscribe("songs.paginated", {query, next, previous});
     const sortField = INDEX_MAP.SONGS;
@@ -36,7 +36,7 @@ export const useSongsPaginated = ({query, next, previous}) =>
       pageInfo,
       isLoading: !subscriptionHandle.ready(),
     };
-  }, [Meteor.userId(), next, previous, JSON.stringify(query)]);
+  }, [Meteor.userId(), next, previous, JSON.stringify(query), reloadKey]);
 
 export const useSongsAll = ({participantID, fields}) =>
   useTracker(() => {

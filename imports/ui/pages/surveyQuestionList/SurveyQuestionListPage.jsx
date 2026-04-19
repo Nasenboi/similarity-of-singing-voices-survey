@@ -16,6 +16,7 @@ export default function SurveyQuestionListPage() {
   const [surveyQuestionID, setSurveyQuestionID] = useState(null);
   const {t} = useTranslation();
   const [query, setQuery] = useState({});
+  const [reloadKey, setReloadKey] = useState(0);
   const [next, setNext] = useState(null);
   const [previous, setPrevious] = useState(null);
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -27,6 +28,7 @@ export default function SurveyQuestionListPage() {
     query,
     next,
     previous,
+    reloadKey,
   });
 
   const surveyQuestionColumns = [
@@ -48,6 +50,7 @@ export default function SurveyQuestionListPage() {
     setQuery(value);
     setNext(null);
     setPrevious(null);
+    setReloadKey((prev) => prev + 1);
   };
 
   const handleNext = () => {
