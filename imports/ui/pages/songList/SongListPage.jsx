@@ -5,7 +5,7 @@ import React, {useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
 import {useAudioContext} from "../../contextProvider/AudioContext";
-import {DataTable} from "../../customComponents/DataTable";
+import {DataTable, ROW_COLOR_STRINGS} from "../../customComponents/DataTable";
 import {ListPage} from "../../customComponents/ListPage";
 import {PageLoading} from "../../customComponents/PageLoading";
 import {SongInfoModal} from "./SongInfoModal";
@@ -17,6 +17,7 @@ export default function SongListPage() {
   const [trackID, setTrackID] = useState(null);
   const {t} = useTranslation();
   const [query, setQuery] = useState({});
+  const [reloadKey, setReloadKey] = useState(0);
   const [next, setNext] = useState(null);
   const [previous, setPrevious] = useState(null);
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -29,6 +30,7 @@ export default function SongListPage() {
     query,
     next,
     previous,
+    reloadKey,
   });
 
   const songColumns = [
@@ -52,9 +54,9 @@ export default function SongListPage() {
 
   const setRowColor = (row) => {
     if (row.skipInSurvey) {
-      return "border-red-500";
+      return ROW_COLOR_STRINGS.red;
     } else if (row.complaints?.length > 0) {
-      return "border-yellow-500";
+      return ROW_COLOR_STRINGS.yellow;
     }
   };
 
@@ -64,6 +66,7 @@ export default function SongListPage() {
     setPrevious(null);
     setTrackID(null);
     setAudioTrackID(null);
+    setReloadKey((prev) => prev + 1);
   };
 
   const handleNext = () => {
@@ -103,7 +106,7 @@ export default function SongListPage() {
 
   return (
     <ListPage dialogOpen={dialogOpen} onDialogOpen={onDialogOpen}>
-      <SongSearchForm onFilterChange={onFilterChange} query={query} />
+      <SongSearchForm onFilterChange={onFilterChange} query={query} count={pageInfo?.count} total={pageInfo?.total} />
       <DataTable
         columns={songColumns}
         data={songs}

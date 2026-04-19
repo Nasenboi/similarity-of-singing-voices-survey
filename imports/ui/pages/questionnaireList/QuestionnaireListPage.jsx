@@ -1,5 +1,4 @@
-import {useSurveyQuestionsPaginated} from "@/imports/api/surveyQuestions/hooks";
-import {SURVEY_QUESTIONS} from "@/imports/api/surveyQuestions/methods";
+import {useQuestionnairesPaginated} from "@/imports/api/surveyQuestions/hooks";
 import {useIsLoggedIn} from "@/imports/api/users/hooks";
 import React, {useState} from "react";
 import {useTranslation} from "react-i18next";
@@ -7,42 +6,39 @@ import {useNavigate} from "react-router-dom";
 import {DataTable, ROW_COLOR_STRINGS} from "../../customComponents/DataTable";
 import {ListPage} from "../../customComponents/ListPage";
 import {PageLoading} from "../../customComponents/PageLoading";
-import {SurveyQuestionInfoModal} from "./SurveyQuestionInfoModal";
-import {SurveyQuestionSearchForm} from "./SurveyQuestionSearchForm";
+import {QuestionnaireSearchForm} from "./QuestionnaireSearchForm";
 
-export default function SurveyQuestionListPage() {
+export default function QuestionnaireListPage() {
   const isLoggedIn = useIsLoggedIn();
   const navigate = useNavigate();
-  const [surveyQuestionID, setSurveyQuestionID] = useState(null);
   const {t} = useTranslation();
   const [query, setQuery] = useState({});
   const [reloadKey, setReloadKey] = useState(0);
   const [next, setNext] = useState(null);
   const [previous, setPrevious] = useState(null);
-  const [dialogOpen, setDialogOpen] = useState(false);
   const {
-    surveyQuestions,
+    questionnaires,
     pageInfo,
-    isLoading: isSurveyQuestionsLoading,
-  } = useSurveyQuestionsPaginated({
+    isLoading: isQuestionnairesLoading,
+  } = useQuestionnairesPaginated({
     query,
     next,
     previous,
     reloadKey,
   });
 
-  const surveyQuestionColumns = [
-    {
-      accessorKey: "_id",
-      header: t("Collections.DBMetaData._id"),
-    },
+  const questionnaireColumns = [
     {
       accessorKey: "questionnaireID",
       header: t("Collections.SurveyQuestions.questionnaireID"),
     },
     {
-      accessorKey: "questionNumber",
-      header: t("Collections.SurveyQuestions.questionNumber"),
+      accessorKey: "participantCount",
+      header: t("Collections.SurveyQuestions.Questionnaires.participantCount"),
+    },
+    {
+      accessorKey: "questionsSkipped",
+      header: t("Collections.SurveyQuestions.Questionnaires.questionsSkipped"),
     },
   ];
 
@@ -56,30 +52,19 @@ export default function SurveyQuestionListPage() {
   const handleNext = () => {
     setNext(pageInfo?.nextCursor);
     setPrevious(null);
-    setDialogOpen(false);
-    setSurveyQuestionID(null);
   };
 
   const handlePrevious = () => {
     setPrevious(pageInfo?.prevCursor);
     setNext(null);
-    setDialogOpen(false);
-    setSurveyQuestionID(null);
-  };
-
-  const onRowClick = (row) => {
-    setSurveyQuestionID(row._id);
-    setDialogOpen(true);
   };
 
   const setRowColor = (row) => {
     if (row.skip) {
       return ROW_COLOR_STRINGS.red;
+    } else if (row.participantCount === 0) {
+      return ROW_COLOR_STRINGS.yellow;
     }
-  };
-
-  const onDialogOpen = (open) => {
-    setDialogOpen(open);
   };
 
   if (!isLoggedIn) {
@@ -87,31 +72,27 @@ export default function SurveyQuestionListPage() {
     return null;
   }
 
-  if (isSurveyQuestionsLoading) {
+  if (isQuestionnairesLoading) {
     return <PageLoading />;
   }
 
   return (
-    <ListPage dialogOpen={dialogOpen} onDialogOpen={onDialogOpen}>
-      <SurveyQuestionSearchForm
+    <ListPage>
+      <QuestionnaireSearchForm
         onFilterChange={onFilterChange}
         query={query}
         count={pageInfo?.count}
         total={pageInfo?.total}
       />
       <DataTable
-        columns={surveyQuestionColumns}
-        data={surveyQuestions}
+        columns={questionnaireColumns}
+        data={questionnaires}
         onNext={handleNext}
         onPrevious={handlePrevious}
         hasNext={pageInfo?.hasNext}
         hasPrevious={pageInfo?.hasPrevious}
-        onRowClick={onRowClick}
         setRowColor={setRowColor}
-        downloadFilename="surveyQuestions.csv"
-        downloadMethod={SURVEY_QUESTIONS.downloadCSV}
       />
-      <SurveyQuestionInfoModal surveyQuestionID={surveyQuestionID} />
     </ListPage>
   );
 }

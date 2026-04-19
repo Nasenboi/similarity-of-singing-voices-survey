@@ -1,4 +1,4 @@
-import {DialogContent, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog";
+import {DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog";
 import {Spinner} from "@/components/ui/spinner";
 import {useSurveyQuestionsSingle} from "@/imports/api/surveyQuestions/hooks";
 import React from "react";
@@ -14,6 +14,7 @@ export function SurveyQuestionInfoModal({surveyQuestionID}) {
       <DialogContent>
         <DialogHeader>
           <DialogTitle className="w-full flex items-center justify-start">{t("Common.loading")}</DialogTitle>
+          <DialogDescription />
         </DialogHeader>
         <Spinner />
       </DialogContent>
@@ -35,6 +36,7 @@ export function SurveyQuestionInfoModal({surveyQuestionID}) {
         <DialogTitle className="w-full flex items-center justify-start">
           {t("Collections.SurveyQuestions.question")} {surveyQuestion.itemNumber}
         </DialogTitle>
+        <DialogDescription />
       </DialogHeader>
       <InfoTable className="w-full" fields={surveyQuestionInfoFields} />
       <DialogFooter></DialogFooter>

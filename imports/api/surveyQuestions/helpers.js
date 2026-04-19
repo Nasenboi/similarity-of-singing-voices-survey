@@ -1,9 +1,10 @@
 import {MIN_NUM_QUESTIONS_PER_SURVEY} from "@/imports/common/config";
 import {Meteor} from "meteor/meteor";
-import {QuestionnaireStats, SurveyQuestions} from "./collection";
+import {Participants} from "../participants/collection";
+import {Questionnaires, SurveyQuestions} from "./collection";
 
 export async function getQuestionnaireIDAtomic() {
-  const result = await QuestionnaireStats.rawCollection().findOneAndUpdate(
+  const result = await Questionnaires.rawCollection().findOneAndUpdate(
     {skip: {$ne: true}},
     {$inc: {participantCount: 1}},
     {
@@ -12,11 +13,27 @@ export async function getQuestionnaireIDAtomic() {
     },
   );
 
-  if (!result && result !== 0) {
-    Meteor.Error("No valid questionnaire found!");
+  if (!result?.questionnaireID) {
+    throw Meteor.Error("No valid questionnaire found!");
   }
 
   return result.questionnaireID;
+}
+
+export async function refreshQuestionnaires() {
+  const questionnaireIDs = await SurveyQuestions.rawCollection().distinct("questionnaireID");
+  await Questionnaires.removeAsync({});
+
+  const processQuestionnaire = async (questionnaireID) => {
+    const questionnaire = {questionnaireID};
+    questionnaire.participantCount = await Participants.countAsync({questionnaireID});
+    questionnaire.questionsSkipped = await SurveyQuestions.countAsync({questionnaireID, skip: true});
+    questionnaire.skip = (await SurveyQuestions.countAsync({questionnaireID, skip: false})) < MIN_NUM_QUESTIONS_PER_SURVEY;
+
+    await Questionnaires.insertAsync(questionnaire);
+  };
+
+  await Promise.all(questionnaireIDs.map(processQuestionnaire));
 }
 
 export async function toggleQuestionSkip({trackID, skipInSurvey}) {
@@ -41,7 +58,8 @@ export async function toggleQuestionSkip({trackID, skipInSurvey}) {
       }
     }
     const skip = counter + 1 < MIN_NUM_QUESTIONS_PER_SURVEY;
+    const questionsSkipped = await SurveyQuestions.countAsync({questionnaireID, skip: true});
 
-    await QuestionnaireStats.updateAsync({questionnaireID}, {$set: {skip}});
+    await Questionnaires.updateAsync({questionnaireID}, {$set: {skip, questionsSkipped}});
   }
 }

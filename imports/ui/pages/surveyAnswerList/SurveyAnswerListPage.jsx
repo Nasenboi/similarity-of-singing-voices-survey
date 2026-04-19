@@ -16,6 +16,7 @@ export default function SurveyAnswerListPage() {
   const [surveyAnswerID, setSurveyAnswerID] = useState(null);
   const {t} = useTranslation();
   const [query, setQuery] = useState({});
+  const [reloadKey, setReloadKey] = useState(0);
   const [next, setNext] = useState(null);
   const [previous, setPrevious] = useState(null);
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -27,6 +28,7 @@ export default function SurveyAnswerListPage() {
     query,
     next,
     previous,
+    reloadKey,
   });
 
   const surveyAnswerColumns = [
@@ -60,6 +62,7 @@ export default function SurveyAnswerListPage() {
     setQuery(value);
     setNext(null);
     setPrevious(null);
+    setReloadKey((prev) => prev + 1);
   };
 
   const handleNext = () => {
@@ -96,7 +99,12 @@ export default function SurveyAnswerListPage() {
 
   return (
     <ListPage dialogOpen={dialogOpen} onDialogOpen={onDialogOpen}>
-      <SurveyAnswerSearchForm onFilterChange={onFilterChange} query={query} />
+      <SurveyAnswerSearchForm
+        onFilterChange={onFilterChange}
+        query={query}
+        count={pageInfo?.count}
+        total={pageInfo?.total}
+      />
       <DataTable
         columns={surveyAnswerColumns}
         data={surveyAnswers}

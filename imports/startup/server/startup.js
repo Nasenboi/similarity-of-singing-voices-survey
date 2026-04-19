@@ -1,4 +1,4 @@
-import {APP_NAME, APP_VERSION} from "@/imports/common/globals";
+import {APP_NAME, APP_VERSION, DB_VERSION} from "@/imports/common/globals";
 import {Log} from "meteor/logging";
 import {Meteor} from "meteor/meteor";
 import SimpleSchema from "simpl-schema";
@@ -42,10 +42,13 @@ async function initServer() {
 
     await initQuestionnaire();
     Log.info("init questionnaire finished");
-
-    await initIndexes();
-    Log.info("init idndexes finished");
   }
+
+  Migrations.migrateTo(DB_VERSION);
+  Log.info("migration finished");
+
+  await initIndexes();
+  Log.info("init indexes finished");
 }
 
 /**

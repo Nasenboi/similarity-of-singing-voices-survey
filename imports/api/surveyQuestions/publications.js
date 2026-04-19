@@ -2,11 +2,12 @@ import {check} from "meteor/check";
 import {Meteor} from "meteor/meteor";
 import {find as findPagination} from "mongo-cursor-pagination";
 import {INDEX_MAP, ITEMS_PER_PAGE} from "../../common/config";
+import {publishPagination} from "../collection/pagination";
 import {Participants} from "../participants/collection";
 import {Songs} from "../songs/collection";
 import {isAdminUser} from "../users/helpers";
-import {buildPaginationQuery} from "../utils";
-import {SurveyQuestions} from "./collection";
+import {buildPaginationQuery, getPaginationCounts} from "../utils";
+import {Questionnaires, SurveyQuestions} from "./collection";
 
 Meteor.publish("surveyQuestions.participant", async function (participantID) {
   check(participantID, String);
@@ -69,7 +70,6 @@ Meteor.publish("surveyQuestions.paginated", async function ({query, next, previo
   let newQuery = buildPaginationQuery({query: q, numericFields, booleanFields});
 
   if (skip) newQuery["skip"] = true;
-
   const result = await findPagination(SurveyQuestions.rawCollection(), {
     query: newQuery,
     limit: ITEMS_PER_PAGE,
@@ -84,11 +84,46 @@ Meteor.publish("surveyQuestions.paginated", async function ({query, next, previo
     this.added("surveyQuestions", doc._id, doc);
   });
 
-  this.added("pagination", "surveyQuestions", {
+  await publishPagination(this, "surveyQuestions", {
     hasNext,
     hasPrevious,
     nextCursor: result.next,
     prevCursor: result.previous,
+    ...(await getPaginationCounts({collection: SurveyQuestions, query: newQuery})),
+  });
+
+  this.ready();
+});
+
+Meteor.publish("questionnaires.paginated", async function ({query, next, previous}) {
+  if (!(await isAdminUser(this.userId))) return this.ready();
+
+  const numericFields = ["questionnaireID"];
+  const booleanFields = [];
+  const {skip, ...q} = query || {};
+  let newQuery = buildPaginationQuery({query: q, numericFields, booleanFields});
+  if (skip) newQuery["skip"] = true;
+
+  const result = await findPagination(Questionnaires.rawCollection(), {
+    query: newQuery,
+    limit: ITEMS_PER_PAGE,
+    paginatedField: INDEX_MAP.QUESTIONNAIRES,
+    next,
+    previous,
+  });
+
+  const {results, hasNext, hasPrevious} = result;
+
+  results.forEach((doc) => {
+    this.added("questionnaires", doc._id, doc);
+  });
+
+  await publishPagination(this, "questionnaires", {
+    hasNext,
+    hasPrevious,
+    nextCursor: result.next,
+    prevCursor: result.previous,
+    ...(await getPaginationCounts({collection: Questionnaires, query: newQuery})),
   });
 
   this.ready();

@@ -3,7 +3,7 @@ import {Meteor} from "meteor/meteor";
 import {useTracker} from "meteor/react-meteor-data";
 import React from "react";
 import {Pagination} from "../collection/pagination";
-import {SurveyQuestions} from "./collection";
+import {Questionnaires, SurveyQuestions} from "./collection";
 import {LinesCollection} from "./lines";
 
 export const useSurveyQuestionsParticipant = (participantID) =>
@@ -42,7 +42,7 @@ export const useSurveyQuestionsLines = ({participantID, dimensions, query}) =>
     };
   }, [participantID, dimensions, query]);
 
-export const useSurveyQuestionsPaginated = ({query, next, previous}) =>
+export const useSurveyQuestionsPaginated = ({query, next, previous, reloadKey}) =>
   useTracker(() => {
     const subscriptionHandle = Meteor.subscribe("surveyQuestions.paginated", {query, next, previous});
     const sortField = INDEX_MAP.SONGS;
@@ -54,4 +54,18 @@ export const useSurveyQuestionsPaginated = ({query, next, previous}) =>
       pageInfo,
       isLoading: !subscriptionHandle.ready(),
     };
-  }, [Meteor.userId(), next, previous, JSON.stringify(query)]);
+  }, [Meteor.userId(), next, previous, JSON.stringify(query), reloadKey]);
+
+export const useQuestionnairesPaginated = ({query, next, previous, reloadKey}) =>
+  useTracker(() => {
+    const subscriptionHandle = Meteor.subscribe("questionnaires.paginated", {query, next, previous});
+
+    const questionnaires = Questionnaires.find({}, {limit: ITEMS_PER_PAGE}).fetch();
+    const pageInfo = Pagination.findOne("questionnaires");
+
+    return {
+      questionnaires,
+      pageInfo,
+      isLoading: !subscriptionHandle.ready(),
+    };
+  }, [Meteor.userId(), next, previous, JSON.stringify(query), reloadKey]);

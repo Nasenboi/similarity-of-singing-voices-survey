@@ -11,6 +11,7 @@ export const DEFAULT_LANGUAGE = "en";
 // Collections
 export const INDEX_MAP = {
   PARTICIPANTS: "itemNumber",
+  QUESTIONNAIRES: "questionnaireID",
   SONGS: "itemNumber",
   SURVEY_QUESTIONS: "itemNumber",
   SURVEY_ANSWERS: "itemNumber",

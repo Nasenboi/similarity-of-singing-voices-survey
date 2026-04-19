@@ -42,11 +42,14 @@ export function NavigationArea() {
             {isAdmin && (
               <>
                 <SidebarMenuButton onClick={() => navigate("/songs")}>{t("Collections.songs")}</SidebarMenuButton>
-                <SidebarMenuButton onClick={() => navigate("/participants")}>
-                  {t("Collections.participants")}
-                </SidebarMenuButton>
                 <SidebarMenuButton onClick={() => navigate("/questions")}>
                   {t("Collections.surveyQuestions")}
+                </SidebarMenuButton>
+                <SidebarMenuButton onClick={() => navigate("/questionnaires")}>
+                  {t("Collections.questionnaires")}
+                </SidebarMenuButton>
+                <SidebarMenuButton onClick={() => navigate("/participants")}>
+                  {t("Collections.participants")}
                 </SidebarMenuButton>
                 <SidebarMenuButton onClick={() => navigate("/answers")}>{t("Collections.surveyAnswers")}</SidebarMenuButton>
               </>

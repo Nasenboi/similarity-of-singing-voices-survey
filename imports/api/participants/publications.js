@@ -2,9 +2,10 @@ import {check} from "meteor/check";
 import {Meteor} from "meteor/meteor";
 import {find as findPagination} from "mongo-cursor-pagination";
 import {INDEX_MAP, ITEMS_PER_PAGE} from "../../common/config";
+import {publishPagination} from "../collection/pagination";
 import {SurveyAnswers} from "../surveyAnswers/collection";
 import {isAdminUser} from "../users/helpers";
-import {buildPaginationQuery} from "../utils";
+import {buildPaginationQuery, getPaginationCounts} from "../utils";
 import {Participants} from "./collection";
 
 Meteor.publish("participants.single", async function (participantID) {
@@ -28,7 +29,6 @@ Meteor.publish("participants.paginated", async function ({query, next, previous,
     });
     newQuery["_id"] = {$nin: participantsWithAnswers};
   }
-
   const result = await findPagination(Participants.rawCollection(), {
     query: newQuery,
     limit: ITEMS_PER_PAGE,
@@ -43,11 +43,12 @@ Meteor.publish("participants.paginated", async function ({query, next, previous,
     this.added("participants", doc._id, doc);
   });
 
-  this.added("pagination", "participants", {
+  await publishPagination(this, "participants", {
     hasNext,
     hasPrevious,
     nextCursor: result.next,
     prevCursor: result.previous,
+    ...(await getPaginationCounts({collection: Participants, query: newQuery})),
   });
 
   this.ready();

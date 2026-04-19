@@ -3,7 +3,7 @@ import {cn} from "@/lib/utils";
 import React from "react";
 import {AudioPlayer} from "./AudioPlayer";
 
-export function ListPage({children, className, dialogOpen, onDialogOpen}) {
+export function ListPage({children, className, dialogOpen = null, onDialogOpen = null}) {
   return (
     <div className={cn("w-screen h-screen max-w-screen max-h-screen flex flex-col", className)}>
       <Dialog open={dialogOpen} onOpenChange={(open) => onDialogOpen(open)}>
