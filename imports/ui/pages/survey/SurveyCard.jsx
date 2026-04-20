@@ -6,6 +6,7 @@ import {RadioGroup, RadioGroupItem} from "@/components/ui/radio-group";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
 import {cn} from "@/lib/utils";
 import {ArrowRightLeft, Flag, Pause, Play} from "lucide-react";
+import {useAnimate} from "motion/react";
 import React, {useCallback, useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useAudioContext} from "../../contextProvider/AudioContext";
@@ -14,11 +15,47 @@ import {cookies} from "../../customComponents/Cookies";
 import {H2, H3, Large, P} from "../../customComponents/Typography";
 import {ComplaintForm} from "./ComplaintForm";
 
-function AudioButton({trackID, voice, onVoiceClick, isPlaying}) {
+function AudioButton({trackID, voice, onVoiceClick, isPlaying, side, animationKey}) {
   const {t} = useTranslation();
+  const [ref, animate] = useAnimate();
+
+  let corners = "";
+  let transformOrigin = "";
+  const animation = {};
+  animation.opacity = [1, 0, 1];
+
+  switch (side) {
+    case "left":
+      corners = "rounded-r-none";
+      animation.scaleX = [1, 0, 1];
+      transformOrigin = "right";
+      break;
+    case "right":
+      corners = "rounded-l-none";
+      animation.scaleX = [1, 0, 1];
+      transformOrigin = "left";
+      break;
+    case "top":
+      corners = "rounded-b-none";
+      animation.scaleY = [1, 0, 1];
+      transformOrigin = "bottom";
+      break;
+    case "bottom":
+      corners = "rounded-t-none";
+      animation.scaleY = [1, 0, 1];
+      transformOrigin = "top";
+      break;
+    default:
+      corners = "";
+  }
+
+  useEffect(() => {
+    if (!animationKey) return;
+    animate(ref.current, animation, {duration: 0.33});
+  }, [animationKey]);
 
   return (
-    <Button onClick={() => onVoiceClick(trackID, voice)}>
+    <Button ref={ref} style={{transformOrigin}} onClick={() => onVoiceClick(trackID, voice)} className={corners}>
       {t("SurveyPage.voice")} {voice} {isPlaying ? <Pause /> : <Play />}
     </Button>
   );
@@ -79,9 +116,16 @@ function ReferenceSection({
   setSurveyAnswer,
   isSubmitted,
   isPlaying,
+  animationKey,
 }) {
   const {t} = useTranslation();
   const {isMobile} = useMobileContext();
+  const [ref, animate] = useAnimate();
+
+  useEffect(() => {
+    if (!animationKey) return;
+    animate(ref.current, {rotate: [0, 180]}, {duration: 0.33});
+  }, [animationKey]);
 
   return (
     <div
@@ -104,12 +148,16 @@ function ReferenceSection({
             voice={similarToX[0]}
             onVoiceClick={onVoiceClick}
             isPlaying={voicePlaying === similarToX[0] && isPlaying}
+            side={isMobile ? "top" : "left"}
+            animationKey={animationKey}
           />
           <ButtonGroupSeparator orientation={isMobile ? "horizontal" : "vertical"} />
           {!isMobile && (
             <>
               <Button size="icon" onClick={() => toggleVoices(similarToX[1])}>
-                <ArrowRightLeft />
+                <div ref={ref}>
+                  <ArrowRightLeft />
+                </div>
               </Button>
               <ButtonGroupSeparator />
             </>
@@ -119,6 +167,8 @@ function ReferenceSection({
             voice={similarToX[1]}
             onVoiceClick={onVoiceClick}
             isPlaying={voicePlaying === similarToX[1] && isPlaying}
+            side={isMobile ? "bottom" : "right"}
+            animationKey={animationKey}
           />
         </ButtonGroup>
       </div>
@@ -149,7 +199,15 @@ function ReferenceSection({
   );
 }
 
-export function SurveyCard({question, similarToX, toggleVoices, setSurveyAnswer, initAnswer, isSubmitted = false}) {
+export function SurveyCard({
+  question,
+  similarToX,
+  toggleVoices,
+  setSurveyAnswer,
+  initAnswer,
+  isSubmitted = false,
+  animationKey,
+}) {
   const {trackID, setTrackID, setIcon, isPlaying, setIsPlaying} = useAudioContext();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [voicePlaying, setVoicePlaying] = useState(null);
@@ -236,6 +294,7 @@ export function SurveyCard({question, similarToX, toggleVoices, setSurveyAnswer,
           setSurveyAnswer={setSurveyAnswer}
           isSubmitted={isSubmitted}
           isPlaying={isPlaying}
+          animationKey={animationKey}
         />
       </CardContent>
     </Card>

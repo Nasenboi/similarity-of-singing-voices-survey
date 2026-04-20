@@ -174,6 +174,7 @@ function CardCarousel({
   toggleVoices,
   initAnswer,
   direction,
+  animationKey,
 }) {
   return (
     <div className={cn("size-full relative", className)}>
@@ -194,6 +195,7 @@ function CardCarousel({
                 similarToX={similarToX}
                 toggleVoices={toggleVoices}
                 initAnswer={initAnswer}
+                animationKey={animationKey}
               />
             </div>
           </motion.div>
@@ -212,9 +214,9 @@ export default function SurveyPage() {
   const [direction, setDirection] = useState(1);
   const [surveyProgress, setSurveyProgress] = useState(0);
   const [questionsAnswered, setQuestionsAnswered] = useState([]);
-
   const navigate = useNavigate();
   const [similarToX, setSimilarToX] = useState(["A", "B"]);
+  const [animationKey, setAnimationKey] = useState(0);
 
   useEffect(() => {
     if (participant?._id && participant._id !== participantID) {
@@ -259,6 +261,7 @@ export default function SurveyPage() {
       setDirection(newPage > currentPage ? 1 : -1);
       setCurrentPage(newPage);
     }
+    setAnimationKey(0);
   };
 
   useEffect(() => {
@@ -297,12 +300,18 @@ export default function SurveyPage() {
   };
 
   const toggleVoices = ({value}) => {
+    let updated = true;
     if (value === "A") {
+      updated = value !== similarToX[0];
       setSimilarToX(["A", "B"]);
+      updated = value !== similarToX[0];
     } else if (value === "B") {
       setSimilarToX(["B", "A"]);
     } else {
       setSimilarToX([similarToX[1], similarToX[0]]);
+    }
+    if (updated) {
+      setAnimationKey((prev) => prev + 1);
     }
   };
 
@@ -360,6 +369,7 @@ export default function SurveyPage() {
           toggleVoices={toggleVoices}
           initAnswer={initAnswer}
           direction={direction}
+          animationKey={animationKey}
         />
       </div>
       <AudioPlayer />
