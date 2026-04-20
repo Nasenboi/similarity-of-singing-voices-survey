@@ -227,7 +227,8 @@
       "title": "Audio Issue Report"
     },
     "Completed": {
-      "description": "Thank you very much for completing the survey. Your Questionnaire No. is '{{questionnaireID}}'. As a small reward you can now check out the similarity plot for all songs, have fun!",
+      "description": "Thank you very much for completing the survey. Your Questionnaire No. is '{{questionnaireID}}'.\nAs a small reward you can now check out the similarity plot for all songs, have fun!",
+      "surveySwap": "The following code gives you Karma that can be used to get free research participants at SurveySwap.io.\nGo to: <1>{{url}}</1>\nOr, alternatively, enter the code manually: {{code}}",
       "title": "Survey Completed"
     },
     "and": "and",

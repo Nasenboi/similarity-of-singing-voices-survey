@@ -224,7 +224,8 @@
       "title": "Audiofehlermeldung"
     },
     "Completed": {
-      "description": "Vielen Dank für Ihre Teilnahme. Ihre Umfragenummer ist '{{questionnaireID}}'. Als kleine Belohnung können Sie nun den Ähnlichkeitsgraphen ansehen, welcher alle Songs beinhaltet, viel Spaß dabei!",
+      "description": "Vielen Dank für Ihre Teilnahme. Ihre Umfragenummer ist '{{questionnaireID}}'.\nAls kleine Belohnung können Sie nun den Ähnlichkeitsgraphen ansehen, welcher alle Songs beinhaltet, viel Spaß dabei!",
+      "surveySwap": "Mit dem folgenden Code erhalten Sie Karma, mit dem Sie bei SurveySwap.io kostenlose Umfrageteilnehmer gewinnen können.\nBesuchen Sie: <1>{{url}}</1>\nOder geben Sie den Code alternativ manuell ein: {{code}}",
       "title": "Umfrage beendet"
     },
     "and": "und",
