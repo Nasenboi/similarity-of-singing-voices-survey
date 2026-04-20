@@ -21,8 +21,7 @@ function AudioButton({trackID, voice, onVoiceClick, isPlaying, side, animationKe
 
   let corners = "";
   let transformOrigin = "";
-  const animation = {};
-  animation.opacity = [1, 0, 1];
+  const animation = {opacity: [1, 0, 1]};
 
   switch (side) {
     case "left":
