@@ -51,7 +51,7 @@ function AudioButton({trackID, voice, onVoiceClick, isPlaying, side, animationKe
 
   useEffect(() => {
     if (!animationKey) return;
-    animate(ref.current, animation, {duration: 0.33});
+    animate(ref.current, animation, {duration: 0.3});
   }, [animationKey]);
 
   return (
@@ -124,7 +124,7 @@ function ReferenceSection({
 
   useEffect(() => {
     if (!animationKey) return;
-    animate(ref.current, {rotate: [0, 180]}, {duration: 0.33});
+    animate(ref.current, {rotate: [0, 180]}, {duration: 0.3});
   }, [animationKey]);
 
   return (
