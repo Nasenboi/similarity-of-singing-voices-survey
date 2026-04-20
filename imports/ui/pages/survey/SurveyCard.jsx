@@ -44,8 +44,6 @@ function AudioButton({trackID, voice, onVoiceClick, isPlaying, side, animationKe
       animation.scaleY = [1, 0, 1];
       transformOrigin = "top";
       break;
-    default:
-      corners = "";
   }
 
   useEffect(() => {
