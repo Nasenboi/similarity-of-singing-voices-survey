@@ -122,8 +122,8 @@ function SurveyFinishedDrawer({participant}) {
   const navigate = useNavigate();
   const {t} = useTranslation();
 
-  const swapURL = Meteor.settings.public.SURVEY_SWAP.URL;
-  const swapCode = Meteor.settings.public.SURVEY_SWAP.CODE;
+  const swapURL = Meteor.settings.public.SURVEY_SWAP?.URL;
+  const swapCode = Meteor.settings.public.SURVEY_SWAP?.CODE;
   return (
     <Drawer open={participant?.surveyCompleted && !drawerDismissed} dismissable>
       <DrawerContent>
