@@ -156,7 +156,7 @@
     }
   },
   "MainPage": {
-    "content": "This Survey is about the similarity of singing voices. You will hear triplets of short music clips: 'A', 'B' and 'X'. 'X' is the target voice, 'A' and 'B' are reference voices. After listening to each of them, choose the reference voice which is the most similar to the target voice. Do not mind the instruments playing in the background while answering the questions. If the instruments irritate you, they can be disabled in the Settings.",
+    "content": "This Survey is about the similarity of singing voices. You will hear triplets of short music clips: 'A', 'B' and 'X'. 'X' is the target voice, 'A' and 'B' are reference voices. After listening to each of them, choose the reference voice which is the most similar to the target voice. Do not mind the instruments playing in the background while answering the questions. If the instruments irritate you, they can be disabled in the Settings.\n\nP.S.: This survey contains a completion code for SurveySwap.io",
     "contentSmall": "By starting the survey, you confirm that you have read the <1>privacy policy</1> and consent to the processing of your data as part of this scientific study.",
     "description": "This survey will take about 15 minutes of your time.",
     "startSurvey": "Start Survey",

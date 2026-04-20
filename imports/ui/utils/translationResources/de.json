@@ -155,7 +155,7 @@
     }
   },
   "MainPage": {
-    "content": "In dieser Umfrage geht es um die Ähnlichkeit von Gesangsstimmen. Sie hören jeweils drei kurze Musikausschnitte: 'A', 'B' und 'X'. 'X' ist die Zielstimme, 'A' und 'B' sind Referenzstimmen. Wählen Sie nach dem Anhören jedes Ausschnitts die Referenzstimme aus, die der Zielstimme am ähnlichsten ist. Achten Sie bei der Beantwortung der Fragen nicht auf die im Hintergrund spielenden Instrumente. Falls die Instrumente Sie stören, können Sie diese in den Einstellungen deaktivieren.",
+    "content": "In dieser Umfrage geht es um die Ähnlichkeit von Gesangsstimmen. Sie hören jeweils drei kurze Musikausschnitte: 'A', 'B' und 'X'. 'X' ist die Zielstimme, 'A' und 'B' sind Referenzstimmen. Wählen Sie nach dem Anhören jedes Ausschnitts die Referenzstimme aus, die der Zielstimme am ähnlichsten ist. Achten Sie bei der Beantwortung der Fragen nicht auf die im Hintergrund spielenden Instrumente. Falls die Instrumente Sie stören, können Sie diese in den Einstellungen deaktivieren.\n\nP.S.: Diese Umfrage enthält einen Code für SurveySwap.io",
     "contentSmall": "Mit dem Start der Umfrage bestätigen Sie, dass Sie die <1>Datenschutzerklärung</1> gelesen haben und in die Verarbeitung Ihrer Daten im Rahmen dieser wissenschaftlichen Studie einwilligen.",
     "description": "Diese Umfrage wird ungefähr 15 Minuten dauern.",
     "startSurvey": "Umfrage starten",
