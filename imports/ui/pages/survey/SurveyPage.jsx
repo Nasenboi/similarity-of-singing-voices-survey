@@ -23,9 +23,10 @@ import {
   PaginationPrevious,
 } from "@/imports/ui/customComponents/pagination";
 import {cn} from "@/lib/utils";
+import {Meteor} from "meteor/meteor";
 import {AnimatePresence, motion} from "motion/react";
 import React, {useEffect, useState} from "react";
-import {useTranslation} from "react-i18next";
+import {Trans, useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
 import {useAudioContext} from "../../contextProvider/AudioContext";
 import {useMobileContext} from "../../contextProvider/MobileContext";
@@ -33,6 +34,7 @@ import {useParticipantContext} from "../../contextProvider/ParticipantContext";
 import {AudioPlayer} from "../../customComponents/AudioPlayer";
 import {cookies} from "../../customComponents/Cookies";
 import {PageLoading} from "../../customComponents/PageLoading";
+import {P} from "../../customComponents/Typography";
 import {SurveyCard} from "./SurveyCard";
 
 function ProgressHeader({className, surveyQuestions, currentPage, questionsAnswered, surveyProgress, handlePageChange}) {
@@ -120,13 +122,29 @@ function SurveyFinishedDrawer({participant}) {
   const navigate = useNavigate();
   const {t} = useTranslation();
 
+  const swapURL = Meteor.settings.public.SURVEY_SWAP.URL;
+  const swapCode = Meteor.settings.public.SURVEY_SWAP.CODE;
   return (
     <Drawer open={participant?.surveyCompleted && !drawerDismissed} dismissable>
       <DrawerContent>
         <DrawerHeader className="flex flex-col justify-center items-center">
           <DrawerTitle>{t("SurveyPage.Completed.title")}</DrawerTitle>
-          <DrawerDescription>
-            {t("SurveyPage.Completed.description", {questionnaireID: participant?.questionnaireID || "N/A"})}
+          <DrawerDescription asChild>
+            <P>
+              {t("SurveyPage.Completed.description", {questionnaireID: participant?.questionnaireID || "N/A"})}
+              {swapURL && swapCode && (
+                <>
+                  {"\n\n"}
+                  <Trans
+                    i18nKey="SurveyPage.Completed.surveySwap"
+                    values={{code: swapCode, url: swapURL}}
+                    components={{
+                      1: <a href={swapURL} target="_blank" rel="noopener noreferrer" className="underline" />,
+                    }}
+                  />
+                </>
+              )}
+            </P>
           </DrawerDescription>
         </DrawerHeader>
         <DrawerFooter className="flex justify-center items-center space-y-4">
