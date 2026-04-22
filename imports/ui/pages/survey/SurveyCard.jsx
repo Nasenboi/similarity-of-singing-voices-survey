@@ -21,38 +21,46 @@ function AudioButton({trackID, voice, onVoiceClick, isPlaying, side, animationKe
 
   let corners = "";
   let transformOrigin = "";
-  const animation = {opacity: [1, 0, 1]};
+  const animation = {opacity: [1, 0.5, 1]};
+
+  const scaleAnimation = [1, 0.1, 1];
+  const moveX = 10;
+  const moveY = 5;
 
   switch (side) {
     case "left":
       corners = "rounded-r-none";
-      animation.scaleX = [1, 0, 1];
+      animation.scaleX = scaleAnimation;
+      animation.x = [0, moveX, 0];
       transformOrigin = "right";
       break;
     case "right":
       corners = "rounded-l-none";
-      animation.scaleX = [1, 0, 1];
+      animation.scaleX = scaleAnimation;
+      animation.x = [0, -moveX, 0];
       transformOrigin = "left";
       break;
     case "top":
       corners = "rounded-b-none";
-      animation.scaleY = [1, 0, 1];
+      animation.scaleY = scaleAnimation;
+      animation.y = [0, moveY, 0];
       transformOrigin = "bottom";
       break;
     case "bottom":
       corners = "rounded-t-none";
-      animation.scaleY = [1, 0, 1];
+      animation.scaleY = scaleAnimation;
+      animation.y = [0, -moveY, 0];
       transformOrigin = "top";
       break;
   }
 
   useEffect(() => {
     if (!animationKey) return;
-    animate(ref.current, animation, {duration: 0.3});
+    animate(ref.current, animation, {duration: 0.3, easing: "easeInOut"});
   }, [animationKey]);
 
   return (
-    <Button ref={ref} style={{transformOrigin}} onClick={() => onVoiceClick(trackID, voice)} className={corners}>
+    <Button ref={ref} style={{transformOrigin}} onClick={() => onVoiceClick(trackID, voice)} className={cn(corners)}>
       {t("SurveyPage.voice")} {voice} {isPlaying ? <Pause /> : <Play />}
     </Button>
   );
@@ -121,7 +129,7 @@ function ReferenceSection({
 
   useEffect(() => {
     if (!animationKey) return;
-    animate(ref.current, {rotate: [0, 180]}, {duration: 0.3});
+    animate(ref.current, {rotate: [0, 180]}, {duration: 0.3, easing: "easeOut"});
   }, [animationKey]);
 
   return (
