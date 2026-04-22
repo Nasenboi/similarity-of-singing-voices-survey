@@ -242,8 +242,11 @@
   },
   "Toasts": {
     "errorRemovingInactiveParticipants": "Error removing inactive participants!",
+    "errorSubmittingAnswer": "Error submitting answer!",
+    "listenToAll": "Please listen to all voices first!",
     "noParticipantsRemoved": "No inactive participants to remove!",
     "participantRemoved": "Participant removed!",
-    "removedInactiveParticipants": "{{numRemoved}} inactive participants removed!"
+    "removedInactiveParticipants": "{{numRemoved}} inactive participants removed!",
+    "slowDown": "Please answer carefully!"
   }
 }

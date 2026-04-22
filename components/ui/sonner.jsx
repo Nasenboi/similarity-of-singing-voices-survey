@@ -18,6 +18,8 @@ const Toaster = ({...props}) => {
         error: <OctagonX className="h-4 w-4" />,
         loading: <LoaderCircle className="h-4 w-4 animate-spin" />,
       }}
+      richColors
+      position="top-right"
       toastOptions={{
         classNames: {
           toast:

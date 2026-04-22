@@ -28,6 +28,7 @@ import {AnimatePresence, motion} from "motion/react";
 import React, {useEffect, useState} from "react";
 import {Trans, useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
+import {toast} from "sonner";
 import {useAudioContext} from "../../contextProvider/AudioContext";
 import {useMobileContext} from "../../contextProvider/MobileContext";
 import {useParticipantContext} from "../../contextProvider/ParticipantContext";
@@ -174,6 +175,7 @@ function CardCarousel({
   toggleVoices,
   initAnswer,
   direction,
+  animationKey,
 }) {
   return (
     <div className={cn("size-full relative", className)}>
@@ -194,6 +196,7 @@ function CardCarousel({
                 similarToX={similarToX}
                 toggleVoices={toggleVoices}
                 initAnswer={initAnswer}
+                animationKey={animationKey}
               />
             </div>
           </motion.div>
@@ -204,17 +207,20 @@ function CardCarousel({
     </div>
   );
 }
+
 export default function SurveyPage() {
-  const {isPlaying, setIsPlaying, useBackgroundMusic} = useAudioContext();
+  const {icon, isPlaying, setIsPlaying, useBackgroundMusic} = useAudioContext();
   const {participant, isLoading: isParticipantLoading} = useParticipantContext();
   const [participantID, setParticipantID] = useState(participant?._id);
   const [currentPage, setCurrentPage] = useState(0);
   const [direction, setDirection] = useState(1);
   const [surveyProgress, setSurveyProgress] = useState(0);
   const [questionsAnswered, setQuestionsAnswered] = useState([]);
-
   const navigate = useNavigate();
   const [similarToX, setSimilarToX] = useState(["A", "B"]);
+  const [animationKey, setAnimationKey] = useState(0);
+  const {t} = useTranslation();
+  const [listenedToTracks, setListenedToTracks] = useState({X: false, A: false, B: false});
 
   useEffect(() => {
     if (participant?._id && participant._id !== participantID) {
@@ -224,6 +230,11 @@ export default function SurveyPage() {
 
   const {surveyQuestions, isLoading: isSurveyQuestionsLoading} = useSurveyQuestionsParticipant(participantID);
   const {surveyAnswers, isLoading: isSurveyAnswersLoading} = useSurveyAnswersParticipant(participantID);
+
+  useEffect(() => {
+    if (!icon) return;
+    setListenedToTracks((prev) => ({...prev, [icon]: true}));
+  }, [icon]);
 
   useEffect(() => {
     if (!surveyQuestions || !surveyAnswers) {
@@ -259,6 +270,7 @@ export default function SurveyPage() {
       setDirection(newPage > currentPage ? 1 : -1);
       setCurrentPage(newPage);
     }
+    setAnimationKey(0);
   };
 
   useEffect(() => {
@@ -288,27 +300,39 @@ export default function SurveyPage() {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [currentPage, surveyQuestions, similarToX]);
+  }, [currentPage, surveyQuestions, similarToX, listenedToTracks]);
 
   const initAnswer = () => {
     const currentQuestionID = surveyQuestions.find((q) => q.questionNumber === currentPage)?._id;
     const currentAnswer = surveyAnswers.find((a) => a.questionID === currentQuestionID)?.answer;
     setSimilarToX(currentAnswer || ["A", "B"]);
+    setListenedToTracks({X: false, A: false, B: false});
   };
 
   const toggleVoices = ({value}) => {
+    let updated = true;
     if (value === "A") {
+      updated = value !== similarToX[0];
       setSimilarToX(["A", "B"]);
+      updated = value !== similarToX[0];
     } else if (value === "B") {
       setSimilarToX(["B", "A"]);
     } else {
       setSimilarToX([similarToX[1], similarToX[0]]);
+    }
+    if (updated) {
+      setAnimationKey((prev) => prev + 1);
     }
   };
 
   const setSurveyAnswer = async (questionID) => {
     if (isPlaying) {
       setIsPlaying(false);
+    }
+
+    if (Object.values(listenedToTracks).includes(false)) {
+      toast.error(t("Toasts.listenToAll"));
+      return;
     }
 
     try {
@@ -323,7 +347,11 @@ export default function SurveyPage() {
         setCurrentPage(currentPage + 1);
       }
     } catch (error) {
-      console.error(error);
+      if (error.error === "too-many-requests") {
+        toast.error(t("Toasts.slowDown"));
+      } else {
+        toast.error(t("Toasts.errorSubmittingAnswer"));
+      }
     }
   };
 
@@ -360,6 +388,7 @@ export default function SurveyPage() {
           toggleVoices={toggleVoices}
           initAnswer={initAnswer}
           direction={direction}
+          animationKey={animationKey}
         />
       </div>
       <AudioPlayer />

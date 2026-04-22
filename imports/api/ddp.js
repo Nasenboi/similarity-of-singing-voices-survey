@@ -4,9 +4,16 @@ DDPRateLimiter.addRule(
   {
     type: "method",
     name: "participants.new",
-    clientAddress: (connection) => connection.clientAddress,
   },
   1,
   5000,
 );
-// 1h 3600000,
+
+DDPRateLimiter.addRule(
+  {
+    type: "method",
+    name: "surveyAnswers.setAnswer",
+  },
+  1,
+  5000,
+);
