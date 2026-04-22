@@ -239,7 +239,10 @@
   },
   "Toasts": {
     "errorRemovingInactiveParticipants": "Fehler beim Entfernen inaktiver Teilnehmer!",
+    "errorSubmittingAnswer": "Fehler beim Absenden der Antwort!",
+    "listenToAll": "Bitte hören Sie sich zuerst alle Stimmen an!",
     "participantRemoved": "Teilnehmer gelöscht!",
-    "removedInactiveParticipants": "{{numRemoved}} inaktive(r) Teilnehmer entfernt!"
+    "removedInactiveParticipants": "{{numRemoved}} inaktive(r) Teilnehmer entfernt!",
+    "slowDown": "Bitte antworten Sie sorgfältig!"
   }
 }

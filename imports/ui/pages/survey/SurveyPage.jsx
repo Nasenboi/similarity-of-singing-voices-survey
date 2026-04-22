@@ -28,6 +28,7 @@ import {AnimatePresence, motion} from "motion/react";
 import React, {useEffect, useState} from "react";
 import {Trans, useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
+import {toast} from "sonner";
 import {useAudioContext} from "../../contextProvider/AudioContext";
 import {useMobileContext} from "../../contextProvider/MobileContext";
 import {useParticipantContext} from "../../contextProvider/ParticipantContext";
@@ -217,6 +218,7 @@ export default function SurveyPage() {
   const navigate = useNavigate();
   const [similarToX, setSimilarToX] = useState(["A", "B"]);
   const [animationKey, setAnimationKey] = useState(0);
+  const {t} = useTranslation();
 
   useEffect(() => {
     if (participant?._id && participant._id !== participantID) {
@@ -332,7 +334,11 @@ export default function SurveyPage() {
         setCurrentPage(currentPage + 1);
       }
     } catch (error) {
-      console.error(error);
+      if (error.error === "too-many-requests") {
+        toast.error(t("Toasts.slowDown"));
+      } else {
+        toast.error(t("Toasts.errorSubmittingAnswer"));
+      }
     }
   };
 
