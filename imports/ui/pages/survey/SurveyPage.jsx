@@ -207,8 +207,9 @@ function CardCarousel({
     </div>
   );
 }
+
 export default function SurveyPage() {
-  const {isPlaying, setIsPlaying, useBackgroundMusic} = useAudioContext();
+  const {icon, isPlaying, setIsPlaying, useBackgroundMusic} = useAudioContext();
   const {participant, isLoading: isParticipantLoading} = useParticipantContext();
   const [participantID, setParticipantID] = useState(participant?._id);
   const [currentPage, setCurrentPage] = useState(0);
@@ -219,6 +220,7 @@ export default function SurveyPage() {
   const [similarToX, setSimilarToX] = useState(["A", "B"]);
   const [animationKey, setAnimationKey] = useState(0);
   const {t} = useTranslation();
+  const [listenedToTracks, setListenedToTracks] = useState({X: false, A: false, B: false});
 
   useEffect(() => {
     if (participant?._id && participant._id !== participantID) {
@@ -228,6 +230,11 @@ export default function SurveyPage() {
 
   const {surveyQuestions, isLoading: isSurveyQuestionsLoading} = useSurveyQuestionsParticipant(participantID);
   const {surveyAnswers, isLoading: isSurveyAnswersLoading} = useSurveyAnswersParticipant(participantID);
+
+  useEffect(() => {
+    if (!icon) return;
+    setListenedToTracks((prev) => ({...prev, [icon]: true}));
+  }, [icon]);
 
   useEffect(() => {
     if (!surveyQuestions || !surveyAnswers) {
@@ -293,12 +300,13 @@ export default function SurveyPage() {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [currentPage, surveyQuestions, similarToX]);
+  }, [currentPage, surveyQuestions, similarToX, listenedToTracks]);
 
   const initAnswer = () => {
     const currentQuestionID = surveyQuestions.find((q) => q.questionNumber === currentPage)?._id;
     const currentAnswer = surveyAnswers.find((a) => a.questionID === currentQuestionID)?.answer;
     setSimilarToX(currentAnswer || ["A", "B"]);
+    setListenedToTracks({X: false, A: false, B: false});
   };
 
   const toggleVoices = ({value}) => {
@@ -320,6 +328,11 @@ export default function SurveyPage() {
   const setSurveyAnswer = async (questionID) => {
     if (isPlaying) {
       setIsPlaying(false);
+    }
+
+    if (Object.values(listenedToTracks).includes(false)) {
+      toast.error(t("Toasts.listenToAll"));
+      return;
     }
 
     try {

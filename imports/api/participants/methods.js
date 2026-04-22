@@ -18,8 +18,6 @@ export const PARTICIPANTS = {
         questionnaireID,
       });
 
-      console.log(`Created new participant with questionnaire ID ${questionnaireID}`);
-
       return itemID;
     },
   }),

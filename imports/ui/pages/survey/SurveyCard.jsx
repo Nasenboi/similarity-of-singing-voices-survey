@@ -235,7 +235,7 @@ export function SurveyCard({
       }
       setVoicePlaying(!isPlaying || !isSameTrack ? voice : null);
     },
-    [trackID, isPlaying, setIcon, setIsPlaying, setTrackID],
+    [trackID, isPlaying, setIcon],
   );
 
   useEffect(() => {
