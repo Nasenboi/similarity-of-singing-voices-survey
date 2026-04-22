@@ -252,10 +252,7 @@ export default function SurveyPage() {
   }, [surveyQuestions, surveyAnswers]);
 
   const handlePageChange = (newPage) => {
-    if (!surveyQuestions) {
-      return;
-    }
-
+    setAnimationKey(0);
     // dismiss toolips on question navigation
     cookies.set("complaintTooltipRead", true);
     cookies.set("flagsTooltipRead", true);
@@ -264,13 +261,15 @@ export default function SurveyPage() {
       setIsPlaying(false);
     }
 
+    if (!surveyQuestions) {
+      return;
+    }
     const numQuestions = surveyQuestions.length;
 
     if (newPage >= 0 && newPage < numQuestions) {
       setDirection(newPage > currentPage ? 1 : -1);
       setCurrentPage(newPage);
     }
-    setAnimationKey(0);
   };
 
   useEffect(() => {
@@ -326,10 +325,6 @@ export default function SurveyPage() {
   };
 
   const setSurveyAnswer = async (questionID) => {
-    if (isPlaying) {
-      setIsPlaying(false);
-    }
-
     if (Object.values(listenedToTracks).includes(false)) {
       toast.error(t("Toasts.listenToAll"));
       return;
@@ -342,10 +337,7 @@ export default function SurveyPage() {
         participantID: participant._id,
         backgroundMusic: useBackgroundMusic,
       });
-      const numQuestions = surveyQuestions.length;
-      if (currentPage + 1 < numQuestions) {
-        setCurrentPage(currentPage + 1);
-      }
+      handlePageChange(currentPage + 1);
     } catch (error) {
       if (error.error === "too-many-requests") {
         toast.error(t("Toasts.slowDown"));
