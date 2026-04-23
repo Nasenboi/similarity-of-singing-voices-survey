@@ -15,5 +15,5 @@ DDPRateLimiter.addRule(
     name: "surveyAnswers.setAnswer",
   },
   1,
-  5000,
+  10000,
 );
