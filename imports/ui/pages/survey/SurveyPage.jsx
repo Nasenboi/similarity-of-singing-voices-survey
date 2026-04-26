@@ -11,6 +11,7 @@ import {
   DrawerTitle,
 } from "@/components/ui/drawer";
 import {Progress} from "@/components/ui/progress";
+import {ScrollArea} from "@/components/ui/scroll-area";
 import {useSurveyAnswersParticipant} from "@/imports/api/surveyAnswers/hooks";
 import {SURVEY_ANSWERS} from "@/imports/api/surveyAnswers/methods";
 import {useSurveyQuestionsParticipant} from "@/imports/api/surveyQuestions/hooks";
@@ -169,11 +170,13 @@ function SurveyFinishedDrawer({participant}) {
         <DrawerHeader className="flex flex-col justify-center items-center">
           <DrawerTitle>{t("SurveyPage.Completed.title")}</DrawerTitle>
           <DrawerDescription asChild>
-            <P>
-              {t("SurveyPage.Completed.description", {questionnaireID: participant?.questionnaireID || "N/A"})}
-              <SurveySwapCode />
-              <SurveyCircleCode />
-            </P>
+            <ScrollArea className="max-h-[40vh] overflow-y-auto">
+              <P>
+                {t("SurveyPage.Completed.description", {questionnaireID: participant?.questionnaireID || "N/A"})}
+                <SurveySwapCode />
+                <SurveyCircleCode />
+              </P>
+            </ScrollArea>
           </DrawerDescription>
         </DrawerHeader>
         <DrawerFooter className="flex justify-center items-center space-y-4">
