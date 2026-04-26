@@ -1,4 +1,5 @@
 import {DDPRateLimiter} from "meteor/ddp-rate-limiter";
+import {Meteor} from "meteor/meteor";
 
 DDPRateLimiter.addRule(
   {
@@ -15,5 +16,5 @@ DDPRateLimiter.addRule(
     name: "surveyAnswers.setAnswer",
   },
   1,
-  10000,
+  Meteor.isDevelopment ? 500 : 10000,
 );
