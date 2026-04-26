@@ -118,13 +118,51 @@ function ProgressHeader({className, surveyQuestions, currentPage, questionsAnswe
   );
 }
 
+function SurveySwapCode() {
+  const swapURL = Meteor.settings.public.SURVEY_SWAP?.URL;
+  const swapCode = Meteor.settings.public.SURVEY_SWAP?.CODE;
+
+  if (!swapCode || !swapCode) return null;
+
+  return (
+    <>
+      {"\n\n"}
+      <Trans
+        i18nKey="SurveyPage.Completed.surveySwap"
+        values={{code: swapCode, url: swapURL}}
+        components={{
+          1: <a href={swapURL} target="_blank" rel="noopener noreferrer" className="underline" />,
+        }}
+      />
+    </>
+  );
+}
+
+function SurveyCircleCode() {
+  const circleURL = Meteor.settings.public.SURVEY_CIRCLE?.URL;
+  const circleCode = Meteor.settings.public.SURVEY_CIRCLE?.CODE;
+
+  if (!circleURL || !circleCode) return null;
+
+  return (
+    <>
+      {"\n\n"}
+      <Trans
+        i18nKey="SurveyPage.Completed.surveyCircle"
+        values={{code: circleCode, url: circleURL}}
+        components={{
+          1: <a href={circleURL} target="_blank" rel="noopener noreferrer" className="underline" />,
+        }}
+      />
+    </>
+  );
+}
+
 function SurveyFinishedDrawer({participant}) {
   const [drawerDismissed, setDrawerDismissed] = useState(false);
   const navigate = useNavigate();
   const {t} = useTranslation();
 
-  const swapURL = Meteor.settings.public.SURVEY_SWAP?.URL;
-  const swapCode = Meteor.settings.public.SURVEY_SWAP?.CODE;
   return (
     <Drawer open={participant?.surveyCompleted && !drawerDismissed} dismissable>
       <DrawerContent>
@@ -133,18 +171,8 @@ function SurveyFinishedDrawer({participant}) {
           <DrawerDescription asChild>
             <P>
               {t("SurveyPage.Completed.description", {questionnaireID: participant?.questionnaireID || "N/A"})}
-              {swapURL && swapCode && (
-                <>
-                  {"\n\n"}
-                  <Trans
-                    i18nKey="SurveyPage.Completed.surveySwap"
-                    values={{code: swapCode, url: swapURL}}
-                    components={{
-                      1: <a href={swapURL} target="_blank" rel="noopener noreferrer" className="underline" />,
-                    }}
-                  />
-                </>
-              )}
+              <SurveySwapCode />
+              <SurveyCircleCode />
             </P>
           </DrawerDescription>
         </DrawerHeader>

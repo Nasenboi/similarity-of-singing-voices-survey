@@ -25,6 +25,9 @@ export default function MainPage() {
     }
   };
 
+  const containsSurveySwapCode = Meteor.settings.public.SURVEY_SWAP?.CODE && Meteor.settings.public.SURVEY_SWAP?.URL;
+  const containsSurveyCircleCode = Meteor.settings.public.SURVEY_CIRCLE?.CODE && Meteor.settings.public.SURVEY_CIRCLE?.URL;
+
   return (
     <div className="w-full flex justify-center items-center">
       <Card className="max-w-150">
@@ -34,6 +37,18 @@ export default function MainPage() {
         </CardHeader>
         <CardContent>
           <P>{t("MainPage.content")}</P>
+          {containsSurveySwapCode && (
+            <P>
+              {"\n"}
+              {t("MainPage.surveySwap")}
+            </P>
+          )}
+          {containsSurveyCircleCode && (
+            <P>
+              {"\n"}
+              {t("MainPage.surveyCircle")}
+            </P>
+          )}
           <Muted className="mt-4">
             <Trans
               i18nKey="MainPage.contentSmall"

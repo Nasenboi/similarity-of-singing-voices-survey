@@ -155,10 +155,12 @@
     }
   },
   "MainPage": {
-    "content": "In dieser Umfrage geht es um die Ähnlichkeit von Gesangsstimmen. Sie hören jeweils drei kurze Musikausschnitte: 'A', 'B' und 'X'. 'X' ist die Zielstimme, 'A' und 'B' sind Referenzstimmen. Wählen Sie nach dem Anhören jedes Ausschnitts die Referenzstimme aus, die der Zielstimme am ähnlichsten ist. Achten Sie bei der Beantwortung der Fragen nicht auf die im Hintergrund spielenden Instrumente. Falls die Instrumente Sie stören, können Sie diese in den Einstellungen deaktivieren.\n\nP.S.: Diese Umfrage enthält einen Code für SurveySwap.io",
+    "content": "In dieser Umfrage geht es um die Ähnlichkeit von Gesangsstimmen. Sie hören jeweils drei kurze Musikausschnitte: 'A', 'B' und 'X'. 'X' ist die Zielstimme, 'A' und 'B' sind Referenzstimmen. Wählen Sie nach dem Anhören jedes Ausschnitts die Referenzstimme aus, die der Zielstimme am ähnlichsten ist. Achten Sie bei der Beantwortung der Fragen nicht auf die im Hintergrund spielenden Instrumente. Falls die Instrumente Sie stören, können Sie diese in den Einstellungen deaktivieren.",
     "contentSmall": "Mit dem Start der Umfrage bestätigen Sie, dass Sie die <1>Datenschutzerklärung</1> gelesen haben und in die Verarbeitung Ihrer Daten im Rahmen dieser wissenschaftlichen Studie einwilligen.",
     "description": "Diese Umfrage wird ungefähr 15 Minuten dauern.",
     "startSurvey": "Umfrage starten",
+    "surveyCircle": "Nutzer von SurveyCircle.com erhalten für ihre Teilnahme Punkte,\nmit denen sie kostenlos Studienteilnehmer rekrutieren können.",
+    "surveySwap": "Diese Umfrage enthält einen Code für SurveySwap.io",
     "title": "Willkommen zur Umfrage"
   },
   "ParticipantListPage": {
@@ -225,6 +227,7 @@
     },
     "Completed": {
       "description": "Vielen Dank für Ihre Teilnahme. Ihre Umfragenummer ist '{{questionnaireID}}'.\nAls kleine Belohnung können Sie nun den Ähnlichkeitsgraphen ansehen, welcher alle Songs beinhaltet, viel Spaß dabei!",
+      "surveyCircle": "Löse den folgenden Survey Code unter <1>{{url}}</1> ein\nund erhalte durch SurveyCircle kostenlos Teilnehmer für deine Studie:\n{{code}}",
       "surveySwap": "Mit dem folgenden Code erhalten Sie Karma, mit dem Sie bei SurveySwap.io kostenlose Umfrageteilnehmer gewinnen können.\nBesuchen Sie: <1>{{url}}</1>\nOder geben Sie den Code alternativ manuell ein: {{code}}",
       "title": "Umfrage beendet"
     },
