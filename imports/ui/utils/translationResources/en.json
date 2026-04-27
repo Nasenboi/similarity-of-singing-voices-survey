@@ -250,6 +250,7 @@
     "noParticipantsRemoved": "No inactive participants to remove!",
     "participantRemoved": "Participant removed!",
     "removedInactiveParticipants": "{{numRemoved}} inactive participants removed!",
-    "slowDown": "Please answer carefully!"
+    "slowDownDesc": "Submission open in {{seconds}} seconds.",
+    "slowDownTitle": "Please answer carefully!"
   }
 }
