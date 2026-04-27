@@ -250,7 +250,7 @@ export default function SurveyPage() {
   const navigate = useNavigate();
   const [similarToX, setSimilarToX] = useState(["A", "B"]);
   const [animationKey, setAnimationKey] = useState(0);
-  const {t} = useTranslation();
+  const {t, i18n} = useTranslation();
   const [listenedToTracks, setListenedToTracks] = useState({X: false, A: false, B: false});
 
   useEffect(() => {
@@ -371,7 +371,11 @@ export default function SurveyPage() {
       handlePageChange(currentPage + 1);
     } catch (error) {
       if (error.error === "too-many-requests") {
-        toast.error(t("Toasts.slowDown"));
+        const seconds = (error.details.timeToReset / 1000).toLocaleString(i18n.language, {
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 1,
+        });
+        toast.error(t("Toasts.slowDownTitle"), {description: t("Toasts.slowDownDesc", {seconds})});
       } else {
         toast.error(t("Toasts.errorSubmittingAnswer"));
       }
