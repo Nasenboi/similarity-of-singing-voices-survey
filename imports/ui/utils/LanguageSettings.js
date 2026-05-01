@@ -1,7 +1,7 @@
 import i18n from "i18next";
 import {initReactI18next} from "react-i18next";
 import {z} from "zod";
-import {zodI18nMap} from "zod-i18n-map";
+import {makeZodI18nMap} from "zod-i18n-map";
 import zodDe from "zod-i18n-map/locales/de/zod.json";
 import zodEn from "zod-i18n-map/locales/en/zod.json";
 import {DEFAULT_LANGUAGE} from "../../common/config";
@@ -41,12 +41,16 @@ i18n.use(initReactI18next).init({
 
 i18n.on("languageChanged", () => {
   z.config({
-    localeError: zodI18nMap,
+    errorMap: makeZodI18nMap({
+      ns: "zod",
+    }),
   });
 });
 
 z.config({
-  localeError: zodI18nMap,
+  errorMap: makeZodI18nMap({
+    ns: "zod",
+  }),
 });
 
 export default i18n;
