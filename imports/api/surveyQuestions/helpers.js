@@ -20,7 +20,32 @@ export async function getQuestionnaireIDAtomic() {
   return result.questionnaireID;
 }
 
+async function updateQuestionnaireAtomic(questionnaireID) {
+  const [participantCount, questionsSkipped, activeQuestions] = await Promise.all([
+    Participants.countAsync({questionnaireID}),
+    SurveyQuestions.countAsync({questionnaireID, skip: true}),
+    SurveyQuestions.countAsync({questionnaireID, skip: false}),
+  ]);
+
+  await Questionnaires.rawCollection().findOneAndUpdate(
+    {questionnaireID},
+    {
+      $set: {
+        participantCount,
+        questionsSkipped,
+        skip: activeQuestions < MIN_NUM_QUESTIONS_PER_SURVEY,
+      },
+    },
+    {upsert: true},
+  );
+}
+
 export async function refreshQuestionnaires() {
+  const questionnaireIDs = await SurveyQuestions.rawCollection().distinct("questionnaireID");
+  await Promise.all(questionnaireIDs.map(updateQuestionnaireAtomic));
+}
+
+export async function resetQuestionnaires() {
   const questionnaireIDs = await SurveyQuestions.rawCollection().distinct("questionnaireID");
   await Questionnaires.removeAsync({});
 
@@ -29,7 +54,6 @@ export async function refreshQuestionnaires() {
     questionnaire.participantCount = await Participants.countAsync({questionnaireID});
     questionnaire.questionsSkipped = await SurveyQuestions.countAsync({questionnaireID, skip: true});
     questionnaire.skip = (await SurveyQuestions.countAsync({questionnaireID, skip: false})) < MIN_NUM_QUESTIONS_PER_SURVEY;
-
     await Questionnaires.insertAsync(questionnaire);
   };
 

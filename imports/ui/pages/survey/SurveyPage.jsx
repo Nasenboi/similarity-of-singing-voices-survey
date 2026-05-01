@@ -263,9 +263,9 @@ export default function SurveyPage() {
   const {surveyAnswers, isLoading: isSurveyAnswersLoading} = useSurveyAnswersParticipant(participantID);
 
   useEffect(() => {
-    if (!icon) return;
+    if (!icon || !isPlaying) return;
     setListenedToTracks((prev) => ({...prev, [icon]: true}));
-  }, [icon]);
+  }, [icon, isPlaying]);
 
   useEffect(() => {
     if (!surveyQuestions || !surveyAnswers) {
@@ -356,7 +356,7 @@ export default function SurveyPage() {
   };
 
   const setSurveyAnswer = async (questionID) => {
-    if (Object.values(listenedToTracks).includes(false)) {
+    if ([listenedToTracks["X"], listenedToTracks["A"], listenedToTracks["B"]].includes(false)) {
       toast.error(t("Toasts.listenToAll"));
       return;
     }

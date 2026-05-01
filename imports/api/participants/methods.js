@@ -1,7 +1,7 @@
 import {ValidatedMethod} from "meteor/mdg:validated-method";
 import SimpleSchema from "simpl-schema";
 import {SurveyAnswers} from "../surveyAnswers/collection";
-import {getQuestionnaireIDAtomic} from "../surveyQuestions/helpers";
+import {getQuestionnaireIDAtomic, refreshQuestionnaires} from "../surveyQuestions/helpers";
 import {isAdminUser} from "../users/helpers";
 import {getYesterday, toCSV} from "../utils";
 import {Participants} from "./collection";
@@ -45,6 +45,7 @@ export const PARTICIPANTS = {
 
       await Participants.removeAsync(participantID);
       await SurveyAnswers.removeAsync({participantID});
+      await refreshQuestionnaires();
     },
   }),
   removeInactiveParticipants: new ValidatedMethod({
@@ -61,7 +62,9 @@ export const PARTICIPANTS = {
       const participantsWithAnswers = await SurveyAnswers.rawCollection().distinct("participantID");
       query["_id"] = {$nin: participantsWithAnswers};
 
-      return await Participants.removeAsync(query);
+      const result = await Participants.removeAsync(query);
+      await refreshQuestionnaires();
+      return result;
     },
   }),
   downloadCSV: new ValidatedMethod({
