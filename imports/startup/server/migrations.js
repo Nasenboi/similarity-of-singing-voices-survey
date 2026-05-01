@@ -1,6 +1,5 @@
-import {refreshQuestionnaires} from "@/imports/api/surveyQuestions/helpers";
+import {resetQuestionnaires} from "@/imports/api/surveyQuestions/helpers";
 import {renameCollectionIfNeeded} from "@/imports/api/utils";
-import {Mongo} from "meteor/mongo";
 
 Migrations.add({
   version: 1,
@@ -14,7 +13,7 @@ Migrations.add({
   name: "Rename QuestionnaireStats collection to questionnaires",
   async up() {
     await renameCollectionIfNeeded("questionnaireStats", "questionnaires");
-    await refreshQuestionnaires();
+    await resetQuestionnaires();
   },
   async down() {
     await renameCollectionIfNeeded("questionnaires", "QuestionnaireStats");
