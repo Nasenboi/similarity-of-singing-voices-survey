@@ -7,7 +7,9 @@ import {AutoField} from "../../customComponents/AutoField";
 import {SearchForm} from "../../customComponents/SearchForm";
 
 const searchFormSchema = z.object({
-  questionnaireID: z.string().optional(),
+  _id: z.string().optional(),
+  questionnaireID: z.number().optional(),
+  participantCount: z.number().optional(),
   skip: z.boolean().optional(),
 });
 
@@ -16,7 +18,9 @@ export function QuestionnaireSearchForm({onFilterChange, query, count, total}) {
   const form = useForm({
     resolver: zodResolver(searchFormSchema),
     defaultValues: {
-      questionnaireID: query?.questionnaireID || "",
+      _id: query?._id || "",
+      questionnaireID: query?.questionnaireID || undefined,
+      participantCount: query?.participantCount || undefined,
       skip: query?.skip || false,
     },
   });
@@ -39,9 +43,16 @@ export function QuestionnaireSearchForm({onFilterChange, query, count, total}) {
       <AutoField
         className="flex-1"
         form={form}
+        name="participantCount"
+        label={t("Collections.SurveyQuestions.Questionnaires.participantCount")}
+        type="number"
+      />
+      <AutoField
+        className="flex-1"
+        form={form}
         name="questionnaireID"
         label={t("Collections.SurveyQuestions.questionnaireID")}
-        type="input"
+        type="number"
       />
       <AutoField className="flex-1" form={form} name="skip" label={t("Collections.SurveyQuestions.skip")} type="bool" />
     </SearchForm>
