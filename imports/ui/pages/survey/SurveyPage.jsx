@@ -119,11 +119,31 @@ function ProgressHeader({className, surveyQuestions, currentPage, questionsAnswe
   );
 }
 
+function ClickWorkerCode() {
+  const clickURL = Meteor.settings.public.CLICK_WORKER?.URL;
+  const clickCode = Meteor.settings.public.CLICK_WORKER?.CODE;
+
+  if (!clickURL || !clickCode) return null;
+
+  return (
+    <>
+      {"\n\n"}
+      <Trans
+        i18nKey="SurveyPage.Completed.clickWorker"
+        values={{code: clickURL, url: clickURL}}
+        components={{
+          1: <a href={clickURL} target="_blank" rel="noopener noreferrer" className="underline" />,
+        }}
+      />
+    </>
+  );
+}
+
 function SurveySwapCode() {
   const swapURL = Meteor.settings.public.SURVEY_SWAP?.URL;
   const swapCode = Meteor.settings.public.SURVEY_SWAP?.CODE;
 
-  if (!swapCode || !swapCode) return null;
+  if (!swapURL || !swapCode) return null;
 
   return (
     <>
@@ -173,6 +193,7 @@ function SurveyFinishedDrawer({participant}) {
             <ScrollArea className="max-h-[40vh] overflow-y-auto">
               <P>
                 {t("SurveyPage.Completed.description", {questionnaireID: participant?.questionnaireID || "N/A"})}
+                <ClickWorkerCode />
                 <SurveySwapCode />
                 <SurveyCircleCode />
               </P>
