@@ -7,6 +7,24 @@
       "itemNumber": "Item No."
     },
     "Participants": {
+      "Educations": {
+        "bachelorsDegree": "Bachelor's Degree",
+        "doctorateOrHigher": "Doctorate (or higher)",
+        "highSchoolDiploma": "High school diploma (or equivalent)",
+        "lessThanHighSchool": "Less than high school",
+        "mastersDegree": "Master's Degree",
+        "someCollege": "Some College"
+      },
+      "Genders": {
+        "female": "Female",
+        "male": "Male",
+        "noAnswer": "No Answer",
+        "nonbinary": "Non-binary"
+      },
+      "age": "Age",
+      "education": "Highest Level of Education",
+      "gender": "Gender",
+      "nativeLanguage": "Native Language",
       "noQuestionsAnswered": "No Questions Answered",
       "participant": "Participant",
       "surveyCompleted": "Survey Completed"
@@ -156,13 +174,19 @@
     }
   },
   "MainPage": {
-    "content": "This Survey is about the similarity of singing voices. You will hear triplets of short music clips: 'A', 'B' and 'X'. 'X' is the target voice, 'A' and 'B' are reference voices. After listening to each of them, choose the reference voice which is the most similar to the target voice. Do not mind the instruments playing in the background while answering the questions. If the instruments irritate you, they can be disabled in the Settings.",
-    "contentSmall": "By starting the survey, you confirm that you have read the <1>privacy policy</1> and consent to the processing of your data as part of this scientific study.",
-    "description": "This survey will take about 15 minutes of your time.",
-    "startSurvey": "Start Survey",
-    "surveyCircle": "SurveyCircle users receive points for their participation,\nwhich can be used to recruit free survey participants at SurveyCircle.com",
-    "surveySwap": "This survey contains a completion code for SurveySwap.io",
-    "title": "Welcome to the survey"
+    "Demographics": {
+      "description": "",
+      "title": "Demographic Data"
+    },
+    "Start": {
+      "content": "This Survey is about the similarity of singing voices. You will hear triplets of short music clips: 'A', 'B' and 'X'. 'X' is the target voice, 'A' and 'B' are reference voices. After listening to each of them, choose the reference voice which is the most similar to the target voice. Do not mind the instruments playing in the background while answering the questions. If the instruments irritate you, they can be disabled in the Settings.",
+      "contentSmall": "By starting the survey, you confirm that you have read the <1>privacy policy</1> and consent to the processing of your data as part of this scientific study.",
+      "description": "This survey will take about 15 minutes of your time.",
+      "startSurvey": "Start Survey",
+      "surveyCircle": "SurveyCircle users receive points for their participation,\nwhich can be used to recruit free survey participants at SurveyCircle.com",
+      "surveySwap": "This survey contains a completion code for SurveySwap.io",
+      "title": "Welcome to the survey"
+    }
   },
   "ParticipantListPage": {
     "ParticipantSearchForm": {

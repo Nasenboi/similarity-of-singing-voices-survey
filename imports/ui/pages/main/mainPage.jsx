@@ -1,67 +1,34 @@
-import {Button} from "@/components/ui/button";
-import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
-import React from "react";
-import {Trans, useTranslation} from "react-i18next";
+import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {useParticipantContext} from "../../contextProvider/ParticipantContext";
-import {Muted, P} from "../../customComponents/Typography";
+import {DemographicForm} from "./demographicForm";
+import {StartSurveyForm} from "./startSurveyForm";
 
 export default function MainPage() {
   const navigate = useNavigate();
-  const {t} = useTranslation();
   const {participant, isLoading, newParticipant} = useParticipantContext();
-
-  const navigateToSurvey = () => {
+  const [subPage, setSubPage] = useState(0);
+  const onStartClick = () => {
     if (!participant && !isLoading) {
       newParticipant()
         .then(() => {
-          navigate("/survey");
+          setSubPage(1);
         })
         .catch((error) => {
           console.error("Error creating new participant:", error);
         });
     } else {
-      navigate("/survey");
+      setSubPage(1);
     }
   };
 
-  const containsSurveySwapCode = Meteor.settings.public.SURVEY_SWAP?.CODE && Meteor.settings.public.SURVEY_SWAP?.URL;
-  const containsSurveyCircleCode = Meteor.settings.public.SURVEY_CIRCLE?.CODE && Meteor.settings.public.SURVEY_CIRCLE?.URL;
-
-  return (
-    <div className="w-full flex justify-center items-center">
-      <Card className="max-w-150">
-        <CardHeader>
-          <CardTitle className="text-center">{t("MainPage.title")}</CardTitle>
-          <CardDescription>{t("MainPage.description")}</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <P>{t("MainPage.content")}</P>
-          {containsSurveySwapCode && (
-            <P>
-              {"\n"}
-              {t("MainPage.surveySwap")}
-            </P>
-          )}
-          {containsSurveyCircleCode && (
-            <P>
-              {"\n"}
-              {t("MainPage.surveyCircle")}
-            </P>
-          )}
-          <Muted className="mt-4">
-            <Trans
-              i18nKey="MainPage.contentSmall"
-              components={{
-                1: <a href="/privacyPolicy" target="_blank" rel="noopener noreferrer" className="underline" />,
-              }}
-            />
-          </Muted>
-        </CardContent>
-        <CardFooter>
-          <Button onClick={navigateToSurvey}>{t("MainPage.startSurvey")}</Button>
-        </CardFooter>
-      </Card>
-    </div>
-  );
+  // navigate("/survey");
+  const getSubPage = () => {
+    if (subPage == 1) {
+      return <DemographicForm onPrevClick={() => setSubPage(0)} onNextClick={() => setSubPage(2)} />;
+    } else {
+      return <StartSurveyForm onStartClick={onStartClick} />;
+    }
+  };
+  return <div className="w-full flex justify-center items-center"> {getSubPage()}</div>;
 }

@@ -5,6 +5,7 @@ import {getQuestionnaireIDAtomic, refreshQuestionnaires} from "../surveyQuestion
 import {isAdminUser} from "../users/helpers";
 import {getYesterday, toCSV} from "../utils";
 import {Participants} from "./collection";
+import {participantDemographicsSchema} from "./schema";
 
 export const PARTICIPANTS = {
   newParticipant: new ValidatedMethod({
@@ -32,6 +33,18 @@ export const PARTICIPANTS = {
       const participant = await Participants.findOneAsync(participantID);
 
       return participant;
+    },
+  }),
+  setDemographics: new ValidatedMethod({
+    name: "participants.setDemographics",
+    validate: new SimpleSchema({
+      participantID: {type: String},
+      demographics: {type: participantDemographicsSchema},
+    }).validator(),
+    async run({participantID, demographics}) {
+      if (this.isSimulation) return;
+
+      return await Participants.updateAsync(participantID, {$set: demographics});
     },
   }),
   removeParticipant: new ValidatedMethod({
