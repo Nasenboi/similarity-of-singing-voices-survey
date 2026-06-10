@@ -61,19 +61,19 @@ export default function ParticipantListPage() {
     },
     {
       accessorKey: "age",
-      header: t("Collections.Participants.age"),
+      header: t("Collections.Participants.Demographics.age"),
     },
     {
       accessorKey: "gender",
-      header: t("Collections.Participants.gender"),
+      header: t("Collections.Participants.Demographics.gender"),
     },
     {
       accessorKey: "nativeLanguage",
-      header: t("Collections.Participants.nativeLanguage"),
+      header: t("Collections.Participants.Demographics.nativeLanguage"),
     },
     {
       accessorKey: "education",
-      header: t("Collections.Participants.education"),
+      header: t("Collections.Participants.Demographics.education"),
     },
   ];
 

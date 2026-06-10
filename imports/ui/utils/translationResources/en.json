@@ -7,35 +7,38 @@
       "itemNumber": "Item No."
     },
     "Participants": {
-      "Educations": {
-        "bachelorsDegree": "Bachelor's Degree",
-        "doctorateOrHigher": "Doctorate (or higher)",
-        "highSchoolDiploma": "High school diploma (or equivalent)",
-        "lessThanHighSchool": "Less than high school",
-        "mastersDegree": "Master's Degree",
-        "someCollege": "Some College"
+      "Demographics": {
+        "Educations": {
+          "bachelorsDegree": "Bachelor's Degree",
+          "doctorateOrHigher": "Doctorate (or higher)",
+          "highSchoolDiploma": "High school diploma (or equivalent)",
+          "lessThanHighSchool": "Less than high school",
+          "mastersDegree": "Master's Degree",
+          "someCollege": "Some College"
+        },
+        "Genders": {
+          "female": "Female",
+          "male": "Male",
+          "noAnswer": "No Answer",
+          "nonbinary": "Non-binary"
+        },
+        "Occupations": {
+          "fullTime": "Full-time",
+          "partTime": "Part-time",
+          "retired": "Retired",
+          "selfEmployed": "Self-employed",
+          "student": "Student",
+          "unemployed": "Unemployed",
+          "university": "University Student"
+        },
+        "age": "Age",
+        "education": "Highest Level of Education",
+        "gender": "Gender",
+        "nativeLanguage": "Native Language",
+        "noQuestionsAnswered": "No Questions Answered",
+        "occupation": "Occupational Status"
       },
-      "Genders": {
-        "female": "Female",
-        "male": "Male",
-        "noAnswer": "No Answer",
-        "nonbinary": "Non-binary"
-      },
-      "Occupations": {
-        "fullTime": "Full-time",
-        "partTime": "Part-time",
-        "retired": "Retired",
-        "selfEmployed": "Self-employed",
-        "student": "Student",
-        "unemployed": "Unemployed",
-        "university": "University Student"
-      },
-      "age": "Age",
-      "education": "Highest Level of Education",
-      "gender": "Gender",
-      "nativeLanguage": "Native Language",
-      "noQuestionsAnswered": "No Questions Answered",
-      "occupation": "Occupational Status",
+
       "participant": "Participant",
       "surveyCompleted": "Survey Completed"
     },

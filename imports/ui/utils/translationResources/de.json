@@ -7,35 +7,37 @@
       "itemNumber": "Nr."
     },
     "Participants": {
-      "Educations": {
-        "bachelorsDegree": "Bachelorabschluss",
-        "doctorateOrHigher": "Promotion (oder höher)",
-        "highSchoolDiploma": "Abitur",
-        "lessThanHighSchool": "Kein Schulabschluss",
-        "mastersDegree": "Masterabschluss",
-        "someCollege": "Studium ohne Abschluss"
+      "Demographics": {
+        "Educations": {
+          "bachelorsDegree": "Bachelorabschluss",
+          "doctorateOrHigher": "Promotion (oder höher)",
+          "highSchoolDiploma": "Abitur",
+          "lessThanHighSchool": "Kein Schulabschluss",
+          "mastersDegree": "Masterabschluss",
+          "someCollege": "Studium ohne Abschluss"
+        },
+        "Genders": {
+          "female": "Weiblich",
+          "male": "Männlich",
+          "noAnswer": "Keine Antwort",
+          "nonbinary": "Nichtbinär"
+        },
+        "Occupations": {
+          "fullTime": "Vollzeit",
+          "partTime": "Teilzeit",
+          "retired": "Rente",
+          "selfEmployed": "Selbstständig",
+          "student": "Schüler",
+          "unemployed": "Arbeitslos",
+          "university": "Student"
+        },
+        "age": "Alter",
+        "education": "Höchster Bildungsabschluss",
+        "gender": "Geschlecht",
+        "nativeLanguage": "Muttersprache",
+        "noQuestionsAnswered": "Keine Fragen beantwortet",
+        "occupation": "Beruflicher Status"
       },
-      "Genders": {
-        "female": "Weiblich",
-        "male": "Männlich",
-        "noAnswer": "Keine Antwort",
-        "nonbinary": "Nichtbinär"
-      },
-      "Occupations": {
-        "fullTime": "Vollzeit",
-        "partTime": "Teilzeit",
-        "retired": "Rente",
-        "selfEmployed": "Selbstständig",
-        "student": "Schüler",
-        "unemployed": "Arbeitslos",
-        "university": "Student"
-      },
-      "age": "Alter",
-      "education": "Höchster Bildungsabschluss",
-      "gender": "Geschlecht",
-      "nativeLanguage": "Muttersprache",
-      "noQuestionsAnswered": "Keine Fragen beantwortet",
-      "occupation": "Beruflicher Status",
       "participant": "Teilnehmer",
       "surveyCompleted": "Umfrage beendet"
     },

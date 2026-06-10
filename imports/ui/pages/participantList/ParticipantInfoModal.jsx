@@ -40,10 +40,10 @@ export function ParticipantInfoModal({participantID, setDialogOpen, refreshData}
     {field: t("Collections.DBMetaData.createDate"), value: participant.createDate},
     {field: t("Collections.DBMetaData.editDate"), value: participant.editDate},
     {field: t("Collections.Participants.surveyCompleted"), value: participant.surveyCompleted},
-    {field: t("Collections.Participants.age"), value: participant.age},
-    {field: t("Collections.Participants.gender"), value: participant.gender},
-    {field: t("Collections.Participants.nativeLanguage"), value: participant.nativeLanguage},
-    {field: t("Collections.Participants.education"), value: participant.education},
+    {field: t("Collections.Participants.Demographics.age"), value: participant.age},
+    {field: t("Collections.Participants.Demographics.gender"), value: participant.gender},
+    {field: t("Collections.Participants.Demographics.nativeLanguage"), value: participant.nativeLanguage},
+    {field: t("Collections.Participants.Demographics.education"), value: participant.education},
   ];
 
   return (

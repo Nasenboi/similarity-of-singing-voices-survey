@@ -89,29 +89,29 @@ export function DemographicForm({onPrevClick, onNextClick}) {
           <AutoField
             form={form}
             name="gender"
-            label={t("Collections.Participants.gender")}
+            label={t("Collections.Participants.Demographics.gender")}
             type="select"
             fieldProps={{allowedValues: getGenderOptions(t)}}
           />
-          <AutoField form={form} name="age" label={t("Collections.Participants.age")} type="number" />
+          <AutoField form={form} name="age" label={t("Collections.Participants.Demographics.age")} type="number" />
           <AutoField
             form={form}
             name="nativeLanguage"
-            label={t("Collections.Participants.nativeLanguage")}
+            label={t("Collections.Participants.Demographics.nativeLanguage")}
             type="select"
             fieldProps={{allowedValues: getLanguageOptions(t)}}
           />
           <AutoField
             form={form}
             name="education"
-            label={t("Collections.Participants.education")}
+            label={t("Collections.Participants.Demographics.education")}
             type="select"
             fieldProps={{allowedValues: getEducationOptions(t)}}
           />
           <AutoField
             form={form}
             name="occupation"
-            label={t("Collections.Participants.occupation")}
+            label={t("Collections.Participants.Demographics.occupation")}
             type="select"
             fieldProps={{allowedValues: getOccupationOptions(t)}}
           />
