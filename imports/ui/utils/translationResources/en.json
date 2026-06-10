@@ -21,11 +21,21 @@
         "noAnswer": "No Answer",
         "nonbinary": "Non-binary"
       },
+      "Occupations": {
+        "fullTime": "Full-time",
+        "partTime": "Part-time",
+        "retired": "Retired",
+        "selfEmployed": "Self-employed",
+        "student": "Student",
+        "unemployed": "Unemployed",
+        "university": "University Student"
+      },
       "age": "Age",
       "education": "Highest Level of Education",
       "gender": "Gender",
       "nativeLanguage": "Native Language",
       "noQuestionsAnswered": "No Questions Answered",
+      "occupation": "Occupational Status",
       "participant": "Participant",
       "surveyCompleted": "Survey Completed"
     },

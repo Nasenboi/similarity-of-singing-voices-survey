@@ -10,6 +10,8 @@ import {
   getEducationOptions,
   getGenderOptions,
   getLanguageOptions,
+  getOccupationOptions,
+  OCCUPATION_OPTIONS,
 } from "@/imports/api/participants/schema";
 import {zodResolver} from "@hookform/resolvers/zod";
 import ISO6391 from "iso-639-1";
@@ -26,6 +28,7 @@ const demographicFormSchema = z.object({
   gender: z.enum(GENDER_OPTIONS, {message: "Invalid option"}),
   education: z.enum(EDUCATION_OPTIONS, {message: "Invalid option"}),
   age: z.number().min(AGE_MIN).max(AGE_MAX),
+  occupation: z.enum(OCCUPATION_OPTIONS, {message: "Invalid option"}),
   nativeLanguage: z.enum(ISO6391.getAllCodes(), {message: "Invalid option"}),
 });
 
@@ -40,6 +43,7 @@ export function DemographicForm({onPrevClick, onNextClick}) {
       age: participant?.age || "",
       nativeLanguage: participant?.nativeLanguage || "",
       education: participant?.education || "",
+      occupation: participant?.occupation || "",
     },
   });
 
@@ -103,6 +107,13 @@ export function DemographicForm({onPrevClick, onNextClick}) {
             label={t("Collections.Participants.education")}
             type="select"
             fieldProps={{allowedValues: getEducationOptions(t)}}
+          />
+          <AutoField
+            form={form}
+            name="occupation"
+            label={t("Collections.Participants.occupation")}
+            type="select"
+            fieldProps={{allowedValues: getOccupationOptions(t)}}
           />
         </form>
       </CardContent>

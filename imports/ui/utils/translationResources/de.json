@@ -21,11 +21,21 @@
         "noAnswer": "Keine Antwort",
         "nonbinary": "Nichtbinär"
       },
+      "Occupations": {
+        "fullTime": "Vollzeit",
+        "partTime": "Teilzeit",
+        "retired": "Rente",
+        "selfEmployed": "Selbstständig",
+        "student": "Schüler",
+        "unemployed": "Arbeitslos",
+        "university": "Student"
+      },
       "age": "Alter",
       "education": "Höchster Bildungsabschluss",
       "gender": "Geschlecht",
       "nativeLanguage": "Muttersprache",
       "noQuestionsAnswered": "Keine Fragen beantwortet",
+      "occupation": "Beruflicher Status",
       "participant": "Teilnehmer",
       "surveyCompleted": "Umfrage beendet"
     },

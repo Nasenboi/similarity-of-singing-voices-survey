@@ -2,6 +2,8 @@ import ISO6391 from "iso-639-1";
 import SimpleSchema from "simpl-schema";
 import {dbMetadataSchema} from "../collection/schema";
 
+// -- Demographics --
+
 export const GENDER_OPTIONS = ["male", "female", "nonbinary", "noAnswer"];
 export const EDUCATION_OPTIONS = [
   "lessThanHighSchool",
@@ -11,6 +13,7 @@ export const EDUCATION_OPTIONS = [
   "mastersDegree",
   "doctorateOrHigher",
 ];
+export const OCCUPATION_OPTIONS = ["student", "university", "fullTime", "partTime", "selfEmployed", "unemployed", "retired"];
 export const AGE_MIN = 5;
 export const AGE_MAX = 99;
 
@@ -36,6 +39,17 @@ export const getEducationOptions = (t) => {
   return options;
 };
 
+export const getOccupationOptions = (t) => {
+  const options = [];
+  OCCUPATION_OPTIONS.map((g) =>
+    options.push({
+      label: t(`Collections.Participants.Occupations.${g}`),
+      value: g,
+    }),
+  );
+  return options;
+};
+
 export const getLanguageOptions = () =>
   ISO6391.getAllCodes().map((code) => ({
     value: code,
@@ -45,6 +59,7 @@ export const getLanguageOptions = () =>
 export const participantDemographicsSchema = new SimpleSchema({
   age: {type: SimpleSchema.Integer, optional: true},
   education: {type: String, allowedValues: EDUCATION_OPTIONS, optional: true},
+  occupation: {type: String, allowedValues: OCCUPATION_OPTIONS, optional: true},
   gender: {type: String, allowedValues: GENDER_OPTIONS, optional: true},
   nativeLanguage: {type: String, allowedValues: ISO6391.getAllCodes(), optional: true},
 });
