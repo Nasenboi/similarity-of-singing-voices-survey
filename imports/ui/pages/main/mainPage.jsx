@@ -1,12 +1,10 @@
 import {AnimatePresence, motion} from "framer-motion";
 import React, {useState} from "react";
-import {useNavigate} from "react-router-dom";
 import {useParticipantContext} from "../../contextProvider/ParticipantContext";
 import {DemographicForm} from "./demographicForm";
 import {StartSurveyForm} from "./startSurveyForm";
 
 export default function MainPage() {
-  const navigate = useNavigate();
   const {participant, isLoading, newParticipant} = useParticipantContext();
   const [subPage, setSubPage] = useState(0);
   const [direction, setDirection] = useState(1);
@@ -29,7 +27,8 @@ export default function MainPage() {
       changePage(1);
     }
   };
-
+  // import {useNavigate} from "react-router-dom";
+  // const navigate = useNavigate();
   // navigate("/survey");
   const getSubPage = () => {
     if (subPage == 1) {
