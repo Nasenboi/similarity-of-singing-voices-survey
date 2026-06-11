@@ -8,6 +8,7 @@ const Slider = React.forwardRef(({className, ...props}, ref) => (
     ref={ref}
     className={cn(
       "relative flex w-full touch-none select-none items-center",
+      "-m-4 p-4",
       className,
       props.orientation === "vertical" && "flex-col h-24 w-5",
     )}

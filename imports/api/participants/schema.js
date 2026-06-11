@@ -75,7 +75,7 @@ export const getPlaybackOptions = (t) => {
   const options = [];
   PLAYBACK_OPTIONS.map((g) =>
     options.push({
-      label: t(`Collections.Participants.GoldMSI.Playpack.${g}`),
+      label: t(`Collections.Participants.GoldMSI.Playback.${g}`),
       value: g,
     }),
   );
@@ -193,6 +193,8 @@ export const participantGoldMSISchema = new SimpleSchema({
   gmsi3: {type: Number, min: 1, max: 7, optional: true},
   gmsi4: {type: Number, min: 1, max: 7, optional: true},
   gmsi5: {type: Number, min: 1, max: 7, optional: true},
+  gmsi6: {type: Number, min: 1, max: 7, optional: true},
+  gmsi7: {type: Number, min: 1, max: 7, optional: true},
 });
 
 // -- ParticipantSchema --
@@ -202,4 +204,5 @@ export const participantSchema = new SimpleSchema({
   surveyCompleted: {type: Boolean, optional: true, defaultValue: false},
 })
   .extend(dbMetadataSchema)
-  .extend(participantDemographicsSchema);
+  .extend(participantDemographicsSchema)
+  .extend(participantGoldMSISchema);

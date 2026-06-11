@@ -24,20 +24,22 @@ import {PARTICIPANTS} from "../../../api/participants/methods";
 import {useParticipantContext} from "../../contextProvider/ParticipantContext";
 import {AutoField} from "../../customComponents/AutoField";
 
-const demographicFormSchema = z.object({
-  gender: z.enum(GENDER_OPTIONS, {message: "Invalid option"}),
-  education: z.enum(EDUCATION_OPTIONS, {message: "Invalid option"}),
-  age: z.number().min(AGE_MIN).max(AGE_MAX),
-  occupation: z.enum(OCCUPATION_OPTIONS, {message: "Invalid option"}),
-  nativeLanguage: z.enum(ISO6391.getAllCodes(), {message: "Invalid option"}),
-});
+const demographicFormSchema = (t) => {
+  return z.object({
+    gender: z.enum(GENDER_OPTIONS, {message: t("Components.Form.invalidOption")}),
+    education: z.enum(EDUCATION_OPTIONS, {message: t("Components.Form.invalidOption")}),
+    age: z.number().min(AGE_MIN).max(AGE_MAX),
+    occupation: z.enum(OCCUPATION_OPTIONS, {message: t("Components.Form.invalidOption")}),
+    nativeLanguage: z.enum(ISO6391.getAllCodes(), {message: t("Components.Form.invalidOption")}),
+  });
+};
 
 export function DemographicForm({onPrevClick, onNextClick}) {
   const {t} = useTranslation();
   const {participant, isLoading} = useParticipantContext();
 
   const form = useForm({
-    resolver: zodResolver(demographicFormSchema),
+    resolver: zodResolver(demographicFormSchema(t)),
     defaultValues: {
       gender: participant?.gender || "",
       age: participant?.age || "",
@@ -78,7 +80,7 @@ export function DemographicForm({onPrevClick, onNextClick}) {
   }
 
   return (
-    <Card className="max-w-150">
+    <Card className="">
       <CardHeader>
         <CardTitle className="text-center">{t("MainPage.Demographics.title")}</CardTitle>
         <CardDescription>{t("MainPage.Demographics.description")}</CardDescription>

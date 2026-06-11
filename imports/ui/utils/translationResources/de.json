@@ -128,17 +128,29 @@
           "world": "Weltmusik",
           "worldfusion": "World Fusion"
         },
+        "Playback": {
+          "inEar": "In-Ear Kopfhörer",
+          "overEar": "Over-Ear Kopfhörer",
+          "phone": "Handylautsprecher",
+          "speakers": "Lautsprecher"
+        },
         "Questions": {
-          "1": "",
-          "2": "",
-          "3": "",
-          "4": "",
-          "5": ""
+          "1": "Ich beschäftige mich in meiner Freizeit viel mit musikbezogenen Aktivitäten.",
+          "2": "Ich schreibe gerne über Musik, z.B. in Internetblogs oder Foren.",
+          "3": "Ich bin fasziniert von Musikstilen, mit denen ich nicht vertraut bin und möchte mehr darüber erfahren.",
+          "4": "Ich lese oder suche oft im Internet nach Dingen, die mit Musik zu tun haben.",
+          "5": "Ich gebe nicht viel Geld meines verfügbaren Einkommens für Musik aus.",
+          "6": "Musik ist für mich eine Art von Sucht- ohne sie könnte ich nicht leben.",
+          "7": "Ich halte mich auf dem Laufendem was neue Musik angeht (z.B. neue Künstler oder Aufnahmen)."
+        },
+        "Scales": {
+          "completelyAgree": "Stimme voll zu",
+          "completelyDisagree": "Stimme gar nicht zu"
         },
         "genre1": "Lieblingsgenre",
         "genre2": "Zweitliebstes Genre",
         "genre3": "Drittliebstes Genre",
-        "playback": "Wiedergabetyp"
+        "playback": "Musikwiedergabeart (während dieser Umfrage)"
       },
       "participant": "Teilnehmer",
       "surveyCompleted": "Umfrage beendet"
@@ -207,6 +219,9 @@
     "yes": "Ja"
   },
   "Components": {
+    "Form": {
+      "invalidOption": "Ungültiger Wert"
+    },
     "InfoTable": {
       "field": "Feld",
       "value": "Wert"
@@ -290,6 +305,10 @@
     "Demographics": {
       "description": "",
       "title": "Demographische Daten"
+    },
+    "GoldMSI": {
+      "description": "",
+      "title": "Hörgewohnheiten"
     },
     "Start": {
       "content": "In dieser Umfrage geht es um die Ähnlichkeit von Gesangsstimmen. Sie hören jeweils drei kurze Musikausschnitte: 'A', 'B' und 'X'. 'X' ist die Zielstimme, 'A' und 'B' sind Referenzstimmen. Wählen Sie nach dem Anhören jedes Ausschnitts die Referenzstimme aus, die der Zielstimme am ähnlichsten ist. Achten Sie bei der Beantwortung der Fragen nicht auf die im Hintergrund spielenden Instrumente. Falls die Instrumente Sie stören, können Sie diese in den Einstellungen deaktivieren.",

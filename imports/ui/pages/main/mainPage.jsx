@@ -2,6 +2,7 @@ import {AnimatePresence, motion} from "framer-motion";
 import React, {useState} from "react";
 import {useParticipantContext} from "../../contextProvider/ParticipantContext";
 import {DemographicForm} from "./demographicForm";
+import {GoldMSIForm} from "./goldMSIForm";
 import {StartSurveyForm} from "./startSurveyForm";
 
 export default function MainPage() {
@@ -33,6 +34,8 @@ export default function MainPage() {
   const getSubPage = () => {
     if (subPage == 1) {
       return <DemographicForm onPrevClick={() => changePage(0)} onNextClick={() => changePage(2)} />;
+    } else if (subPage == 2) {
+      return <GoldMSIForm onPrevClick={() => changePage(1)} onNextClick={() => changePage(0)} />;
     } else {
       return <StartSurveyForm onStartClick={onStartClick} />;
     }

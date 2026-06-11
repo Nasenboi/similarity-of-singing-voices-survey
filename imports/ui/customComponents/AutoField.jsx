@@ -7,6 +7,7 @@ import {cn} from "@/lib/utils";
 import React from "react";
 import {FieldWrapper} from "./FieldWrapper";
 import {NumberInput} from "./NumberInput";
+import {Slider} from "./slider";
 
 /**
  *
@@ -32,6 +33,7 @@ export function AutoField({
     password: "min-w-40",
     number: "min-w-40",
     bool: "min-w-30",
+    slider: "min-w-40",
     select: "min-w-40",
   };
 
@@ -63,6 +65,22 @@ export function AutoField({
               <div>
                 <Checkbox checked={field.value} onCheckedChange={field.onChange} />
               </div>
+            );
+          case "slider":
+          case "slider":
+            return (
+              <Slider
+                value={field.value !== undefined ? [field.value] : [fieldProps?.min ?? 0]}
+                onValueChange={(vals) => field.onChange(vals[0])}
+                onValueCommit={(vals) => field.onChange(vals[0])}
+                min={fieldProps?.min ?? 0}
+                max={fieldProps?.max ?? 100}
+                step={fieldProps?.step ?? 1}
+                disabled={fieldProps?.disabled}
+                name={field.name}
+                id={field.name}
+                aria-invalid={fieldState.invalid}
+              />
             );
           case "select":
             return (
