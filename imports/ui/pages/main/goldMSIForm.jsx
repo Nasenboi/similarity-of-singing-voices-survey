@@ -12,7 +12,7 @@ import {z} from "zod";
 import {PARTICIPANTS} from "../../../api/participants/methods";
 import {useParticipantContext} from "../../contextProvider/ParticipantContext";
 import {AutoField} from "../../customComponents/AutoField";
-import {P} from "../../customComponents/Typography";
+import {Small} from "../../customComponents/Typography";
 
 const goldMSIFormSchema = (t) => {
   return z.object({
@@ -131,8 +131,8 @@ export function GoldMSIForm({onPrevClick, onNextClick}) {
                   fieldProps={{min: 1, max: 7, step: 1}}
                 />
                 <div className="flex flex-row justify-between">
-                  <P>{t("Collections.Participants.GoldMSI.Scales.completelyDisagree")}</P>
-                  <P>{t("Collections.Participants.GoldMSI.Scales.completelyAgree")}</P>
+                  <Small>{t("Collections.Participants.GoldMSI.Scales.completelyDisagree")}</Small>
+                  <Small>{t("Collections.Participants.GoldMSI.Scales.completelyAgree")}</Small>
                 </div>
               </div>
             ))}
