@@ -88,7 +88,7 @@ export function GoldMSIForm({onPrevClick, onNextClick}) {
         <CardDescription>{t("MainPage.GoldMSI.description")}</CardDescription>
       </CardHeader>
       <CardContent className="flex-1 my-2 overflow-y-auto">
-        <form className="w-full h-full flex flex-col space-y-4" onSubmit={form.handleSubmit(submitForm)}>
+        <form className="w-full h-full flex flex-col space-y-2" onSubmit={form.handleSubmit(submitForm)}>
           <div className="flex flex-col space-y-4">
             <AutoField
               form={form}
@@ -119,9 +119,10 @@ export function GoldMSIForm({onPrevClick, onNextClick}) {
               fieldProps={{allowedValues: getGenreOptions(t)}}
             />
           </div>
+          <div className="my-4 w-full h-0 border-b-2 border-accent" />
           <div className="flex flex-col space-y-6">
             {Array.from({length: 7}, (_, i) => i + 1).map((g) => (
-              <div key={g} className="flex flex-col space-y-2">
+              <div key={g} className="w-full flex flex-col space-y-2">
                 <AutoField
                   form={form}
                   name={`gmsi${g}`}

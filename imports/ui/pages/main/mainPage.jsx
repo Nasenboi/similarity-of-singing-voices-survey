@@ -1,5 +1,6 @@
 import {AnimatePresence, motion} from "framer-motion";
 import React, {useState} from "react";
+import {useNavigate} from "react-router-dom";
 import {useParticipantContext} from "../../contextProvider/ParticipantContext";
 import {DemographicForm} from "./demographicForm";
 import {GoldMSIForm} from "./goldMSIForm";
@@ -9,6 +10,7 @@ export default function MainPage() {
   const {participant, isLoading, newParticipant} = useParticipantContext();
   const [subPage, setSubPage] = useState(0);
   const [direction, setDirection] = useState(1);
+  const navigate = useNavigate();
 
   const changePage = (newPage) => {
     setDirection(newPage > subPage ? 1 : -1);
@@ -28,14 +30,12 @@ export default function MainPage() {
       changePage(1);
     }
   };
-  // import {useNavigate} from "react-router-dom";
-  // const navigate = useNavigate();
-  // navigate("/survey");
+
   const getSubPage = () => {
     if (subPage == 1) {
       return <DemographicForm onPrevClick={() => changePage(0)} onNextClick={() => changePage(2)} />;
     } else if (subPage == 2) {
-      return <GoldMSIForm onPrevClick={() => changePage(1)} onNextClick={() => changePage(0)} />;
+      return <GoldMSIForm onPrevClick={() => changePage(1)} onNextClick={() => navigate("/survey")} />;
     } else {
       return <StartSurveyForm onStartClick={onStartClick} />;
     }
