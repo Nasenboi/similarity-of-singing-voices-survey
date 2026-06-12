@@ -12,8 +12,10 @@
           "bachelorsDegree": "Bachelorabschluss",
           "doctorateOrHigher": "Promotion (oder höher)",
           "highSchoolDiploma": "Abitur",
-          "lessThanHighSchool": "Kein Schulabschluss",
           "mastersDegree": "Masterabschluss",
+          "noFormalEducation": "Kein Schulabschluss",
+          "primarySchool": "Grundschulabschluss",
+          "secondarySchool": "Schulabschluss",
           "someCollege": "Studium ohne Abschluss"
         },
         "Genders": {
@@ -23,9 +25,9 @@
           "nonbinary": "Nichtbinär"
         },
         "Occupations": {
-          "fullTime": "Vollzeit",
-          "partTime": "Teilzeit",
-          "retired": "Rente",
+          "fullTime": "Vollzeit angestellt",
+          "partTime": "Teilzeit angestellt",
+          "retired": "In Rente",
           "selfEmployed": "Selbstständig",
           "student": "Schüler",
           "unemployed": "Arbeitslos",

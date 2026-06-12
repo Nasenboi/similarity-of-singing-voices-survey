@@ -9,12 +9,14 @@
     "Participants": {
       "Demographics": {
         "Educations": {
-          "bachelorsDegree": "Bachelor's Degree",
+          "bachelorsDegree": "Bachelor's degree",
           "doctorateOrHigher": "Doctorate (or higher)",
-          "highSchoolDiploma": "High school diploma (or equivalent)",
-          "lessThanHighSchool": "Less than high school",
-          "mastersDegree": "Master's Degree",
-          "someCollege": "Some College"
+          "highSchoolDiploma": "High school",
+          "mastersDegree": "Master's degree",
+          "noFormalEducation": "No formal education",
+          "primarySchool": "Primary school",
+          "secondarySchool": "Secondary school",
+          "someCollege": "Some college"
         },
         "Genders": {
           "female": "Female",
@@ -23,8 +25,8 @@
           "nonbinary": "Non-binary"
         },
         "Occupations": {
-          "fullTime": "Full-time",
-          "partTime": "Part-time",
+          "fullTime": "Full-time employed",
+          "partTime": "Part-time employed",
           "retired": "Retired",
           "selfEmployed": "Self-employed",
           "student": "Student",

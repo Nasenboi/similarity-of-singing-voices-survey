@@ -18,7 +18,9 @@ export const getGenderOptions = (t) => {
 };
 
 export const EDUCATION_OPTIONS = [
-  "lessThanHighSchool",
+  "noFormalEducation",
+  "primarySchool",
+  "secondarySchool",
   "highSchoolDiploma",
   "someCollege",
   "bachelorsDegree",
