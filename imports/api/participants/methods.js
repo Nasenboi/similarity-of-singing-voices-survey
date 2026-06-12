@@ -5,6 +5,7 @@ import {getQuestionnaireIDAtomic, refreshQuestionnaires} from "../surveyQuestion
 import {isAdminUser} from "../users/helpers";
 import {getYesterday, toCSV} from "../utils";
 import {Participants} from "./collection";
+import {participantDemographicsSchema, participantGoldMSISchema} from "./schema";
 
 export const PARTICIPANTS = {
   newParticipant: new ValidatedMethod({
@@ -32,6 +33,30 @@ export const PARTICIPANTS = {
       const participant = await Participants.findOneAsync(participantID);
 
       return participant;
+    },
+  }),
+  setDemographics: new ValidatedMethod({
+    name: "participants.setDemographics",
+    validate: new SimpleSchema({
+      participantID: {type: String},
+      demographics: {type: participantDemographicsSchema},
+    }).validator(),
+    async run({participantID, demographics}) {
+      if (this.isSimulation) return;
+
+      return await Participants.updateAsync(participantID, {$set: demographics});
+    },
+  }),
+  setGoldMSI: new ValidatedMethod({
+    name: "participants.setGoldMSI",
+    validate: new SimpleSchema({
+      participantID: {type: String},
+      goldMSI: {type: participantGoldMSISchema},
+    }).validator(),
+    async run({participantID, goldMSI}) {
+      if (this.isSimulation) return;
+
+      return await Participants.updateAsync(participantID, {$set: goldMSI});
     },
   }),
   removeParticipant: new ValidatedMethod({

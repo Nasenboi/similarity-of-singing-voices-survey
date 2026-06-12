@@ -1,67 +1,58 @@
-import {Button} from "@/components/ui/button";
-import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
-import React from "react";
-import {Trans, useTranslation} from "react-i18next";
+import {AnimatePresence, motion} from "framer-motion";
+import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {useParticipantContext} from "../../contextProvider/ParticipantContext";
-import {Muted, P} from "../../customComponents/Typography";
+import {DemographicForm} from "./demographicForm";
+import {GoldMSIForm} from "./goldMSIForm";
+import {StartSurveyForm} from "./startSurveyForm";
 
 export default function MainPage() {
-  const navigate = useNavigate();
-  const {t} = useTranslation();
   const {participant, isLoading, newParticipant} = useParticipantContext();
+  const [subPage, setSubPage] = useState(0);
+  const [direction, setDirection] = useState(1);
+  const navigate = useNavigate();
 
-  const navigateToSurvey = () => {
+  const changePage = (newPage) => {
+    setDirection(newPage > subPage ? 1 : -1);
+    setSubPage(newPage);
+  };
+
+  const onStartClick = () => {
     if (!participant && !isLoading) {
       newParticipant()
         .then(() => {
-          navigate("/survey");
+          changePage(1);
         })
         .catch((error) => {
           console.error("Error creating new participant:", error);
         });
     } else {
-      navigate("/survey");
+      changePage(1);
     }
   };
 
-  const containsSurveySwapCode = Meteor.settings.public.SURVEY_SWAP?.CODE && Meteor.settings.public.SURVEY_SWAP?.URL;
-  const containsSurveyCircleCode = Meteor.settings.public.SURVEY_CIRCLE?.CODE && Meteor.settings.public.SURVEY_CIRCLE?.URL;
+  const getSubPage = () => {
+    if (subPage == 1) {
+      return <DemographicForm onPrevClick={() => changePage(0)} onNextClick={() => changePage(2)} />;
+    } else if (subPage == 2) {
+      return <GoldMSIForm onPrevClick={() => changePage(1)} onNextClick={() => navigate("/survey")} />;
+    } else {
+      return <StartSurveyForm onStartClick={onStartClick} />;
+    }
+  };
 
   return (
     <div className="w-full flex justify-center items-center">
-      <Card className="max-w-150">
-        <CardHeader>
-          <CardTitle className="text-center">{t("MainPage.title")}</CardTitle>
-          <CardDescription>{t("MainPage.description")}</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <P>{t("MainPage.content")}</P>
-          {containsSurveySwapCode && (
-            <P>
-              {"\n"}
-              {t("MainPage.surveySwap")}
-            </P>
-          )}
-          {containsSurveyCircleCode && (
-            <P>
-              {"\n"}
-              {t("MainPage.surveyCircle")}
-            </P>
-          )}
-          <Muted className="mt-4">
-            <Trans
-              i18nKey="MainPage.contentSmall"
-              components={{
-                1: <a href="/privacyPolicy" target="_blank" rel="noopener noreferrer" className="underline" />,
-              }}
-            />
-          </Muted>
-        </CardContent>
-        <CardFooter>
-          <Button onClick={navigateToSurvey}>{t("MainPage.startSurvey")}</Button>
-        </CardFooter>
-      </Card>
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={subPage}
+          initial={{x: direction * 300, opacity: 0}}
+          animate={{x: 0, opacity: 1}}
+          transition={{duration: 0.3}}
+        >
+          {getSubPage()}
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 }

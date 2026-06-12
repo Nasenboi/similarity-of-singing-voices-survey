@@ -1,4 +1,5 @@
 import {Checkbox} from "@/components/ui/checkbox";
+import {Combobox, ComboboxContent, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList} from "@/components/ui/combobox";
 import {Input} from "@/components/ui/input";
 import {PasswordInput} from "@/components/ui/password-input";
 import {Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
@@ -7,6 +8,7 @@ import {cn} from "@/lib/utils";
 import React from "react";
 import {FieldWrapper} from "./FieldWrapper";
 import {NumberInput} from "./NumberInput";
+import {Slider} from "./slider";
 
 /**
  *
@@ -32,7 +34,9 @@ export function AutoField({
     password: "min-w-40",
     number: "min-w-40",
     bool: "min-w-30",
+    slider: "min-w-40",
     select: "min-w-40",
+    combobox: "min-w-40",
   };
 
   return (
@@ -64,6 +68,24 @@ export function AutoField({
                 <Checkbox checked={field.value} onCheckedChange={field.onChange} />
               </div>
             );
+          case "slider":
+          case "slider":
+            return (
+              <Slider
+                value={field.value !== undefined ? [field.value] : [fieldProps?.min ?? 0]}
+                onValueChange={(vals) => field.onChange(vals[0])}
+                onValueCommit={(vals) => field.onChange(vals[0])}
+                min={fieldProps?.min ?? 0}
+                max={fieldProps?.max ?? 100}
+                step={fieldProps?.step ?? 1}
+                disabled={fieldProps?.disabled}
+                name={field.name}
+                id={field.name}
+                aria-invalid={fieldState.invalid}
+                showTicks={fieldProps.showTicks}
+                showLabels={fieldProps.showLabels}
+              />
+            );
           case "select":
             return (
               <Select
@@ -91,6 +113,36 @@ export function AutoField({
                   </SelectGroup>
                 </SelectContent>
               </Select>
+            );
+          case "combobox":
+            const comboItems =
+              fieldProps?.allowedValues?.map((x) =>
+                typeof x === "string" || typeof x === "number"
+                  ? {label: String(x), value: String(x)}
+                  : {label: x.label, value: x.value},
+              ) ?? [];
+
+            return (
+              <Combobox
+                items={comboItems}
+                itemToStringValue={(item) => item.label}
+                value={comboItems.find((item) => item.value === field.value) ?? null}
+                onValueChange={(item) => field.onChange(item?.value ?? "")}
+                name={field.name}
+                aria-invalid={fieldState.invalid}
+              >
+                <ComboboxInput ref={field.ref} placeholder={fieldProps?.placeholder ?? "Select an option"} />
+                <ComboboxContent>
+                  <ComboboxEmpty>{fieldProps?.emptyMessage ?? "No items found."}</ComboboxEmpty>
+                  <ComboboxList>
+                    {(item) => (
+                      <ComboboxItem key={`${name}.${item.value}`} value={item}>
+                        {item.label}
+                      </ComboboxItem>
+                    )}
+                  </ComboboxList>
+                </ComboboxContent>
+              </Combobox>
             );
         }
       }}

@@ -1,9 +1,6 @@
 import i18n from "i18next";
 import {initReactI18next} from "react-i18next";
-import {z} from "zod";
-import {makeZodI18nMap} from "zod-i18n-map";
-import zodDe from "zod-i18n-map/locales/de/zod.json";
-import zodEn from "zod-i18n-map/locales/en/zod.json";
+import * as z from "zod";
 import {DEFAULT_LANGUAGE} from "../../common/config";
 import {getCookieSave} from "../customComponents/Cookies";
 import de from "./translationResources/de.json";
@@ -16,14 +13,13 @@ const detectUserLocale = () => {
 };
 
 const resources = {
-  en: {
-    translation: en,
-    zod: zodEn,
-  },
-  de: {
-    translation: de,
-    zod: zodDe,
-  },
+  en: {translation: en},
+  de: {translation: de},
+};
+
+const applyZodLocale = (lang) => {
+  const locale = lang === "de" ? z.locales.de : z.locales.en;
+  z.config(locale());
 };
 
 i18n.use(initReactI18next).init({
@@ -32,25 +28,13 @@ i18n.use(initReactI18next).init({
   fallbackLng: DEFAULT_LANGUAGE,
   debug: false,
   showSupportNotice: false,
-  ns: ["translation", "zod"],
-  defaultNS: "translation",
-  interpolation: {
-    escapeValue: false,
-  },
+  interpolation: {escapeValue: false},
 });
 
-i18n.on("languageChanged", () => {
-  z.config({
-    errorMap: makeZodI18nMap({
-      ns: "zod",
-    }),
-  });
+i18n.on("languageChanged", (lang) => {
+  applyZodLocale(lang);
 });
 
-z.config({
-  errorMap: makeZodI18nMap({
-    ns: "zod",
-  }),
-});
+applyZodLocale(i18n.language);
 
 export default i18n;

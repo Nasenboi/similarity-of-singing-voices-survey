@@ -7,7 +7,153 @@
       "itemNumber": "Item No."
     },
     "Participants": {
-      "noQuestionsAnswered": "No Questions Answered",
+      "Demographics": {
+        "Educations": {
+          "bachelorsDegree": "Bachelor's degree",
+          "doctorateOrHigher": "Doctorate (or higher)",
+          "highSchoolDiploma": "High school",
+          "mastersDegree": "Master's degree",
+          "noFormalEducation": "No formal education",
+          "primarySchool": "Primary school",
+          "secondarySchool": "Secondary school",
+          "someCollege": "Some college"
+        },
+        "Genders": {
+          "female": "Female",
+          "male": "Male",
+          "noAnswer": "No Answer",
+          "nonbinary": "Non-binary"
+        },
+        "Occupations": {
+          "fullTime": "Full-time employed",
+          "partTime": "Part-time employed",
+          "retired": "Retired",
+          "selfEmployed": "Self-employed",
+          "student": "Student",
+          "unemployed": "Unemployed",
+          "university": "University Student"
+        },
+        "age": "Age",
+        "education": "Highest Level of Education",
+        "gender": "Gender",
+        "nativeLanguage": "Native Language",
+        "noQuestionsAnswered": "No Questions Answered",
+        "occupation": "Occupational Status"
+      },
+      "GoldMSI": {
+        "Genres": {
+          "60s": "1960s Music",
+          "70s": "1970s Music",
+          "80s": "1980s Music",
+          "90s": "1990s Music",
+          "acidjazz": "Acid Jazz",
+          "alternative": "Alternative",
+          "alternativerock": "Alternative Rock",
+          "ambient": "Ambient",
+          "atmospheric": "Atmospheric",
+          "blues": "Blues",
+          "bluesrock": "Blues Rock",
+          "bossanova": "Bossa Nova",
+          "breakbeat": "Breakbeat",
+          "celtic": "Celtic",
+          "chanson": "Chanson",
+          "chillout": "Chillout",
+          "choir": "Choir",
+          "classical": "Classical",
+          "classicrock": "Classic Rock",
+          "club": "Club",
+          "contemporary": "Contemporary",
+          "country": "Country",
+          "dance": "Dance",
+          "darkambient": "Dark Ambient",
+          "darkwave": "Darkwave",
+          "deephouse": "Deep House",
+          "disco": "Disco",
+          "downtempo": "Downtempo",
+          "drumnbass": "Drum and Bass",
+          "dub": "Dub",
+          "dubstep": "Dubstep",
+          "easylistening": "Easy Listening",
+          "edm": "Electronic Dance Music",
+          "electronic": "Electronic",
+          "electronica": "Electronica",
+          "electropop": "Electropop",
+          "ethno": "Ethno",
+          "eurodance": "Eurodance",
+          "experimental": "Experimental",
+          "folk": "Folk",
+          "funk": "Funk",
+          "fusion": "Fusion",
+          "groove": "Groove",
+          "grunge": "Grunge",
+          "hard": "Hard",
+          "hardrock": "Hard Rock",
+          "hiphop": "Hip Hop",
+          "house": "House",
+          "idm": "Intelligent Dance Music",
+          "improvisation": "Improvisation",
+          "indie": "Indie",
+          "industrial": "Industrial",
+          "instrumentalpop": "Instrumental Pop",
+          "instrumentalrock": "Instrumental Rock",
+          "jazz": "Jazz",
+          "jazzfusion": "Jazz Fusion",
+          "latin": "Latin",
+          "lounge": "Lounge",
+          "medieval": "Medieval",
+          "metal": "Metal",
+          "minimal": "Minimal",
+          "newage": "New Age",
+          "newwave": "New Wave",
+          "orchestral": "Orchestral",
+          "pop": "Pop",
+          "popfolk": "Pop Folk",
+          "poprock": "Pop Rock",
+          "postrock": "Post-Rock",
+          "progressive": "Progressive",
+          "psychedelic": "Psychedelic",
+          "punkrock": "Punk Rock",
+          "rap": "Rap",
+          "reggae": "Reggae",
+          "rnb": "R&B",
+          "rock": "Rock",
+          "rocknroll": "Rock and Roll",
+          "singersongwriter": "Singer-Songwriter",
+          "soul": "Soul",
+          "soundtrack": "Soundtrack",
+          "swing": "Swing",
+          "symphonic": "Symphonic",
+          "synthpop": "Synthpop",
+          "techno": "Techno",
+          "trance": "Trance",
+          "triphop": "Trip Hop",
+          "world": "World",
+          "worldfusion": "World Fusion"
+        },
+        "Playback": {
+          "inEar": "In-Ear Headphones",
+          "overEar": "Over-Ear Headphones",
+          "phone": "Phone Speakers",
+          "speakers": "Speakers"
+        },
+        "Questions": {
+          "1": "I spend a lot of my free time doing music-related activities.",
+          "2": "I enjoy writing about music, for example on blogs and forums.",
+          "3": "I'm intrigued by musical styles I'm not familiar with and want to find out more.",
+          "4": "I often read or search the internet for things related to music.",
+          "5": "I don't spend much of my disposable income on music.",
+          "6": "Music is kind of an addiction for me - I couldn't live without it.",
+          "7": "I keep track of new of music that I come across (e.g. new artists or recordings)."
+        },
+        "Scales": {
+          "completelyAgree": "Completely Agree",
+          "completelyDisagree": "Completely Disagree"
+        },
+        "genre1": "Most Favorite Genre",
+        "genre2": "Second Most Favorite Genre",
+        "genre3": "Third Most Favorite Genre",
+        "playback": "Music Playback Type (during this survey)"
+      },
       "participant": "Participant",
       "surveyCompleted": "Survey Completed"
     },
@@ -75,6 +221,13 @@
     "yes": "Yes"
   },
   "Components": {
+    "Combobox": {
+      "noItemsFound": "No items found.",
+      "selectItem": "Select an option..."
+    },
+    "Form": {
+      "invalidOption": "Invalid Option"
+    },
     "InfoTable": {
       "field": "Field",
       "value": "Value"
@@ -156,13 +309,23 @@
     }
   },
   "MainPage": {
-    "content": "This Survey is about the similarity of singing voices. You will hear triplets of short music clips: 'A', 'B' and 'X'. 'X' is the target voice, 'A' and 'B' are reference voices. After listening to each of them, choose the reference voice which is the most similar to the target voice. Do not mind the instruments playing in the background while answering the questions. If the instruments irritate you, they can be disabled in the Settings.",
-    "contentSmall": "By starting the survey, you confirm that you have read the <1>privacy policy</1> and consent to the processing of your data as part of this scientific study.",
-    "description": "This survey will take about 15 minutes of your time.",
-    "startSurvey": "Start Survey",
-    "surveyCircle": "SurveyCircle users receive points for their participation,\nwhich can be used to recruit free survey participants at SurveyCircle.com",
-    "surveySwap": "This survey contains a completion code for SurveySwap.io",
-    "title": "Welcome to the survey"
+    "Demographics": {
+      "description": "Please provide this basic information for statistical purposes. Your responses will remain anonymous at all times.",
+      "title": "Demographic Data"
+    },
+    "GoldMSI": {
+      "description": "Here are a few questions about your music listening habits.",
+      "title": "Listening Habits"
+    },
+    "Start": {
+      "content": "This Survey is about the similarity of singing voices. You will hear triplets of short music clips: 'A', 'B' and 'X'. 'X' is the target voice, 'A' and 'B' are reference voices. After listening to each of them, choose the reference voice which is the most similar to the target voice. Do not mind the instruments playing in the background while answering the questions. If the instruments irritate you, they can be disabled in the Settings.",
+      "contentSmall": "By starting the survey, you confirm that you have read the <1>privacy policy</1> and consent to the processing of your data as part of this scientific study.",
+      "description": "This survey will take about 15 minutes of your time.",
+      "startSurvey": "Start Survey",
+      "surveyCircle": "SurveyCircle users receive points for their participation,\nwhich can be used to recruit free survey participants at SurveyCircle.com",
+      "surveySwap": "This survey contains a completion code for SurveySwap.io",
+      "title": "Welcome to the survey"
+    }
   },
   "ParticipantListPage": {
     "ParticipantSearchForm": {
@@ -229,6 +392,7 @@
       "title": "Audio Issue Report"
     },
     "Completed": {
+      "clickWorker": "You can redeem the following code for clickworker at <l>{{url}}<l>:\n{{code}}",
       "description": "Thank you very much for completing the survey. Your Questionnaire No. is '{{questionnaireID}}'.\nAs a small reward you can now check out the similarity plot for all songs, have fun!",
       "surveyCircle": "Redeem the following Survey Code at <1>{{url}}</1>\nand get free survey participants through SurveyCircle.\nThe Survey Code is: {{code}}",
       "surveySwap": "The following code gives you Karma that can be used to get free research participants at SurveySwap.io.\nGo to: <1>{{url}}</1>\nOr, alternatively, enter the code manually: {{code}}",

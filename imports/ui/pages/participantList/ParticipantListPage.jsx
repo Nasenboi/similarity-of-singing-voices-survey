@@ -59,6 +59,22 @@ export default function ParticipantListPage() {
       accessorKey: "editDate",
       header: t("Collections.DBMetaData.editDate"),
     },
+    {
+      accessorKey: "age",
+      header: t("Collections.Participants.Demographics.age"),
+    },
+    {
+      accessorKey: "gender",
+      header: t("Collections.Participants.Demographics.gender"),
+    },
+    {
+      accessorKey: "nativeLanguage",
+      header: t("Collections.Participants.Demographics.nativeLanguage"),
+    },
+    {
+      accessorKey: "education",
+      header: t("Collections.Participants.Demographics.education"),
+    },
   ];
 
   const onFilterChange = (value) => {

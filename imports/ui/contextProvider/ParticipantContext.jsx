@@ -1,6 +1,7 @@
 import {useParticipantSingle} from "@/imports/api/participants/hooks";
 import {PARTICIPANTS} from "@/imports/api/participants/methods";
 import React, {createContext, useContext, useEffect, useState} from "react";
+import {toast} from "sonner";
 import {cookies} from "../customComponents/Cookies";
 
 const ParticipantContext = createContext(undefined);
@@ -16,6 +17,7 @@ export const ParticipantProvider = ({children}) => {
       setParticipantID(newID);
     } catch (error) {
       console.error(error);
+      toast.error(error);
     }
   };
 
