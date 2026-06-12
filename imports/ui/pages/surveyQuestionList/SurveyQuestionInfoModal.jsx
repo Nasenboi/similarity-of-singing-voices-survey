@@ -31,15 +31,15 @@ export function SurveyQuestionInfoModal({surveyQuestionID}) {
   ];
 
   return (
-    <DialogContent>
-      <DialogHeader>
+    <DialogContent className="max-h-[90dvh] flex flex-col overflow-hidden">
+      <DialogHeader className="flex-none">
         <DialogTitle className="w-full flex items-center justify-start">
           {t("Collections.SurveyQuestions.question")} {surveyQuestion.itemNumber}
         </DialogTitle>
         <DialogDescription />
       </DialogHeader>
-      <InfoTable className="w-full" fields={surveyQuestionInfoFields} />
-      <DialogFooter></DialogFooter>
+      <InfoTable className="flex-1 overflow-y-auto max-h-full h-full" fields={surveyQuestionInfoFields} />
+      <DialogFooter className="flex-none"></DialogFooter>
     </DialogContent>
   );
 }

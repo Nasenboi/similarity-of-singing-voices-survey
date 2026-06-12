@@ -47,14 +47,14 @@ export function ParticipantInfoModal({participantID, setDialogOpen, refreshData}
   ];
 
   return (
-    <DialogContent>
-      <DialogHeader>
+    <DialogContent className="max-h-[90dvh] flex flex-col overflow-hidden">
+      <DialogHeader className="flex-none">
         <DialogTitle className="w-full flex items-center justify-start">
           {t("Collections.Participants.participant")} {participant.itemNumber}
         </DialogTitle>
       </DialogHeader>
-      <InfoTable className="w-full" fields={participantInfoFields} />
-      <DialogFooter>
+      <InfoTable className="flex-1 overflow-y-auto max-h-full h-full" fields={participantInfoFields} />
+      <DialogFooter className="flex-none">
         <div className="w-full grid grid-cols-3">
           <div className="col-span-2" />
           <div className="col-span-1">

@@ -31,15 +31,15 @@ export function SurveyAnswerInfoModal({surveyAnswerID}) {
   ];
 
   return (
-    <DialogContent>
-      <DialogHeader>
+    <DialogContent className="max-h-[90dvh] flex flex-col overflow-hidden">
+      <DialogHeader className="flex-none">
         <DialogTitle className="w-full flex items-center justify-start">
           {t("Collections.SurveyAnswers.answer")} {surveyAnswer._id}
         </DialogTitle>
         <DialogDescription />
       </DialogHeader>
-      <InfoTable className="w-full" fields={surveyAnswerInfoFields} />
-      <DialogFooter></DialogFooter>
+      <InfoTable className="flex-1 overflow-y-auto max-h-full h-full" fields={surveyAnswerInfoFields} />
+      <DialogFooter className="flex-none"></DialogFooter>
     </DialogContent>
   );
 }

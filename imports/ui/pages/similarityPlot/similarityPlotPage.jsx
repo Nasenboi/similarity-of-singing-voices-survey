@@ -116,7 +116,7 @@ export default function SimilarityPlotPage() {
           </CardContent>
         </Card>
       </div>
-      <div className="fixed bottom-0 max-w-500 w-full flex items-center">
+      <div className="fixed bottom-0 max-w-500 w-full flex items-center pb-[env(safe-area-inset-bottom)]">
         <AudioPlayer />
       </div>
     </div>
