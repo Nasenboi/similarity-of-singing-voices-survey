@@ -103,24 +103,20 @@ export function SongInfoModal({trackID}) {
   };
 
   return (
-    <DialogContent>
-      <DialogHeader>
+    <DialogContent className="max-h-[90dvh] flex flex-col overflow-hidden">
+      <DialogHeader className="flex-none">
         <DialogTitle className="w-full flex items-center justify-start">
           {t("Collections.Songs.song")} {song.trackID}
         </DialogTitle>
       </DialogHeader>
-      <div className="max-h-full h-full">
+      <div className="flex-1 overflow-y-auto max-h-full h-full">
         {!showComplaints ? (
           <InfoTable className="w-full h-full" fields={songInfoFields} />
         ) : (
-          <ScrollArea className="w-full h-full max-h-[30vh] -pb-4">
-            {song.complaints?.map((complaint, idx) => (
-              <SongComplaint key={`sc_${idx}`} complaint={complaint} index={idx} />
-            ))}
-          </ScrollArea>
+          song.complaints?.map((complaint, idx) => <SongComplaint key={`sc_${idx}`} complaint={complaint} index={idx} />)
         )}
       </div>
-      <DialogFooter>
+      <DialogFooter className="flex-none">
         <div className="w-full grid grid-cols-3">
           <div className="col-span-1 flex items-center justify-center">
             {song.complaints && (

@@ -418,7 +418,7 @@ export default function SurveyPage() {
   }
 
   return (
-    <div className="w-full h-screen max-h-screen flex flex-col overflow-hidden">
+    <div className="w-screen h-screen max-w-screen max-h-screen flex flex-col justify-center items-center overflow-hidden">
       <ProgressHeader
         surveyQuestions={surveyQuestions}
         currentPage={currentPage}
@@ -439,8 +439,10 @@ export default function SurveyPage() {
           animationKey={animationKey}
         />
       </div>
-      <AudioPlayer />
       <SurveyFinishedDrawer participant={participant} />
+      <div className="w-full max-w-500 flex items-center pb-[env(safe-area-inset-bottom)]">
+        <AudioPlayer />
+      </div>
     </div>
   );
 }
