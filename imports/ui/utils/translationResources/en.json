@@ -310,11 +310,11 @@
   },
   "MainPage": {
     "Demographics": {
-      "description": "",
+      "description": "Please provide this basic information for statistical purposes. Your responses will remain anonymous at all times.",
       "title": "Demographic Data"
     },
     "GoldMSI": {
-      "description": "",
+      "description": "Here are a few questions about your music listening habits.",
       "title": "Listening Habits"
     },
     "Start": {

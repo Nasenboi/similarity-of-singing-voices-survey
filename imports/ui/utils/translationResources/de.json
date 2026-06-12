@@ -15,7 +15,7 @@
           "mastersDegree": "Masterabschluss",
           "noFormalEducation": "Kein Schulabschluss",
           "primarySchool": "Grundschulabschluss",
-          "secondarySchool": "Schulabschluss",
+          "secondarySchool": "Mittlerer Schulabschluss",
           "someCollege": "Studium ohne Abschluss"
         },
         "Genders": {
@@ -309,11 +309,11 @@
   },
   "MainPage": {
     "Demographics": {
-      "description": "",
+      "description": "Bitte geben Sie für statistische Zwecke diese grundlegenden Daten an. Ihre Antworten bleiben stets anonym.",
       "title": "Demographische Daten"
     },
     "GoldMSI": {
-      "description": "",
+      "description": "Nun folgen ein paar Fragen zu Ihrem Musikhörverhalten.",
       "title": "Hörgewohnheiten"
     },
     "Start": {
