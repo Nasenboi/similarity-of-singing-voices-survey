@@ -219,6 +219,10 @@
     "yes": "Yes"
   },
   "Components": {
+    "Combobox": {
+      "noItemsFound": "No items found.",
+      "selectItem": "Select an option..."
+    },
     "Form": {
       "invalidOption": "Invalid Option"
     },

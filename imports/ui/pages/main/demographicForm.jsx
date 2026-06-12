@@ -92,30 +92,46 @@ export function DemographicForm({onPrevClick, onNextClick}) {
             form={form}
             name="gender"
             label={t("Collections.Participants.Demographics.gender")}
-            type="select"
-            fieldProps={{allowedValues: getGenderOptions(t)}}
+            type="combobox"
+            fieldProps={{
+              allowedValues: getGenderOptions(t),
+              placeholder: t("Components.Combobox.selectItem"),
+              emptyMessage: t("Components.Combobox.noItemsFound"),
+            }}
           />
           <AutoField form={form} name="age" label={t("Collections.Participants.Demographics.age")} type="number" />
           <AutoField
             form={form}
             name="nativeLanguage"
             label={t("Collections.Participants.Demographics.nativeLanguage")}
-            type="select"
-            fieldProps={{allowedValues: getLanguageOptions(t)}}
+            type="combobox"
+            fieldProps={{
+              allowedValues: getLanguageOptions(t),
+              placeholder: t("Components.Combobox.selectItem"),
+              emptyMessage: t("Components.Combobox.noItemsFound"),
+            }}
           />
           <AutoField
             form={form}
             name="education"
             label={t("Collections.Participants.Demographics.education")}
-            type="select"
-            fieldProps={{allowedValues: getEducationOptions(t)}}
+            type="combobox"
+            fieldProps={{
+              allowedValues: getEducationOptions(t),
+              placeholder: t("Components.Combobox.selectItem"),
+              emptyMessage: t("Components.Combobox.noItemsFound"),
+            }}
           />
           <AutoField
             form={form}
             name="occupation"
             label={t("Collections.Participants.Demographics.occupation")}
-            type="select"
-            fieldProps={{allowedValues: getOccupationOptions(t)}}
+            type="combobox"
+            fieldProps={{
+              allowedValues: getOccupationOptions(t),
+              placeholder: t("Components.Combobox.selectItem"),
+              emptyMessage: t("Components.Combobox.noItemsFound"),
+            }}
           />
         </form>
       </CardContent>

@@ -219,6 +219,10 @@
     "yes": "Ja"
   },
   "Components": {
+    "Combobox": {
+      "noItemsFound": "Keine Resultate.",
+      "selectItem": "Wähle eine Option..."
+    },
     "Form": {
       "invalidOption": "Ungültiger Wert"
     },

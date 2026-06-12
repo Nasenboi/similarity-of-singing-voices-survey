@@ -94,29 +94,45 @@ export function GoldMSIForm({onPrevClick, onNextClick}) {
               form={form}
               name="playback"
               label={t("Collections.Participants.GoldMSI.playback")}
-              type="select"
-              fieldProps={{allowedValues: getPlaybackOptions(t)}}
+              type="combobox"
+              fieldProps={{
+                allowedValues: getPlaybackOptions(t),
+                placeholder: t("Components.Combobox.selectItem"),
+                emptyMessage: t("Components.Combobox.noItemsFound"),
+              }}
             />
             <AutoField
               form={form}
               name="genre1"
               label={t("Collections.Participants.GoldMSI.genre1")}
-              type="select"
-              fieldProps={{allowedValues: getGenreOptions(t)}}
+              type="combobox"
+              fieldProps={{
+                allowedValues: getGenreOptions(t),
+                placeholder: t("Components.Combobox.selectItem"),
+                emptyMessage: t("Components.Combobox.noItemsFound"),
+              }}
             />
             <AutoField
               form={form}
               name="genre2"
               label={t("Collections.Participants.GoldMSI.genre2")}
-              type="select"
-              fieldProps={{allowedValues: getGenreOptions(t)}}
+              type="combobox"
+              fieldProps={{
+                allowedValues: getGenreOptions(t),
+                placeholder: t("Components.Combobox.selectItem"),
+                emptyMessage: t("Components.Combobox.noItemsFound"),
+              }}
             />
             <AutoField
               form={form}
               name="genre3"
               label={t("Collections.Participants.GoldMSI.genre3")}
-              type="select"
-              fieldProps={{allowedValues: getGenreOptions(t)}}
+              type="combobox"
+              fieldProps={{
+                allowedValues: getGenreOptions(t),
+                placeholder: t("Components.Combobox.selectItem"),
+                emptyMessage: t("Components.Combobox.noItemsFound"),
+              }}
             />
           </div>
           <div className="my-4 w-full h-0 border-b-2 border-accent" />
@@ -128,7 +144,7 @@ export function GoldMSIForm({onPrevClick, onNextClick}) {
                   name={`gmsi${g}`}
                   label={t(`Collections.Participants.GoldMSI.Questions.${g}`)}
                   type="slider"
-                  fieldProps={{min: 1, max: 7, step: 1}}
+                  fieldProps={{min: 1, max: 7, step: 1, showTicks: true}}
                 />
                 <div className="flex flex-row justify-between">
                   <Small>{t("Collections.Participants.GoldMSI.Scales.completelyDisagree")}</Small>
