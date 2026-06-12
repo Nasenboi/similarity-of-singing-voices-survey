@@ -25,8 +25,8 @@
           "nonbinary": "Nichtbinär"
         },
         "Occupations": {
-          "fullTime": "Vollzeit angestellt",
-          "partTime": "Teilzeit angestellt",
+          "fullTime": "Vollzeitbeschäftigt",
+          "partTime": "Teilzeitbeschäftigt",
           "retired": "In Rente",
           "selfEmployed": "Selbstständig",
           "student": "Schüler",
