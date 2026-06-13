@@ -37,7 +37,6 @@
         "education": "Highest Level of Education",
         "gender": "Gender",
         "nativeLanguage": "Native Language",
-        "noQuestionsAnswered": "No Questions Answered",
         "occupation": "Occupational Status"
       },
       "GoldMSI": {
@@ -154,6 +153,7 @@
         "genre3": "Third Most Favorite Genre",
         "playback": "Music Playback Type (during this survey)"
       },
+      "noQuestionsAnswered": "No Questions Answered",
       "participant": "Participant",
       "surveyCompleted": "Survey Completed"
     },
