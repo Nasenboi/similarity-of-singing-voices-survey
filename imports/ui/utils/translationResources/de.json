@@ -37,7 +37,6 @@
         "education": "Höchster Bildungsabschluss",
         "gender": "Geschlecht",
         "nativeLanguage": "Muttersprache",
-        "noQuestionsAnswered": "Keine Fragen beantwortet",
         "occupation": "Beruflicher Status"
       },
       "GoldMSI": {
@@ -154,6 +153,7 @@
         "genre3": "Drittliebstes Genre",
         "playback": "Musikwiedergabeart (während dieser Umfrage)"
       },
+      "noQuestionsAnswered": "Keine Fragen beantwortet",
       "participant": "Teilnehmer",
       "surveyCompleted": "Umfrage beendet"
     },
