@@ -1,6 +1,7 @@
 import {AnimatePresence, motion} from "framer-motion";
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
+import {toast} from "sonner";
 import {useParticipantContext} from "../../contextProvider/ParticipantContext";
 import {DemographicForm} from "./demographicForm";
 import {GoldMSIForm} from "./goldMSIForm";
@@ -25,6 +26,7 @@ export default function MainPage() {
         })
         .catch((error) => {
           console.error("Error creating new participant:", error);
+          toast.error(error);
         });
     } else {
       changePage(1);

@@ -13,7 +13,7 @@ export async function getQuestionnaireIDAtomic() {
     },
   );
 
-  if (!result?.questionnaireID) {
+  if (result?.questionnaireID == null || result?.questionnaireID == undefined) {
     throw Meteor.Error("No valid questionnaire found!");
   }
 
