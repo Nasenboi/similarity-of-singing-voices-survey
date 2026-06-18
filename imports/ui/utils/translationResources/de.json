@@ -192,6 +192,7 @@
       "A": "A",
       "B": "B",
       "Questionnaires": {
+        "isRandomized": "Zufällig",
         "participantCount": "Anzahl Teilnehmer",
         "questionsSkipped": "Übersprungene Fragen"
       },
