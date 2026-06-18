@@ -218,7 +218,9 @@ function SurveyFinishedDrawer({participant}) {
           <DrawerDescription asChild>
             <ScrollArea className="max-h-[40vh] overflow-y-auto">
               <P>
-                {t("SurveyPage.Completed.description", {questionnaireID: participant?.questionnaireID || "N/A"})}
+                {t("SurveyPage.Completed.description", {
+                  questionnaireID: participant?.questionnaireID != null ? participant.questionnaireID : "N/A",
+                })}
                 <ClickWorkerCode />
                 <SurveySwapCode />
                 <SurveyCircleCode />
