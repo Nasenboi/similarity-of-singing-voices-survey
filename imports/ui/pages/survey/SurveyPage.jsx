@@ -24,6 +24,7 @@ import {
   PaginationPrevious,
 } from "@/imports/ui/customComponents/pagination";
 import {cn} from "@/lib/utils";
+import {Copy} from "lucide-react";
 import {Meteor} from "meteor/meteor";
 import {AnimatePresence, motion} from "motion/react";
 import React, {useEffect, useState} from "react";
@@ -119,6 +120,27 @@ function ProgressHeader({className, surveyQuestions, currentPage, questionsAnswe
   );
 }
 
+function CopyCodeText({code, children}) {
+  const handleCopyCode = () => {
+    navigator.clipboard
+      .writeText(code)
+      .then(() => {
+        toast.info("Code copied to clipboard");
+        console.log("Code copied to clipboard");
+      })
+      .catch((err) => {
+        console.error("Failed to copy code:", err);
+      });
+  };
+
+  return (
+    <span onClick={handleCopyCode} className="inline-flex items-center gap-1 underline cursor-pointer whitespace-nowrap">
+      {children}
+      <Copy size={16} className="inline-block shrink-0" />
+    </span>
+  );
+}
+
 function ClickWorkerCode() {
   const clickURL = Meteor.settings.public.CLICK_WORKER?.URL;
   const clickCode = Meteor.settings.public.CLICK_WORKER?.CODE;
@@ -133,6 +155,7 @@ function ClickWorkerCode() {
         values={{code: clickCode, url: clickURL}}
         components={{
           1: <a href={clickURL} target="_blank" rel="noopener noreferrer" className="underline" />,
+          2: <CopyCodeText code={clickCode} />,
         }}
       />
     </>
@@ -153,6 +176,7 @@ function SurveySwapCode() {
         values={{code: swapCode, url: swapURL}}
         components={{
           1: <a href={swapURL} target="_blank" rel="noopener noreferrer" className="underline" />,
+          2: <CopyCodeText code={swapCode} />,
         }}
       />
     </>
@@ -173,6 +197,7 @@ function SurveyCircleCode() {
         values={{code: circleCode, url: circleURL}}
         components={{
           1: <a href={circleURL} target="_blank" rel="noopener noreferrer" className="underline" />,
+          2: <CopyCodeText code={circleCode} />,
         }}
       />
     </>

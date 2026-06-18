@@ -390,10 +390,10 @@
       "title": "Audiofehlermeldung"
     },
     "Completed": {
-      "clickWorker": "Folgenden Code können Sie für clickworker unter <1>{{url}}</1> einlösen:\n{{code}}",
+      "clickWorker": "Folgenden Code können Sie für clickworker unter <1>{{url}}</1> einlösen:\n<2>{{code}}</2>",
       "description": "Vielen Dank für Ihre Teilnahme. Ihre Umfragenummer ist '{{questionnaireID}}'.\nAls kleine Belohnung können Sie nun den Ähnlichkeitsgraphen ansehen, welcher alle Songs beinhaltet, viel Spaß dabei!",
-      "surveyCircle": "Löse den folgenden Survey Code unter <1>{{url}}</1> ein\nund erhalte durch SurveyCircle kostenlos Teilnehmer für deine Studie:\n{{code}}",
-      "surveySwap": "Mit dem folgenden Code erhalten Sie Karma, mit dem Sie bei SurveySwap.io kostenlose Umfrageteilnehmer gewinnen können.\nBesuchen Sie: <1>{{url}}</1>\nOder geben Sie den Code alternativ manuell ein: {{code}}",
+      "surveyCircle": "Löse den folgenden Survey Code unter <1>{{url}}</1> ein\nund erhalte durch SurveyCircle kostenlos Teilnehmer für deine Studie:\n<2>{{code}}</2>",
+      "surveySwap": "Mit dem folgenden Code erhalten Sie Karma, mit dem Sie bei SurveySwap.io kostenlose Umfrageteilnehmer gewinnen können.\nBesuchen Sie: <1>{{url}}</1>\nOder geben Sie den Code alternativ manuell ein: <2>{{code}}</2>",
       "title": "Umfrage beendet"
     },
     "and": "und",
