@@ -393,10 +393,10 @@
       "title": "Audio Issue Report"
     },
     "Completed": {
-      "clickWorker": "You can redeem the following code for clickworker at <1>{{url}}</1>:\n{{code}}",
+      "clickWorker": "You can redeem the following code for clickworker at <1>{{url}}</1>:\n<2>{{code}}</2>",
       "description": "Thank you very much for completing the survey. Your Questionnaire No. is '{{questionnaireID}}'.\nAs a small reward you can now check out the similarity plot for all songs, have fun!",
-      "surveyCircle": "Redeem the following Survey Code at <1>{{url}}</1>\nand get free survey participants through SurveyCircle.\nThe Survey Code is: {{code}}",
-      "surveySwap": "The following code gives you Karma that can be used to get free research participants at SurveySwap.io.\nGo to: <1>{{url}}</1>\nOr, alternatively, enter the code manually: {{code}}",
+      "surveyCircle": "Redeem the following Survey Code at <1>{{url}}</1>\nand get free survey participants through SurveyCircle.\nThe Survey Code is: <2>{{code}}</2>",
+      "surveySwap": "The following code gives you Karma that can be used to get free research participants at SurveySwap.io.\nGo to: <1>{{url}}</1>\nOr, alternatively, enter the code manually: <2>{{code}}</2>",
       "title": "Survey Completed"
     },
     "and": "and",
