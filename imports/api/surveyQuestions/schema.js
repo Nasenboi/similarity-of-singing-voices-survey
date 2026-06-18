@@ -15,4 +15,5 @@ export const questionnairesSchema = new SimpleSchema({
   participantCount: {type: SimpleSchema.Integer, optional: true},
   questionsSkipped: {type: SimpleSchema.Integer, optional: true},
   skip: {type: Boolean, optional: true},
+  isRandomized: {type: Boolean, optional: true, defaultValue: false},
 });

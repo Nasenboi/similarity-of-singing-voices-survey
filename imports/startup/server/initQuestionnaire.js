@@ -1,5 +1,6 @@
 import {Questionnaires, SurveyQuestions} from "@/imports/api/surveyQuestions/collection";
-import {NUM_QUESTIONNAIRES, NUM_QUESTIONS_PER_SURVEY} from "@/imports/common/config";
+import {generateRandomQuestionnaire} from "@/imports/api/surveyQuestions/helpers";
+import {NUM_QUESTIONNAIRES, NUM_QUESTIONS_PER_SURVEY, NUM_RANDOM_QUESTIONNAIRES} from "@/imports/common/config";
 import {TRIPLETS_FILE_PATH} from "@/imports/common/globals";
 import {Log} from "meteor/logging";
 import {Meteor} from "meteor/meteor";
@@ -124,5 +125,20 @@ export async function initQuestionnaire() {
   } catch (error) {
     Log.error(error);
     Log.info(tripletURL);
+  }
+}
+
+export async function checkRandomQuestionnaires() {
+  if (!NUM_RANDOM_QUESTIONNAIRES) return;
+
+  await Questionnaires.updateAsync({isRandomized: {$exists: false}}, {$set: {isRandomized: false}}, {multi: true});
+
+  let randomQuestionnaireCount = await Questionnaires.find({isRandomized: true}).countAsync();
+  let questionnaireID = await Questionnaires.find({}).countAsync();
+
+  while (randomQuestionnaireCount < NUM_RANDOM_QUESTIONNAIRES) {
+    await generateRandomQuestionnaire({questionnaireID});
+    ++questionnaireID;
+    ++randomQuestionnaireCount;
   }
 }

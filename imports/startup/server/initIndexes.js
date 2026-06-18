@@ -3,15 +3,15 @@ import {Songs} from "@/imports/api/songs/collection";
 import {SurveyAnswers} from "@/imports/api/surveyAnswers/collection";
 import {Questionnaires, SurveyQuestions} from "@/imports/api/surveyQuestions/collection";
 import {INDEX_MAP} from "@/imports/common/config";
+import {Log} from "meteor/logging";
 
 async function indexCollection({collection, indexField}) {
   try {
     const rawCollection = collection.rawCollection();
-    dropCollectionIndices(rawCollection);
-
+    await dropCollectionIndices(rawCollection);
     await rawCollection.createIndex({[indexField]: 1}, {unique: true});
   } catch (e) {
-    console.error(e);
+    Log.error(e);
   }
 }
 

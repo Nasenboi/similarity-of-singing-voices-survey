@@ -4,7 +4,7 @@ import {Meteor} from "meteor/meteor";
 import SimpleSchema from "simpl-schema";
 import {initAdminUser} from "./initAdminUser";
 import {initIndexes} from "./initIndexes";
-import {initQuestionnaire} from "./initQuestionnaire";
+import {checkRandomQuestionnaires, initQuestionnaire} from "./initQuestionnaire";
 import {initSongs} from "./initSongs";
 import {resetDB} from "./resetDB";
 import {waitForFiles} from "./waitForFiles";
@@ -43,6 +43,9 @@ async function initServer() {
     await initQuestionnaire();
     Log.info("init questionnaire finished");
   }
+
+  await checkRandomQuestionnaires();
+  Log.info("check random questionnaires finished");
 
   Migrations.migrateTo(DB_VERSION);
   Log.info("migration finished");

@@ -40,6 +40,10 @@ export default function QuestionnaireListPage() {
       accessorKey: "questionsSkipped",
       header: t("Collections.SurveyQuestions.Questionnaires.questionsSkipped"),
     },
+    {
+      accessorKey: "isRandomized",
+      header: t("Collections.SurveyQuestions.Questionnaires.isRandomized"),
+    },
   ];
 
   const onFilterChange = (value) => {
