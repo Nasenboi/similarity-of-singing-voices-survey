@@ -130,7 +130,7 @@ function ClickWorkerCode() {
       {"\n\n"}
       <Trans
         i18nKey="SurveyPage.Completed.clickWorker"
-        values={{code: clickURL, url: clickURL}}
+        values={{code: clickCode, url: clickURL}}
         components={{
           1: <a href={clickURL} target="_blank" rel="noopener noreferrer" className="underline" />,
         }}
