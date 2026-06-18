@@ -129,6 +129,7 @@ function CopyCodeText({code, children}) {
         console.log("Code copied to clipboard");
       })
       .catch((err) => {
+        toast.error("Failed to copy code");
         console.error("Failed to copy code:", err);
       });
   };
