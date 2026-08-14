@@ -1,6 +1,11 @@
 # Similarity of Singing Voices Survey
 
-## The Survey is Online! 🌍
+### Update 2: The survey is Done! ✅
+
+The survey will still be online for some time, but participations are not longer needed.  
+Thanks to everyone that participated in this survey and supported this project!
+
+### Update: The Survey is Online! 🌍
 
 Visit [similarity-of-singing-voices.com](similarity-of-singing-voices.com) to participate in it.  
 Every answer is appreciated!
@@ -10,11 +15,9 @@ Every answer is appreciated!
 This project is a custom-built survey for my master’s thesis:
 _"Comparing Perceptual Similarity of Singing Voices with Digital Voice Representations."_
 
-The goal of this survey is to establish a gold standard for perceptual similarity mapping of singing voices. Other voice similarity mappings, either generated through acoustic measurements or machine learning embeddings, will be compared to this standard to gain insights on the different nuances of information they provide.
+The goal of this survey is to establish a _golden standard_ for perceptual similarity ratings of singing voices. Other voice similarity ratings — either generated through acoustic measurements or machine learning embeddings — will be compared to this standard. A correlation analysis can yield the best matching _digital voice representation_ of singing voices with perceptually accurate voice models for similarity estimation. In addition acoustic measures can reveal patterns in how humans rate the similarity of singing voices. Lastly, the collected results can additionally be used to fine-tune a voice embedding model, which will generate the final voice similarity embedding used for comparison.
 
-During the survey, users are asked to evaluate multiple triplets of audio samples. One voice (_X_) is the target, and two voices (_A_ and _B_) are reference samples. The user selects which reference voice is more similar to _X_.
-
-The collected results are used to fine-tune a voice embedding model, which will generate the final voice similarity embedding used for comparison.
+During the survey, users are asked to evaluate multiple triplets of audio samples. One voice (X) is the target, and two voices (A and B) are reference samples. The user selects which reference voice is more similar to X.
 
 ## Before you Start
 
@@ -24,17 +27,12 @@ There are a few requirements needed to run this survey: a dataset and supporting
 
 The songs used in this survey come from the [Free Music Archive (FMA)](https://github.com/mdeff/fma). Over 11,000 songs were manually labeled using custom Python software. The labels include:
 
-- Voice quality score (0–3)
+- Audio Quality score (0–3)
 - A flag indicating multiple voices
 
 The labeled dataset is planned to be published after the survey.
 
-For this survey, only songs with:
-
-Voice quality = 3
-Single vocalist
-
-were selected, resulting in ~700 songs.
+For this survey, only songs with: Audio Quality = 3 & single voice, were selected, resulting in ~700 songs.
 
 For machine learning purposes vocal and instrument stems were extracted for each song using:
 
@@ -59,7 +57,7 @@ Simple deployment:
 Local (non-containerized) setup:
 
 - [Node.js + npm](https://nodejs.org/en)
-- [meteor](https://docs.meteor.com/).
+- [meteor](https://docs.meteor.com/)
 
 ## Deploy the Survey
 
@@ -97,4 +95,4 @@ To run the survey locally:
    ```sh
    npm start
    ```
-5. Open `http://localhost:3000` in your browser.
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
