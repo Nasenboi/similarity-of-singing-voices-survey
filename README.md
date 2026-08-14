@@ -7,7 +7,7 @@ Thanks to everyone that participated in this survey and supported this project!
 
 ### Update: The Survey is Online! 🌍
 
-Visit [similarity-of-singing-voices.com](similarity-of-singing-voices.com) to participate in it.  
+Visit [similarity-of-singing-voices.com](https://similarity-of-singing-voices.com) to participate in it.  
 Every answer is appreciated!
 
 ## Description
