@@ -21,7 +21,7 @@ During the survey, users are asked to evaluate multiple triplets of audio sample
 
 ## Before you Start
 
-There are a few requirements needed to run this survey: a dataset and supporting software.
+There are a few requirements to run this survey: a dataset and supporting software.
 
 ### Dataset requirements
 
